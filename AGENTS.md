@@ -1,6 +1,6 @@
 # Vae Victis: agent instructions
 
-Read [README.md](README.md) and [docs/STATUS.md](docs/STATUS.md) first, then [docs/DESIGN.md](docs/DESIGN.md) for anything touching the game itself.
+Read [README.md](README.md) and [docs/STATUS.md](docs/STATUS.md) first, then [docs/DESIGN.md](docs/DESIGN.md) for anything touching the game itself. Check history, dress, buildings and names against [docs/research/](docs/research/README.md).
 
 - The design doc is the source of truth for the game. Change it when the game changes; record why in [docs/DECISIONS.md](docs/DECISIONS.md).
 - Godot 4.7, GDScript only (C# can't export to the web). Engine: `C:\Users\ringd\tools\godot\4.7\Godot_v4.7-stable_win64_console.exe`.

@@ -10,6 +10,7 @@ Status: a playable demo, "Leaving home": the first village, a cave, a neighborin
 - [docs/ROADMAP.md](docs/ROADMAP.md): build order, milestone by milestone.
 - [docs/DECISIONS.md](docs/DECISIONS.md): decisions and the reasons for them.
 - [docs/STATUS.md](docs/STATUS.md): where things stand.
+- [docs/research/](docs/research/README.md): source-cited history and material culture, with the corrections the game still needs.
 
 ## Layout
 
