@@ -7,6 +7,7 @@ extends Node
 ##   --shot=<file.png>   save a screenshot after --frames frames, then quit
 ##   --frames=<n>        frames to wait before the screenshot (default 30)
 ##   --act=<list>        comma-separated scripted actions run before the shot
+##   --style=<id>        art style for this run (see data/art_styles.json)
 
 var _screen: Node
 var _shot := ""
@@ -27,6 +28,8 @@ func _ready() -> void:
 			_frames = int(a.substr(9))
 		elif a.begins_with("--act="):
 			_acts = Array(a.substr(6).split(","))
+		elif a.begins_with("--style="):
+			Art.set_style(a.substr(8), false)
 	if scenario != "":
 		Scenarios.start(scenario)
 	else:

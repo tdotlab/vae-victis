@@ -17,10 +17,12 @@ Status: a playable demo, "Leaving home": the first village, a cave, a neighborin
   - `src/core/`: rules with no scene dependencies (character sheet, combat math, dialogue engine, hex math, pathfinding, inventory, trade, game state). Tested headless.
   - `src/game/`: the local map, combat runner, world map, scenarios used by tests and screenshots.
   - `src/ui/`: every screen and window, built in code.
-  - `src/view/paint.gd`: placeholder drawing until the art pipeline (M7).
+  - `src/view/`: drawing. `art.gd` draws the rendered sprites and switches art styles (F2 on a map); `pixelate.gdshader` makes the pixel styles; `paint.gd` is the code-drawn placeholder art, used for anything without a sprite.
+  - `assets/art/`: generated sprite sheets, ground textures and their manifest `art.json`. Don't edit by hand; rebuild with `tools/build-art.sh`.
   - `data/`: all game content. JSON for rules, items, NPCs, quests, local maps, the world map (`world.json`), the historical calendar (`calendar.json`) and story; `.dlg` files for dialogue (format documented at the top of `src/core/dialogue.gd`); `.txt` for longer text.
   - `tests/`: headless test suite. Rule tests, content validation (`test_content.gd`: every reference in dialogue, maps and NPCs resolves, everything is reachable) and scripted playthroughs of the quest routes (`test_playthrough.gd`).
-- `tools/`: shell scripts (Git Bash) for testing, screenshots and the web build.
+- `art/`: the art pipeline. `sprites.py` models and renders everything in Blender, headless, from the game's own camera angle; `pack.py` packs the renders into sheets and generates the ground textures.
+- `tools/`: shell scripts (Git Bash) for testing, screenshots, the web build and the art build.
 - `build/`: export output, not in Git.
 
 ## Running
@@ -43,8 +45,14 @@ tools/export-web.sh && tools/serve-web.sh
 
 That builds the browser version into `build/web` and serves it on http://localhost:8060. The web build is single-threaded, so any static host works without special headers.
 
+```bash
+tools/build-art.sh
+```
+
+That re-renders all sprites with Blender (portable, `C:\Users\ringd\tools\blender\`, override with `BLENDER=...`) and repacks them; a few minutes. Pass groups to render only some: `tools/build-art.sh trees,props`. `STYLE=pixel tools/shot.sh ...` takes a screenshot in a given art style.
+
 To play from the editor, open `game/project.godot` in Godot 4.7 and press F5.
 
 ## Controls
 
-Left click walks, talks, opens and attacks. Right click examines, or in a fight opens the aimed-attack menu. Space ends your turn, Enter ends a fight when no enemy is aware of you, A starts a fight, S toggles sneaking. C, I, J open the character sheet, gear and journal; M opens the world map; walking off a map's edge does too. On the world map, click a known place or open country to travel, E enters where you stand, R rests, Space or right click stops. Arrow keys pan the camera, the wheel zooms, Home recenters. F5 and F9 quicksave and quickload. Escape closes windows or opens the menu. Number keys pick dialogue replies.
+Left click walks, talks, opens and attacks. Right click examines, or in a fight opens the aimed-attack menu. Space ends your turn, Enter ends a fight when no enemy is aware of you, A starts a fight, S toggles sneaking. C, I, J open the character sheet, gear and journal; M opens the world map; walking off a map's edge does too. On the world map, click a known place or open country to travel, E enters where you stand, R rests, Space or right click stops. Arrow keys pan the camera, the wheel zooms, Home recenters. F5 and F9 quicksave and quickload. F2 cycles the art style. Escape closes windows or opens the menu. Number keys pick dialogue replies.

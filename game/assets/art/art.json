@@ -1,0 +1,294 @@
+{
+ "scale": 0.5,
+ "walls": {
+  "wall_wood": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "walls_wall_wood.png",
+   "cols": 8,
+   "connect": [
+    "wall_wood",
+    "door",
+    "wall_stone"
+   ],
+   "under": "dirt"
+  },
+  "wall_stone": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "walls_wall_stone.png",
+   "cols": 8,
+   "connect": [
+    "wall_stone",
+    "door",
+    "wall_wood"
+   ],
+   "under": "dirt"
+  },
+  "palisade": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "walls_palisade.png",
+   "cols": 8,
+   "connect": [
+    "palisade"
+   ],
+   "under": "dirt"
+  },
+  "fence": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "walls_fence.png",
+   "cols": 8,
+   "connect": [
+    "fence"
+   ],
+   "under": null
+  },
+  "rampart": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "walls_rampart.png",
+   "cols": 8,
+   "connect": [
+    "rampart"
+   ],
+   "under": "dirt"
+  },
+  "door": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "walls_door.png",
+   "cols": 8,
+   "connect": [
+    "wall_wood",
+    "wall_stone"
+   ],
+   "under": null
+  }
+ },
+ "trees": {
+  "tree": {
+   "cell": [
+    352,
+    352
+   ],
+   "anchor": [
+    176,
+    272
+   ],
+   "sheet": "trees_tree.png",
+   "cols": 3,
+   "frames": 3
+  },
+  "pine": {
+   "cell": [
+    352,
+    352
+   ],
+   "anchor": [
+    176,
+    272
+   ],
+   "sheet": "trees_pine.png",
+   "cols": 3,
+   "frames": 3
+  },
+  "bush": {
+   "cell": [
+    352,
+    352
+   ],
+   "anchor": [
+    176,
+    272
+   ],
+   "sheet": "trees_bush.png",
+   "cols": 3,
+   "frames": 3
+  }
+ },
+ "props": {
+  "hearth": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 5,
+   "frame": 0,
+   "under": "floor_earth"
+  },
+  "bed": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 5,
+   "frame": 1,
+   "under": "floor_earth"
+  },
+  "table": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 5,
+   "frame": 2,
+   "under": "floor_earth"
+  },
+  "crate": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 5,
+   "frame": 3,
+   "under": "floor_earth"
+  },
+  "altar": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 5,
+   "frame": 4,
+   "under": null
+  }
+ },
+ "figure": {
+  "cell": [
+   144,
+   176
+  ],
+  "anchor": [
+   72,
+   140
+  ],
+  "cols": 3,
+  "layers": {
+   "body": {
+    "sheet": "figure_body.png",
+    "tints": {
+     "tunic": "figure_body_tunic.png",
+     "trousers": "figure_body_trousers.png",
+     "hair": "figure_body_hair.png"
+    }
+   },
+   "shield": {
+    "sheet": "figure_shield.png",
+    "tints": {
+     "shield": "figure_shield_shield.png"
+    }
+   },
+   "small_shield": {
+    "sheet": "figure_small_shield.png",
+    "tints": {
+     "shield": "figure_small_shield_shield.png"
+    }
+   },
+   "spear": {
+    "sheet": "figure_spear.png",
+    "tints": {}
+   },
+   "sword": {
+    "sheet": "figure_sword.png",
+    "tints": {}
+   }
+  }
+ },
+ "ground": {
+  "grass": "ground/grass.png",
+  "meadow": "ground/meadow.png",
+  "field": "ground/field.png",
+  "road": "ground/road.png",
+  "dirt": "ground/dirt.png",
+  "mud": "ground/mud.png",
+  "floor_earth": "ground/floor_earth.png",
+  "floor_wood": "ground/floor_wood.png",
+  "water": "ground/water.png",
+  "shallows": "ground/shallows.png",
+  "snow": "ground/snow.png",
+  "cave": "ground/cave.png"
+ },
+ "blend": {
+  "water": 0,
+  "shallows": 1,
+  "mud": 2,
+  "cave": 2,
+  "grass": 3,
+  "meadow": 4,
+  "field": 4,
+  "snow": 5,
+  "dirt": 6,
+  "road": 7,
+  "floor_earth": 9,
+  "floor_wood": 9
+ },
+ "alias": {
+  "door": "floor_earth",
+  "bed": "floor_earth",
+  "bush": "grass",
+  "bones": "cave"
+ }
+}

@@ -37,6 +37,7 @@ var _over: _Layer
 var _night: CanvasModulate
 var _fired_triggers: Dictionary = {}
 var _leaving := false
+var _post: CanvasLayer
 
 
 class _Layer extends Node2D:
@@ -52,17 +53,22 @@ func _ready() -> void:
 	add_child(_night)
 	_floor = _Layer.new()
 	_floor.fn = _draw_floor
+	_floor.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	_floor.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	add_child(_floor)
 	_over = _Layer.new()
 	_over.fn = _draw_overlay
 	add_child(_over)
 	_things = _Layer.new()
 	_things.fn = _draw_things
+	_things.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	add_child(_things)
 	_camera = Camera2D.new()
 	_camera.position_smoothing_enabled = true
 	_camera.position_smoothing_speed = 6.0
 	add_child(_camera)
+	_post = Art.make_post_layer()
+	add_child(_post)
 	ui_layer = CanvasLayer.new()
 	ui_layer.layer = 10
 	add_child(ui_layer)
@@ -325,6 +331,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				Game.goto("load", {"slot": "quick"})
 			KEY_HOME:
 				_cam_offset = Vector2.ZERO
+			KEY_F2:
+				Game.say(Art.cycle())
+				_floor.queue_redraw()
 
 
 func _update_preview() -> void:
@@ -507,6 +516,9 @@ func float_text(c: Vector2i, text: String, color: Color) -> void:
 
 func _process(delta: float) -> void:
 	_update_camera(delta)
+	if _post.visible or Art.style_def().has("pixel"):
+		var vp := get_viewport()
+		Art.update_post_layer(_post, vp.get_final_transform() * vp.get_canvas_transform() * Vector2.ZERO)
 	for f in floaters:
 		f[3] += delta
 	floaters = floaters.filter(func(f): return f[3] < 1.4)
@@ -772,6 +784,48 @@ func spawn_actor(template: String, uid: String, cell: Vector2i) -> Actor:
 # --- Drawing ----------------------------------------------------------------
 
 func _draw_floor(ci: CanvasItem) -> void:
+	if Art.on():
+		_draw_floor_textured(ci)
+	else:
+		_draw_floor_flat(ci)
+	for e in exits:
+		for c in map.mark_cells(e["mark"]):
+			Paint.fill_hex(ci, c, Color(0.45, 0.75, 0.35, 0.22))
+			Paint.grid_hex(ci, c, Color(0.55, 0.85, 0.4, 0.5))
+
+
+## The ground each hex shows: walls, trees and props stand on their own.
+func _ground_of(c: Vector2i) -> String:
+	var t: String = map.cells[c]
+	if Art.ground_texture(t) != null:
+		return t
+	var u := Art.ground_under(t)
+	return u if u != "" else str(map.def.get("default", "grass"))
+
+
+func _draw_floor_textured(ci: CanvasItem) -> void:
+	var ground := {}
+	for c in map.cells:
+		ground[c] = _ground_of(c)
+		var tex := Art.ground_texture(ground[c])
+		if tex:
+			Art.draw_ground(ci, c, tex)
+		else:
+			Paint.floor_hex(ci, c, DB.terrain()[map.cells[c]])
+	# Soft edges: higher-ranked ground spreads a little over its neighbors.
+	for c in map.cells:
+		var g: String = ground[c]
+		var rank := Art.blend_rank(g)
+		var tex := Art.ground_texture(g)
+		if tex == null:
+			continue
+		for edge in range(6):
+			var n := Hex.neighbor(c, (6 - edge) % 6)
+			if ground.has(n) and Art.blend_rank(ground[n]) < rank and Art.ground_id(ground[n]) != Art.ground_id(g):
+				Art.draw_fringe(ci, c, edge, tex)
+
+
+func _draw_floor_flat(ci: CanvasItem) -> void:
 	var tdefs := DB.terrain()
 	for c in map.cells:
 		var t: Dictionary = tdefs[map.cells[c]]
@@ -780,10 +834,6 @@ func _draw_floor(ci: CanvasItem) -> void:
 		else:
 			# Under blocks, draw the neighboring ground color so edges look right.
 			Paint.floor_hex(ci, c, tdefs.get(map.def.get("default", "grass"), t) if t.get("tree", false) else {"color": Color(t["color"]).darkened(0.35).to_html()})
-	for e in exits:
-		for c in map.mark_cells(e["mark"]):
-			Paint.fill_hex(ci, c, Color(0.45, 0.75, 0.35, 0.22))
-			Paint.grid_hex(ci, c, Color(0.55, 0.85, 0.4, 0.5))
 
 
 func _draw_overlay(ci: CanvasItem) -> void:
@@ -809,10 +859,12 @@ func _draw_overlay(ci: CanvasItem) -> void:
 
 func _draw_things(ci: CanvasItem) -> void:
 	var tdefs := DB.terrain()
+	var sprites := Art.on()
 	var items: Array = []  # [sort_y, kind, payload]
 	for c in map.cells:
-		var t: Dictionary = tdefs[map.cells[c]]
-		if t.has("height") and not t.get("walk", false):
+		var tid: String = map.cells[c]
+		var t: Dictionary = tdefs[tid]
+		if (t.has("height") and not t.get("walk", false)) or (sprites and (Art.has_thing(tid) or Art.has_wall(tid))):
 			items.append([Hex.to_pixel(c, Paint.HEX).y, 0, c])
 	for a in actors:
 		if a.fled:
@@ -828,7 +880,14 @@ func _draw_things(ci: CanvasItem) -> void:
 			var p := Hex.to_pixel(c, Paint.HEX)
 			# Fade blocks that stand in front of the player and would hide them.
 			var fade := p.y > pp.y and p.y - pp.y < 60 and absf(p.x - pp.x) < 40 and float(t.get("height", 0)) > 20
-			if t.get("tree", false):
+			var tid: String = map.cells[c]
+			if sprites and Art.has_wall(tid):
+				Art.draw_wall(ci, map, c, tid, fade)
+			elif sprites and Art.has_thing(tid):
+				Art.draw_thing(ci, c, tid, fade)
+			elif not t.has("height"):
+				pass
+			elif t.get("tree", false):
 				Paint.tree(ci, c, t, fade)
 			else:
 				Paint.block(ci, c, t, fade)
@@ -841,7 +900,9 @@ func _draw_things(ci: CanvasItem) -> void:
 				ring = Color(0.9, 0.3, 0.2, 0.9) if a.hostile else Color(0.4, 0.8, 0.4, 0.8)
 				if a == combat.current:
 					ring = Color(1, 1, 1, 0.95)
-			if a.look.get("beast", false):
+			if sprites and Art.draw_figure(ci, display_pos[a], a, walk_phase[a], ring):
+				pass
+			elif a.look.get("beast", false):
 				Paint.beast(ci, display_pos[a], a, walk_phase[a], ring)
 			else:
 				Paint.figure(ci, display_pos[a], a, walk_phase[a], ring)

@@ -2,6 +2,15 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-18 (art style proof, M7)
+
+- **Sprites come from a Blender script, not hand modeling.** `art/sprites.py` builds every model from primitives and renders it headless under one camera and sun; `art/pack.py` packs the renders into sheets plus `assets/art/art.json`. The whole art set rebuilds with one command, so a style change is an edit and a rerun, not a redraw.
+- **Walls auto-tile by neighbor mask.** Each wall type is rendered 64 times (a center post plus any of six arms), and the game picks the frame from which neighbors continue the wall. Maps stay plain terrain letters; no hand-placed wall pieces.
+- **One neutral figure, recolored in the game.** The body is rendered once in gray with ID-color masks for tunic, trousers, hair and shield; the game tints those layers from each NPC's `look`. Weapons and shields are separate layers. One render set covers every person in the game.
+- **Ground is tiling textures with soft fringes**, not per-hex tiles, so terrain edges don't show the hex grid.
+- **The pixel styles are a screen shader over the same sprites**, not separate art. The pixel grid is anchored to the map so standing things don't shimmer when the camera moves. This keeps the choice of style cheap and reversible.
+- **Several styles side by side, T picks.** F2 cycles Rendered, Pixel, Pixel with a fixed palette, and the old placeholders. The style is a setting, so the losers can stay as options or be cut.
+
 ## 2026-11-17 (world and demo)
 
 - **The world map is a square grid of terrain cells, separate from the hex local maps.** Travel is counted in hours per cell by terrain, like Fallout's world map; hexes would add nothing at that scale.

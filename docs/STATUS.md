@@ -1,8 +1,8 @@
 # Status
 
-Updated 2026-11-17.
+Updated 2026-11-18.
 
-**Phase:** the playable demo (M6) is done. Next is art (M7) or more content; T's call.
+**Phase:** M7 art has started with a style proof: rendered sprites for walls, trees, props, ground and people, in several styles side by side (F2 on a map). T picks the style; then the rest of the art follows it.
 
 **Working:**
 - M0 Foundation: hex map in isometric view, click-to-walk with A* pathfinding, camera pan and zoom, data loading, headless test runner (fails on any script error), web export that runs in a browser.
@@ -21,11 +21,11 @@ Updated 2026-11-17.
 **Partial:** save and load (quick slot and title-screen Continue; no slot browser yet).
 
 **Known rough edges:**
-- Placeholder art drawn in code.
+- Art is a style proof. No roofs yet (houses show only thatch eaves), beasts, rocks, cliffs and cave walls are still code-drawn, cloaks, helmets and skin tone are not recolored, and the world map and title screen are unchanged.
 - Enemies that haven't seen you stay out of a fight even when their friends are in it.
 - Winning the ford by force only closes the quest with Sulicena if you loot Haldo's pay tablet.
 - The ford's toll rider charges you every crossing until the ford is settled.
 - Consequences that pay off later (hired riders in Act III, the discovered lie, the pardoned exile) are recorded as flags; the content that uses them doesn't exist yet.
 - Balance is untested by a human: check odds, enemy strength, prices.
 
-**Waiting on T:** play the demo; the open questions at the end of [DESIGN.md](DESIGN.md), including real names for the placeholders.
+**Waiting on T:** pick an art style (F2 in Brigodunon); play the demo; the open questions at the end of [DESIGN.md](DESIGN.md), including real names for the placeholders.
