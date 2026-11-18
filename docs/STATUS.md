@@ -2,7 +2,7 @@
 
 Updated 2026-11-18.
 
-**Phase:** M7 art has started with a style proof: rendered sprites for walls, trees, props, ground and people, in several styles side by side (F2 on a map). T picks the style; then the rest of the art follows it.
+**Phase:** M7 art. The style proof is done and T picked the Rendered style. Next: bigger, more detailed people, then roofs and the rest of the art in that style.
 
 **Working:**
 - M0 Foundation: hex map in isometric view, click-to-walk with A* pathfinding, camera pan and zoom, data loading, headless test runner (fails on any script error), web export that runs in a browser.
@@ -28,4 +28,4 @@ Updated 2026-11-18.
 - Consequences that pay off later (hired riders in Act III, the discovered lie, the pardoned exile) are recorded as flags; the content that uses them doesn't exist yet.
 - Balance is untested by a human: check odds, enemy strength, prices.
 
-**Waiting on T:** pick an art style (F2 in Brigodunon); play the demo; the open questions at the end of [DESIGN.md](DESIGN.md), including real names for the placeholders.
+**Waiting on T:** play the demo; the open questions at the end of [DESIGN.md](DESIGN.md), including real names for the placeholders.

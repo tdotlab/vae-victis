@@ -4,6 +4,8 @@ Newest first. Each entry: the decision, and why.
 
 ## 2026-11-18 (art style proof, M7)
 
+- **The art style is Rendered** (T's pick, from the four in the proof): the Blender sprites drawn as they are, no pixel filter. The pixel styles and placeholders stay behind F2 for now as a comparison and a debugging aid; they are not maintained as alternatives.
+
 - **Sprites come from a Blender script, not hand modeling.** `art/sprites.py` builds every model from primitives and renders it headless under one camera and sun; `art/pack.py` packs the renders into sheets plus `assets/art/art.json`. The whole art set rebuilds with one command, so a style change is an edit and a rerun, not a redraw.
 - **Walls auto-tile by neighbor mask.** Each wall type is rendered 64 times (a center post plus any of six arms), and the game picks the frame from which neighbors continue the wall. Maps stay plain terrain letters; no hand-placed wall pieces.
 - **One neutral figure, recolored in the game.** The body is rendered once in gray with ID-color masks for tunic, trousers, hair and shield; the game tints those layers from each NPC's `look`. Weapons and shields are separate layers. One render set covers every person in the game.
