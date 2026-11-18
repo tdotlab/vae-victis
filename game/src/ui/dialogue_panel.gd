@@ -12,6 +12,9 @@ var _page: Dictionary
 var _text: RichTextLabel
 var _choices: VBoxContainer
 var _pending_actions: Array = []
+var _finished := false
+const TEXT_MIN_H := 120.0
+const TEXT_MAX_H := 330.0
 
 
 func _ready() -> void:
@@ -39,7 +42,8 @@ func _ready() -> void:
 	vb.add_child(title)
 	_text = RichTextLabel.new()
 	_text.bbcode_enabled = true
-	_text.custom_minimum_size = Vector2(760, 170)
+	_text.custom_minimum_size = Vector2(760, TEXT_MIN_H)
+	_text.scroll_following = false
 	_text.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_text.add_theme_font_size_override("normal_font_size", 16)
 	vb.add_child(_text)
@@ -75,9 +79,14 @@ func _show(page: Dictionary) -> void:
 			hud.open_barter(speaker)
 	_text.text = ""
 	_text.append_text(page["text"].replace("[", "[lb]"))
+	_fit_text.call_deferred()
 	for c in _choices.get_children():
 		c.queue_free()
 	if page["end"]:
+		# A choice that leads straight to END has nothing left to read.
+		if str(page["text"]).strip_edges() == "":
+			_finish.call_deferred()
+			return
 		var b := _choice_button("1. [Done]", func(): _finish())
 		_choices.add_child(b)
 		return
@@ -89,6 +98,11 @@ func _show(page: Dictionary) -> void:
 			label += "  (%d%%)" % ch["chance"]
 		var idx: int = ch["index"]
 		_choices.add_child(_choice_button(label, func(): _pick(idx)))
+
+
+## Grows the text box to fit a long speech, up to a cap; past that it scrolls.
+func _fit_text() -> void:
+	_text.custom_minimum_size.y = clampf(_text.get_content_height() + 8, TEXT_MIN_H, TEXT_MAX_H)
 
 
 func _choice_button(text: String, cb: Callable) -> Button:
@@ -116,6 +130,9 @@ func on_key(event: InputEventKey) -> void:
 
 
 func _finish() -> void:
+	if _finished:
+		return
+	_finished = true
 	hud.close_modal(self)
 	var m := hud.map
 	for a in _pending_actions:
@@ -154,5 +171,25 @@ func _finish() -> void:
 			"heal_all":
 				Game.state.player.hp = Game.state.player.max_hp()
 				Game.say("Your wounds are tended.", "good")
+			"leave_all":
+				for a2 in m.actors:
+					if a2.faction == parts[1] and not a2.dead and not a2.is_companion:
+						a2.fled = true
+						a2.ai = "idle"
+				m.save_map_state()
+			"fight_all":
+				var first: Actor = null
+				for a2 in m.actors:
+					if a2.faction == parts[1] and a2.is_active():
+						a2.hostile = true
+						if first == null:
+							first = a2
+				if first:
+					m.combat.provoke(first)
+					m.combat.start_combat(first)
+			"ending":
+				m.save_map_state()
+				Game.goto("text", {"title": DB.story().get("ending_title", ""), "text": DB.text_file(parts[1]), "next": "map", "button": DB.story().get("ending_button", "Go on")})
+				return
 	m.save_map_state()
 	hud.refresh()

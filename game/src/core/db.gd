@@ -64,6 +64,19 @@ static func item(id: String) -> Dictionary:
 	return items().get(id, {})
 
 
+## An item's name for the middle of a sentence: "Roman order" stays capitalized
+## past the first letter, "Bread" becomes "bread".
+static func item_name_lc(id: String) -> String:
+	return lc_first(str(item(id).get("name", id)))
+
+
+static func lc_first(s: String) -> String:
+	var first := s.get_slice(" ", 0)
+	if first in story().get("proper_words", []):
+		return s
+	return s.left(1).to_lower() + s.substr(1)
+
+
 static func items() -> Dictionary:
 	return _index("items.json", "items")
 
@@ -100,3 +113,13 @@ static func text_file(path: String) -> String:
 		push_error("DB: missing text file " + full)
 		return ""
 	return FileAccess.get_file_as_string(full)
+
+
+static func world() -> Dictionary:
+	var d = load_json("world.json")
+	return d if d is Dictionary else {}
+
+
+static func calendar() -> Array:
+	var d = load_json("calendar.json")
+	return d.get("events", []) if d is Dictionary else []

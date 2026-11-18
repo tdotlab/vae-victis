@@ -1,0 +1,161 @@
+// Haldo, leader of the Germanic deserters at the ford. Routes: fight, pay the
+// toll, lie (the Arverni are coming), forged recall order, recruit, and
+// talking to men whose horses you stole. He can read the hostage tally.
+=== start
+[flag horses_gone, !flag ford_settled] -> on_foot
+[flag ford_toll_paid] -> paid_again
+[flag haldo_met] -> again
+~ set haldo_met
+He's the one with the mail shirt, sitting on a saddle by the fire with a spear across his knees. Fair hair knotted on the side of his head the way his people wear it, and a face that's been out in all weathers for years.
+
+"Another one from the village." His Gaulish is good, with an accent like gravel. "Toll is five silver a head. Grain is two a sack. Horses, four. Children, free." He smiles without much in it. "I am Haldo. What do you want?"
+-> hub
+
+=== again
+"You again." He doesn't get up.
+-> hub
+
+=== hub
+* "Who are you people?" -> who
+* [item hostage_tally, !flag tally_read, !flag haldo_read] "Can you read Roman marks?" -> tally
+* [quest ford active] "Brigodunon's grain. What will it cost to get it across?" -> grain
+* [quest ford active, !flag ford_lie_failed, roll speech -15] "You should know: the Arverni are coming down this valley. A thousand horse, two days behind me." -> lie_win | lie_fail
+* [quest ford active, item roman_order] "A message came for you. From the depot." -> recall
+* [quest ford active, renown 10] "Ride for Brigodunon instead. We'll have a war soon enough." -> recruit
+* [quest ford active, PRE 7] "Men like you shouldn't be sitting in a river taking coins off farmers. Ride for Brigodunon." -> recruit
+* [quest ford active] "Get off this ford or I'll put you off it." -> threat
+* "Nothing. Goodbye." -> END
+
+=== who
+"Batavi. Ubii. A Sueb or two." He shrugs. "Caesar hired us across the Rhenus four years ago. Good pay, he said. We rode for him in the Belgae lands and in Britannia." He spits into the fire. "This autumn the pay stopped. So we took our horses as our wages, and here we are. A ford is a good place to sit. Everyone has to cross a river sometime."
+-> hub
+
+=== tally
+He takes it, squints, and grunts. "Roman. Depot mark. I know it." He doesn't give it back. "Knowing is worth something, ja?"
+* [flag ford_toll_paid] "I've paid your toll. Call it part of the bargain." -> tally_read
+* [silver 20] Pay him twenty silver. -> tally_read ~ silver -20
+* [speech 40] "It's three children. One is my sister. You've taken enough off Brigodunon." -> tally_read
+* "Give it back." -> tally_back
+
+=== tally_back
+He tosses it to you. "Maybe later."
+-> hub
+
+=== tally_read
+~ set tally_read; set haldo_read; quest hostages north; known noviodunum; xp 50
+"DEP NOVIOD. Noviodunum, on the Liger. Caesar's depot. Hostages, horses, grain, baggage, pay chest." His face does something. "We drew our pay there, the last time there was pay. I know the hostage pens. Low building by the river, behind the horse lines. Children from every people in Gaul, learning to say 'yes, master' in Latin."
+
+He hands you the tally. "If yours are still there, they'll be there in the spring. Maybe."
+-> hub
+
+=== grain
+"Twenty sacks. Two a sack. Forty silver and it crosses all season." He holds out his hand, palm up.
+* [silver 40] Pay him forty silver. -> paid ~ silver -40
+* [barter 40, silver 25] "Twenty-five. Or I take it round by the Duranius and you get nothing." -> paid_cheap ~ silver -25
+* "Too much." -> hub
+
+=== paid
+~ set ford_toll_paid; set ford_open; set ford_settled; quest ford toll_paid; xp 50
+He weighs the purse and tucks it away. "Good. Your carts cross when they like. Tell the woman in the village she can stop sending me rude messages."
+-> hub
+
+=== paid_cheap
+~ set ford_toll_paid; set ford_open; set ford_settled; quest ford toll_paid; xp 75
+He laughs. "The Duranius is a week out of your way." But he takes it. "Fine. You haggle like a Roman."
+-> hub
+
+=== paid_again
+"Your grain crosses. Your toll is paid. What else?"
+-> hub
+
+=== lie_win
+~ set ford_lied; set ford_open; set ford_settled; quest ford riders_gone; xp 100; renown 2; leave_all riders
+He looks at you a long time. Then he looks north, up the valley, and you watch him do the sum: twenty horse against a thousand, and nobody paying any of them.
+
+"Vercingetorix's men." He stands. "Then we go west. Up! Saddle up!" The camp breaks like a kicked anthill.
+[item hostage_tally, !flag tally_read] As he swings into the saddle he glances down at the stick at your belt. "That tally. Noviodunum depot. I know the mark." He wheels his horse. "Good luck to you. You'll need more than me."
+[item hostage_tally, !flag tally_read] ~ set tally_read; set haldo_read; quest hostages north; known noviodunum
+* Watch them go. -> END
+
+=== lie_fail
+~ set ford_lie_failed
+He laughs. "A thousand Arverni, and no smoke, and no refugees, and the birds still singing?" He shakes his head. "Try that on the farmers. Toll is still the toll."
+-> hub
+
+=== recall
+He takes the tablet and reads it, slowly, lips moving. Then again. His face doesn't change, but his hands do.
+
+"Pardon. Back pay. Report to the depot at Noviodunum before the Kalends." He looks at you. "Where did you get this?"
+* "A courier came through Vindomagos. He asked who was at the ford. He didn't want to come down himself." -> recall_yes
+* [latin 40] "It's in a quartermaster's hand. You know what that means. They're short of horse and they're desperate." -> recall_yes
+
+=== recall_yes
+~ take roman_order; set riders_recalled; set ford_open; set ford_settled; quest ford riders_recalled; xp 100; leave_all riders
+He's quiet for a long moment, and then he stands and shouts something in his own language, and the men around the fire cheer.
+
+"Four years we rode for him." He's almost talking to himself. "Of course he wants us back. Who else would he get?"
+[item hostage_tally, !flag tally_read] He sees the tally at your belt as he mounts. "That's a Noviodunum mark. We'll be there in ten days. If I see your children, I'll tell them someone's coming." He means it kindly.
+[item hostage_tally, !flag tally_read] ~ set tally_read; set haldo_read; quest hostages north; known noviodunum
+* Watch them ride north. -> END
+
+=== recruit
+He looks at you with real interest for the first time. "And who pays? The village on the hill, with its twenty cows?"
+* [item gold_torque] Hold out a gold torque. "This, now. More when we call you." -> hired ~ take gold_torque
+* [silver 60] "Sixty silver now. More when we call you." -> hired ~ silver -60
+* "Brigodunon will find it." -> recruit_no
+
+=== recruit_no
+"Then come back when Brigodunon has found it." He leans back. "Until then I sit on my river."
+-> hub
+
+=== hired
+~ set riders_hired; set ford_open; set ford_settled; quest ford riders_hired; xp 125; renown 3; leave_all riders
+He takes it, bites it, and grins. "Done. We go to the hills above your village and we wait. When Brigodunon calls, we come." He holds out his hand and you take it. His grip is like a horse's bridle.
+
+"An oath. On my horse and my spear." He means it. You think he means it.
+[item hostage_tally, !flag tally_read] "That tally. Noviodunum depot. Since we're friends now, that one's free."
+[item hostage_tally, !flag tally_read] ~ set tally_read; set haldo_read; quest hostages north; known noviodunum
+* "On my word too." -> END
+
+=== threat
+He stands up, and so do all the others, all at once.
+* [roll PRE -20] "Look at me. Do you want to die in a river for a toll?" -> threat_win | fight
+* "So be it." -> fight
+* "Some other time." -> hub
+
+=== threat_win
+~ set ford_open; set ford_settled; quest ford riders_gone; xp 125; renown 4; leave_all riders
+He holds your eye for a long moment. Then, unexpectedly, he laughs.
+
+"No. I don't. I want to die rich and old in a bed." He kicks the fire apart. "It's a cold ford anyway. We go." He points the spear at you. "Don't be here when we come back."
+* Watch them go. -> END
+
+=== fight
+~ set ford_fought; fight_all riders
+"Your choice, farmer." The spear comes up.
+* Fight. -> END
+
+=== on_foot
+He's white with rage. Behind him his men stand around the empty picket line like mourners.
+
+"You." He knows. Of course he knows. "Twenty horses. Do you know what a horse is to a man like me? It's his legs. It's his life."
+* [flag horses_kept] "I know where they are. Leave the ford, and you'll find them in the fold above the old sheepfold, a morning's walk north." -> walk_horses
+* [speech 35] "On foot, in winter, with the Arverni rising? You'll want to be gone before word gets around." -> walk
+* [PRE 6] "Vindomagos has forty spears and it knows you're on foot. Go now." -> walk
+* "Then fight me for them." -> fight
+
+=== walk_horses
+~ set ford_open; set ford_settled; quest ford riders_walked; xp 100; leave_all riders
+He looks at you for a long time. "You could have kept them. Twenty horses. You'd be a chief." He shakes his head. "Gauls."
+
+"Fine. We go." He jerks his head at his men.
+[item hostage_tally, !flag tally_read] On the way past he stops. "That stick of yours. Noviodunum depot. Since you were honest about the horses."
+[item hostage_tally, !flag tally_read] ~ set tally_read; set haldo_read; quest hostages north; known noviodunum
+* Watch them go. -> END
+
+=== walk
+~ set ford_open; set ford_settled; quest ford riders_walked; xp 100; leave_all riders
+He looks at his men, and at the empty line, and at you. "We'll find them," he says, and he doesn't mean the horses. "Next year, maybe. Or the year after."
+
+They pick up their saddles and walk north, carrying them.
+* Watch them go. -> END

@@ -30,6 +30,10 @@ static func start(name: String) -> void:
 		"world":
 			Game.new_game(test_hero())
 			Game.state.set_quest("hostages", "find_tally")
+			for l in DB.story().get("known_locations", []):
+				Game.state.known_locations.append(l)
+			var ws: Array = DB.story().get("world_start", [0, 0])
+			Game.state.world_pos = Vector2i(int(ws[0]), int(ws[1]))
 			Game.goto("world", {})
 		"newgame":
 			Game.new_game(test_hero())
@@ -42,7 +46,8 @@ static func start(name: String) -> void:
 
 
 ## Scripted actions for screenshot runs: walk:x:y, fight, talk:<uid>,
-## open:<panel>, wait:<frames>, attack:<uid>, endturn, key:<choice number>.
+## open:<panel>, wait:<frames>, attack:<uid>, endturn, key:<choice number>,
+## flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, known:<location>.
 static func act(main: Node, a: String) -> void:
 	var parts := a.split(":")
 	var tree := main.get_tree()
@@ -75,6 +80,17 @@ static func act(main: Node, a: String) -> void:
 				var t2 := map.find_actor(parts[1])
 				map.open_dialogue(t2.dialogue, t2)
 				await tree.process_frame
+		"travel":
+			var wm := screen as WorldMap
+			if wm:
+				if parts.size() > 2:
+					wm._set_destination(Vector2i(int(parts[1]), int(parts[2])))
+				else:
+					wm._travel_to_location(parts[1])
+				for i in range(600):
+					await tree.process_frame
+					if wm._path.is_empty() or wm.modal_open or main.current_screen() != wm:
+						break
 		"key":
 			var ev := InputEventKey.new()
 			ev.keycode = KEY_1 + int(parts[1]) - 1
@@ -96,6 +112,18 @@ static func act(main: Node, a: String) -> void:
 					"barter":
 						map.hud.open_barter(map.find_actor(parts[2]))
 				await tree.process_frame
+		"flag":
+			Game.state.set_flag(parts[1], int(parts[2]) if parts.size() > 2 else 1)
+		"quest":
+			Game.state.set_quest(parts[1], parts[2])
+		"give":
+			Game.state.player.inventory.add(parts[1], int(parts[2]) if parts.size() > 2 else 1)
+		"silver":
+			Game.state.player.silver += int(parts[1])
+		"known":
+			Game.state.known_locations.append(parts[1])
+			if screen is WorldMap:
+				screen.queue_redraw()
 		"hover":
 			if map:
 				map.hover = Hex.offset_to_axial(int(parts[1]), int(parts[2]))

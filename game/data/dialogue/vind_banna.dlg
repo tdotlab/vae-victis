@@ -1,0 +1,21 @@
+// Old Banna, healer of Vindomagos. Heals for a price, sells medicine.
+=== start
+The old woman doesn't look up from her pestle. "If you're bleeding, sit. If you're not, buy something or go away."
+* [silver 10] "I'm hurt." Pay her ten silver to treat you. -> heal ~ silver -10
+* "What have you got?" -> trade
+* "Do you know anything about the riders at the ford?" -> riders
+* "Goodbye." -> END
+
+=== heal
+~ heal_all; time 60
+She cleans you up with hot water and something that stings like hornets, and binds you tight. "Don't fall off anything for a day or two."
+* "Thank you." -> END
+
+=== trade
+~ barter
+"Herbs, poultices, bandages. Fair prices. Fairer for people who don't bleed on my floor."
+* "Thanks." -> END
+
+=== riders
+"I sewed one of them up last month. Haldo's own nephew." She grinds harder. "Nice boy. Said they'd ridden for Caesar four years, and he'd stopped paying them in the autumn. They took their horses as their wages." She sniffs. "They're not wicked. They're hungry, and armed. That's worse, mostly."
+* "Thanks." -> END

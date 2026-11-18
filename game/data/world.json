@@ -1,0 +1,376 @@
+{
+ "_comment": "The travel map of central Gaul. One cell is roughly 12 km. Rows are drawn north (top) to south. Rules: src/core/world_data.gd.",
+ "legend": {
+  ".": "plain",
+  "f": "forest",
+  "h": "hills",
+  "m": "mountains",
+  "s": "marsh",
+  "~": "river",
+  "=": "ford"
+ },
+ "terrain": {
+  "plain": {
+   "name": "Open country",
+   "hours": 4,
+   "color": "#6b6a3a",
+   "encounter": 5,
+   "encounter_map": "enc_open"
+  },
+  "forest": {
+   "name": "Forest",
+   "hours": 6,
+   "color": "#34482a",
+   "encounter": 8,
+   "encounter_map": "enc_wood"
+  },
+  "hills": {
+   "name": "Hills",
+   "hours": 6,
+   "color": "#7a6c4c",
+   "encounter": 6,
+   "encounter_map": "enc_open"
+  },
+  "mountains": {
+   "name": "Mountains",
+   "hours": 10,
+   "color": "#8f8b80",
+   "encounter": 7,
+   "encounter_map": "enc_wood"
+  },
+  "marsh": {
+   "name": "Marsh",
+   "hours": 8,
+   "color": "#4c5a44",
+   "encounter": 7,
+   "encounter_map": "enc_wood"
+  },
+  "river": {
+   "name": "River",
+   "pass": false,
+   "color": "#2f4a62"
+  },
+  "ford": {
+   "name": "Ford",
+   "hours": 4,
+   "color": "#5d7a86",
+   "encounter": 3,
+   "encounter_map": "enc_open"
+  }
+ },
+ "seasons": {
+  "winter": {
+   "*": 1.15,
+   "hills": 1.25,
+   "mountains": 2.2,
+   "marsh": 1.3
+  },
+  "spring": {
+   "*": 1.1,
+   "plain": 1.2,
+   "marsh": 1.5,
+   "ford": 1.4
+  },
+  "summer": {
+   "*": 1.0
+  },
+  "autumn": {
+   "*": 1.05,
+   "marsh": 1.2
+  }
+ },
+ "rows": [
+  ".f.....f.....f.ff.............f.",
+  "..f.....ff....f.f.......f.......",
+  "......f.f...ff.f....f.f..f......",
+  "f............f.................f",
+  "..f...f~~~ffffff..f..........ff.",
+  ".....f~~f~~=~~ffff.......f......",
+  ".~~=~~~..ffff~~.......f..f....f.",
+  "~~ff.......f..~=.f........f.....",
+  "~.....f..f.sss.~~......ff....f.f",
+  "..........sssss.~~fff.....f....f",
+  "...........s.s...~~.f.f.h..f..f.",
+  "......f...........~....h.fh...ff",
+  ".......f...f....f.~ff..hfhf..f..",
+  "..f.f.....f.......~~ff.fhff..f..",
+  ".....ff..ff....f...~=.f.h.h.f...",
+  "....f.f......f.....~~~ffhff.....",
+  ".f..............f..~.~~.h.....f.",
+  "....ff..f.......f..~..~~.f.f....",
+  "..........f...f....~...~~.......",
+  "....f.........f..ff~....~~.ff...",
+  "f.....f...........f=.....~f..f..",
+  "....ff.....ff.hhhhh~hhh.f~~.f...",
+  ".f.ff...f...f.hhhhh~hhh...=f....",
+  ".f..ffff..f..h.hhh~~.hhh..~...ff",
+  ".ff.f..f...hhhmhm~~~hhhhhh~.....",
+  "fff.f.f.ff..hhmh~~m~hhhhhh~....f",
+  "..f...f.f..fh.m~~mm~~hh.hh~..f..",
+  "...f.fff..hf.h~~mhhh~~hhhh~~....",
+  "..f.f.ff...hh~~mmhhhh=~hhh.~.f..",
+  "....fff..~~~~=hhhh.hhh~hhhh~...f",
+  "~~~~~=~~~~..hhhhhhhhh.~hhhm=....",
+  "~.f....hhfffhhhhhhhh.h~~mhh~mmf.",
+  ".....hhh.fhfhhhhhhhhhhh~~hm~m.m.",
+  "f..f..hhhhfffhhhh.hhh.hh~hh~m...",
+  "..fh.fhhhfhhh.ff..h..fmm~mmmmmmf",
+  "....hh.fhh.h.f.~~~~~=mmm~m~~~~~~",
+  "~~~~~~=~~~~~~~~~....~~~~~~~mm..f",
+  "~f....h.....f.........mmmmmmmmm.",
+  "ff...f...h.......f...fmmmmmmmmff",
+  ".......f.......f....f...mmmm...."
+ ],
+ "locations": [
+  {
+   "id": "brigodunon",
+   "name": "Brigodunon",
+   "cell": [
+    8,
+    34
+   ],
+   "desc": "Home. A hill fort of the Cadurci above the Oltis, behind a rampart of stone and timber.",
+   "map": "brigodunon",
+   "entry": "world",
+   "size": 2
+  },
+  {
+   "id": "grotto",
+   "name": "The Grotto of the Hanging Dead",
+   "cell": [
+    10,
+    32
+   ],
+   "desc": "A cave in the limestone where the old dead were hung for the birds. Nobody goes there now. Somebody does.",
+   "map": "grotto",
+   "entry": "start",
+   "size": 1
+  },
+  {
+   "id": "vindomagos",
+   "name": "Vindomagos",
+   "cell": [
+    6,
+    35
+   ],
+   "desc": "A farming village on the north bank of the Oltis. Salt, grain, and gossip.",
+   "map": "vindomagos",
+   "entry": "world",
+   "size": 2
+  },
+  {
+   "id": "oltis_ford",
+   "name": "The ford at the Oltis",
+   "cell": [
+    6,
+    36
+   ],
+   "desc": "The only good crossing of the Oltis for a day in either direction.",
+   "map": "oltis_ford",
+   "entry": "north",
+   "size": 1
+  },
+  {
+   "id": "uxellodunum",
+   "name": "Uxellodunum",
+   "cell": [
+    10,
+    28
+   ],
+   "desc": "The great stronghold of the Cadurci, on its cliff above the Duranius.",
+   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "size": 2
+  },
+  {
+   "id": "gergovia",
+   "name": "Gergovia",
+   "cell": [
+    17,
+    23
+   ],
+   "desc": "The Arverni capital on its plateau. Whoever holds it holds the revolt.",
+   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "size": 3
+  },
+  {
+   "id": "avaricum",
+   "name": "Avaricum",
+   "cell": [
+    12,
+    11
+   ],
+   "desc": "The richest city in Gaul, behind walls of stone and timber.",
+   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "size": 3
+  },
+  {
+   "id": "noviodunum",
+   "name": "Noviodunum",
+   "cell": [
+    17,
+    11
+   ],
+   "desc": "Caesar's depot on the Liger. Hostages, horses, grain.",
+   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "size": 2,
+   "hidden": true
+  },
+  {
+   "id": "cenabum",
+   "name": "Cenabum",
+   "cell": [
+    9,
+    3
+   ],
+   "desc": "The Carnute trading town where the revolt began.",
+   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "size": 2
+  },
+  {
+   "id": "carnute_forest",
+   "name": "The Carnute forest",
+   "cell": [
+    12,
+    3
+   ],
+   "desc": "Where the druids of all Gaul meet once a year.",
+   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "size": 2,
+   "hidden": true
+  },
+  {
+   "id": "bibracte",
+   "name": "Bibracte",
+   "cell": [
+    23,
+    13
+   ],
+   "desc": "The Aeduan capital. Rome's oldest friends in Gaul.",
+   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "size": 3
+  },
+  {
+   "id": "alesia",
+   "name": "Alesia",
+   "cell": [
+    27,
+    7
+   ],
+   "desc": "A hill town of the Mandubii.",
+   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "size": 2,
+   "hidden": true
+  }
+ ],
+ "encounters": [
+  {
+   "id": "wolves",
+   "weight": 10,
+   "terrain": [
+    "forest",
+    "hills",
+    "mountains"
+   ],
+   "days": [
+    0,
+    110
+   ],
+   "actors": [
+    "wolf",
+    "wolf",
+    "wolf"
+   ],
+   "text": "Wolves. Winter has made them bold."
+  },
+  {
+   "id": "wolf_pair",
+   "weight": 6,
+   "terrain": [
+    "plain",
+    "marsh"
+   ],
+   "days": [
+    0,
+    110
+   ],
+   "actors": [
+    "wolf",
+    "wolf"
+   ],
+   "text": "Two wolves are shadowing you through the brush."
+  },
+  {
+   "id": "brigands",
+   "weight": 9,
+   "terrain": [],
+   "days": [
+    0,
+    9999
+   ],
+   "actors": [
+    "brigand",
+    "brigand",
+    "brigand_slinger"
+   ],
+   "text": "Men on the road with weapons and no village. In a war, that's a trade."
+  },
+  {
+   "id": "refugees",
+   "weight": 8,
+   "terrain": [
+    "plain",
+    "hills",
+    "forest",
+    "ford"
+   ],
+   "days": [
+    1,
+    9999
+   ],
+   "actors": [
+    "refugee",
+    "refugee_woman",
+    "refugee_elder"
+   ],
+   "text": "A family on the road, carrying everything they own."
+  },
+  {
+   "id": "salt_trader",
+   "weight": 6,
+   "terrain": [
+    "plain",
+    "hills",
+    "ford"
+   ],
+   "days": [
+    0,
+    9999
+   ],
+   "actors": [
+    "salt_trader",
+    "trader_guard"
+   ],
+   "text": "A trader with two mules, a guard, and opinions."
+  },
+  {
+   "id": "foragers",
+   "weight": 7,
+   "terrain": [
+    "plain",
+    "hills",
+    "forest"
+   ],
+   "days": [
+    26,
+    9999
+   ],
+   "actors": [
+    "roman_forager",
+    "roman_forager",
+    "auxiliary_slinger"
+   ],
+   "text": "Roman foragers, a long way from their camp, stripping a farm. They see you."
+  }
+ ],
+ "reveal_radius": 1
+}

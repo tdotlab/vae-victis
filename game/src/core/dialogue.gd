@@ -23,7 +23,10 @@ extends RefCounted
 ##   set flag [n] | clear flag | add flag n | xp n | quest id stage [active|done|failed]
 ##   give item [n] | take item [n] | silver n | honor n | renown n | standing faction n
 ##   time minutes | heal n | say text | fight | barter | join | leave | travel map entry
-##   title text | known location
+##   title text | known location | leave_all faction | fight_all faction | ending textfile
+##   wait_until hour (pass time until the next time the clock shows that hour)
+## A line "@speaker Name" before the first node names a speaker-less talk.
+## [night] is true from 20:00 to 06:00.
 
 const SKILL_IDS := ["blades", "spears", "missiles", "brawling", "shield", "sneak", "locks", "steal",
 	"traps", "healing", "surgery", "speech", "barter", "gambling", "lore", "latin", "survival"]
@@ -38,11 +41,15 @@ static func parse(text: String, source: String = "") -> Dictionary:
 	var entry := ""
 	var cur: Array = []
 	var cur_id := ""
+	var speaker := ""
 	var lineno := 0
 	for raw in text.split("\n"):
 		lineno += 1
 		var line := raw.strip_edges()
 		if line.begins_with("//"):
+			continue
+		if cur_id == "" and line.begins_with("@speaker"):
+			speaker = line.trim_prefix("@speaker").strip_edges()
 			continue
 		if line.begins_with("==="):
 			cur_id = line.trim_prefix("===").strip_edges()
@@ -74,7 +81,7 @@ static func parse(text: String, source: String = "") -> Dictionary:
 			cur.append({"t": "jump", "cond": conds, "to": line.substr(2).strip_edges()})
 		else:
 			cur.append({"t": "text", "cond": conds, "text": line})
-	return {"entry": entry, "nodes": nodes}
+	return {"entry": entry, "nodes": nodes, "speaker": speaker}
 
 
 static func _take_conds(line: String) -> Array:
@@ -246,6 +253,8 @@ static func _check(gs: GameState, c: String, ctx: Dictionary) -> bool:
 			return p.sex == rest
 		"season":
 			return gs.season() == rest
+		"night":
+			return gs.hour() < 6 or gs.hour() >= 20
 		"companion":
 			for cd in gs.companions:
 				if cd.get("uid", "") == rest or cd.get("template", "") == rest:
@@ -323,7 +332,7 @@ static func _apply_one(gs: GameState, e: String, out: Dictionary) -> void:
 		"give":
 			var n := int(args[1]) if args.size() > 1 else 1
 			p.inventory.add(args[0], n)
-			out["messages"].append(["You receive %s%s." % [DB.item(args[0]).get("name", args[0]).to_lower(), (" x%d" % n) if n > 1 else ""], "good"])
+			out["messages"].append(["You receive %s%s." % [DB.item_name_lc(args[0]), (" x%d" % n) if n > 1 else ""], "good"])
 		"take":
 			var n2 := int(args[1]) if args.size() > 1 else 1
 			var have := p.inventory.count(args[0])
@@ -332,7 +341,7 @@ static func _apply_one(gs: GameState, e: String, out: Dictionary) -> void:
 					if p.equipment[slot] == args[0]:
 						p.unequip(slot)
 			p.inventory.remove(args[0], n2)
-			out["messages"].append(["You hand over %s%s." % [DB.item(args[0]).get("name", args[0]).to_lower(), (" x%d" % n2) if n2 > 1 else ""], "info"])
+			out["messages"].append(["You hand over %s%s." % [DB.item_name_lc(args[0]), (" x%d" % n2) if n2 > 1 else ""], "info"])
 		"silver":
 			var n3 := int(args[0])
 			p.silver = maxi(0, p.silver + n3)
@@ -351,6 +360,10 @@ static func _apply_one(gs: GameState, e: String, out: Dictionary) -> void:
 			gs.add_standing(args[0], int(args[1]))
 		"time":
 			gs.advance(int(args[0]))
+		"wait_until":
+			var target := int(args[0]) * 60
+			var now := gs.minutes % 1440
+			gs.advance((target - now + 1440) % 1440)
 		"heal":
 			p.hp = mini(p.max_hp(), p.hp + int(args[0]))
 			out["messages"].append(["You feel better.", "good"])
@@ -363,10 +376,55 @@ static func _apply_one(gs: GameState, e: String, out: Dictionary) -> void:
 			if not gs.known_locations.has(rest):
 				gs.known_locations.append(rest)
 				out["messages"].append(["A new place is marked on your map.", "good"])
-		"fight", "barter", "join", "leave", "travel", "end", "heal_all", "rest":
+		"fight", "barter", "join", "leave", "travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending":
 			out["actions"].append(e)
 		_:
 			push_warning("Unknown dialogue effect: " + e)
+
+
+const COND_HEADS := ["flag", "item", "silver", "honor", "renown", "day", "level", "standing", "quest",
+	"trait", "perk", "sex", "season", "night", "companion", "has"]
+const FX_HEADS := ["set", "clear", "add", "xp", "quest", "give", "take", "silver", "honor", "renown",
+	"standing", "time", "wait_until", "heal", "say", "title", "known", "fight", "barter", "join", "leave",
+	"travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending"]
+
+
+## Problems in a parsed script: unknown conditions or effects, jumps to
+## missing nodes, unknown items, quests or quest stages. Empty if clean.
+static func validate(d: Dictionary) -> Array:
+	var errs: Array = []
+	var nodes: Dictionary = d.get("nodes", {})
+	if not nodes.has(d.get("entry", "")):
+		errs.append("no entry node")
+	for nid in nodes:
+		for op in nodes[nid]:
+			var where := "%s: " % nid
+			for c in op.get("cond", []):
+				var head: String = _split_op(String(c).trim_prefix("!").strip_edges().split(" ")[0])[0]
+				if not (head in SKILL_IDS or head in ATTR_IDS or head in COND_HEADS):
+					errs.append(where + "unknown condition " + c)
+				if head == "item" and DB.item(String(c).split(" ")[1]).is_empty():
+					errs.append(where + "unknown item in " + c)
+			if op.has("roll"):
+				var rh: String = String(op["roll"]).split(" ")[0]
+				if not (rh in SKILL_IDS or rh in ATTR_IDS):
+					errs.append(where + "bad roll " + op["roll"])
+			for key in ["to", "fail"]:
+				if op.has(key) and op[key] != "END" and not nodes.has(op[key]):
+					errs.append(where + "jump to missing node " + op[key])
+			for e in op.get("fx", []):
+				var parts: PackedStringArray = String(e).split(" ", false)
+				if not parts[0] in FX_HEADS:
+					errs.append(where + "unknown effect " + e)
+				elif parts[0] in ["give", "take"] and DB.item(parts[1]).is_empty():
+					errs.append(where + "unknown item in " + e)
+				elif parts[0] == "quest":
+					var q := DB.quest(parts[1])
+					if q.is_empty() or not q.get("stages", {}).has(parts[2]):
+						errs.append(where + "unknown quest stage in " + e)
+				elif parts[0] == "ending" and not FileAccess.file_exists("res://data/" + parts[1]):
+					errs.append(where + "missing text file in " + e)
+	return errs
 
 
 ## Replaces {name} and {sibling} tokens in text.

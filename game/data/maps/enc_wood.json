@@ -1,0 +1,59 @@
+{
+ "id": "enc_wood",
+ "name": "In the woods",
+ "default": "grass",
+ "encounter": true,
+ "legend": {
+  ".": "grass",
+  ",": "meadow",
+  "_": "road",
+  "T": "tree",
+  "P": "pine",
+  "b": "bush",
+  "r": "rock",
+  "m": "mud",
+  "e": {
+   "terrain": "grass",
+   "mark": "exit"
+  },
+  "@": {
+   "terrain": "grass",
+   "mark": "start"
+  },
+  "1": {
+   "terrain": "grass",
+   "mark": "group"
+  }
+ },
+ "rows": [
+  "eeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "eTT.P..TT...P.....TT..P...TT.e",
+  "e.T....T..b....TT.....b...T..e",
+  "e..P.......bb....T.......PP..e",
+  "eT....TT.........b..TT.......e",
+  "e...b.....P..TT........b..T..e",
+  "e.P....,,.........P.....T....e",
+  "eT...,,,,,..T.........b.....Pe",
+  "e..@..,,,......bb..1.....T...e",
+  "e.....,,...P.........,,,..b..e",
+  "eTT.......T....T....,,,,...T.e",
+  "e....b.......P.....T.....P...e",
+  "e.P.....TT........b.....T....e",
+  "e...T.......b..P.......T..b..e",
+  "eT.....P.........TT.........Te",
+  "e..b......T..P.......P.......e",
+  "e.TT...b........b.....TT..P..e",
+  "e......PP....T.........b.....e",
+  "eP..T........b...P.......T.TTe",
+  "eeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+ ],
+ "actors": [],
+ "containers": [],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "Back to the road"
+  }
+ ]
+}

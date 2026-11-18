@@ -1,0 +1,72 @@
+// Cintugnatos, the vates of Brigodunon: the shrine, the grotto, healing.
+=== start
+[flag vates_met] -> again
+~ set vates_met
+The vates is on his knees by the altar stone, picking splinters of the offering box out of the grass one by one, as if he could put it back together.
+
+"They came in the night before last. Took the box, the silver in it, the bronze, and the Roman stick." He sits back on his heels. "I followed the tracks as far as the stream. They go northeast, toward the Grotto of the Hanging Dead. Men have been living there since the autumn. Dubnacos's men."
+~ quest grotto start; known grotto
+* "Dubnacos? The one who was exiled?" -> dubnacos
+* "The Grotto of the Hanging Dead?" -> grotto
+* "I'll get it back." -> END
+
+=== again
+[quest hostages=reported] -> north
+"{name}." He nods. "What is it?"
+-> hub
+
+=== north
+"The gods go with you, north. They're not much use, mostly, but they go."
+-> hub
+
+=== hub
+* [quest grotto active] "Tell me about the grotto." -> grotto
+* [quest grotto active] "Tell me about Dubnacos." -> dubnacos
+* [!flag vates_lore] "Who are the hanging dead?" -> lore
+* "I'm hurt. Can you help?" -> heal
+* [item grotto_idol] "I found this deep in the grotto." -> idol
+* [item hostage_tally, quest grotto active] "I have the tally back." -> tally
+* "Goodbye." -> END
+
+=== dubnacos
+"Senovir's son and Dubnacos fought over a cow. Senovir's son died. That's the whole story; nobody comes out of it looking clever." He shrugs. "Seven winters' exile. He's done three, living in a hole with the kind of men who end up in holes. He knows the shrine. He knew where the box was."
+-> hub
+
+=== grotto
+"Half a day northeast, up the dry valley, where the limestone opens." He wipes his hands. "Our grandfathers' grandfathers hung their dead there, or their enemies' dead, or their gods' share of them. Nobody remembers which. People don't go there."
+
+"Dubnacos goes there. Which tells you something about Dubnacos."
+-> hub
+
+=== lore
+~ set vates_lore
+[lore 30] ~ xp 20
+[lore 30] You know some of this already, from your grandmother: the old peoples gave Taranis his share of the battle dead, hung in high places, and you don't take back what's been given. The vates sees you know it, and nods.
+"Old dead, given to the thunderer. The old songs say anyone who sleeps under them dreams of falling, and anyone who steals from them falls." He smiles a little. "The songs say a great many things. But outlaws are superstitious men. They'll have stayed near the mouth, I'd guess, and kept away from the deep chambers."
+-> hub
+
+=== heal
+~ heal_all; time 30
+He makes you sit, cleans what needs cleaning, packs what needs packing with moss and honey, and binds it with linen. His hands are better than his manner.
+"Try not to come back with more of those."
+-> hub
+
+=== idol
+He goes very still. "Where was that?"
+* "In a niche at the back of the grotto, under the bones." -> idol2
+
+=== idol2
+"Then it belongs to the dead, and the dead to the god." He doesn't reach for it. "I'll take it, if you give it to me. I'll carry it back and put it where it was, with the right words. Or you can keep it. Men have carried worse things for luck." He looks at you. "And some of them had luck."
+* Give him the idol. -> idol_give
+* "I'll keep it for now." -> hub
+
+=== idol_give
+~ take grotto_idol; xp 50; honor 5; give poultice 2
+He wraps it in a white cloth and holds it like a child.
+"Here. For the road." Two poultices, wrapped in leaves.
+-> hub
+
+=== tally
+~ quest grotto done done
+"Good." He doesn't ask how. He looks at the stick and not at you. "Take it to Vellaunos. It's his business now, and yours."
+-> hub

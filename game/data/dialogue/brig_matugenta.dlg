@@ -1,0 +1,42 @@
+// The player's mother, after the first morning.
+=== start
+[quest hostages=reported] -> after
+[quest hostages=summoned] -> summoned
+"You're still here." It isn't quite a complaint.
+-> hub
+
+=== summoned
+"Vellaunos is waiting. The hall, {name}. Not tomorrow."
+-> hub
+
+=== hub
+* "Tell me about Epona." -> epona
+* [!flag mother_gift] "I'll need things for the road." -> gift
+* [quest hostages active] "I'm going to find her." -> going
+* "Later." -> END
+
+=== epona
+She was nine when they took her. She'll be fourteen now. "She bit the Roman who lifted her onto the cart. Did you know that? Bit him through the glove. He laughed. He said she'd do well."
+
+Your mother looks at the door. "I don't know what that means, 'do well.' I've had five years to think about it."
+* "I'll find out." -> hub
+* "Mother." -> hub
+
+=== gift
+~ set mother_gift; give herbs 2; give bread 2; silver 10
+She has it ready already, wrapped in a cloth: bread, a twist of dried herbs, ten silver coins that you know were for the spring sowing.
+"Don't argue. Don't you dare."
+* Take it. -> hub
+
+=== going
+"Don't tell me. Do it." She turns back to the fire. "And come back. Both of you. I mean both."
+* Go. -> END
+
+=== after
+"Noviodunum." She tries the name and doesn't like it. "Is that far?"
+* "Far enough." -> after2
+* "Not so far." -> after2
+
+=== after2
+She nods slowly. "Then go. Bring her back, and don't you dare send word you're dead. Come and tell me yourself."
+* Go. -> END

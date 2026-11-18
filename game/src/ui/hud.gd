@@ -3,7 +3,8 @@ extends Control
 ## The interface over a local map: the bottom bar (message log, health,
 ## action points, weapon, buttons) and the windows opened from it.
 
-var map: LocalMap
+var map: LocalMap        # set on a local map
+var world: Node          # set on the world map (WorldMap); exactly one of the two
 var _log: RichTextLabel
 var _hp: Label
 var _ap: Label
@@ -75,6 +76,10 @@ func _build_bar() -> void:
 	grid.add_child(_tb("Gear (I)", open_inventory))
 	grid.add_child(_tb("Self (C)", open_character))
 	grid.add_child(_tb("Journal (J)", open_journal))
+	if map == null:
+		grid.add_child(_tb("Rest (R)", func(): world.rest()))
+		grid.add_child(_tb("Menu (Esc)", open_menu))
+		return
 	grid.add_child(_tb("Travel (M)", func(): map.try_world_map()))
 	_sneak_btn = _tb("Sneak (S)", func(): map.toggle_sneak())
 	grid.add_child(_sneak_btn)
@@ -111,17 +116,21 @@ func _append(text: String, kind: String) -> void:
 
 
 func refresh() -> void:
-	if map == null or map.player == null:
+	if map == null and world == null:
 		return
-	var p := map.player.sheet
+	if map and map.player == null:
+		return
+	var p := Game.state.player
 	_hp.text = "Health %d / %d" % [p.hp, p.max_hp()]
 	_hp.add_theme_color_override("font_color", UITheme.GOOD if p.hp * 2 > p.max_hp() else UITheme.BAD)
-	var in_fight := map.combat.active
+	var in_fight := in_fight()
 	if in_fight:
 		var a := map.player.ap if map.combat.current == map.player else 0
 		_ap.text = "Action %s" % ("●".repeat(a) + "○".repeat(maxi(0, p.max_ap() - a)))
-	else:
+	elif map:
 		_ap.text = "Sneaking" if map.player.get_meta("sneaking", false) else ""
+	else:
+		_ap.text = ""
 	_date.text = Game.state.date_text()
 	var w := p.weapon_def()
 	var ammo := ""
@@ -130,9 +139,22 @@ func refresh() -> void:
 	elif w.get("thrown", false):
 		ammo = " (%d)" % (p.inventory.count(w["id"]) + 1)
 	_weapon_btn.text = "%s%s  %d AP" % [w.get("name", "Fists"), ammo, int(w.get("ap", 3))]
-	_end_turn.disabled = not in_fight
-	_end_combat.disabled = not in_fight
-	_sneak_btn.disabled = in_fight
+	if map:
+		_end_turn.disabled = not in_fight
+		_end_combat.disabled = not in_fight
+		_sneak_btn.disabled = in_fight
+
+
+func in_fight() -> bool:
+	return map != null and map.combat.active
+
+
+func _set_modal_open(v: bool) -> void:
+	if map:
+		map.modal_open = v
+		map.path_preview.clear()
+	elif world:
+		world.modal_open = v
 
 
 func update_hover(c: Vector2i) -> void:
@@ -153,14 +175,14 @@ func update_hover(c: Vector2i) -> void:
 
 
 func _cycle_weapon() -> void:
-	var p := map.player.sheet
+	var p := Game.state.player
 	var options: Array = [""]
 	for id in p.inventory.ids():
 		if DB.item(id).get("type", "") == "weapon":
 			options.append(id)
 	if options.size() <= 1 and p.equipped("weapon") == "":
 		return
-	if map.combat.active:
+	if in_fight():
 		if map.combat.current != map.player or map.player.ap < 1:
 			return
 		map.player.ap -= 1
@@ -180,15 +202,14 @@ func _cycle_weapon() -> void:
 
 func push_modal(root: Control) -> void:
 	_modals.append(root)
-	map.modal_open = true
-	map.path_preview.clear()
+	_set_modal_open(true)
 	_hover.text = ""
 
 
 func close_modal(root: Control) -> void:
 	_modals.erase(root)
 	root.queue_free()
-	map.modal_open = not _modals.is_empty()
+	_set_modal_open(not _modals.is_empty())
 	refresh()
 
 
@@ -276,7 +297,7 @@ func open_character() -> void:
 	if _is_open(CharacterPanel):
 		return
 	var w := CharacterPanel.new()
-	w.sheet = map.player.sheet
+	w.sheet = Game.state.player
 	w.on_close = func(): close_modal(w)
 	add_child(w)
 	push_modal(w)
@@ -298,8 +319,11 @@ func open_menu() -> void:
 	vb.add_child(UITheme.button("Resume", func(): close_modal(root)))
 	var save_b := UITheme.button("Save (F5)", func():
 		close_modal(root)
-		map.quick_save())
-	save_b.disabled = map.combat.active
+		if map:
+			map.quick_save()
+		else:
+			world.quick_save())
+	save_b.disabled = in_fight()
 	vb.add_child(save_b)
 	var load_b := UITheme.button("Load (F9)", func(): Game.goto("load", {"slot": "quick"}))
 	load_b.disabled = not Game.has_save("quick")

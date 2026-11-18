@@ -109,7 +109,7 @@ func _select_worn(slot: String) -> void:
 ## Runs an action, charging action points in a fight.
 func _do(action: Callable) -> void:
 	var m := hud.map
-	if m.combat.active:
+	if m and m.combat.active:
 		if m.combat.current != m.player:
 			Game.say("Wait for your turn.")
 			return
@@ -127,7 +127,7 @@ func _do(action: Callable) -> void:
 func _drop(id: String) -> void:
 	var p := _sheet()
 	p.inventory.remove(id, 1)
-	Game.say("You leave the %s behind." % DB.item(id).get("name", id).to_lower())
+	Game.say("You leave the %s behind." % DB.item_name_lc(id))
 	_refresh()
 
 
@@ -145,5 +145,5 @@ static func use_item(id: String) -> void:
 	var before := p.hp
 	p.hp = mini(p.max_hp(), p.hp + amount)
 	Game.state.advance(2)
-	Game.say("You use the %s. (+%d health)" % [d.get("name", id).to_lower(), p.hp - before], "good")
+	Game.say("You use the %s. (+%d health)" % [DB.lc_first(str(d.get("name", id))), p.hp - before], "good")
 	Game.stats_changed.emit()

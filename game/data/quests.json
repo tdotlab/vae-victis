@@ -6,7 +6,51 @@
       "main": true,
       "xp": 0,
       "stages": {
-        "find_tally": "The elders want the hostages back before the spring assembly. Find out where Rome sent them."
+        "summoned": "Vellaunos has sent for me. Whatever it is, it has to do with the news from Cenabum.",
+        "find_tally": "Five years ago Brigodunon gave Rome three hostages: Ateula, Iccios, and my sibling Epona. If the Cadurci join the revolt, Rome kills or sells them. Vellaunos wants them home before the spring assembly. First I need the Roman tally that says where they were sent. It was kept at the shrine, and it is gone. Cintugnatos the vates knows more.",
+        "read_tally": "I have the tally back. Nobody in Brigodunon reads Roman letters. Vellaunos says Sulicena, headwoman of Vindomagos, trades with everyone; she may know who can.",
+        "ask_riders": "Sulicena can't read the tally either. The horsemen holding the ford at the Oltis served in Caesar's cavalry and would know a Roman depot mark. So would Lugurix, the salt merchant in Vindomagos, for a price.",
+        "north": "The tally was cut at Noviodunum, Caesar's depot on the Liger, in Aedui country. Vellaunos should hear this.",
+        "reported": "Vellaunos knows. The road goes north, to Noviodunum."
+      }
+    },
+    {
+      "id": "grotto",
+      "name": "The Grotto of the Hanging Dead",
+      "xp": 100,
+      "stages": {
+        "start": "Someone broke into the shrine and took the offerings and the Roman tally. Cintugnatos thinks it was the outlaws living in the Grotto of the Hanging Dead, northeast of Brigodunon.",
+        "pardon_asked": "The outlaws are led by Dubnacos, exiled from Brigodunon three winters ago for a killing. He will give back the tally for sixty silver, or for Vellaunos's word that he can come home.",
+        "pardon_granted": "Vellaunos has agreed to let Dubnacos come home. I should tell him.",
+        "done": "I have the tally back.",
+        "done_pardon": "Dubnacos gave back the tally and is coming home. Vellaunos gave his word, and so, in a way, did I.",
+        "done_bought": "I bought the tally back from Dubnacos.",
+        "done_lied": "I told Dubnacos he was pardoned. He wasn't. He gave me the tally and left the grotto, heading for a home that won't take him.",
+        "done_scared": "The outlaws fled the grotto and left the tally behind."
+      }
+    },
+    {
+      "id": "ford",
+      "name": "The Ford at the Oltis",
+      "xp": 150,
+      "stages": {
+        "start": "Sulicena of Vindomagos has twenty sacks of grain promised to Brigodunon, but a band of Germanic horsemen, deserters from Caesar's cavalry, holds the ford at the Oltis and takes a toll from everything that crosses. Their leader is called Haldo.",
+        "toll_paid": "I paid Haldo's toll. Brigodunon's grain crosses this season. I should tell Sulicena.",
+        "riders_gone": "I convinced the riders that the Arverni were coming. They rode off. I should tell Sulicena, before anyone finds out there's no army.",
+        "riders_recalled": "I gave Haldo a forged Roman order promising pardon at Noviodunum. The riders went north to collect it. I should tell Sulicena.",
+        "riders_hired": "The riders have sworn to ride for Brigodunon when they are called, and have left the ford. I should tell Sulicena.",
+        "horses_stolen": "I ran off the riders' horses in the night. Men on foot are easier to talk to.",
+        "riders_walked": "The riders left the ford on foot. I should tell Sulicena.",
+        "riders_dead": "The riders are dead. I should tell Sulicena.",
+        "done": "The ford at the Oltis is open and Brigodunon's grain is crossing."
+      }
+    },
+    {
+      "id": "sandbox_spear",
+      "name": "The Grandson's Spear",
+      "xp": 50,
+      "stages": {
+        "get_spear": "Get Old Cottos's grandson's spear back from the bandits by the river."
       }
     }
   ]

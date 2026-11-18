@@ -1,0 +1,23 @@
+// Villagers of Brigodunon. Short talk that tracks the main quest.
+=== start
+[quest hostages=reported] -> late
+[quest hostages=summoned] -> early
+"They say you're going after the hostages. Is it true?"
+* "It's true." -> true
+* "Who says?" -> who
+
+=== early
+"Vellaunos is looking for you. Everybody knows it except you, apparently."
+* "Thanks." -> END
+
+=== true
+"Then good luck. My cousin's girl was nearly the one they took, instead of Ateula. Nearly." They make a sign against bad luck. "Don't tell anyone I said so."
+* "I won't." -> END
+
+=== who
+"Everyone. It's Brigodunon. Somebody sneezes at one end of the village and they're saying 'gods bless you' at the other."
+* "Fair." -> END
+
+=== late
+"Noviodunum, is it? Where's that, then?"
+* "North. A long way north." -> END

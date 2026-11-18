@@ -1,0 +1,46 @@
+// The riders' horse line: the steal route for the ford.
+@speaker The horse line
+=== start
+[flag ford_settled] -> settled
+[night] -> dark
+Twenty horses on a picket line, small and shaggy and better fed than anyone in Vindomagos. Two riders sit on a log where they can see the whole line, and they're watching you now.
+
+Not in daylight.
+* Find a place in the reeds and wait for dark. -> wait ~ wait_until 22
+* Leave them. -> END
+
+=== wait
+The light goes. The fire across the camp burns down to red, and the men around it go quiet one by one. There's one guard left on the log, wrapped to the eyes in his cloak.
+-> choose
+
+=== dark
+The horses shift and blow in the dark. One guard on the log, wrapped in his cloak.
+-> choose
+
+=== choose
+* [roll sneak 0] Cut the picket rope and drive them off into the night. -> stolen | caught
+* [survival 50] Lead them off quietly, a few at a time, the way you'd move cattle. -> stolen_quiet
+* Leave them. -> END
+
+=== stolen
+~ set horses_gone; quest ford horses_stolen; xp 100
+The rope parts under your knife. You slap the nearest rump, and the whole line goes, a drumming in the dark that wakes everyone at once. By the time the riders are on their feet, cursing in their own language, the horses are halfway to the hills.
+
+Now they're men on foot.
+* Slip away. -> END
+
+=== stolen_quiet
+~ set horses_gone; set horses_kept; quest ford horses_stolen; xp 125
+You take them three and four at a time, a hand on each neck, up the valley to a fold in the hills above the old sheepfold where nobody will find them before morning. It takes half the night. The guard on the log never wakes.
+
+Twenty horses is a fortune. It is also, now, something to bargain with.
+* Slip away. -> END
+
+=== caught
+~ set ford_fought; fight_all riders
+The guard isn't as asleep as he looked. He shouts, and the camp comes up with spears.
+* Fight. -> END
+
+=== settled
+The picket line is quiet. The horses are none of your business now.
+* Leave them. -> END

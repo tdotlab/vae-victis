@@ -1,0 +1,14 @@
+// A Vindomagos carter waiting with grain at the ford.
+=== start
+[flag ford_settled] -> after
+"Sulicena's grain, for your lot up the hill." He pats the sacks. "And there it sits. Haldo says two a sack, Sulicena says not a coin, and I get paid by the day either way." He doesn't seem upset about it.
+* "I'm working on it." -> END
+* "What are the riders like?" -> riders
+
+=== riders
+"Polite, mostly. Polite like a dog with a bone is polite." He nods at the horse line. "Those horses are worth more than this whole village. They never leave them, day or night. Well. Day, anyway. At night there's one man on the log, and he sleeps more than he watches."
+* "Interesting." -> END
+
+=== after
+"We're crossing in the morning." He's already harnessing the ox. "Your elders will eat this summer."
+* "Good." -> END

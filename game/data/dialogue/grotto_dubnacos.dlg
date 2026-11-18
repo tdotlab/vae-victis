@@ -1,0 +1,105 @@
+// Dubnacos, the exile who robbed the shrine. Routes for the tally: fight,
+// buy, pardon (via Vellaunos), lie, scare (idol or Lore), steal (the chest).
+=== start
+[item hostage_tally] -> already
+[flag dub_met] -> again
+~ set dub_met
+He's sitting by the fire with a sword across his knees, and he doesn't get up. Thin, quick, a good sword and a bad cloak. You know him: everyone in Brigodunon knows him. Dubnacos, who killed Senovir's son over a cow and was sent out of the village for seven winters.
+
+"Well. Brigodunon sends someone at last." He looks you over. "If it's about the stick with the Roman marks, it's in my chest. I took it because it was in the box with the silver, and I kept it because I thought somebody might want it." He smiles. "Somebody does."
+-> hub
+
+=== again
+[flag pardon_granted] "You're back. And you've got a face on you like a message."
+[!flag pardon_granted] "Back again. Brought my price?"
+-> hub
+
+=== hub
+* [!flag dub_price] "What do you want for it?" -> price
+* [flag pardon_granted] "Vellaunos says you can come home." -> pardoned
+* [flag dub_price, silver 60] Pay him sixty silver. -> bought ~ silver -60
+* [flag dub_price, item gold_torque] Offer him a gold torque. -> bought_gold ~ take gold_torque
+* [flag dub_price, item bronze_torque, barter 35] "A bronze torque. Worth more than your silver, out here." -> bought ~ take bronze_torque
+* [flag dub_price, !flag pardon_granted, !flag dub_lie_failed, item elders_ring, roll speech -10] Show him the elder's ring. "Vellaunos sent me. You're pardoned." -> lied | lie_failed
+* [item grotto_idol] Hold up the idol from the deep chamber. -> idol
+* [lore 45, !flag dub_scare_failed] "You know whose dead those are, hanging at the door?" -> lore
+* "Give me the tally or I'll take it." -> threat
+* "I'll be back." -> END
+
+=== price
+~ set dub_price; quest grotto pardon_asked
+"Two prices. Pick one." He holds up a finger. "Sixty silver. That's what the shrine box had in it, near enough, and my lads have been eating it." A second finger. "Or a word from Vellaunos that I can come home. Three winters I've been in this hole. I'm tired of the dead looking at me."
+"Home, with the blood price paid like a proper man. That's what I want. The silver's just what I'll settle for."
+-> hub
+
+=== bought
+~ give hostage_tally; set tally_given; quest grotto done_bought done; xp 75
+He gets up, goes to the chest, and comes back with the tally. He holds it out but doesn't let go at once. "My sister's boy was nearly one of the three, you know. Instead of Iccios." He lets go. "Go on, then."
+* Leave. -> END
+
+=== bought_gold
+~ give hostage_tally; set tally_given; quest grotto done_bought done; xp 75; honor 2
+He weighs the gold torque in his hand and laughs out loud. "That's three times the price and you know it." He fetches the tally. "You're either very rich or very stupid. Either way, Brigodunon's lucky in you."
+* Leave. -> END
+
+=== pardoned
+~ give hostage_tally; set tally_given; set dubnacos_pardoned; quest grotto done_pardon done; xp 150; honor 5; leave_all grotto
+He looks at you for a long time. "Truly?"
+
+You tell him the terms: the blood price, every head of cattle, sleeping outside the rampart until it's paid. He laughs and wipes his eyes at the same time.
+
+"Thirty cattle. I'll be paying till I'm grey." He fetches the tally himself and puts it in your hand. "Lads! Pack up. We're done here." He grips your arm. "I won't forget this. Whatever that's worth."
+* "See you at home." -> END
+
+=== lied
+~ give hostage_tally; set tally_given; set dub_lied; quest grotto done_lied done; xp 100; honor -10; leave_all grotto
+He stares at the ring, and then at you, and something goes out of his shoulders. "Truly? He said that?"
+
+You tell him yes. On the ring. You watch him believe you.
+
+He fetches the tally himself. "Lads. Pack up. We're going home." He's grinning like a boy. He'll be at the gate of Brigodunon by tomorrow night, and Moccos will turn him away, and he will know exactly who lied to him.
+* Leave. -> END
+
+=== lie_failed
+~ set dub_lie_failed
+He looks at the ring and doesn't move. "Vellaunos would sooner pardon a wolf. You're lying, and you're bad at it." He settles back. "Price is the same. Don't do that again."
+-> hub
+
+=== idol
+~ give hostage_tally; set tally_given; quest grotto done_scared done; xp 125; leave_all grotto
+The fire jumps when you lift it, or seems to. The idol's nail eyes catch the light. The outlaw nearest you makes a noise in his throat and backs into the wall.
+
+"You went in there," Dubnacos says. His voice is very quiet. "You went in there and you took that out." He stands up slowly. "Keep it. Keep the tally. Keep the cave." He throws the stick at your feet. "Lads. We're leaving. Now."
+* Watch them go. -> END
+
+=== lore
+"The hanging dead? Old, that's whose." But he glances toward the passage.
+* [roll lore -10] "Taranis's share. Given in battle, a hundred years before your grandfather. The old songs say what happens to men who sleep under the god's portion and steal from his shrine. You've been dreaming of falling, haven't you?" -> lore_win | lore_fail
+
+=== lore_win
+~ give hostage_tally; set tally_given; quest grotto done_scared done; xp 125; leave_all grotto
+Nobody says anything. One of the outlaws looks at Dubnacos, and Dubnacos looks at the fire, and you know you've guessed right.
+
+"Every night," the boy with the sling says. "Every night since we came."
+
+"Shut up." But Dubnacos is already standing. He takes the tally out of the chest and throws it at your feet. "It's yours. The cave's yours. The gods can have it back." He kicks the fire apart. "We're going."
+* Watch them go. -> END
+
+=== lore_fail
+~ set dub_scare_failed
+He laughs, a little too loudly. "Nice try. My grandmother told it better." But he doesn't look at the passage again.
+-> hub
+
+=== threat
+"Try it." He doesn't get up. Behind you, someone draws an axe.
+* "So be it." -> fight
+* "Not today." -> hub
+
+=== fight
+~ fight_all grotto
+He's up faster than you'd believe, and the sword comes up with him.
+* Fight. -> END
+
+=== already
+"So that's where it went." He looks at the tally in your hand, then at his chest, then at you, and something like respect crosses his face. "You've got quick fingers, for a farmer's child. Go on, then. Before I decide I'm offended."
+* Leave. -> END

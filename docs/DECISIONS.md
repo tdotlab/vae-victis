@@ -2,6 +2,15 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-17 (world and demo)
+
+- **The world map is a square grid of terrain cells, separate from the hex local maps.** Travel is counted in hours per cell by terrain, like Fallout's world map; hexes would add nothing at that scale.
+- **The historical calendar is data (`calendar.json`).** Events fire once on their day and set flags, so dialogue can react to the war's progress without code.
+- **Content is checked by tests, not by eye.** A validator rejects unknown dialogue conditions and effects and dangling references to items, quests, nodes, maps and marks; a flood fill proves every actor, container, exit and trigger on a map can be reached; scripted playthroughs walk each quest route through the real `.dlg` files. Writing content is where most bugs will come from, and an agent can't playtest by feel.
+- **Dialogue can act on a whole faction (`leave_all`, `fight_all`) and end the demo (`ending`).** Most quest resolutions in the demo send a whole band away or start a fight with it.
+- **A reply that leads straight to the end of a conversation closes it**, instead of showing an empty page with a Done button.
+- **The demo ends on a text screen when the player reports where the hostages are, then lets them keep playing.** The road north is shown on the world map but closed.
+
 ## 2026-11-17 (engine)
 
 - **Dialogue in a custom plain-text format (`.dlg`), not JSON or Ink.** Reads like a script, so T can rewrite it in any editor; conditions, checks and effects are one-line tags. The parser is small, pure GDScript and tested. Format reference: the header of `game/src/core/dialogue.gd`.

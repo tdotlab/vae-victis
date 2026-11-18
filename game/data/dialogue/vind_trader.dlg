@@ -1,0 +1,31 @@
+// Lugurix the salt merchant. Trades; reads Roman marks for a price.
+=== start
+"Salt, wine, bread, anything with a price on it." He's white to the elbows with salt dust. "And everything has a price on it."
+-> hub
+
+=== hub
+* "Let's trade." -> trade
+* [item hostage_tally, !flag tally_read] "Can you read this Roman mark?" -> tally
+* "What's the news from the road?" -> news
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Look all you like. Touching is also allowed, if you're buying."
+* "Thanks." -> hub
+
+=== tally
+He takes the stick, looks at it, and hands it back before you can blink. "I can. It'll cost you thirty silver."
+* [silver 30] Pay him. -> read ~ silver -30
+* [barter 45, silver 10] "You read it already. I saw your face. Ten, and I won't tell Sulicena you cheat at weights." -> read ~ silver -10
+* "Too much." -> hub
+
+=== read
+~ set tally_read; quest hostages north; known noviodunum; xp 50
+"DEP NOVIOD. Depot, Noviodunum, on the Liger. Caesar keeps his baggage there: hostages, remounts, grain, the pay chest." He shrugs. "I sold salt to the quartermaster once. Paid on time, which is more than I can say for my own people. Your hostages will be there, or they were."
+-> hub
+
+=== news
+[flag cal_cevennes] "Caesar crossed the Cevennes in the snow. Six feet of it, they say, and he dug his way through. The Arverni had to run home to save their own farms. Prices went up."
+[!flag cal_cevennes] "Everyone's buying iron and selling grain. That's what war smells like, to a merchant. I'd sell you a spear if I had one."
+-> hub

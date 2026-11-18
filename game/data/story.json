@@ -1,7 +1,42 @@
 {
-  "sibling": "Epona",
-  "home": "Brigodunon",
-  "start_map": "brigodunon",
-  "start_entry": "start",
-  "start_day": 1
+ "sibling": "Epona",
+ "home": "Brigodunon",
+ "start_map": "brigodunon",
+ "start_entry": "start",
+ "start_day": 1,
+ "home_location": "brigodunon",
+ "known_locations": [
+  "brigodunon",
+  "vindomagos"
+ ],
+ "world_start": [
+  8,
+  34
+ ],
+ "title": "Vae Victis",
+ "tagline": "You can't change who wins. You can change who's left.",
+ "version": "demo 0.1",
+ "intro": "text/intro.txt",
+ "intro_title": "Brigodunon, in the hills of the Cadurci, winter, 52 BC",
+ "deadline_day": 120,
+ "start_items": [
+  [
+   "bread",
+   2
+  ],
+  [
+   "herbs",
+   1
+  ],
+  [
+   "dagger",
+   1
+  ]
+ ],
+ "start_equip": ["dagger"],
+ "start_silver": 10,
+ "ending_title": "The road north",
+ "ending_button": "Keep playing",
+ "_proper_words": "Words that keep their capital when a name is used mid-sentence.",
+ "proper_words": ["Gallic", "Roman", "Germanic", "Aeduan", "Arvernian"]
 }

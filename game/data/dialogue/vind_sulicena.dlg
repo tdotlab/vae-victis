@@ -1,0 +1,98 @@
+// Sulicena, headwoman of Vindomagos. Reads nothing, knows everyone.
+// Gives the ford quest; points to readers for the tally.
+=== start
+[flag sul_met] -> again
+~ set sul_met
+The headwoman of Vindomagos is counting sacks in her own storeroom, and makes you wait until she's done. Then she looks at your boots, your cloak, your face.
+
+"Cadurci. From up the hill." She says it the way a trader names a coin. "Brigodunon, by the look of you. I'm Sulicena. What does Vellaunos want? He only sends people when he wants something."
+-> hub
+
+=== again
+"Back again." She doesn't stop counting. "Go on."
+-> hub
+
+=== hub
+* [item hostage_tally, !flag tally_read] "Can you read Roman marks?" -> tally
+* [quest ford none] "Vellaunos sends his greetings. Is there anything Vindomagos needs?" -> ford_offer
+* [quest ford active, !flag ford_settled, latin 40, !item roman_order, !flag sul_forge] "Those riders were Roman cavalry. What if Rome called them home?" -> forge
+* [item rider_tablet, quest ford active, !flag ford_settled] "The riders at the ford are dead." -> done_dead
+* [flag ford_settled, !flag ford_done, quest ford active] "The ford is open." -> done
+* [flag ford_done] "Has the grain gone up the hill?" -> grain
+* "Can I sleep here tonight?" -> sleep
+* "Goodbye." -> END
+
+=== tally
+She turns it over in her hands, holds it close to her eye, then far away. "Roman marks. I can count in Latin and swear in it, and that's all." She hands it back.
+
+"Two kinds of people round here read those: Romans, and men who've taken Roman pay. The horsemen sitting on the ford at the Oltis were Caesar's cavalry until this winter. They'll know a Roman mark when they see one. Or there's Lugurix, the salt man in the store across the way. He trades down to Narbo. He'll read anything for a price."
+[!flag tally_read] ~ quest hostages ask_riders
+* [latin 45] "Let me look at it again. I know some Latin." -> self_read
+* "Thank you." -> hub
+
+=== self_read
+~ set tally_read; quest hostages north; known noviodunum; xp 75
+The letters are worn and the soldiers abbreviated everything, but you've seen enough Latin to try. A legion's number. A man's name. And at the end, DEP NOVIOD.
+
+"Noviodunum," you say. "A depot. On the Liger."
+
+Sulicena raises her eyebrows. "Aedui country. Rome's best friends." She shrugs. "Well. Rather you than me."
+-> hub
+
+=== ford_offer
+~ quest ford start; give grain_writ
+"As it happens." She leads you to the door and points south, where the road goes down to the river. "Vellaunos bought twenty sacks of grain from me in the autumn, to see Brigodunon through to the harvest. Paid for. They're sitting in my store, because I can't get them across the Oltis."
+
+"A band of horsemen took the ford a month ago. Germans: Caesar's own cavalry, from over the Rhenus, deserted with their horses and their spears. Their chief calls himself Haldo. They take a toll off everything that crosses. Two silver a sack, he wants for the grain. Two! For carrying it through water."
+
+She cuts a hazel stick in half and gives you one end. "That's Brigodunon's half of the bargain. Get my carts across that ford, however you like, and the grain goes up the hill. I don't much care how. I'd prefer they were gone. I'd settle for them being paid."
+* "I'll see to it." -> hub
+* "Why haven't your own people run them off?" -> why_not
+
+=== why_not
+"Because they're farmers and those are soldiers." She looks at you levelly. "I've buried enough people this year. I'll pay a toll before I bury more. Or I'll pay you. That's cheaper too."
+-> hub
+
+=== forge
+~ set sul_forge
+She's quiet a moment. "Go on."
+
+You explain. Deserters fear one thing more than hunger: the army coming after them. And they want one thing more than anything: to be forgiven and paid. A wax tablet in good Latin, from the depot, promising pardon and back pay to any man of the auxiliary horse who reports.
+
+"And when they get there and find there's no pardon?" Sulicena asks.
+* "That's Rome's business." -> forge_yes
+* "They'll be a long way from your ford." -> forge_yes
+* "You're right. Forget it." -> hub
+
+=== forge_yes
+~ give roman_order; xp 30
+She looks at you a little differently, as if she's revised a price. Then she fetches a tablet from her chest, and a stylus, and watches you write.
+
+"Rome flogs deserters to death, I'm told. With their own comrades doing the flogging." She hands you the tablet when the wax is set. "I'm only telling you. I'm not stopping you."
+-> hub
+
+=== done
+~ quest ford done done; set ford_done; standing vindomagos 15; silver 25; xp 50
+[flag ford_toll_paid] "Paid. Well, it's done, and nobody's dead." She sniffs. "Haldo will be twice as greedy next year, and three times as strong. But next year is next year."
+[flag ford_lied] "The Arverni are coming, you told them!" She laughs until she has to sit down. "Gods. When they find out there's no army, I'd like to be somewhere else. So would you, I expect."
+[flag riders_recalled] "Gone north to their pardon." She's quiet a moment. "Well. The ford's clear."
+[flag riders_hired] "Sworn to Brigodunon. Twenty German horse." She looks at you differently. "Vellaunos will either kiss you or kill you. The Arverni would pay a lot for those men."
+[flag horses_gone] "On foot! I'd have paid to see Haldo's face." She grins. "Somebody in this village will have a very fine horse next spring, and won't be able to say where they got it."
+"The carts go up the hill tomorrow. Here: something for your trouble."
+-> hub
+
+=== done_dead
+~ quest ford riders_dead; quest ford done done; set ford_done; set ford_settled; set ford_open; standing vindomagos 20; silver 25; xp 50
+She looks at the tablet, at the blood on it, and doesn't touch it. "All of them?"
+
+"Well." She lets out a long breath. "It had to be someone. I'm glad it wasn't my boys." She counts out silver. "The carts go up the hill tomorrow. Brigodunon eats this summer."
+-> hub
+
+=== grain
+"Up the hill and in your elders' storehouse. Vellaunos sent a man to count it. Twice." She almost smiles. "Like me."
+-> hub
+
+=== sleep
+~ rest
+"There's straw in the loft. Guests eat what we eat and leave before it gets awkward."
+* "Thank you." -> END

@@ -1,0 +1,39 @@
+// A trader on the roads of the southwest, with two mules and a guard.
+=== start
+[flag met_salt_trader] -> again
+~ set met_salt_trader
+A thickset man in a good cloak stands between two mules. His guard leans on a spear and watches you without much interest.
+
+"Salt, bandages, a little mead. No wine. Wine I sell to people who can pay for it." He looks you over. "You're buying or you're robbing? Tell me early. It saves everyone time."
+* "Buying." -> trade
+* "What's the news on the road?" -> news
+* [lore 35] "That's Santone salt, from the coast. You're a long way east." -> lore
+* "Neither. Safe travels." -> END
+
+=== again
+"You again. Still buying, I hope."
+* "Let's trade." -> trade
+* "What's the news?" -> news
+* "Just passing." -> END
+
+=== trade
+~ barter
+"Look all you like. Touching costs extra."
+* "Done." -> END
+
+=== news
+[flag cal_cevennes] -> news_caesar
+"Prices are up. Everyone wants iron and nobody wants to sell grain." He shrugs. "War is good for trade the way a fire is good for keeping warm. You make a living until the roof comes down."
+* "Let's trade." -> trade
+* "Safe travels." -> END
+
+=== news_caesar
+"Caesar came over the Cevennes in the snow. The Arverni are screaming for their young king to come home and save their farms." He spits. "Salt prices doubled. I'm not complaining. I'm just telling you."
+* "Let's trade." -> trade
+* "Safe travels." -> END
+
+=== lore
+~ standing trader 20; xp 20
+He looks at you differently. "Santone salt, yes. A man who knows where things come from." He nods slowly. "For you, a fair price. Don't tell the guard, he thinks I'm generous with everyone."
+* "Let's trade." -> trade
+* "Safe travels." -> END

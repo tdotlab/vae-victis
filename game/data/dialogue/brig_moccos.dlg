@@ -1,0 +1,30 @@
+// Moccos at the gate: directions to everything in the demo.
+=== start
+"Off somewhere?" Moccos leans on his spear. He fought the Romans six years ago, at the river, and says so often.
+-> hub
+
+=== hub
+* [quest grotto active] "Where's the Grotto of the Hanging Dead?" -> grotto
+* "How do I get to Vindomagos?" -> vindomagos
+* "Heard anything on the road?" -> news
+* "What was it like, fighting the Romans?" -> romans
+* "Goodbye." -> END
+
+=== grotto
+~ known grotto
+"Northeast, up the dry valley. Half a day if you don't dawdle." He spits. "I wouldn't. And I wouldn't go in at night. Not for the dead. For the living."
+-> hub
+
+=== vindomagos
+"West along the river, an afternoon's walk. You can't miss it, it's the place with all the money." He grins. "And past it, the ford at the Oltis. There's horsemen sitting on that ford now, I hear. Germans. Taking a toll off everything that crosses."
+-> hub
+
+=== news
+[flag dub_lied] "Dubnacos came to the gate in the night, going on about a pardon from Vellaunos. I sent him off with a spear at his back." Moccos looks at you sidelong. "He said your name. More than once."
+[flag cal_gergovia_taken] "Vercingetorix has taken Gergovia. Threw out his own uncle, they say, and every elder who told him to wait. That's the kind of man he is."
+"The roads are full of people going somewhere else. That's always a bad sign."
+-> hub
+
+=== romans
+He's quiet for once. "They don't run. That's the thing. You go at them screaming, the way we do, and they just stand there behind those big shields and wait. And then they all throw their spears at once." He looks at the river. "I ran. Everyone ran. I'm not ashamed of it. You'll see."
+-> hub

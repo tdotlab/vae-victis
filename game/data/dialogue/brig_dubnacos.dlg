@@ -1,0 +1,16 @@
+// Dubnacos back home after the pardon.
+=== start
+Dubnacos is sitting outside the rampart, as Vellaunos said he would, mending a cattle halter. He looks up.
+
+"Senovir won't speak to me. His wife spat on my shadow." He goes back to the halter. "It's better than the cave. Not much, but better."
+* [flag pardon_oath] "I gave my word for you." -> oath
+* "Keep the peace." -> peace
+* "Goodbye." -> END
+
+=== oath
+"I know. Vellaunos made very sure I knew." He doesn't look up. "I don't break things I've been handed. Ask anyone. Well, don't ask Senovir."
+* "Good." -> END
+
+=== peace
+"I'm keeping it. Look at me keeping it." He holds up the halter. "Thirty head of cattle. That's what a son costs. I'll be paying until I'm an old man."
+* "Better than the cave." -> END

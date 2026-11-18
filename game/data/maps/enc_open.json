@@ -1,0 +1,59 @@
+{
+ "id": "enc_open",
+ "name": "Open country",
+ "default": "grass",
+ "encounter": true,
+ "legend": {
+  ".": "grass",
+  ",": "meadow",
+  "_": "road",
+  "T": "tree",
+  "P": "pine",
+  "b": "bush",
+  "r": "rock",
+  "m": "mud",
+  "e": {
+   "terrain": "grass",
+   "mark": "exit"
+  },
+  "@": {
+   "terrain": "grass",
+   "mark": "start"
+  },
+  "1": {
+   "terrain": "grass",
+   "mark": "group"
+  }
+ },
+ "rows": [
+  "eeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "e....,,,....T.......b....,,..e",
+  "e..T....,,,.....rr......,,,..e",
+  "e.......___..........T.......e",
+  "e..b..___._____...........b..e",
+  "e.....,.......____......,....e",
+  "e..,,,..T.........___........e",
+  "e....,....b..........__..T...e",
+  "e..@.......,,,.........__....e",
+  "e......T.....,,..1.....,.__..e",
+  "e...b.........,......T....._.e",
+  "e.......rr.........b........_e",
+  "e..,,.......T..............._e",
+  "e...........,,,....,,,.....__e",
+  "e..T....b......,...........b.e",
+  "e.....,,,,..........T........e",
+  "e..........r......b......,,..e",
+  "e....T.........,,,...........e",
+  "e.........,,..........T......e",
+  "eeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+ ],
+ "actors": [],
+ "containers": [],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "Back to the road"
+  }
+ ]
+}

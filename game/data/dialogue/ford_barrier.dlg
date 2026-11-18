@@ -1,0 +1,26 @@
+// Stepping onto the barrier in the ford while the riders hold it.
+@speaker A rider at the barrier
+=== start
+[flag ford_fought] -> empty
+A rider wades into the water in front of the stakes, spear held low and easy. "Toll," he says in bad Gaulish. "Five." He holds up five fingers in case you missed it.
+* [silver 5] Pay him five silver and wade across. -> paid ~ silver -5
+* "I'll talk to Haldo first." -> back
+* Push past him. -> fight
+
+=== paid
+He steps aside. "Come back soon," he says, and seems pleased with the phrase.
+* Cross. -> END
+
+=== back
+He shrugs and points up the bank, toward the fire.
+* Go back. -> END ~ travel oltis_ford north
+
+=== fight
+~ set ford_fought; fight_all riders
+He shouts, and up on the bank everyone is moving.
+* Fight. -> END
+
+=== empty
+~ set ford_open
+Nobody stands at the barrier now. The stakes lean in the current, already half pulled out.
+* Cross. -> END

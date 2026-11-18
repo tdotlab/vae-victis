@@ -79,10 +79,15 @@ func _ready() -> void:
 	_camera.reset_smoothing()
 	var first_visit: bool = not gs.map_states.has(map.id) or not gs.map_states[map.id].get("visited", false)
 	_remember_visit()
-	if first_visit and map.def.has("arrive_text"):
+	if map.def.get("encounter", false):
+		if gs.encounter.has("text"):
+			Game.say(gs.encounter["text"], "story")
+	elif first_visit and map.def.has("arrive_text"):
 		Game.say(map.def["arrive_text"], "story")
 	else:
 		Game.say("You are in %s." % map.name)
+	for ev in Game.check_calendar():
+		Game.say("%s. %s" % [ev.get("title", ""), ev.get("text", "")], "story")
 	_fired_triggers = gs.map_states.get(map.id, {}).get("triggers", {}).duplicate()
 	if first_visit and map.def.has("arrive_dialogue"):
 		await get_tree().process_frame
@@ -129,6 +134,18 @@ func _spawn_actors() -> void:
 		if saved.has(uid):
 			a.apply_state(saved[uid])
 		actors.append(a)
+	# A random encounter brings its own people.
+	if map.def.get("encounter", false):
+		var group := map.mark("group") if map.has_mark("group") else player.cell
+		var list: Array = gs.encounter.get("actors", [])
+		for i in range(list.size()):
+			var uid := "enc%d" % i
+			var a := Actor.from_template(String(list[i]), uid)
+			a.cell = group
+			if saved.has(uid):
+				a.apply_state(saved[uid])
+			a.home = a.cell
+			actors.append(a)
 	# Companions travel with the player.
 	for cd in gs.companions:
 		var c := Actor.from_template(cd["template"], cd["uid"])
@@ -419,7 +436,7 @@ func examine(c: Vector2i) -> void:
 			return
 	var cont := container_at(c)
 	if cont != "":
-		Game.say("You see %s." % containers[cont]["def"].get("name", "a container").to_lower())
+		Game.say("You see %s." % DB.lc_first(str(containers[cont]["def"].get("name", "a container"))))
 		return
 	var t := map.terrain_at(c)
 	if not t.is_empty():
@@ -617,6 +634,9 @@ func open_dialogue(dlg_id: String, speaker: Actor) -> void:
 func open_container(mark: String) -> void:
 	var c: Dictionary = containers[mark]
 	var st: Dictionary = c["state"]
+	if c["def"].has("unless_flag") and Game.state.flag(c["def"]["unless_flag"]) != 0:
+		Game.say(c["def"].get("gone_text", "There's nothing left in it."))
+		return
 	if not st.get("unlocked", true):
 		var lock := int(c["def"].get("lock", 0))
 		var skill := player.sheet.skill("locks") + _tool_bonus("locks")
@@ -630,7 +650,8 @@ func open_container(mark: String) -> void:
 			Game.say("The lock holds. (Locks %d%%)" % skill, "bad")
 			return
 	if c["def"].has("owner"):
-		_owner_check(c["def"]["owner"])
+		if _owner_check(c["def"]["owner"], c["def"].get("if_seen", "")):
+			return
 	hud.open_loot(c["def"].get("name", "Container"), st, null)
 
 
@@ -638,11 +659,18 @@ func open_body(a: Actor) -> void:
 	hud.open_loot(a.display_name(), {}, a)
 
 
-func _owner_check(owner_uid: String) -> void:
+## Returns true if the owner caught you and won't let you near it.
+func _owner_check(owner_uid: String, if_seen: String = "") -> bool:
 	for a in actors:
 		if a.uid == owner_uid and a.is_active() and can_see(a, player) and not player.get_meta("sneaking", false):
 			Game.say("%s sees you going through their things." % a.display_name(), "bad")
 			Game.state.add_standing(a.faction, -5)
+			if if_seen == "fight":
+				a.hostile = true
+				combat.provoke(a)
+				combat.start_combat(a)
+				return true
+	return false
 
 
 func _tool_bonus(skill: String) -> int:
@@ -667,15 +695,21 @@ func try_world_map() -> void:
 		Game.say("You can't leave from here.")
 		return
 	for e in exits:
-		if e.get("to", "") == "world" and Hex.distance(player.cell, map.mark(e["mark"])) <= 3:
-			take_exit(e)
-			return
+		if e.get("to", "") != "world":
+			continue
+		for c in map.mark_cells(e["mark"]):
+			if Hex.distance(player.cell, c) <= 3:
+				take_exit(e)
+				return
 	Game.say("Walk to the edge of the area to travel on.")
 
 
 func leave_to(to: String, entry: String = "start") -> void:
 	_leaving = true
 	save_map_state()
+	if map.def.get("encounter", false):
+		Game.state.encounter = {}
+		Game.state.map_states.erase(map.id)
 	if to == "world":
 		Game.goto("world", {})
 	elif to.begins_with("map:"):

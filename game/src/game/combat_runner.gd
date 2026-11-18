@@ -293,7 +293,7 @@ func attack(att: Actor, def: Actor, w: Dictionary, aim: String = "torso") -> voi
 		var sb := int(w.get("shield_breaker", 0))
 		if sb > 0 and dice().chance(sb):
 			def.shield_fouled = true
-			Game.say("The %s sticks fast in %s's shield. It's dead weight now." % [w.get("name", "weapon").to_lower(), whom], "good" if att.is_player else "bad")
+			Game.say("The %s sticks fast in %s's shield. It's dead weight now." % [DB.lc_first(str(w.get("name", "weapon"))), whom], "good" if att.is_player else "bad")
 		if thrown:
 			def.sheet.inventory.add(w["id"], 1)
 		return

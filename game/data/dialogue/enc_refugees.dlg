@@ -1,0 +1,45 @@
+// A family on the road. Any of them can be the one you talk to.
+=== start
+[flag refugees_robbed] -> robbed_before
+A man with a handcart and a face like a shut door. Behind him a woman with a bundle, and an old man who walks like every step is a decision.
+
+"We don't have anything," he says before you can speak. "In case that's what you're asking."
+* "Where are you headed?" -> where
+* [item bread] "You look hungry. Here, take some bread." -> give_bread
+* [silver 10] Give them ten silver. -> give_silver
+* [STR 6] "Leave the cart and walk away." -> rob
+* "Go on, then." -> END
+
+=== where
+[flag cal_avaricum_fallen] -> where_late
+"South. My wife's cousin married into the Nitiobriges. Maybe they remember." He looks back the way they came. "Everyone's cheering about Cenabum. The Carnutes killed every Roman trader in the town. Nobody's asking what the Romans do next. We're not waiting to find out."
+* [item bread] "Take some bread for the road." -> give_bread
+* "Good luck." -> END
+
+=== where_late
+"South. Anywhere the legions aren't." The woman says, without looking at you, "We were at Avaricum's market every autumn. Every autumn."
+
+Nobody says anything after that.
+* [item bread] "Take some bread for the road." -> give_bread
+* "Good luck." -> END
+
+=== give_bread
+~ take bread 1; honor 3; xp 15
+The old man takes it with both hands and doesn't say anything, which is how you know it mattered.
+* "Safe road." -> END
+
+=== give_silver
+~ silver -10; honor 5; xp 15
+The man looks at the coins a long time before he closes his hand on them. "I'll remember your face," he says. It sounds like a promise and a warning at once.
+* "Safe road." -> END
+
+=== rob
+~ honor -15; give bread 2; give salt 1; silver 2; set refugees_robbed
+He looks at your arms, then at his family, and does the sum. They leave the cart and walk on with what they can carry.
+
+The woman doesn't look back. The old man does.
+* Go through the cart. -> END
+
+=== robbed_before
+They see you coming and get off the road.
+-> END

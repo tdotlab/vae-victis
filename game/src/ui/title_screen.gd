@@ -47,16 +47,17 @@ class _Backdrop extends Control:
 		var h := size.y
 		var sky := PackedVector2Array([Vector2(0, 0), Vector2(w, 0), Vector2(w, h), Vector2(0, h)])
 		draw_polygon(sky, PackedColorArray([Color("#2a2420"), Color("#2a2420"), Color("#120c08"), Color("#120c08")]))
-		var hill := PackedVector2Array([Vector2(0, h * 0.78), Vector2(w * 0.18, h * 0.7), Vector2(w * 0.38, h * 0.58),
-			Vector2(w * 0.62, h * 0.57), Vector2(w * 0.8, h * 0.66), Vector2(w, h * 0.72), Vector2(w, h), Vector2(0, h)])
+		# The fort sits low, under the menu, so the palisade never shows between buttons.
+		var hill := PackedVector2Array([Vector2(0, h * 0.9), Vector2(w * 0.18, h * 0.86), Vector2(w * 0.38, h * 0.8),
+			Vector2(w * 0.62, h * 0.79), Vector2(w * 0.8, h * 0.84), Vector2(w, h * 0.88), Vector2(w, h), Vector2(0, h)])
 		draw_colored_polygon(hill, Color("#1a130d"))
 		# Palisade on the hilltop.
 		for i in range(48):
 			var x := w * 0.4 + i * (w * 0.2 / 48.0)
-			var top := h * 0.53 - (sin(i * 1.7) * 3.0)
-			draw_line(Vector2(x, h * 0.575), Vector2(x, top), Color("#0e0906"), 4.0)
+			var top := h * 0.755 - (sin(i * 1.7) * 3.0)
+			draw_line(Vector2(x, h * 0.797), Vector2(x, top), Color("#0e0906"), 4.0)
 		# Smoke from the hearths.
 		for j in range(3):
 			var sx := w * (0.45 + j * 0.05)
 			for k in range(14):
-				draw_circle(Vector2(sx + sin(k * 0.6 + j) * 10.0 + k * 3.0, h * 0.52 - k * 14.0), 6.0 + k * 1.2, Color(0.5, 0.45, 0.4, 0.05))
+				draw_circle(Vector2(sx + sin(k * 0.6 + j) * 10.0 + k * 3.0, h * 0.745 - k * 14.0), 6.0 + k * 1.2, Color(0.5, 0.45, 0.4, 0.05))

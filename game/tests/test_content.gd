@@ -1,0 +1,132 @@
+extends TestCase
+## Content integrity: every dialogue, map, NPC and story reference points at
+## something that exists. Catches writing typos before they reach a player.
+
+
+func _files(dir: String, ext: String) -> Array:
+	var out: Array = []
+	for f in DirAccess.get_files_at("res://data/" + dir):
+		if f.ends_with(ext):
+			out.append(f.get_basename())
+	return out
+
+
+func _dlg_exists(id: String) -> bool:
+	return FileAccess.file_exists("res://data/dialogue/%s.dlg" % id)
+
+
+func test_every_dialogue_is_clean() -> void:
+	for id in _files("dialogue", ".dlg"):
+		var d := Dialogue.parse(FileAccess.get_file_as_string("res://data/dialogue/%s.dlg" % id))
+		for e in Dialogue.validate(d):
+			fail("%s.dlg: %s" % [id, e])
+
+
+func test_npc_templates_reference_real_things() -> void:
+	for t in DB.load_json("npcs.json")["npcs"]:
+		for e in t.get("equip", []):
+			check(not DB.item(e).is_empty(), "%s equips unknown %s" % [t["id"], e])
+		for e in t.get("items", []):
+			var iid: String = e[0] if e is Array else str(e)
+			check(not DB.item(iid).is_empty(), "%s carries unknown %s" % [t["id"], iid])
+		if t.has("dialogue"):
+			check(_dlg_exists(t["dialogue"]), "%s has missing dialogue %s" % [t["id"], t["dialogue"]])
+
+
+func test_maps_reference_real_things() -> void:
+	for id in _files("maps", ".json"):
+		var def := DB.map_def(id)
+		var m := MapData.from_def(def)
+		for a in def.get("actors", []):
+			check(not DB.npc_template(a["template"]).is_empty(), "%s: unknown template %s" % [id, a["template"]])
+			if a.has("mark"):
+				check(m.has_mark(a["mark"]), "%s: actor mark %s missing" % [id, a["mark"]])
+			if a.has("dialogue"):
+				check(_dlg_exists(a["dialogue"]), "%s: missing dialogue %s" % [id, a["dialogue"]])
+		for c in def.get("containers", []):
+			check(m.has_mark(c["mark"]), "%s: container mark %s missing" % [id, c["mark"]])
+			for it in c.get("items", []):
+				check(not DB.item(it[0]).is_empty(), "%s: unknown item %s" % [id, it[0]])
+		for e in def.get("exits", []):
+			check(m.has_mark(e["mark"]), "%s: exit mark %s missing" % [id, e["mark"]])
+			var to: String = e.get("to", "world")
+			if to.begins_with("map:"):
+				var target := DB.map_def(to.substr(4))
+				check(not target.is_empty(), "%s: exit to missing map %s" % [id, to])
+				if not target.is_empty():
+					check(MapData.from_def(target).has_mark(e.get("entry", "start")), "%s: exit entry %s missing in %s" % [id, e.get("entry", "start"), to])
+		for t in def.get("triggers", []):
+			check(m.has_mark(t["mark"]), "%s: trigger mark %s missing" % [id, t["mark"]])
+			if t.has("dialogue"):
+				check(_dlg_exists(t["dialogue"]), "%s: trigger dialogue %s missing" % [id, t["dialogue"]])
+		if def.has("arrive_dialogue"):
+			check(_dlg_exists(def["arrive_dialogue"]), "%s: arrive dialogue missing" % id)
+		if not def.get("encounter", false):
+			check(m.has_mark("start"), "%s has a start mark" % id)
+
+
+func test_world_locations_enter_at_real_marks() -> void:
+	for l in DB.world()["locations"]:
+		if l.has("map"):
+			var m := MapData.from_def(DB.map_def(l["map"]))
+			check(m.has_mark(l.get("entry", "start")), "%s: entry %s missing" % [l["id"], l.get("entry", "start")])
+
+
+func test_story_start_is_complete() -> void:
+	var st := DB.story()
+	var m := MapData.from_def(DB.map_def(st["start_map"]))
+	check(m.has_mark(st.get("start_entry", "start")), "start entry exists")
+	for it in st.get("start_items", []):
+		check(not DB.item(it[0]).is_empty(), "start item %s exists" % it[0])
+	var hero := CharacterSheet.create("Test", {}, ["blades", "sneak", "speech"])
+	for it in st.get("start_items", []):
+		hero.inventory.add(it[0], int(it[1]))
+	for id in st.get("start_equip", []):
+		check(hero.equip(id), "start gear %s can be equipped" % id)
+	if st.has("intro"):
+		check(FileAccess.file_exists("res://data/" + st["intro"]), "intro text exists")
+
+
+func _reachable(m: MapData, from: Vector2i, blocked: Array = []) -> Dictionary:
+	var seen := {from: true}
+	var todo: Array = [from]
+	while not todo.is_empty():
+		var c: Vector2i = todo.pop_back()
+		for n in Hex.neighbors(c):
+			if not seen.has(n) and m.is_walkable(n) and not n in blocked:
+				seen[n] = true
+				todo.append(n)
+	return seen
+
+
+func _near(seen: Dictionary, c: Vector2i) -> bool:
+	if seen.has(c):
+		return true
+	for n in Hex.neighbors(c):
+		if seen.has(n):
+			return true
+	return false
+
+
+func test_everything_on_a_map_can_be_reached_from_its_start() -> void:
+	for id in _files("maps", ".json"):
+		var def := DB.map_def(id)
+		if def.get("encounter", false):
+			continue
+		var m := MapData.from_def(def)
+		var seen := _reachable(m, m.mark("start"))
+		for a in def.get("actors", []):
+			if a.has("mark"):
+				check(_near(seen, m.mark(a["mark"])), "%s: %s can be reached" % [id, a["uid"]])
+		for c in def.get("containers", []):
+			check(_near(seen, m.mark(c["mark"])), "%s: container %s can be reached" % [id, c["mark"]])
+		for e in def.get("exits", []):
+			check(_near(seen, m.mark(e["mark"])), "%s: exit %s can be reached" % [id, e["mark"]])
+		for t in def.get("triggers", []):
+			check(_near(seen, m.mark(t["mark"])), "%s: trigger %s can be reached" % [id, t["mark"]])
+
+
+func test_the_ford_barrier_cannot_be_walked_around() -> void:
+	var m := MapData.from_def(DB.map_def("oltis_ford"))
+	var seen := _reachable(m, m.mark("start"), m.mark_cells("barrier"))
+	check(not _near(seen, m.mark("exit")), "the far bank is only reached through the barrier")

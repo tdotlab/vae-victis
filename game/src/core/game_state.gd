@@ -20,6 +20,8 @@ var entry := "start"           # mark name to place the player on map entry
 var map_states: Dictionary = {}  # map id -> {"actors": {uid: state}, "containers": {...}, "taken": [...]}
 var world_pos := Vector2i.ZERO
 var known_locations: Array = []
+var world_seen: Array = []     # world-map cell indexes the player has seen
+var encounter: Dictionary = {} # the random encounter in progress, if any
 var titles: Array = []
 var messages: Array = []       # recent log lines, for the HUD
 var dice := Dice.new()
@@ -91,6 +93,7 @@ func to_dict() -> Dictionary:
 		"map_states": map_states,
 		"world_pos": [world_pos.x, world_pos.y],
 		"known_locations": known_locations, "titles": titles,
+		"world_seen": world_seen, "encounter": encounter,
 		"dice_state": str(dice.get_state()),
 	}
 
@@ -115,6 +118,10 @@ static func from_dict(d: Dictionary) -> GameState:
 	g.world_pos = Vector2i(int(wp[0]), int(wp[1]))
 	g.known_locations = d.get("known_locations", [])
 	g.titles = d.get("titles", [])
+	g.world_seen = d.get("world_seen", [])
+	for i in range(g.world_seen.size()):
+		g.world_seen[i] = int(g.world_seen[i])
+	g.encounter = d.get("encounter", {})
 	if d.has("dice_state"):
 		g.dice.set_state(int(d["dice_state"]))
 	return g

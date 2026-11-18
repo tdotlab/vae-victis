@@ -1,0 +1,9 @@
+// The other outlaws in the grotto.
+=== start
+[flag dub_met] -> again
+"You want Dubnacos. By the fire." He doesn't take his eyes off you. "Keep your hands where I can see them."
+* Go. -> END
+
+=== again
+"Talk to him, not me."
+* Go. -> END

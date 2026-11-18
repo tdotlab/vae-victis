@@ -1,0 +1,205 @@
+{
+ "id": "grotto",
+ "name": "The Grotto of the Hanging Dead",
+ "default": "cave",
+ "legend": {
+  ".": "grass",
+  ",": "field",
+  ";": "meadow",
+  "_": "road",
+  "P": "pine",
+  "T": "tree",
+  "b": "bush",
+  "r": "rock",
+  "R": "rampart",
+  "w": "wall_wood",
+  "s": "wall_stone",
+  "n": {
+   "terrain": "crate",
+   "mark": "niche"
+  },
+  "f": "floor_earth",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "d": "door",
+  "A": "altar",
+  "x": "crate",
+  "X": "cave_wall",
+  "o": "cave",
+  "z": "bones",
+  "~": "water",
+  "=": "shallows",
+  "m": "mud",
+  "C": "cliff",
+  "@": {
+   "terrain": "grass",
+   "mark": "start"
+  },
+  "D": {
+   "terrain": "cave",
+   "mark": "dubnacos"
+  },
+  "k": {
+   "terrain": "crate",
+   "mark": "chest"
+  },
+  "3": {
+   "terrain": "cave",
+   "mark": "b3"
+  },
+  "4": {
+   "terrain": "cave",
+   "mark": "b4"
+  },
+  "5": {
+   "terrain": "cave",
+   "mark": "b5"
+  },
+  "W": {
+   "terrain": "cave",
+   "mark": "wolf"
+  },
+  "S": {
+   "terrain": "cave",
+   "mark": "shrine"
+  },
+  "H": {
+   "terrain": "bones",
+   "mark": "hanging"
+  },
+  "e": {
+   "terrain": "grass",
+   "mark": "exit"
+  }
+ },
+ "rows": [
+  "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "XXXXXXXXXXXXXXXXXXXXXXXXXXXooooXXXXX",
+  "XXXXooooooXXXXXXXXXXXXXXXXooozooXXXX",
+  "XXXoooWoooXXXXXXXXXXXXXXXXoonozoXXXX",
+  "XXooooWoWoooXXXXXXXXXXXXXXoozzooXXXX",
+  "XXXoozoooooooXXXXXXXXXXXXXXooooXXXXX",
+  "XXXXXooooooooooXXXXXXXXXXXXXSSXXXXXX",
+  "XXXXXXXXXoooooooXXXXXXXXXXXooXXXXXXX",
+  "XXXXXXXXXXXXoooooooooooooooooXXXXXXX",
+  "XXXXXXXXXXXXXXXoooooooXXXXXXXXXXXXXX",
+  "XXXXXXXXXXXXXXXXXoooXXXXXXXXXXXXXXXX",
+  "XXXXXXXXXXXXXXXoooooXXXXXXXXXXXXXXXX",
+  "XXXXXXXXXXoooooooooooooXXXXXXXXXXXXX",
+  "XXXXXXXXXoooozzoooooooooXXXXXXXXXXXX",
+  "XXXXXXXXooooooooDooooookXXXXXXXXXXXX",
+  "XXXXXXXXoooooohoooooo4ooXXXXXXXXXXXX",
+  "XXXXXXXXXoooo3ooooo5ooooXXXXXXXXXXXX",
+  "XXXXXXXXXXoooooooooooooXXXXXXXXXXXXX",
+  "XXXXXXXXXXXXXXoooHHooXXXXXXXXXXXXXXX",
+  "XXXXXXXXXXXXXXXHHHHHXXXXXXXXXXXXXXXX",
+  "XXXXXXXXXXXXXXooooooXXXXXXXXXXXXXXXX",
+  "rrrrrrrrrrrrrr..@...rrrrrrrrrrrrrrrr",
+  "..TT.......b..........b......TT.....",
+  ".....TT..........TT.................",
+  "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+ ],
+ "cave": true,
+ "arrive_text": "A crack in the limestone, taller than a house. Strips of cloth hang from the bushes at the mouth, bleached grey. Smoke comes out of it, and the smell of meat.",
+ "actors": [
+  {
+   "uid": "dubnacos",
+   "template": "dubnacos",
+   "mark": "dubnacos"
+  },
+  {
+   "uid": "grotto_b3",
+   "template": "grotto_bandit",
+   "mark": "b3"
+  },
+  {
+   "uid": "grotto_b4",
+   "template": "grotto_bandit",
+   "mark": "b4"
+  },
+  {
+   "uid": "grotto_b5",
+   "template": "grotto_slinger",
+   "mark": "b5"
+  },
+  {
+   "uid": "wolf1",
+   "template": "wolf",
+   "mark": "wolf"
+  },
+  {
+   "uid": "wolf2",
+   "template": "wolf",
+   "mark": "wolf"
+  },
+  {
+   "uid": "wolf3",
+   "template": "wolf",
+   "mark": "wolf"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "chest",
+   "name": "Outlaws' chest",
+   "items": [
+    [
+     "hostage_tally",
+     1
+    ],
+    [
+     "bronze_torque",
+     1
+    ],
+    [
+     "mead",
+     2
+    ],
+    [
+     "salt",
+     2
+    ]
+   ],
+   "silver": 35,
+   "lock": 25,
+   "owner": "dubnacos",
+   "if_seen": "fight",
+   "unless_flag": "tally_given",
+   "gone_text": "The chest is empty. The outlaws took everything they could carry."
+  },
+  {
+   "mark": "niche",
+   "name": "Niche in the rock",
+   "items": [
+    [
+     "grotto_idol",
+     1
+    ],
+    [
+     "gold_torque",
+     1
+    ]
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "Out into the daylight"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "hanging",
+   "id": "hanging",
+   "say": "Above you, roped to iron pegs driven into the rock, hang the dead: a dozen of them, old beyond rotting, brown as leather. Some have torques at their necks. Nobody has taken them. Even outlaws have limits."
+  },
+  {
+   "mark": "shrine",
+   "id": "deep_shrine",
+   "say": "The passage opens into a chamber nobody has lit a fire in for a long time. Bones on the floor, a lot of them, and a niche cut into the far wall."
+  }
+ ]
+}

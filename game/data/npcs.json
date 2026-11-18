@@ -1,16 +1,987 @@
 {
-  "npcs": [
-    {"id": "test_villager", "name": "Old Cottos", "faction": "villager", "attrs": {"PRE": 6}, "ai": "wander",
-     "dialogue": "sandbox_talker", "items": [["bread", 3], ["salt", 2]], "silver": 40,
-     "desc": "A stooped man with a beard like a thornbush.", "look": {"tunic": "#7a6a3a", "hair": "#c8c0b0"}},
-    {"id": "test_bandit", "name": "Bandit", "faction": "bandit", "hostile": true, "ai": "guard",
-     "attrs": {"STR": 6, "AGI": 6, "END": 5}, "tags": ["blades"], "equip": ["dagger", "leather_jerkin"],
-     "items": [["bread", 1]], "silver": 12, "xp": 40, "desc": "Hungry and armed.", "look": {"tunic": "#5a3a3a"}},
-    {"id": "test_spearman", "name": "Bandit spearman", "faction": "bandit", "hostile": true, "ai": "guard",
-     "attrs": {"STR": 6, "AGI": 5, "END": 6, "PER": 6}, "tags": ["spears", "missiles"], "equip": ["spear", "small_shield"],
-     "items": [["javelin", 2]], "silver": 5, "xp": 50, "desc": "Javelins over his shoulder.", "look": {"tunic": "#5a3a3a", "shield": "#6a3a20"}},
-    {"id": "wolf", "name": "Wolf", "faction": "beast", "hostile": true, "ai": "wander",
-     "attrs": {"STR": 4, "AGI": 8, "END": 4, "PER": 8}, "tags": ["brawling"], "equip": ["wolf_bite"],
-     "items": [["wolf_pelt", 1]], "xp": 30, "desc": "Grey, lean, and not afraid of you.", "look": {"beast": true, "tunic": "#6a6460"}}
-  ]
+ "npcs": [
+  {
+   "id": "test_villager",
+   "name": "Old Cottos",
+   "faction": "villager",
+   "attrs": {
+    "PRE": 6
+   },
+   "ai": "wander",
+   "dialogue": "sandbox_talker",
+   "items": [
+    [
+     "bread",
+     3
+    ],
+    [
+     "salt",
+     2
+    ]
+   ],
+   "silver": 40,
+   "desc": "A stooped man with a beard like a thornbush.",
+   "look": {
+    "tunic": "#7a6a3a",
+    "hair": "#c8c0b0"
+   }
+  },
+  {
+   "id": "test_bandit",
+   "name": "Bandit",
+   "faction": "bandit",
+   "hostile": true,
+   "ai": "guard",
+   "attrs": {
+    "STR": 6,
+    "AGI": 6,
+    "END": 5
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "dagger",
+    "leather_jerkin"
+   ],
+   "items": [
+    [
+     "bread",
+     1
+    ]
+   ],
+   "silver": 12,
+   "xp": 40,
+   "desc": "Hungry and armed.",
+   "look": {
+    "tunic": "#5a3a3a"
+   }
+  },
+  {
+   "id": "test_spearman",
+   "name": "Bandit spearman",
+   "faction": "bandit",
+   "hostile": true,
+   "ai": "guard",
+   "attrs": {
+    "STR": 6,
+    "AGI": 5,
+    "END": 6,
+    "PER": 6
+   },
+   "tags": [
+    "spears",
+    "missiles"
+   ],
+   "equip": [
+    "spear",
+    "small_shield"
+   ],
+   "items": [
+    [
+     "javelin",
+     2
+    ]
+   ],
+   "silver": 5,
+   "xp": 50,
+   "desc": "Javelins over his shoulder.",
+   "look": {
+    "tunic": "#5a3a3a",
+    "shield": "#6a3a20"
+   }
+  },
+  {
+   "id": "wolf",
+   "name": "Wolf",
+   "faction": "beast",
+   "hostile": true,
+   "ai": "wander",
+   "attrs": {
+    "STR": 4,
+    "AGI": 8,
+    "END": 4,
+    "PER": 8
+   },
+   "tags": [
+    "brawling"
+   ],
+   "equip": [
+    "wolf_bite"
+   ],
+   "items": [
+    [
+     "wolf_pelt",
+     1
+    ]
+   ],
+   "xp": 30,
+   "desc": "Grey, lean, and not afraid of you.",
+   "look": {
+    "beast": true,
+    "tunic": "#6a6460"
+   }
+  },
+  {
+   "id": "brigand",
+   "name": "Brigand",
+   "faction": "bandit",
+   "hostile": true,
+   "ai": "guard",
+   "attrs": {
+    "STR": 6,
+    "AGI": 6,
+    "END": 5
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "axe",
+    "leather_jerkin"
+   ],
+   "items": [
+    [
+     "bread",
+     1
+    ]
+   ],
+   "silver": 6,
+   "xp": 35,
+   "desc": "A farmer once, by the hands. Not anymore, by the eyes.",
+   "look": {
+    "tunic": "#5a4a3a",
+    "cloak": "#3a3028"
+   }
+  },
+  {
+   "id": "brigand_slinger",
+   "name": "Brigand slinger",
+   "faction": "bandit",
+   "hostile": true,
+   "ai": "guard",
+   "attrs": {
+    "AGI": 7,
+    "PER": 7
+   },
+   "tags": [
+    "missiles"
+   ],
+   "equip": [
+    "sling",
+    "leather_cap"
+   ],
+   "items": [
+    [
+     "sling_stone",
+     14
+    ]
+   ],
+   "silver": 3,
+   "xp": 35,
+   "desc": "A boy with a sling and a very good arm.",
+   "look": {
+    "tunic": "#5a5038"
+   }
+  },
+  {
+   "id": "refugee",
+   "name": "Refugee",
+   "faction": "refugee",
+   "ai": "idle",
+   "dialogue": "enc_refugees",
+   "attrs": {
+    "STR": 5,
+    "END": 4
+   },
+   "items": [
+    [
+     "bread",
+     1
+    ]
+   ],
+   "silver": 2,
+   "desc": "A man pushing a handcart with everything his family owns.",
+   "look": {
+    "tunic": "#6a6048",
+    "hair": "#3a2a1a"
+   }
+  },
+  {
+   "id": "refugee_woman",
+   "name": "Refugee",
+   "sex": "f",
+   "faction": "refugee",
+   "ai": "idle",
+   "dialogue": "enc_refugees",
+   "attrs": {
+    "END": 4
+   },
+   "items": [
+    [
+     "salt",
+     1
+    ]
+   ],
+   "desc": "A woman carrying a bundle and watching your hands.",
+   "look": {
+    "tunic": "#5a5a48",
+    "hair": "#5a3a20"
+   }
+  },
+  {
+   "id": "refugee_elder",
+   "name": "Old refugee",
+   "faction": "refugee",
+   "ai": "idle",
+   "dialogue": "enc_refugees",
+   "attrs": {
+    "STR": 3,
+    "END": 3
+   },
+   "desc": "An old man who walks like every step is a decision.",
+   "look": {
+    "tunic": "#58503e",
+    "hair": "#c8c0b0"
+   }
+  },
+  {
+   "id": "salt_trader",
+   "name": "Salt trader",
+   "faction": "trader",
+   "ai": "idle",
+   "dialogue": "enc_salt_trader",
+   "attrs": {
+    "PRE": 6,
+    "WIT": 6
+   },
+   "skills": {
+    "barter": 30
+   },
+   "items": [
+    [
+     "salt",
+     6
+    ],
+    [
+     "bread",
+     4
+    ],
+    [
+     "herbs",
+     3
+    ],
+    [
+     "bandage",
+     4
+    ],
+    [
+     "mead",
+     2
+    ],
+    [
+     "javelin",
+     4
+    ],
+    [
+     "leather_cap",
+     1
+    ],
+    [
+     "sling_stone",
+     20
+    ]
+   ],
+   "silver": 150,
+   "desc": "Thickset, good cloak, careful eyes. The mules are better fed than he is.",
+   "look": {
+    "tunic": "#6a4a2a",
+    "cloak": "#3a5a4a"
+   }
+  },
+  {
+   "id": "trader_guard",
+   "name": "Trader's guard",
+   "faction": "trader",
+   "ai": "idle",
+   "attrs": {
+    "STR": 6,
+    "END": 6,
+    "AGI": 5
+   },
+   "tags": [
+    "spears",
+    "shield"
+   ],
+   "equip": [
+    "spear",
+    "small_shield",
+    "leather_jerkin"
+   ],
+   "silver": 4,
+   "xp": 40,
+   "desc": "Bored, in a professional way.",
+   "look": {
+    "tunic": "#4a4a3a",
+    "shield": "#5a4a2a"
+   }
+  },
+  {
+   "id": "roman_forager",
+   "name": "Roman forager",
+   "faction": "rome",
+   "hostile": true,
+   "ai": "guard",
+   "attrs": {
+    "STR": 6,
+    "END": 6,
+    "AGI": 6
+   },
+   "tags": [
+    "blades",
+    "shield"
+   ],
+   "equip": [
+    "gladius",
+    "scutum",
+    "leather_jerkin"
+   ],
+   "items": [
+    [
+     "bread",
+     2
+    ]
+   ],
+   "silver": 10,
+   "xp": 75,
+   "desc": "A legionary with a sack of somebody's grain over his shoulder and a sword in his other hand.",
+   "look": {
+    "tunic": "#8a3a2a",
+    "shield": "#8a2a20",
+    "hair": "#2a2018"
+   }
+  },
+  {
+   "id": "auxiliary_slinger",
+   "name": "Balearic slinger",
+   "faction": "rome",
+   "hostile": true,
+   "ai": "guard",
+   "attrs": {
+    "AGI": 7,
+    "PER": 7
+   },
+   "tags": [
+    "missiles"
+   ],
+   "equip": [
+    "sling"
+   ],
+   "items": [
+    [
+     "sling_stone",
+     18
+    ]
+   ],
+   "silver": 6,
+   "xp": 50,
+   "desc": "An islander in Roman pay, three slings wound round his head and a bag of stones at his hip.",
+   "look": {
+    "tunic": "#9a8a6a",
+    "hair": "#1a1410"
+   }
+  },
+  {
+   "id": "matugenta",
+   "name": "Matugenta",
+   "sex": "f",
+   "faction": "brigodunon",
+   "ai": "idle",
+   "dialogue": "brig_matugenta",
+   "attrs": {
+    "PRE": 6,
+    "WIT": 6
+   },
+   "desc": "Your mother. Grey at the temples since the day they took Epona, and she has never once said so.",
+   "look": {
+    "tunic": "#6a4a5a",
+    "hair": "#9a8a7a"
+   }
+  },
+  {
+   "id": "vellaunos",
+   "name": "Vellaunos",
+   "faction": "brigodunon",
+   "ai": "idle",
+   "dialogue": "brig_vellaunos",
+   "attrs": {
+    "PRE": 7,
+    "WIT": 7,
+    "END": 4
+   },
+   "leader": true,
+   "equip": [
+    "gallic_sword",
+    "padded_linen"
+   ],
+   "desc": "Chief of the elders. A big man gone thin, with a voice that still fills the hall.",
+   "look": {
+    "tunic": "#5a3a2a",
+    "cloak": "#7a2a2a",
+    "hair": "#d0c8b8"
+   }
+  },
+  {
+   "id": "cobnertos",
+   "name": "Cobnertos the smith",
+   "faction": "brigodunon",
+   "ai": "idle",
+   "dialogue": "brig_cobnertos",
+   "attrs": {
+    "STR": 8,
+    "END": 7,
+    "PRE": 4
+   },
+   "skills": {
+    "barter": 20
+   },
+   "items": [
+    [
+     "spear",
+     2
+    ],
+    [
+     "axe",
+     1
+    ],
+    [
+     "dagger",
+     2
+    ],
+    [
+     "javelin",
+     6
+    ],
+    [
+     "small_shield",
+     1
+    ],
+    [
+     "leather_cap",
+     2
+    ],
+    [
+     "leather_jerkin",
+     1
+    ],
+    [
+     "sling",
+     1
+    ],
+    [
+     "sling_stone",
+     30
+    ],
+    [
+     "lockpicks",
+     1
+    ]
+   ],
+   "silver": 120,
+   "desc": "Forearms like oak roots and burn scars to the elbow. His son is the second hostage.",
+   "look": {
+    "tunic": "#4a3a2a",
+    "hair": "#3a2a1a"
+   }
+  },
+  {
+   "id": "cintugnatos",
+   "name": "Cintugnatos",
+   "faction": "brigodunon",
+   "ai": "idle",
+   "dialogue": "brig_vates",
+   "attrs": {
+    "WIT": 8,
+    "PER": 7,
+    "STR": 3
+   },
+   "skills": {
+    "lore": 40,
+    "healing": 50
+   },
+   "items": [
+    [
+     "herbs",
+     4
+    ],
+    [
+     "poultice",
+     2
+    ]
+   ],
+   "desc": "The vates: seer, healer, keeper of the shrine. Young for it, and knows that everyone thinks so.",
+   "look": {
+    "tunic": "#d8d0b8",
+    "cloak": "#e8e0c8",
+    "hair": "#5a3a1a"
+   }
+  },
+  {
+   "id": "moccos",
+   "name": "Moccos",
+   "faction": "brigodunon",
+   "ai": "guard",
+   "dialogue": "brig_moccos",
+   "attrs": {
+    "STR": 6,
+    "END": 6,
+    "AGI": 5
+   },
+   "tags": [
+    "spears",
+    "shield"
+   ],
+   "equip": [
+    "spear",
+    "small_shield",
+    "leather_cap"
+   ],
+   "desc": "Keeper of the gate. Old enough to have fought the Romans once and lost, young enough to want to again.",
+   "look": {
+    "tunic": "#4a5a3a",
+    "shield": "#6a4a2a",
+    "hair": "#7a6a5a"
+   }
+  },
+  {
+   "id": "brig_villager",
+   "name": "Villager",
+   "faction": "brigodunon",
+   "ai": "wander",
+   "dialogue": "brig_villager",
+   "attrs": {},
+   "desc": "Someone you have known all your life.",
+   "look": {
+    "tunic": "#6a5a3a",
+    "hair": "#4a3a2a"
+   }
+  },
+  {
+   "id": "brig_villager_f",
+   "name": "Villager",
+   "sex": "f",
+   "faction": "brigodunon",
+   "ai": "wander",
+   "dialogue": "brig_villager",
+   "attrs": {},
+   "desc": "Someone you have known all your life.",
+   "look": {
+    "tunic": "#5a4a5a",
+    "hair": "#8a5a2a"
+   }
+  },
+  {
+   "id": "brig_warrior",
+   "name": "Young warrior",
+   "faction": "brigodunon",
+   "ai": "guard",
+   "dialogue": "brig_warrior",
+   "attrs": {
+    "STR": 6,
+    "END": 6
+   },
+   "tags": [
+    "spears"
+   ],
+   "equip": [
+    "spear",
+    "gallic_shield"
+   ],
+   "desc": "One of the young men who wants a war and has never seen one.",
+   "look": {
+    "tunic": "#3a4a5a",
+    "shield": "#7a5a2a"
+   }
+  },
+  {
+   "id": "dubnacos_home",
+   "name": "Dubnacos",
+   "faction": "brigodunon",
+   "ai": "wander",
+   "dialogue": "brig_dubnacos",
+   "attrs": {
+    "AGI": 7,
+    "PRE": 6
+   },
+   "equip": [
+    "gallic_sword"
+   ],
+   "desc": "Home again, and not sure yet what that means.",
+   "look": {
+    "tunic": "#4a4a3a",
+    "cloak": "#2a2a28",
+    "hair": "#2a1a10"
+   }
+  },
+  {
+   "id": "dubnacos",
+   "name": "Dubnacos",
+   "faction": "grotto",
+   "ai": "guard",
+   "leader": true,
+   "dialogue": "grotto_dubnacos",
+   "attrs": {
+    "STR": 6,
+    "AGI": 7,
+    "END": 5,
+    "PER": 6,
+    "PRE": 6
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "gallic_sword",
+    "leather_jerkin"
+   ],
+   "items": [
+    [
+     "bread",
+     2
+    ]
+   ],
+   "silver": 25,
+   "xp": 90,
+   "desc": "Thin, quick, a good sword and a bad cloak. Exiled from Brigodunon three winters ago for a killing.",
+   "look": {
+    "tunic": "#4a4a3a",
+    "cloak": "#2a2a28",
+    "hair": "#2a1a10"
+   }
+  },
+  {
+   "id": "grotto_bandit",
+   "name": "Outlaw",
+   "faction": "grotto",
+   "ai": "guard",
+   "dialogue": "grotto_bandit",
+   "attrs": {
+    "STR": 6,
+    "AGI": 5,
+    "END": 5
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "axe",
+    "leather_jerkin"
+   ],
+   "items": [
+    [
+     "bread",
+     1
+    ]
+   ],
+   "silver": 5,
+   "xp": 40,
+   "desc": "A man the world has no use for, and who has noticed.",
+   "look": {
+    "tunic": "#5a4a3a",
+    "cloak": "#3a3028"
+   }
+  },
+  {
+   "id": "grotto_slinger",
+   "name": "Outlaw slinger",
+   "faction": "grotto",
+   "ai": "guard",
+   "dialogue": "grotto_bandit",
+   "attrs": {
+    "AGI": 6,
+    "PER": 6,
+    "END": 4
+   },
+   "tags": [
+    "missiles"
+   ],
+   "equip": [
+    "sling",
+    "leather_cap"
+   ],
+   "items": [
+    [
+     "sling_stone",
+     16
+    ]
+   ],
+   "silver": 3,
+   "xp": 40,
+   "desc": "A boy with a sling and an old man's eyes.",
+   "look": {
+    "tunic": "#6a5a3a"
+   }
+  },
+  {
+   "id": "sulicena",
+   "name": "Sulicena",
+   "sex": "f",
+   "faction": "vindomagos",
+   "ai": "idle",
+   "dialogue": "vind_sulicena",
+   "attrs": {
+    "WIT": 8,
+    "PRE": 7
+   },
+   "skills": {
+    "barter": 40
+   },
+   "desc": "Headwoman of Vindomagos. Counts everything twice, and smiles once you are worth it.",
+   "look": {
+    "tunic": "#3a5a4a",
+    "cloak": "#6a5a3a",
+    "hair": "#a07040"
+   }
+  },
+  {
+   "id": "vind_trader",
+   "name": "Lugurix the salt merchant",
+   "faction": "vindomagos",
+   "ai": "idle",
+   "dialogue": "vind_trader",
+   "attrs": {
+    "PRE": 6,
+    "WIT": 6
+   },
+   "skills": {
+    "barter": 30
+   },
+   "items": [
+    [
+     "salt",
+     10
+    ],
+    [
+     "bread",
+     6
+    ],
+    [
+     "mead",
+     3
+    ],
+    [
+     "roman_wine",
+     2
+    ],
+    [
+     "bandage",
+     4
+    ],
+    [
+     "herbs",
+     3
+    ],
+    [
+     "javelin",
+     4
+    ],
+    [
+     "hunting_bow",
+     1
+    ],
+    [
+     "arrow",
+     30
+    ],
+    [
+     "padded_linen",
+     1
+    ],
+    [
+     "bronze_torque",
+     1
+    ]
+   ],
+   "silver": 200,
+   "desc": "White to the elbows with salt dust. Knows the price of everything from here to the sea.",
+   "look": {
+    "tunic": "#8a8070",
+    "cloak": "#5a4a3a"
+   }
+  },
+  {
+   "id": "banna",
+   "name": "Old Banna",
+   "sex": "f",
+   "faction": "vindomagos",
+   "ai": "idle",
+   "dialogue": "vind_banna",
+   "attrs": {
+    "WIT": 7,
+    "STR": 2
+   },
+   "skills": {
+    "healing": 60
+   },
+   "items": [
+    [
+     "herbs",
+     6
+    ],
+    [
+     "poultice",
+     3
+    ],
+    [
+     "bandage",
+     4
+    ]
+   ],
+   "desc": "The village healer. Hands like roots, eyes like a hawk.",
+   "look": {
+    "tunic": "#5a5a4a",
+    "hair": "#e0dcd0"
+   }
+  },
+  {
+   "id": "vind_villager",
+   "name": "Villager",
+   "faction": "vindomagos",
+   "ai": "wander",
+   "dialogue": "vind_villager",
+   "attrs": {},
+   "desc": "A farmer of Vindomagos.",
+   "look": {
+    "tunic": "#7a6a4a"
+   }
+  },
+  {
+   "id": "vind_villager_f",
+   "name": "Villager",
+   "sex": "f",
+   "faction": "vindomagos",
+   "ai": "wander",
+   "dialogue": "vind_villager",
+   "attrs": {},
+   "desc": "A farmer of Vindomagos.",
+   "look": {
+    "tunic": "#6a5a4a",
+    "hair": "#6a4a2a"
+   }
+  },
+  {
+   "id": "haldo",
+   "name": "Haldo",
+   "faction": "riders",
+   "ai": "guard",
+   "leader": true,
+   "dialogue": "ford_haldo",
+   "attrs": {
+    "STR": 7,
+    "AGI": 6,
+    "END": 7,
+    "PER": 6,
+    "PRE": 6
+   },
+   "level": 3,
+   "tags": [
+    "spears",
+    "shield"
+   ],
+   "equip": [
+    "war_spear",
+    "gallic_shield",
+    "mail_shirt",
+    "bronze_helmet"
+   ],
+   "items": [
+    [
+     "rider_tablet",
+     1
+    ]
+   ],
+   "silver": 45,
+   "xp": 150,
+   "desc": "Leader of the horsemen at the ford. Fair hair knotted on the side of his head, a Roman mail shirt, and a Gallic shield he took from somebody.",
+   "look": {
+    "tunic": "#6a5a3a",
+    "shield": "#4a4a5a",
+    "hair": "#d8c070"
+   }
+  },
+  {
+   "id": "rider",
+   "name": "Germanic rider",
+   "faction": "riders",
+   "ai": "guard",
+   "dialogue": "ford_rider",
+   "attrs": {
+    "STR": 6,
+    "AGI": 6,
+    "END": 6
+   },
+   "level": 2,
+   "tags": [
+    "spears"
+   ],
+   "equip": [
+    "spear",
+    "small_shield",
+    "leather_jerkin"
+   ],
+   "silver": 8,
+   "xp": 60,
+   "desc": "One of Caesar's Germanic horse, from across the Rhenus. Now nobody's.",
+   "look": {
+    "tunic": "#5a5a3a",
+    "shield": "#5a4a3a",
+    "hair": "#c8b070"
+   }
+  },
+  {
+   "id": "rider_archer",
+   "name": "Germanic rider",
+   "faction": "riders",
+   "ai": "guard",
+   "dialogue": "ford_rider",
+   "attrs": {
+    "AGI": 7,
+    "PER": 7,
+    "END": 5
+   },
+   "level": 2,
+   "tags": [
+    "missiles"
+   ],
+   "equip": [
+    "hunting_bow",
+    "leather_jerkin"
+   ],
+   "items": [
+    [
+     "arrow",
+     20
+    ]
+   ],
+   "silver": 6,
+   "xp": 60,
+   "desc": "Keeps his bow strung and his eyes on you.",
+   "look": {
+    "tunic": "#4a5a3a",
+    "hair": "#b8a060"
+   }
+  },
+  {
+   "id": "carter",
+   "name": "Carter from Vindomagos",
+   "faction": "vindomagos",
+   "ai": "idle",
+   "dialogue": "ford_carter",
+   "attrs": {},
+   "desc": "Sitting on a cart of grain sacks with the patience of a man paid by the day.",
+   "look": {
+    "tunic": "#7a6a4a"
+   }
+  }
+ ]
 }

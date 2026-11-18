@@ -1,53 +1,521 @@
 {
   "items": [
-    {"id": "fists", "name": "Bare hands", "type": "weapon", "skill": "brawling", "dmg": [1, 3], "ap": 3, "range": 1, "weight": 0, "value": 0, "desc": "Free, and always with you."},
-    {"id": "wolf_bite", "name": "Teeth", "type": "weapon", "skill": "brawling", "dmg": [2, 6], "ap": 3, "range": 1, "natural": true, "weight": 0, "value": 0, "desc": "A wolf's jaws."},
-    {"id": "boar_tusk", "name": "Tusks", "type": "weapon", "skill": "brawling", "dmg": [3, 9], "ap": 4, "range": 1, "natural": true, "weight": 0, "value": 0, "desc": "A boar's tusks."},
-
-    {"id": "dagger", "name": "Dagger", "type": "weapon", "skill": "blades", "dmg": [2, 6], "ap": 3, "range": 1, "acc": 5, "weight": 1, "value": 20, "desc": "A plain iron knife with a bone grip. Every Gaul carries one."},
-    {"id": "gallic_sword", "name": "Gallic long sword", "type": "weapon", "skill": "blades", "dmg": [4, 10], "ap": 4, "range": 1, "weight": 3, "value": 90, "desc": "A long slashing blade, made for swinging from above. Caesar's men call them soft. Caesar's men have not been hit by one."},
-    {"id": "gladius", "name": "Roman short sword", "type": "weapon", "skill": "blades", "dmg": [3, 9], "ap": 3, "range": 1, "acc": 10, "weight": 2, "value": 110, "desc": "Short, pointed, ugly. Made for stabbing from behind a shield, which is all the Romans want to do."},
-    {"id": "axe", "name": "Woodsman's axe", "type": "weapon", "skill": "blades", "dmg": [4, 11], "ap": 4, "range": 1, "acc": -5, "weight": 4, "value": 35, "desc": "Built for oak. Works on other things."},
-    {"id": "spear", "name": "Spear", "type": "weapon", "skill": "spears", "dmg": [3, 9], "ap": 4, "range": 2, "weight": 3, "value": 30, "desc": "An ash shaft and a leaf-shaped head. Reaches past a friend's shoulder."},
-    {"id": "war_spear", "name": "Broad-bladed war spear", "type": "weapon", "skill": "spears", "dmg": [5, 13], "ap": 4, "range": 2, "two_handed": true, "weight": 5, "value": 85, "desc": "A long blade with wavy edges, meant to open men up. Needs both hands."},
-    {"id": "club", "name": "Club", "type": "weapon", "skill": "brawling", "dmg": [2, 7], "ap": 3, "range": 1, "weight": 2, "value": 5, "desc": "Oak, knotted. The oldest argument."},
-    {"id": "staff", "name": "Walking staff", "type": "weapon", "skill": "brawling", "dmg": [2, 6], "ap": 3, "range": 1, "acc": 5, "two_handed": true, "weight": 3, "value": 8, "desc": "A shepherd's staff. Shepherds know how to use them."},
-    {"id": "javelin", "name": "Javelin", "type": "weapon", "skill": "missiles", "dmg": [3, 9], "ap": 4, "range": 7, "thrown": true, "shield_breaker": 30, "weight": 1, "value": 10, "desc": "A light throwing spear. Thrown, it's gone until you pick it up again."},
-    {"id": "pilum", "name": "Pilum", "type": "weapon", "skill": "missiles", "dmg": [4, 12], "ap": 5, "range": 5, "thrown": true, "shield_breaker": 70, "acc": -5, "weight": 2, "value": 25, "desc": "A Roman throwing spear with a long soft-iron neck. It bends when it hits a shield and won't come out. That is the point."},
-    {"id": "sling", "name": "Sling", "type": "weapon", "skill": "missiles", "dmg": [2, 7], "ap": 4, "range": 10, "ammo": "sling_stone", "weight": 0.5, "value": 12, "desc": "Two cords and a pouch. A good slinger can kill a man at a hundred paces. You may not be a good slinger."},
-    {"id": "hunting_bow", "name": "Hunting bow", "type": "weapon", "skill": "missiles", "dmg": [3, 8], "ap": 5, "range": 12, "ammo": "arrow", "two_handed": true, "weight": 2, "value": 40, "desc": "A yew self bow, made for deer."},
-
-    {"id": "sling_stone", "name": "Sling stones", "type": "ammo", "weight": 0.1, "value": 0, "desc": "Smooth river stones, chosen for weight."},
-    {"id": "arrow", "name": "Arrows", "type": "ammo", "weight": 0.1, "value": 2, "desc": "Goose-fletched, iron-tipped."},
-
-    {"id": "small_shield", "name": "Round shield", "type": "shield", "block": 10, "weight": 3, "value": 25, "desc": "Wicker and hide on a wooden frame."},
-    {"id": "gallic_shield", "name": "Gallic long shield", "type": "shield", "block": 20, "weight": 6, "value": 60, "desc": "A tall oval of planks under leather, with an iron boss. Covers a man from chin to knee."},
-    {"id": "scutum", "name": "Roman scutum", "type": "shield", "block": 25, "defense": -1, "weight": 10, "value": 90, "desc": "Curved, heavy, layered plywood with a boss. A wall you carry."},
-
-    {"id": "leather_jerkin", "name": "Leather jerkin", "type": "armor", "dt": 1, "dr": 10, "weight": 5, "value": 40, "desc": "Thick oxhide, stitched and oiled."},
-    {"id": "padded_linen", "name": "Padded linen coat", "type": "armor", "dt": 2, "dr": 15, "weight": 6, "value": 70, "desc": "Many layers of linen glued and quilted. Stops more than you'd think."},
-    {"id": "mail_shirt", "name": "Mail shirt", "type": "armor", "dt": 4, "dr": 30, "defense": -1, "weight": 18, "value": 400, "desc": "Thousands of riveted rings. The Romans say they invented it. The smiths of the Gauls laugh."},
-    {"id": "chief_mail", "name": "War-chief's mail", "type": "armor", "dt": 5, "dr": 35, "weight": 16, "value": 900, "desc": "Fine riveted mail with shoulder doubling and bronze clasps. A noble's fortune worn on the body."},
-    {"id": "leather_cap", "name": "Leather cap", "type": "helmet", "dr": 5, "weight": 1, "value": 10, "desc": "Better than hair."},
-    {"id": "bronze_helmet", "name": "Bronze helmet", "type": "helmet", "dt": 1, "dr": 10, "weight": 3, "value": 80, "desc": "A rounded cap with a knob on top and cheek pieces. Romans wear the same kind, copied from the Gauls."},
-    {"id": "raven_helm", "name": "Raven-crested helmet", "type": "helmet", "dt": 2, "dr": 15, "weight": 4, "value": 1200, "desc": "Iron, with a bronze raven on the crown whose hinged wings flap when you run. Men will remember who wore this."},
-
-    {"id": "herbs", "name": "Healing herbs", "type": "consumable", "heal": [4, 8], "skill": "healing", "weight": 0.2, "value": 8, "desc": "Yarrow, plantain, comfrey. Chewed and packed into a wound. Works better if you know what you're doing."},
-    {"id": "bandage", "name": "Linen bandages", "type": "consumable", "heal": [2, 6], "skill": "healing", "weight": 0.2, "value": 5, "desc": "Clean strips of linen. Rare enough."},
-    {"id": "poultice", "name": "Druid's poultice", "type": "consumable", "heal": [10, 18], "skill": "healing", "weight": 0.3, "value": 35, "desc": "A paste of mistletoe and things the druids won't name. It stings like fire and closes wounds overnight."},
-    {"id": "bread", "name": "Barley bread", "type": "consumable", "heal": [1, 2], "weight": 0.5, "value": 2, "desc": "Dense, sour, filling."},
-    {"id": "mead", "name": "Mead", "type": "consumable", "heal": [1, 3], "weight": 1, "value": 6, "desc": "Honey wine. Courage in a horn."},
-    {"id": "roman_wine", "name": "Amphora of Roman wine", "type": "trade", "weight": 15, "value": 120, "desc": "Italian red, sealed with pitch. In Gaul a jar of this has bought a slave. Some Gallic nobles drink it undiluted, to the horror of the Romans."},
-    {"id": "salt", "name": "Cake of salt", "type": "trade", "weight": 2, "value": 15, "desc": "Grey salt from the evaporation pans. Meat that lasts the winter."},
-    {"id": "bronze_torque", "name": "Bronze torque", "type": "trade", "weight": 1, "value": 60, "desc": "A neck ring of twisted bronze. Not gold, but it shines."},
-    {"id": "gold_torque", "name": "Gold torque", "type": "trade", "weight": 1, "value": 500, "desc": "A heavy twisted ring of gold. The kind of thing a man is buried in."},
-    {"id": "lockpicks", "name": "Picks and hooks", "type": "tool", "skill_bonus": {"locks": 20}, "weight": 0.5, "value": 50, "desc": "Bronze picks and an iron hook in a leather roll. Adds to your Locks skill when carried."},
-    {"id": "wolf_pelt", "name": "Wolf pelt", "type": "trade", "weight": 3, "value": 18, "desc": "Grey and thick. Winter fur."},
-
-    {"id": "hostage_tally", "name": "Hostage tally", "type": "quest", "weight": 0, "value": 0, "desc": "A notched tally stick with Roman letters burned into it: the receipt Brigodunon got for its children five years ago. Three notches. One is your sibling."},
-    {"id": "elders_ring", "name": "Elder's iron ring", "type": "quest", "weight": 0, "value": 0, "desc": "Vellaunos's ring. Shown to the Cadurci, it says you speak for Brigodunon."},
-    {"id": "grain_writ", "name": "Grain promise", "type": "quest", "weight": 0, "value": 0, "desc": "A cut hazel stick, the other half of which is held by the headwoman of Vindomagos. Twenty sacks of grain, to be carried across the Oltis."},
-    {"id": "roman_order", "name": "Forged Roman order", "type": "quest", "weight": 0, "value": 0, "desc": "A wax tablet in good Latin, promising pardon and back pay to any deserter of the auxiliary horse who reports to the depot at Noviodunum. Entirely false."},
-    {"id": "grotto_idol", "name": "Wooden idol", "type": "quest", "weight": 2, "value": 0, "desc": "A figure carved from a single oak root, black with age and handling. The eyes are two iron nails."}
+    {
+      "id": "fists",
+      "name": "Bare hands",
+      "type": "weapon",
+      "skill": "brawling",
+      "dmg": [
+        1,
+        3
+      ],
+      "ap": 3,
+      "range": 1,
+      "weight": 0,
+      "value": 0,
+      "desc": "Free, and always with you."
+    },
+    {
+      "id": "wolf_bite",
+      "name": "Teeth",
+      "type": "weapon",
+      "skill": "brawling",
+      "dmg": [
+        2,
+        6
+      ],
+      "ap": 3,
+      "range": 1,
+      "natural": true,
+      "weight": 0,
+      "value": 0,
+      "desc": "A wolf's jaws."
+    },
+    {
+      "id": "boar_tusk",
+      "name": "Tusks",
+      "type": "weapon",
+      "skill": "brawling",
+      "dmg": [
+        3,
+        9
+      ],
+      "ap": 4,
+      "range": 1,
+      "natural": true,
+      "weight": 0,
+      "value": 0,
+      "desc": "A boar's tusks."
+    },
+    {
+      "id": "dagger",
+      "name": "Dagger",
+      "type": "weapon",
+      "skill": "blades",
+      "dmg": [
+        2,
+        6
+      ],
+      "ap": 3,
+      "range": 1,
+      "acc": 5,
+      "weight": 1,
+      "value": 20,
+      "desc": "A plain iron knife with a bone grip. Every Gaul carries one."
+    },
+    {
+      "id": "gallic_sword",
+      "name": "Gallic long sword",
+      "type": "weapon",
+      "skill": "blades",
+      "dmg": [
+        4,
+        10
+      ],
+      "ap": 4,
+      "range": 1,
+      "weight": 3,
+      "value": 90,
+      "desc": "A long slashing blade, made for swinging from above. Caesar's men call them soft. Caesar's men have not been hit by one."
+    },
+    {
+      "id": "gladius",
+      "name": "Roman short sword",
+      "type": "weapon",
+      "skill": "blades",
+      "dmg": [
+        3,
+        9
+      ],
+      "ap": 3,
+      "range": 1,
+      "acc": 10,
+      "weight": 2,
+      "value": 110,
+      "desc": "Short, pointed, ugly. Made for stabbing from behind a shield, which is all the Romans want to do."
+    },
+    {
+      "id": "axe",
+      "name": "Woodsman's axe",
+      "type": "weapon",
+      "skill": "blades",
+      "dmg": [
+        4,
+        11
+      ],
+      "ap": 4,
+      "range": 1,
+      "acc": -5,
+      "weight": 4,
+      "value": 35,
+      "desc": "Built for oak. Works on other things."
+    },
+    {
+      "id": "spear",
+      "name": "Spear",
+      "type": "weapon",
+      "skill": "spears",
+      "dmg": [
+        3,
+        9
+      ],
+      "ap": 4,
+      "range": 2,
+      "weight": 3,
+      "value": 30,
+      "desc": "An ash shaft and a leaf-shaped head. Reaches past a friend's shoulder."
+    },
+    {
+      "id": "war_spear",
+      "name": "Broad-bladed war spear",
+      "type": "weapon",
+      "skill": "spears",
+      "dmg": [
+        5,
+        13
+      ],
+      "ap": 4,
+      "range": 2,
+      "two_handed": true,
+      "weight": 5,
+      "value": 85,
+      "desc": "A long blade with wavy edges, meant to open men up. Needs both hands."
+    },
+    {
+      "id": "club",
+      "name": "Club",
+      "type": "weapon",
+      "skill": "brawling",
+      "dmg": [
+        2,
+        7
+      ],
+      "ap": 3,
+      "range": 1,
+      "weight": 2,
+      "value": 5,
+      "desc": "Oak, knotted. The oldest argument."
+    },
+    {
+      "id": "staff",
+      "name": "Walking staff",
+      "type": "weapon",
+      "skill": "brawling",
+      "dmg": [
+        2,
+        6
+      ],
+      "ap": 3,
+      "range": 1,
+      "acc": 5,
+      "two_handed": true,
+      "weight": 3,
+      "value": 8,
+      "desc": "A shepherd's staff. Shepherds know how to use them."
+    },
+    {
+      "id": "javelin",
+      "name": "Javelin",
+      "type": "weapon",
+      "skill": "missiles",
+      "dmg": [
+        3,
+        9
+      ],
+      "ap": 4,
+      "range": 7,
+      "thrown": true,
+      "shield_breaker": 30,
+      "weight": 1,
+      "value": 10,
+      "desc": "A light throwing spear. Thrown, it's gone until you pick it up again."
+    },
+    {
+      "id": "pilum",
+      "name": "Pilum",
+      "type": "weapon",
+      "skill": "missiles",
+      "dmg": [
+        4,
+        12
+      ],
+      "ap": 5,
+      "range": 5,
+      "thrown": true,
+      "shield_breaker": 70,
+      "acc": -5,
+      "weight": 2,
+      "value": 25,
+      "desc": "A Roman throwing spear with a long soft-iron neck. It bends when it hits a shield and won't come out. That is the point."
+    },
+    {
+      "id": "sling",
+      "name": "Sling",
+      "type": "weapon",
+      "skill": "missiles",
+      "dmg": [
+        2,
+        7
+      ],
+      "ap": 4,
+      "range": 10,
+      "ammo": "sling_stone",
+      "weight": 0.5,
+      "value": 12,
+      "desc": "Two cords and a pouch. A good slinger can kill a man at a hundred paces. You may not be a good slinger."
+    },
+    {
+      "id": "hunting_bow",
+      "name": "Hunting bow",
+      "type": "weapon",
+      "skill": "missiles",
+      "dmg": [
+        3,
+        8
+      ],
+      "ap": 5,
+      "range": 12,
+      "ammo": "arrow",
+      "two_handed": true,
+      "weight": 2,
+      "value": 40,
+      "desc": "A yew self bow, made for deer."
+    },
+    {
+      "id": "sling_stone",
+      "name": "Sling stones",
+      "type": "ammo",
+      "weight": 0.1,
+      "value": 0,
+      "desc": "Smooth river stones, chosen for weight."
+    },
+    {
+      "id": "arrow",
+      "name": "Arrows",
+      "type": "ammo",
+      "weight": 0.1,
+      "value": 2,
+      "desc": "Goose-fletched, iron-tipped."
+    },
+    {
+      "id": "small_shield",
+      "name": "Round shield",
+      "type": "shield",
+      "block": 10,
+      "weight": 3,
+      "value": 25,
+      "desc": "Wicker and hide on a wooden frame."
+    },
+    {
+      "id": "gallic_shield",
+      "name": "Gallic long shield",
+      "type": "shield",
+      "block": 20,
+      "weight": 6,
+      "value": 60,
+      "desc": "A tall oval of planks under leather, with an iron boss. Covers a man from chin to knee."
+    },
+    {
+      "id": "scutum",
+      "name": "Roman scutum",
+      "type": "shield",
+      "block": 25,
+      "defense": -1,
+      "weight": 10,
+      "value": 90,
+      "desc": "Curved, heavy, layered plywood with a boss. A wall you carry."
+    },
+    {
+      "id": "leather_jerkin",
+      "name": "Leather jerkin",
+      "type": "armor",
+      "dt": 1,
+      "dr": 10,
+      "weight": 5,
+      "value": 40,
+      "desc": "Thick oxhide, stitched and oiled."
+    },
+    {
+      "id": "padded_linen",
+      "name": "Padded linen coat",
+      "type": "armor",
+      "dt": 2,
+      "dr": 15,
+      "weight": 6,
+      "value": 70,
+      "desc": "Many layers of linen glued and quilted. Stops more than you'd think."
+    },
+    {
+      "id": "mail_shirt",
+      "name": "Mail shirt",
+      "type": "armor",
+      "dt": 4,
+      "dr": 30,
+      "defense": -1,
+      "weight": 18,
+      "value": 400,
+      "desc": "Thousands of riveted rings. The Romans say they invented it. The smiths of the Gauls laugh."
+    },
+    {
+      "id": "chief_mail",
+      "name": "War-chief's mail",
+      "type": "armor",
+      "dt": 5,
+      "dr": 35,
+      "weight": 16,
+      "value": 900,
+      "desc": "Fine riveted mail with shoulder doubling and bronze clasps. A noble's fortune worn on the body."
+    },
+    {
+      "id": "leather_cap",
+      "name": "Leather cap",
+      "type": "helmet",
+      "dr": 5,
+      "weight": 1,
+      "value": 10,
+      "desc": "Better than hair."
+    },
+    {
+      "id": "bronze_helmet",
+      "name": "Bronze helmet",
+      "type": "helmet",
+      "dt": 1,
+      "dr": 10,
+      "weight": 3,
+      "value": 80,
+      "desc": "A rounded cap with a knob on top and cheek pieces. Romans wear the same kind, copied from the Gauls."
+    },
+    {
+      "id": "raven_helm",
+      "name": "Raven-crested helmet",
+      "type": "helmet",
+      "dt": 2,
+      "dr": 15,
+      "weight": 4,
+      "value": 1200,
+      "desc": "Iron, with a bronze raven on the crown whose hinged wings flap when you run. Men will remember who wore this."
+    },
+    {
+      "id": "herbs",
+      "name": "Healing herbs",
+      "type": "consumable",
+      "heal": [
+        4,
+        8
+      ],
+      "skill": "healing",
+      "weight": 0.2,
+      "value": 8,
+      "desc": "Yarrow, plantain, comfrey. Chewed and packed into a wound. Works better if you know what you're doing."
+    },
+    {
+      "id": "bandage",
+      "name": "Linen bandages",
+      "type": "consumable",
+      "heal": [
+        2,
+        6
+      ],
+      "skill": "healing",
+      "weight": 0.2,
+      "value": 5,
+      "desc": "Clean strips of linen. Rare enough."
+    },
+    {
+      "id": "poultice",
+      "name": "Druid's poultice",
+      "type": "consumable",
+      "heal": [
+        10,
+        18
+      ],
+      "skill": "healing",
+      "weight": 0.3,
+      "value": 35,
+      "desc": "A paste of mistletoe and things the druids won't name. It stings like fire and closes wounds overnight."
+    },
+    {
+      "id": "bread",
+      "name": "Barley bread",
+      "type": "consumable",
+      "heal": [
+        1,
+        2
+      ],
+      "weight": 0.5,
+      "value": 2,
+      "desc": "Dense, sour, filling."
+    },
+    {
+      "id": "mead",
+      "name": "Mead",
+      "type": "consumable",
+      "heal": [
+        1,
+        3
+      ],
+      "weight": 1,
+      "value": 6,
+      "desc": "Honey wine. Courage in a horn."
+    },
+    {
+      "id": "roman_wine",
+      "name": "Amphora of Roman wine",
+      "type": "trade",
+      "weight": 15,
+      "value": 120,
+      "desc": "Italian red, sealed with pitch. In Gaul a jar of this has bought a slave. Some Gallic nobles drink it undiluted, to the horror of the Romans."
+    },
+    {
+      "id": "salt",
+      "name": "Cake of salt",
+      "type": "trade",
+      "weight": 2,
+      "value": 15,
+      "desc": "Grey salt from the evaporation pans. Meat that lasts the winter."
+    },
+    {
+      "id": "bronze_torque",
+      "name": "Bronze torque",
+      "type": "trade",
+      "weight": 1,
+      "value": 60,
+      "desc": "A neck ring of twisted bronze. Not gold, but it shines."
+    },
+    {
+      "id": "gold_torque",
+      "name": "Gold torque",
+      "type": "trade",
+      "weight": 1,
+      "value": 500,
+      "desc": "A heavy twisted ring of gold. The kind of thing a man is buried in."
+    },
+    {
+      "id": "lockpicks",
+      "name": "Picks and hooks",
+      "type": "tool",
+      "skill_bonus": {
+        "locks": 20
+      },
+      "weight": 0.5,
+      "value": 50,
+      "desc": "Bronze picks and an iron hook in a leather roll. Adds to your Locks skill when carried."
+    },
+    {
+      "id": "wolf_pelt",
+      "name": "Wolf pelt",
+      "type": "trade",
+      "weight": 3,
+      "value": 18,
+      "desc": "Grey and thick. Winter fur."
+    },
+    {
+      "id": "hostage_tally",
+      "name": "Hostage tally",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "desc": "A notched tally stick with Roman letters burned into it: the receipt Brigodunon got for its children five years ago. Three notches. One is your sibling."
+    },
+    {
+      "id": "elders_ring",
+      "name": "Elder's iron ring",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "desc": "Vellaunos's ring. Shown to the Cadurci, it says you speak for Brigodunon."
+    },
+    {
+      "id": "grain_writ",
+      "name": "Grain promise",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "desc": "A cut hazel stick, the other half of which is held by the headwoman of Vindomagos. Twenty sacks of grain, to be carried across the Oltis."
+    },
+    {
+      "id": "roman_order",
+      "name": "Forged Roman order",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "desc": "A wax tablet in good Latin, promising pardon and back pay to any deserter of the auxiliary horse who reports to the depot at Noviodunum. Entirely false."
+    },
+    {
+      "id": "grotto_idol",
+      "name": "Wooden idol",
+      "type": "quest",
+      "weight": 2,
+      "value": 0,
+      "desc": "A figure carved from a single oak root, black with age and handling. The eyes are two iron nails."
+    },
+    {
+      "id": "rider_tablet",
+      "name": "Pay tablet",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "desc": "A wax tablet from the horse leader's saddlebag: a pay chit for a decurion of auxiliary horse, stamped with a Roman depot mark."
+    }
   ]
 }

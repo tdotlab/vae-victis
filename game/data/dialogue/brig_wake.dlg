@@ -1,0 +1,24 @@
+// Opens the game: the player's mother, the morning the news comes.
+@speaker Matugenta
+=== start
+~ quest hostages summoned
+Your mother is already up, which means she never went to bed. She is sitting by the cold hearth with her hands in her lap.
+
+"There was a rider from the north in the night. The Carnutes have risen at Cenabum. They killed every Roman trader in the town." She says it the way she'd say the river was high. "Vellaunos has called the elders, and he's asked for you. Not your uncle. You."
+
+She doesn't say why. She doesn't need to. Five years ago Rome took three children from Brigodunon as a pledge of good behavior, and one of them was Epona.
+* "What does he want with me?" -> why
+* "Then I'd better go." -> go
+
+=== why
+"What do you think?" She stands, and puts bread in your hand, because that is what she does instead of crying. "If the Cadurci join the revolt, Rome kills its hostages. If we don't, Vercingetorix calls us traitors. Either way somebody has to go and find out where they took her."
+
+"The hall. Go on. There's more bread in the chest, and your father's old sling."
+~ give bread 1
+* "I'll bring her home." -> END
+* Go. -> END
+
+=== go
+~ give bread 1
+"Take this." Bread, still warm. "There's more in the chest, and your father's old sling. The hall, {name}. Go."
+* Go. -> END

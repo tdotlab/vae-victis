@@ -1,0 +1,35 @@
+// Cobnertos the smith. Trades; his son Iccios is a hostage.
+=== start
+[flag smith_met] -> again
+~ set smith_met
+The smith doesn't stop working when you come in. The hammer goes up and down, up and down, and the iron on the anvil slowly becomes a spearhead.
+
+"Vellaunos told me." Up, down. "He says you're going after them." He quenches the iron and the steam rolls up between you. "Good. Somebody should. I'd go myself, but somebody has to make the spears."
+-> hub
+
+=== again
+[quest hostages=reported] "Noviodunum, Vellaunos says. Never heard of it. Bring my boy back from it anyway."
+"What do you need?"
+-> hub
+
+=== hub
+* "Show me what you've got." -> trade
+* "Tell me about Iccios." -> iccios
+* [!flag smith_gift, quest hostages active] "I'll need a real weapon." -> gift
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Fair prices. Fairer than Vindomagos, anyway."
+* "Thanks." -> hub
+
+=== iccios
+"Big lad. Fourteen when they took him; nineteen now." He turns the spearhead in the tongs. "He was going to be better than me. Had the hands for it. You can't teach the hands." He puts the iron back in the fire. "If they've made a Roman of him, I don't care. Bring him back and I'll unmake it."
+-> hub
+
+=== gift
+~ set smith_gift; give spear 1; xp 10
+He looks at you, then goes to the back of the forge and comes back with a spear: ash shaft, leaf blade, the socket bound with bronze wire.
+
+"I made this for Iccios's sixteenth. He wasn't here for it." He puts it in your hands. "Use it on the right people."
+* "I will." -> hub

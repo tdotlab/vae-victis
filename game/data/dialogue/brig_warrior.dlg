@@ -1,0 +1,15 @@
+// One of the young men of Brigodunon who wants the war.
+=== start
+"Cenabum! Did you hear? Every Roman in the town, dead." His face is bright. "The Arverni are rising. All of Gaul. And the elders sit in the hall and talk."
+* "Some of us have family in Roman hands." -> family
+* "You sound pleased." -> pleased
+* "Goodbye." -> END
+
+=== family
+He flushes. "I know. I know that. But if we join the war and win, we'll get them back anyway, won't we?" He wants you to say yes.
+* "Maybe." -> END
+* "If we lose, they die first." -> END
+
+=== pleased
+"Shouldn't I be? My father says the Romans took his father's land on the coast, the year before I was born. Now we can take it back." He grips his spear. "You'll see."
+* "I'm sure I will." -> END

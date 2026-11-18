@@ -30,6 +30,8 @@ func start_story() -> void:
 		state.world_pos = Vector2i(int(st["world_start"][0]), int(st["world_start"][1]))
 	for it in st.get("start_items", []):
 		state.player.inventory.add(it[0], int(it[1]))
+	for id in st.get("start_equip", []):
+		state.player.equip(id)
 	state.player.silver += int(st.get("start_silver", 0))
 	if st.has("intro"):
 		goto("text", {"title": st.get("intro_title", ""), "text": DB.text_file(st["intro"]), "next": "map", "button": "Begin"})
@@ -138,3 +140,21 @@ func load_game(slot: String = "quick") -> bool:
 		return false
 	state = GameState.from_dict(d)
 	return true
+
+
+# --- The historical clock ---------------------------------------------------
+
+## Fires calendar events that are due: sets their flags and returns the ones
+## with news to show. Screens decide how to show them.
+func check_calendar() -> Array:
+	if state == null:
+		return []
+	var shown: Array = []
+	for e in WorldData.due_events(DB.calendar(), state.day(), state.flags):
+		state.set_flag("cal_" + String(e["id"]))
+		var fl: Dictionary = e.get("flags", {})
+		for f in fl:
+			state.set_flag(f, int(fl[f]))
+		if not e.get("silent", false):
+			shown.append(e)
+	return shown

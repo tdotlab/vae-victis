@@ -1,0 +1,165 @@
+{
+ "id": "oltis_ford",
+ "name": "The ford at the Oltis",
+ "default": "grass",
+ "legend": {
+  ".": "grass",
+  ",": "field",
+  ";": "meadow",
+  "_": "road",
+  "P": "pine",
+  "T": "tree",
+  "b": "bush",
+  "r": "rock",
+  "R": "rampart",
+  "w": "wall_wood",
+  "s": {
+   "terrain": "grass",
+   "mark": "exit"
+  },
+  "n": "fence",
+  "f": "floor_earth",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "d": "door",
+  "A": "altar",
+  "x": "crate",
+  "X": "cave_wall",
+  "o": "cave",
+  "z": "bones",
+  "~": "water",
+  "=": "shallows",
+  "m": "mud",
+  "C": {
+   "terrain": "grass",
+   "mark": "carter"
+  },
+  "N": {
+   "terrain": "road",
+   "mark": "north"
+  },
+  "@": {
+   "terrain": "grass",
+   "mark": "start"
+  },
+  "L": {
+   "terrain": "grass",
+   "mark": "haldo"
+  },
+  "1": {
+   "terrain": "grass",
+   "mark": "r1"
+  },
+  "2": {
+   "terrain": "grass",
+   "mark": "r2"
+  },
+  "3": {
+   "terrain": "grass",
+   "mark": "r3"
+  },
+  "4": {
+   "terrain": "grass",
+   "mark": "r4"
+  },
+  "H": {
+   "terrain": "grass",
+   "mark": "horses"
+  },
+  "Q": {
+   "terrain": "shallows",
+   "mark": "barrier"
+  },
+  "e": {
+   "terrain": "road",
+   "mark": "to_village"
+  }
+ },
+ "rows": [
+  "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "...TT..............N...............TT...",
+  "..TTT.............._@.............TTTT..",
+  "..................._....................",
+  "......b............_.........nnnn.......",
+  "..........1........_...2.....HHHH.......",
+  "................L.C_.........HHHH.......",
+  "..........3......._........4............",
+  "..............nnnn_nnnn.................",
+  "mmmmmmmmmmmmmmmmmm_mmmmmmmmmmmmmmmmmmmmm",
+  "~~~~~~~~~~~~~~~~QQQQQ~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~=====~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~=====~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~=====~~~~~~~~~~~~~~~~~~~",
+  "mmmmmmmmmmmmmmmmm_mmmmmmmmmmmmmmmmmmmmmm",
+  "................._......................",
+  "...b............._.............TT.......",
+  "................._............TTT.......",
+  ".....TT.........._......................",
+  "....TTT.........._..........b...........",
+  "................._......................",
+  "ssssssssssssssssssssssssssssssssssssssss"
+ ],
+ "arrive_text": "The Oltis runs wide and brown with snowmelt. Where it spreads over gravel there is a ford, and across the ford someone has built a barrier of cut stakes. Horses graze on the near bank. Men sit by a fire and watch you come down the road.",
+ "actors": [
+  {
+   "uid": "haldo",
+   "template": "haldo",
+   "mark": "haldo"
+  },
+  {
+   "uid": "rider1",
+   "template": "rider",
+   "mark": "r1"
+  },
+  {
+   "uid": "rider2",
+   "template": "rider",
+   "mark": "r2"
+  },
+  {
+   "uid": "rider3",
+   "template": "rider_archer",
+   "mark": "r3"
+  },
+  {
+   "uid": "rider4",
+   "template": "rider",
+   "mark": "r4"
+  },
+  {
+   "uid": "carter",
+   "template": "carter",
+   "mark": "carter"
+  }
+ ],
+ "exits": [
+  {
+   "mark": "to_village",
+   "to": "map:vindomagos",
+   "entry": "south",
+   "label": "Up to Vindomagos"
+  },
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The road south"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "barrier",
+   "id": "barrier",
+   "once": false,
+   "unless_flag": "ford_open",
+   "dialogue": "ford_barrier"
+  },
+  {
+   "mark": "horses",
+   "id": "horses",
+   "once": false,
+   "unless_flag": "horses_gone",
+   "dialogue": "ford_horses"
+  }
+ ]
+}

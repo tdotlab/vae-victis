@@ -1,0 +1,15 @@
+// Villagers of Vindomagos.
+=== start
+[flag ford_done] -> after
+"You're from up the hill, aren't you? Brigodunon." They look you up and down. "Have you come about the ford? Somebody should."
+* "Maybe." -> END
+* "What about the ford?" -> ford
+
+=== ford
+"Germans. Sitting on it like hens on eggs. My brother tried to take a cart of salt across without paying, and they broke his arm in two places." They shake their head. "Sulicena says pay. Sulicena always says pay."
+* "Sulicena's not wrong." -> END
+* "I'll see what I can do." -> END
+
+=== after
+"The ford's open! I heard it was you." They grin. "Drink on me, next time you're through."
+* "I'll hold you to that." -> END

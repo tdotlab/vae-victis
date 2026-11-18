@@ -2,7 +2,7 @@
 
 A turn-based, isometric, open-world role-playing game in the mold of Fallout 1, set in Gaul during the Great Revolt of 52 BC. You can't change who wins. You can change who's left.
 
-Status: see [docs/STATUS.md](docs/STATUS.md).
+Status: a playable demo, "Leaving home": the first village, a cave, a neighboring village and a held river ford, with every quest solvable several ways. See [docs/STATUS.md](docs/STATUS.md).
 
 ## Docs
 
@@ -18,8 +18,8 @@ Status: see [docs/STATUS.md](docs/STATUS.md).
   - `src/game/`: the local map, combat runner, world map, scenarios used by tests and screenshots.
   - `src/ui/`: every screen and window, built in code.
   - `src/view/paint.gd`: placeholder drawing until the art pipeline (M7).
-  - `data/`: all game content. JSON for rules, items, NPCs, quests, maps and story; `.dlg` files for dialogue (format documented at the top of `src/core/dialogue.gd`); `.txt` for longer text.
-  - `tests/`: headless test suite.
+  - `data/`: all game content. JSON for rules, items, NPCs, quests, local maps, the world map (`world.json`), the historical calendar (`calendar.json`) and story; `.dlg` files for dialogue (format documented at the top of `src/core/dialogue.gd`); `.txt` for longer text.
+  - `tests/`: headless test suite. Rule tests, content validation (`test_content.gd`: every reference in dialogue, maps and NPCs resolves, everything is reachable) and scripted playthroughs of the quest routes (`test_playthrough.gd`).
 - `tools/`: shell scripts (Git Bash) for testing, screenshots and the web build.
 - `build/`: export output, not in Git.
 
@@ -35,7 +35,7 @@ tools/test.sh
 tools/shot.sh sandbox /tmp/shot.png 40 "walk:12:5,fight"
 ```
 
-`shot.sh` runs the game windowed in a scenario, performs the listed actions and saves a screenshot. Scenarios and actions are in `game/src/game/scenarios.gd` (`sandbox`, `fight`, `world`, `newgame`, `create`, or any map id).
+`shot.sh` runs the game windowed in a scenario, performs the listed actions and saves a screenshot. Scenarios and actions are in `game/src/game/scenarios.gd` (`sandbox`, `fight`, `world`, `newgame`, `create`, or any map id). Actions include `talk:<uid>`, `key:<n>` (a dialogue reply), `walk:x:y`, and state setters such as `quest:<id>:<stage>`, `flag:<name>`, `give:<item>`, `known:<location>`.
 
 ```bash
 tools/export-web.sh && tools/serve-web.sh
@@ -47,4 +47,4 @@ To play from the editor, open `game/project.godot` in Godot 4.7 and press F5.
 
 ## Controls
 
-Left click walks, talks, opens and attacks. Right click examines, or in a fight opens the aimed-attack menu. Space ends your turn, Enter ends a fight when no enemy is aware of you, A starts a fight, S toggles sneaking. C, I, J open the character sheet, gear and journal; M opens the world map from a map's edge. Arrow keys pan the camera, the wheel zooms, Home recenters. F5 and F9 quicksave and quickload. Escape closes windows or opens the menu. Number keys pick dialogue replies.
+Left click walks, talks, opens and attacks. Right click examines, or in a fight opens the aimed-attack menu. Space ends your turn, Enter ends a fight when no enemy is aware of you, A starts a fight, S toggles sneaking. C, I, J open the character sheet, gear and journal; M opens the world map; walking off a map's edge does too. On the world map, click a known place or open country to travel, E enters where you stand, R rests, Space or right click stops. Arrow keys pan the camera, the wheel zooms, Home recenters. F5 and F9 quicksave and quickload. Escape closes windows or opens the menu. Number keys pick dialogue replies.
