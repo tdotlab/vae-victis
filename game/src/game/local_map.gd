@@ -38,6 +38,7 @@ var _night: CanvasModulate
 var _fired_triggers: Dictionary = {}
 var _leaving := false
 var _post: CanvasLayer
+var _roofs: Array = []
 
 
 class _Layer extends Node2D:
@@ -49,6 +50,7 @@ class _Layer extends Node2D:
 func _ready() -> void:
 	var gs := Game.state
 	map = MapData.load_map(gs.map_id)
+	_roofs = Roofs.build(map)
 	_night = CanvasModulate.new()
 	add_child(_night)
 	_floor = _Layer.new()
@@ -62,6 +64,7 @@ func _ready() -> void:
 	_things = _Layer.new()
 	_things.fn = _draw_things
 	_things.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	_things.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED  # roof thatch tiles
 	add_child(_things)
 	_camera = Camera2D.new()
 	_camera.position_smoothing_enabled = true
@@ -871,10 +874,15 @@ func _draw_things(ci: CanvasItem) -> void:
 			continue
 		var y: float = display_pos[a].y + (0.1 if a.is_active() else -0.5)
 		items.append([y, 1, a])
+	if sprites:
+		for r in _roofs:
+			items.append([r["sort_y"], 2, r])
 	items.sort_custom(func(x, y): return x[0] < y[0])
 	var pp: Vector2 = display_pos[player]
 	for it in items:
-		if it[1] == 0:
+		if it[1] == 2:
+			Roofs.draw(ci, it[2], player.cell, pp)
+		elif it[1] == 0:
 			var c: Vector2i = it[2]
 			var t: Dictionary = tdefs[map.cells[c]]
 			var p := Hex.to_pixel(c, Paint.HEX)

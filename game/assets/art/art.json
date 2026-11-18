@@ -85,6 +85,40 @@
    ],
    "under": "dirt"
   },
+  "cliff": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "walls_cliff.png",
+   "cols": 8,
+   "connect": [
+    "cliff",
+    "cave_wall"
+   ],
+   "under": null
+  },
+  "cave_wall": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "walls_cave_wall.png",
+   "cols": 8,
+   "connect": [
+    "cave_wall",
+    "cliff"
+   ],
+   "under": "cave"
+  },
   "door": {
    "cell": [
     224,
@@ -142,6 +176,19 @@
    "sheet": "trees_bush.png",
    "cols": 3,
    "frames": 3
+  },
+  "rock": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "rocks.png",
+   "cols": 4,
+   "frames": 4
   }
  },
  "props": {
@@ -218,15 +265,41 @@
  },
  "figure": {
   "cell": [
-   144,
-   176
+   184,
+   232
   ],
   "anchor": [
-   72,
-   140
+   92,
+   188
   ],
   "cols": 3,
+  "gear": {
+   "gallic_sword": "sword",
+   "gladius": "sword",
+   "dagger": "dagger",
+   "axe": "axe",
+   "spear": "spear",
+   "war_spear": "spear",
+   "staff": "staff",
+   "club": "club",
+   "javelin": "javelin",
+   "pilum": "javelin",
+   "sling": "sling",
+   "hunting_bow": "bow",
+   "gallic_shield": "shield",
+   "small_shield": "small_shield",
+   "scutum": "scutum",
+   "leather_cap": "cap",
+   "bronze_helmet": "helmet",
+   "raven_helm": "helmet",
+   "mail_shirt": "mail",
+   "chief_mail": "mail"
+  },
   "layers": {
+   "axe": {
+    "sheet": "figure_axe.png",
+    "tints": {}
+   },
    "body": {
     "sheet": "figure_body.png",
     "tints": {
@@ -235,11 +308,55 @@
      "hair": "figure_body_hair.png"
     }
    },
+   "bow": {
+    "sheet": "figure_bow.png",
+    "tints": {}
+   },
+   "cap": {
+    "sheet": "figure_cap.png",
+    "tints": {}
+   },
+   "cloak": {
+    "sheet": "figure_cloak.png",
+    "tints": {
+     "cloak": "figure_cloak_cloak.png"
+    }
+   },
+   "club": {
+    "sheet": "figure_club.png",
+    "tints": {}
+   },
+   "dagger": {
+    "sheet": "figure_dagger.png",
+    "tints": {}
+   },
+   "helmet": {
+    "sheet": "figure_helmet.png",
+    "tints": {}
+   },
+   "javelin": {
+    "sheet": "figure_javelin.png",
+    "tints": {}
+   },
+   "mail": {
+    "sheet": "figure_mail.png",
+    "tints": {}
+   },
+   "scutum": {
+    "sheet": "figure_scutum.png",
+    "tints": {
+     "shield": "figure_scutum_shield.png"
+    }
+   },
    "shield": {
     "sheet": "figure_shield.png",
     "tints": {
      "shield": "figure_shield_shield.png"
     }
+   },
+   "sling": {
+    "sheet": "figure_sling.png",
+    "tints": {}
    },
    "small_shield": {
     "sheet": "figure_small_shield.png",
@@ -249,6 +366,10 @@
    },
    "spear": {
     "sheet": "figure_spear.png",
+    "tints": {}
+   },
+   "staff": {
+    "sheet": "figure_staff.png",
     "tints": {}
    },
    "sword": {
@@ -269,7 +390,8 @@
   "water": "ground/water.png",
   "shallows": "ground/shallows.png",
   "snow": "ground/snow.png",
-  "cave": "ground/cave.png"
+  "cave": "ground/cave.png",
+  "thatch": "ground/thatch.png"
  },
  "blend": {
   "water": 0,
@@ -290,5 +412,24 @@
   "bed": "floor_earth",
   "bush": "grass",
   "bones": "cave"
+ },
+ "beasts": {
+  "wolf": {
+   "cell": [
+    184,
+    160
+   ],
+   "anchor": [
+    92,
+    116
+   ],
+   "cols": 3,
+   "layers": {
+    "body": {
+     "sheet": "wolf_body.png",
+     "tints": {}
+    }
+   }
+  }
  }
 }

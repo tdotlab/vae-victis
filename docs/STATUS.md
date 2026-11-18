@@ -2,7 +2,7 @@
 
 Updated 2026-11-18.
 
-**Phase:** M7 art. The style proof is done and T picked the Rendered style. Next: bigger, more detailed people, then roofs and the rest of the art in that style.
+**Phase:** M7 art. The demo maps are fully dressed in the Rendered style: bigger people with worn and carried gear as layers, the wolf, cliffs, cave walls, rocks and thatched roofs. Art is frozen while T plays the demo; content comes next, from T's notes.
 
 **Working:**
 - M0 Foundation: hex map in isometric view, click-to-walk with A* pathfinding, camera pan and zoom, data loading, headless test runner (fails on any script error), web export that runs in a browser.
@@ -21,7 +21,7 @@ Updated 2026-11-18.
 **Partial:** save and load (quick slot and title-screen Continue; no slot browser yet).
 
 **Known rough edges:**
-- Art is a style proof. No roofs yet (houses show only thatch eaves), beasts, rocks, cliffs and cave walls are still code-drawn, cloaks, helmets and skin tone are not recolored, and the world map and title screen are unchanged.
+- Art: water is a plain texture, skin tone is not recolored, only the wolf has a beast sprite (other beasts fall back to the placeholder), and the world map and title screen are unchanged.
 - Enemies that haven't seen you stay out of a fight even when their friends are in it.
 - Winning the ford by force only closes the quest with Sulicena if you loot Haldo's pay tablet.
 - The ford's toll rider charges you every crossing until the ford is settled.

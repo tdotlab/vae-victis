@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Rebuild the game's art: render sprites in Blender, then pack them.
-# Usage: tools/build-art.sh [group,group...]   (walls, trees, props, figure)
+# Usage: tools/build-art.sh [group,group...]   (walls, trees, props, figure, beasts, rocks;
+#   a wall kind like cliff or a figure layer like sword renders just that)
 # Renders go to art/render/ (ignored by Git); sheets to game/assets/art/.
 set -euo pipefail
 cd "$(dirname "$0")/.."

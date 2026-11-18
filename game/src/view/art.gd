@@ -164,16 +164,19 @@ static func draw_thing(ci: CanvasItem, c: Vector2i, terrain: String, fade: bool)
 		_frame(ci, e2, e2["sheet"], int(e2["frame"]), p, mod)
 
 
-## A person: the body recolored from their look, then shield and weapon.
-## Returns false when there is no sprite for them (beasts), so the caller
-## can fall back to Paint.
+## A person: the body recolored from their look, then what they wear and
+## carry, each a layer of its own. Beasts with a sprite (by NPC template)
+## draw the same way without the gear. Returns false when there is no sprite,
+## so the caller can fall back to Paint.
 static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: float, ring: Color) -> bool:
 	var f: Dictionary = manifest().get("figure", {})
-	if f.is_empty() or a.look.get("beast", false):
+	if a.look.get("beast", false):
+		f = manifest().get("beasts", {}).get(a.template, {})
+	if f.is_empty():
 		return false
 	if ring.a > 0:
 		ci.draw_set_transform(pos, 0, Vector2(1, 0.45))
-		ci.draw_arc(Vector2.ZERO, 15.0, 0, TAU, 28, ring, 2.5)
+		ci.draw_arc(Vector2.ZERO, 17.0, 0, TAU, 28, ring, 2.5)
 		ci.draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
 	var down := a.dead or a.unconscious or a.knocked_down
 	var idx := 18
@@ -185,18 +188,20 @@ static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: floa
 		"tunic": Color(look.get("tunic", Paint._faction_color(a.faction))),
 		"trousers": Color(look.get("trousers", "#4b4136")),
 		"hair": Color(look.get("hair", "#4a3020")),
+		"cloak": Color(look.get("cloak", "#5a4a3a")),
 		"shield": Color(look.get("shield", "#7a4a28")),
 	}
 	var layers := ["body"]
-	if not down:
-		var sh := a.sheet.equipped("shield")
-		if sh != "":
-			layers.append("small_shield" if sh == "small_shield" else "shield")
-		match a.sheet.weapon_def().get("skill", ""):
-			"blades":
-				layers.append("sword")
-			"spears":
-				layers.append("spear")
+	if not down and not look.get("beast", false):
+		var gear: Dictionary = f.get("gear", {})
+		for slot in ["armor", "cloak", "helmet", "shield", "weapon"]:
+			var layer := ""
+			if slot == "cloak":
+				layer = "cloak" if look.has("cloak") else ""
+			else:
+				layer = gear.get(a.sheet.equipped(slot), "")
+			if layer != "":
+				layers.append(layer)
 	for name in layers:
 		var l: Dictionary = f["layers"].get(name, {})
 		if l.is_empty():
@@ -208,7 +213,7 @@ static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: floa
 				t = t.darkened(0.4)
 			_frame(ci, f, l["tints"][key], idx, pos, Color(t.r * 2.0, t.g * 2.0, t.b * 2.0, 1.0))
 	if a.dead:
-		ci.draw_circle(pos + Vector2(4, 4), 5.0, Color(0.4, 0.05, 0.03, 0.7))
+		ci.draw_circle(pos + Vector2(4, 4), 6.0, Color(0.4, 0.05, 0.03, 0.7))
 	return true
 
 

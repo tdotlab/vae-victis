@@ -2,6 +2,13 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-18 (dressing the demo, M7)
+
+- **People are drawn 1.3 times life size against the hexes.** At true scale a person was a smudge next to a house; Fallout cheats the same way. Walls and trees keep their scale.
+- **Gear is layers, not variants.** Cloak, mail, cap, helmet, each weapon and each shield are rendered on their own with the body as a holdout, and the game stacks the ones an NPC has equipped (`GEAR` in `art/pack.py` maps items to layers). Cloaks and shields carry color masks, so they recolor like tunics.
+- **Cliffs and cave walls are rock masses that join like walls** (a boulder at the center and two toward each rocky neighbor, 64 frames), so cave maps stay plain terrain letters. Loose rocks are random clusters, like trees.
+- **Roofs are built in the game, not rendered.** Each house (a wall ring around cells the outside can't reach) gets a hip roof whose height follows each cell's distance from the outside, lit by the same sun as the sprites. Any floor plan gets a roof with no art work. A roof disappears while the player is inside its house and turns see-through while they stand behind it.
+
 ## 2026-11-18 (art style proof, M7)
 
 - **The art style is Rendered** (T's pick, from the four in the proof): the Blender sprites drawn as they are, no pixel filter. The pixel styles and placeholders stay behind F2 for now as a comparison and a debugging aid; they are not maintained as alternatives.
