@@ -1,5 +1,6 @@
-// Turns what is under it into chunky pixels, optionally snapped to a fixed
-// palette with ordered dithering. Used by the pixel art styles (Art).
+// The color grade for every rendered style (contrast, saturation, a tint and
+// a vignette), and for the pixel styles also chunky pixels, optionally
+// snapped to a fixed palette with ordered dithering (Art).
 shader_type canvas_item;
 
 uniform sampler2D screen_tex : hint_screen_texture, filter_linear;
@@ -8,22 +9,26 @@ uniform vec2 origin = vec2(0.0); // where the map's origin is on screen, in real
 uniform vec3 palette[32];
 uniform int palette_size = 0;
 uniform float dither = 0.0;
+uniform float contrast = 1.0;
+uniform float saturation = 1.0;
+uniform vec3 tint = vec3(1.0);
+uniform float vignette = 0.0;
 
 const float BAYER[16] = float[16](0.0, 8.0, 2.0, 10.0, 12.0, 4.0, 14.0, 6.0,
 	3.0, 11.0, 1.0, 9.0, 15.0, 7.0, 13.0, 5.0);
 
-void fragment() {
-	vec2 res = 1.0 / SCREEN_PIXEL_SIZE;
+vec3 pixelate(vec2 frag, vec2 sps) {
+	vec2 res = 1.0 / sps;
 	float cell = px * res.y / 720.0;
 	// The grid moves with the map, so standing things don't shimmer as the
 	// camera scrolls.
-	vec2 g = floor((FRAGCOORD.xy - origin) / cell);
+	vec2 g = floor((frag - origin) / cell);
 	vec2 base = g * cell + origin;
 	vec3 c = vec3(0.0);
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
 			vec2 p = base + cell * (vec2(float(i), float(j)) + 0.5) / 3.0;
-			c += texture(screen_tex, p * SCREEN_PIXEL_SIZE).rgb;
+			c += texture(screen_tex, p * sps).rgb;
 		}
 	}
 	c /= 9.0;
@@ -45,5 +50,21 @@ void fragment() {
 		}
 		c = pick;
 	}
-	COLOR = vec4(c, 1.0);
+	return c;
+}
+
+void fragment() {
+	vec3 c;
+	if (px <= 0.0) {
+		c = texture(screen_tex, SCREEN_UV).rgb;
+	} else {
+		c = pixelate(FRAGCOORD.xy, SCREEN_PIXEL_SIZE);
+	}
+	float l = dot(c, vec3(0.30, 0.59, 0.11));
+	c = mix(vec3(l), c, saturation);
+	c = (c - 0.5) * contrast + 0.5;
+	c *= tint;
+	vec2 v = SCREEN_UV - 0.5;
+	c *= 1.0 - vignette * smoothstep(0.25, 0.75, length(v * vec2(1.4, 1.0)));
+	COLOR = vec4(clamp(c, 0.0, 1.0), 1.0);
 }

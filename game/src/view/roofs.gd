@@ -104,7 +104,7 @@ static func _house(cells: Dictionary, walls: Dictionary) -> Dictionary:
 		if up.dot(mid - e0) < 0:
 			up = -up
 		var nrm := Vector3(-up.x, -up.y, 1.0 / tan(deg_to_rad(PITCH))).normalized()
-		var lit := 0.55 + 0.75 * maxf(nrm.dot(light), 0.0)
+		var lit := 0.4 + 0.9 * maxf(nrm.dot(light), 0.0)
 		var col := Color(lit, lit * 0.97, lit * 0.9)
 		var pts: Array[Vector3] = []
 		for p in f:

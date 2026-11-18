@@ -23,7 +23,8 @@
    "desc": "A stooped man with a beard like a thornbush.",
    "look": {
     "tunic": "#7a6a3a",
-    "hair": "#c8c0b0"
+    "hair": "#c8c0b0",
+    "face": "beard"
    }
   },
   {
@@ -54,7 +55,8 @@
    "xp": 40,
    "desc": "Hungry and armed.",
    "look": {
-    "tunic": "#5a3a3a"
+    "tunic": "#5a3a3a",
+    "face": "beard"
    }
   },
   {
@@ -151,7 +153,8 @@
    "desc": "A farmer once, by the hands. Not anymore, by the eyes.",
    "look": {
     "tunic": "#5a4a3a",
-    "cloak": "#3a3028"
+    "cloak": "#3a3028",
+    "face": "beard"
    }
   },
   {
@@ -204,7 +207,8 @@
    "desc": "A man pushing a handcart with everything his family owns.",
    "look": {
     "tunic": "#6a6048",
-    "hair": "#3a2a1a"
+    "hair": "#3a2a1a",
+    "face": "beard"
    }
   },
   {
@@ -242,7 +246,8 @@
    "desc": "An old man who walks like every step is a decision.",
    "look": {
     "tunic": "#58503e",
-    "hair": "#c8c0b0"
+    "hair": "#c8c0b0",
+    "face": "beard"
    }
   },
   {
@@ -296,7 +301,10 @@
    "desc": "Thickset, good cloak, careful eyes. The mules are better fed than he is.",
    "look": {
     "tunic": "#6a4a2a",
-    "cloak": "#3a5a4a"
+    "cloak": "#3a5a4a",
+    "face": "beard",
+    "cloak2": "#2e3a30",
+    "torc": "bronze"
    }
   },
   {
@@ -344,7 +352,7 @@
    "equip": [
     "gladius",
     "scutum",
-    "leather_jerkin"
+    "bronze_helmet"
    ],
    "items": [
     [
@@ -356,9 +364,10 @@
    "xp": 75,
    "desc": "A legionary with a sack of somebody's grain over his shoulder and a sword in his other hand.",
    "look": {
-    "tunic": "#8a3a2a",
+    "tunic": "#8e3424",
     "shield": "#8a2a20",
-    "hair": "#2a2018"
+    "hair": "#2a2018",
+    "body": "roman"
    }
   },
   {
@@ -388,7 +397,8 @@
    "desc": "An islander in Roman pay, three slings wound round his head and a bag of stones at his hip.",
    "look": {
     "tunic": "#9a8a6a",
-    "hair": "#1a1410"
+    "hair": "#1a1410",
+    "body": "roman"
    }
   },
   {
@@ -404,8 +414,9 @@
    },
    "desc": "Your mother. Grey at the temples since the day they took Eponina, and she has never once said so.",
    "look": {
-    "tunic": "#6a4a5a",
-    "hair": "#9a8a7a"
+    "tunic": "#4a6a8a",
+    "hair": "#9a8a7a",
+    "hair_style": "bun"
    }
   },
   {
@@ -426,9 +437,12 @@
    ],
    "desc": "Chief of the elders. A big man gone thin, with a voice that still fills the hall.",
    "look": {
-    "tunic": "#5a3a2a",
-    "cloak": "#7a2a2a",
-    "hair": "#d0c8b8"
+    "tunic": "#2f4a66",
+    "cloak": "#8e3424",
+    "hair": "#d0c8b8",
+    "face": "moustache",
+    "torc": "gold",
+    "cloak2": "#c4a23c"
    }
   },
   {
@@ -491,7 +505,8 @@
    "desc": "Forearms like oak roots and burn scars to the elbow. His son is the second hostage.",
    "look": {
     "tunic": "#4a3a2a",
-    "hair": "#3a2a1a"
+    "hair": "#3a2a1a",
+    "face": "beard"
    }
   },
   {
@@ -544,13 +559,15 @@
    "equip": [
     "spear",
     "small_shield",
-    "leather_cap"
+    "iron_helmet"
    ],
    "desc": "Keeper of the gate. Old enough to have fought the Romans once and lost, young enough to want to again.",
    "look": {
-    "tunic": "#4a5a3a",
+    "tunic": "#4e6a3a",
     "shield": "#6a4a2a",
-    "hair": "#7a6a5a"
+    "hair": "#7a6a5a",
+    "hair_style": "swept",
+    "face": "moustache"
    }
   },
   {
@@ -563,7 +580,8 @@
    "desc": "Someone you have known all your life.",
    "look": {
     "tunic": "#6a5a3a",
-    "hair": "#4a3a2a"
+    "hair": "#4a3a2a",
+    "face": "beard"
    }
   },
   {
@@ -599,8 +617,12 @@
    ],
    "desc": "One of the young men who wants a war and has never seen one.",
    "look": {
-    "tunic": "#3a4a5a",
-    "shield": "#7a5a2a"
+    "tunic": "#4a6a8a",
+    "shield": "#7a5a2a",
+    "hair_style": "swept",
+    "face": "moustache",
+    "hair": "#b8985e",
+    "torc": "bronze"
    }
   },
   {
@@ -620,7 +642,8 @@
    "look": {
     "tunic": "#4a4a3a",
     "cloak": "#2a2a28",
-    "hair": "#2a1a10"
+    "hair": "#2a1a10",
+    "face": "moustache"
    }
   },
   {
@@ -656,7 +679,8 @@
    "look": {
     "tunic": "#4a4a3a",
     "cloak": "#2a2a28",
-    "hair": "#2a1a10"
+    "hair": "#2a1a10",
+    "face": "moustache"
    }
   },
   {
@@ -688,7 +712,8 @@
    "desc": "A man the world has no use for, and who has noticed.",
    "look": {
     "tunic": "#5a4a3a",
-    "cloak": "#3a3028"
+    "cloak": "#3a3028",
+    "face": "beard"
    }
   },
   {
@@ -738,9 +763,11 @@
    },
    "desc": "Headwoman of Vindomagos. Counts everything twice, and smiles once you are worth it.",
    "look": {
-    "tunic": "#3a5a4a",
-    "cloak": "#6a5a3a",
-    "hair": "#a07040"
+    "tunic": "#4e6a3a",
+    "cloak": "#6a3e5c",
+    "hair": "#a07040",
+    "torc": "gold",
+    "cloak2": "#b8766a"
    }
   },
   {
@@ -806,7 +833,10 @@
    "desc": "White to the elbows with salt dust. Knows the price of everything from here to the sea.",
    "look": {
     "tunic": "#8a8070",
-    "cloak": "#5a4a3a"
+    "cloak": "#5a4634",
+    "face": "beard",
+    "torc": "bronze",
+    "cloak2": "#a8462c"
    }
   },
   {
@@ -840,7 +870,8 @@
    "desc": "The village healer. Hands like roots, eyes like a hawk.",
    "look": {
     "tunic": "#5a5a4a",
-    "hair": "#e0dcd0"
+    "hair": "#e0dcd0",
+    "hair_style": "bun"
    }
   },
   {
@@ -852,7 +883,8 @@
    "attrs": {},
    "desc": "A farmer of Vindomagos.",
    "look": {
-    "tunic": "#7a6a4a"
+    "tunic": "#7a6a4a",
+    "face": "beard"
    }
   },
   {
@@ -906,7 +938,10 @@
    "look": {
     "tunic": "#6a5a3a",
     "shield": "#4a4a5a",
-    "hair": "#d8c070"
+    "hair": "#d8c070",
+    "hair_style": "knot",
+    "face": "beard",
+    "hide": "#6a5a44"
    }
   },
   {
@@ -935,7 +970,9 @@
    "look": {
     "tunic": "#5a5a3a",
     "shield": "#5a4a3a",
-    "hair": "#c8b070"
+    "hair": "#c8b070",
+    "face": "beard",
+    "hide": "#5a4a38"
    }
   },
   {
@@ -968,7 +1005,10 @@
    "desc": "Keeps his bow strung and his eyes on you.",
    "look": {
     "tunic": "#4a5a3a",
-    "hair": "#b8a060"
+    "hair": "#b8a060",
+    "hair_style": "knot",
+    "face": "beard",
+    "hide": "#4e4232"
    }
   },
   {
@@ -980,7 +1020,8 @@
    "attrs": {},
    "desc": "Sitting on a cart of grain sacks with the patience of a man paid by the day.",
    "look": {
-    "tunic": "#7a6a4a"
+    "tunic": "#7a6a4a",
+    "face": "beard"
    }
   }
  ]

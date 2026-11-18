@@ -2,6 +2,14 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-18 (figure rework and grit pass)
+
+- **Bodies, heads and ornaments are layers too.** Three bodies (man in trousers, woman in an ankle-length dress, bare-legged Roman), seven hairstyles, moustache or beard, gold or bronze torc, each its own render; the game builds the stack from the NPC's `look` (`body`, `hair_style`, `face`, `torc`, `hide`, `cloak2`) in `Art.figure_layers`. Torcs and moustaches were baked into every figure; the research says they belong to nobles. Hair does more for telling people apart than gear does.
+- **Romans get their own kit:** gladius, a tall curved scutum, the pilum with its long shank, the bronze Montefortino. Gauls get an iron Agen-type helmet (new item `iron_helmet`); the raven helm is an iron cap with a bronze bird, re-anchored on the Tintignac find as an heirloom.
+- **Cloaks carry a check.** The cloak mask has a second channel for a woven check, so each NPC can have two cloak colors. The Germans wear hide capes instead.
+- **Fallout grit, not a filter.** Harder light (a small sun at 4.5 over a 0.32 fill, so shadows read), a one-pixel dark outline on figures, beasts, trees and props (not walls or rock, which join across hexes and would show seams), a darker winter ground with straw patches and lit pebbles, and a color grade per style in `art_styles.json` (contrast, saturation, warm tint, vignette) in the same screen shader the pixel styles use. Roofs follow the harder light.
+- **Gear that changes stats waits for T.** The research suggests javelins for the rider archers, hide cloaks for the German riders and padded linen for Vellaunos; those change fights, so they're noted, not done. The Roman forager's leather jerkin became a scutum and helmet with the same protection.
+
 ## 2026-11-18 (cleanup pass after the research)
 
 - **The clock follows Caesar, not 240 days.** Caesar's own day counts don't fit in 240; Alesia surrenders about day 284. Events moved: Cevennes 56, scorched earth 105, Avaricum 137, Gergovia 190, new Noviodunum event 196. Seasons: winter to day 70, spring to 160, summer to 255. Roman foragers start at day 45. The "spring assembly" deadline (120) stays as an invented in-game deadline.

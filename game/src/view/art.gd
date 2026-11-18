@@ -189,26 +189,18 @@ static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: floa
 		"trousers": Color(look.get("trousers", "#4b4136")),
 		"hair": Color(look.get("hair", "#4a3020")),
 		"cloak": Color(look.get("cloak", "#5a4a3a")),
+		"cloak2": Color(look.get("cloak2", look.get("cloak", "#5a4a3a"))),
+		"hide": Color(look.get("hide", "#5a4a36")),
 		"shield": Color(look.get("shield", "#7a4a28")),
 	}
-	var layers := ["body"]
-	if not down and not look.get("beast", false):
-		var gear: Dictionary = f.get("gear", {})
-		for slot in ["armor", "cloak", "helmet", "shield", "weapon"]:
-			var layer := ""
-			if slot == "cloak":
-				layer = "cloak" if look.has("cloak") else ""
-			else:
-				layer = gear.get(a.sheet.equipped(slot), "")
-			if layer != "":
-				layers.append(layer)
+	var layers := figure_layers(a, f.get("gear", {}), down)
 	for name in layers:
 		var l: Dictionary = f["layers"].get(name, {})
 		if l.is_empty():
 			continue
 		_frame(ci, f, l["sheet"], idx, pos)
 		for key in l.get("tints", {}):
-			var t: Color = tints[key]
+			var t: Color = tints.get(key, Color.GRAY)
 			if key == "shield" and a.shield_fouled:
 				t = t.darkened(0.4)
 			_frame(ci, f, l["tints"][key], idx, pos, Color(t.r * 2.0, t.g * 2.0, t.b * 2.0, 1.0))
@@ -217,10 +209,54 @@ static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: floa
 	return true
 
 
+## Which figure layers make up a person, bottom to top. The body comes from
+## look.body ("f", "roman") or the actor's sex; hair from look.hair_style
+## ("long", "swept", "short", "knot", "braid", "bun", "bald"), defaulting by
+## body; look.face is "moustache" or "beard" (shaven without); look.torc is
+## "gold" or "bronze"; look.hide draws a hide cape instead of a cloak. The
+## fallen keep their body, hair, face and torc and lose the rest.
+static func figure_layers(a: Actor, gear: Dictionary, down: bool) -> Array:
+	var look := a.look
+	if look.get("beast", false):
+		return ["body"]
+	var body := str(look.get("body", "f" if a.sheet.sex == "f" else ""))
+	var hair := str(look.get("hair_style", {"f": "braid", "roman": "short"}.get(body, "long")))
+	var helmet := "" if down else str(gear.get(a.sheet.equipped("helmet"), ""))
+	if hair == "swept" and helmet != "":
+		hair = "long"  # the mane goes under the helmet
+	var layers := ["body" if body == "" else "body_" + body]
+	var head := []
+	if hair != "bald":
+		head.append("hair_" + hair)
+	if look.has("face"):
+		head.append(str(look["face"]))
+	var torc := ("torc_" + str(look["torc"])) if look.has("torc") else ""
+	if down:
+		layers.append_array(head)
+		if torc != "":
+			layers.append(torc)
+		return layers
+	var armor := str(gear.get(a.sheet.equipped("armor"), ""))
+	if armor != "":
+		layers.append(armor)
+	layers.append_array(head)
+	if look.has("hide"):
+		layers.append("hide")
+	elif look.has("cloak"):
+		layers.append("cloak")
+	if torc != "":
+		layers.append(torc)
+	for slot in ["helmet", "shield", "weapon"]:
+		var layer := str(gear.get(a.sheet.equipped(slot), ""))
+		if layer != "":
+			layers.append(layer)
+	return layers
+
+
 # --- Pixel styles ------------------------------------------------------------------
 
-## A full-screen pass between the map and the HUD that turns the map into
-## chunky pixels (and optionally a fixed palette), for the pixel styles.
+## A full-screen pass between the map and the HUD: the style's color grade
+## and, for the pixel styles, chunky pixels (optionally a fixed palette).
 static func make_post_layer() -> CanvasLayer:
 	var layer := CanvasLayer.new()
 	layer.layer = 5
@@ -239,11 +275,17 @@ static func update_post_layer(layer: CanvasLayer, origin_px: Vector2) -> void:
 	var d := style_def()
 	var rect := layer.get_child(0) as ColorRect
 	var px := float(d.get("pixel", 0))
-	layer.visible = px > 0
-	if px <= 0:
+	var grade: Dictionary = d.get("grade", {})
+	layer.visible = px > 0 or not grade.is_empty()
+	if not layer.visible:
 		return
 	var mat := rect.material as ShaderMaterial
 	mat.set_shader_parameter("px", px)
+	mat.set_shader_parameter("contrast", float(grade.get("contrast", 1.0)))
+	mat.set_shader_parameter("saturation", float(grade.get("saturation", 1.0)))
+	var tint := Color(grade.get("tint", "#ffffff"))
+	mat.set_shader_parameter("tint", Vector3(tint.r, tint.g, tint.b))
+	mat.set_shader_parameter("vignette", float(grade.get("vignette", 0.0)))
 	mat.set_shader_parameter("origin", origin_px)
 	var pal: Array = d.get("palette", [])
 	var cols := PackedVector3Array()

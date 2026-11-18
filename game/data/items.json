@@ -314,7 +314,7 @@
       "defense": -1,
       "weight": 18,
       "value": 400,
-      "desc": "Thousands of riveted rings. The Romans say they invented it. The smiths of the Gauls laugh."
+      "desc": "Thousands of riveted rings. Even the Romans admit the Gauls invented it."
     },
     {
       "id": "chief_mail",
@@ -336,6 +336,16 @@
       "desc": "Better than hair."
     },
     {
+      "id": "iron_helmet",
+      "name": "Iron helmet",
+      "type": "helmet",
+      "dt": 1,
+      "dr": 10,
+      "weight": 3,
+      "value": 90,
+      "desc": "A Gallic iron cap with a ridge round the base, cheek pieces and a short guard at the back of the neck."
+    },
+    {
       "id": "bronze_helmet",
       "name": "Bronze helmet",
       "type": "helmet",
@@ -353,7 +363,7 @@
       "dr": 15,
       "weight": 4,
       "value": 1200,
-      "desc": "Iron, with a bronze raven on the crown whose hinged wings flap when you run. Men will remember who wore this."
+      "desc": "An iron cap with a bronze bird on the crown, its wings hinged. Older than anyone's grandfather; the kind of thing that comes out of a sanctuary pit or a chief's grave. Men will remember who wore this."
     },
     {
       "id": "herbs",
@@ -448,7 +458,7 @@
       "type": "trade",
       "weight": 1,
       "value": 500,
-      "desc": "A heavy twisted ring of gold. The kind of thing a man is buried in."
+      "desc": "A heavy twisted ring of gold. The kind of thing a man gives to the gods, or is buried in."
     },
     {
       "id": "lockpicks",

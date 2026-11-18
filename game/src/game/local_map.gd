@@ -540,9 +540,8 @@ func float_text(c: Vector2i, text: String, color: Color) -> void:
 
 func _process(delta: float) -> void:
 	_update_camera(delta)
-	if _post.visible or Art.style_def().has("pixel"):
-		var vp := get_viewport()
-		Art.update_post_layer(_post, vp.get_final_transform() * vp.get_canvas_transform() * Vector2.ZERO)
+	var vp := get_viewport()
+	Art.update_post_layer(_post, vp.get_final_transform() * vp.get_canvas_transform() * Vector2.ZERO)
 	for f in floaters:
 		f[3] += delta
 	floaters = floaters.filter(func(f): return f[3] < 1.4)

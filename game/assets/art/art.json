@@ -265,17 +265,17 @@
  },
  "figure": {
   "cell": [
-   184,
-   232
+   216,
+   240
   ],
   "anchor": [
-   92,
-   188
+   108,
+   196
   ],
   "cols": 3,
   "gear": {
    "gallic_sword": "sword",
-   "gladius": "sword",
+   "gladius": "gladius",
    "dagger": "dagger",
    "axe": "axe",
    "spear": "spear",
@@ -283,7 +283,7 @@
    "staff": "staff",
    "club": "club",
    "javelin": "javelin",
-   "pilum": "javelin",
+   "pilum": "pilum",
    "sling": "sling",
    "hunting_bow": "bow",
    "gallic_shield": "shield",
@@ -291,7 +291,8 @@
    "scutum": "scutum",
    "leather_cap": "cap",
    "bronze_helmet": "helmet",
-   "raven_helm": "helmet",
+   "iron_helmet": "helmet_iron",
+   "raven_helm": "helmet_bird",
    "mail_shirt": "mail",
    "chief_mail": "mail"
   },
@@ -300,12 +301,30 @@
     "sheet": "figure_axe.png",
     "tints": {}
    },
+   "beard": {
+    "sheet": "figure_beard.png",
+    "tints": {
+     "hair": "figure_beard_hair.png"
+    }
+   },
    "body": {
     "sheet": "figure_body.png",
     "tints": {
      "tunic": "figure_body_tunic.png",
      "trousers": "figure_body_trousers.png",
      "hair": "figure_body_hair.png"
+    }
+   },
+   "body_f": {
+    "sheet": "figure_body_f.png",
+    "tints": {
+     "tunic": "figure_body_f_tunic.png"
+    }
+   },
+   "body_roman": {
+    "sheet": "figure_body_roman.png",
+    "tints": {
+     "tunic": "figure_body_roman_tunic.png"
     }
    },
    "bow": {
@@ -319,7 +338,8 @@
    "cloak": {
     "sheet": "figure_cloak.png",
     "tints": {
-     "cloak": "figure_cloak_cloak.png"
+     "cloak": "figure_cloak_cloak.png",
+     "cloak2": "figure_cloak_cloak2.png"
     }
    },
    "club": {
@@ -330,9 +350,63 @@
     "sheet": "figure_dagger.png",
     "tints": {}
    },
+   "gladius": {
+    "sheet": "figure_gladius.png",
+    "tints": {}
+   },
+   "hair_braid": {
+    "sheet": "figure_hair_braid.png",
+    "tints": {
+     "hair": "figure_hair_braid_hair.png"
+    }
+   },
+   "hair_bun": {
+    "sheet": "figure_hair_bun.png",
+    "tints": {
+     "hair": "figure_hair_bun_hair.png"
+    }
+   },
+   "hair_knot": {
+    "sheet": "figure_hair_knot.png",
+    "tints": {
+     "hair": "figure_hair_knot_hair.png"
+    }
+   },
+   "hair_long": {
+    "sheet": "figure_hair_long.png",
+    "tints": {
+     "hair": "figure_hair_long_hair.png"
+    }
+   },
+   "hair_short": {
+    "sheet": "figure_hair_short.png",
+    "tints": {
+     "hair": "figure_hair_short_hair.png"
+    }
+   },
+   "hair_swept": {
+    "sheet": "figure_hair_swept.png",
+    "tints": {
+     "hair": "figure_hair_swept_hair.png"
+    }
+   },
    "helmet": {
     "sheet": "figure_helmet.png",
     "tints": {}
+   },
+   "helmet_bird": {
+    "sheet": "figure_helmet_bird.png",
+    "tints": {}
+   },
+   "helmet_iron": {
+    "sheet": "figure_helmet_iron.png",
+    "tints": {}
+   },
+   "hide": {
+    "sheet": "figure_hide.png",
+    "tints": {
+     "hide": "figure_hide_hide.png"
+    }
    },
    "javelin": {
     "sheet": "figure_javelin.png",
@@ -340,6 +414,16 @@
    },
    "mail": {
     "sheet": "figure_mail.png",
+    "tints": {}
+   },
+   "moustache": {
+    "sheet": "figure_moustache.png",
+    "tints": {
+     "hair": "figure_moustache_hair.png"
+    }
+   },
+   "pilum": {
+    "sheet": "figure_pilum.png",
     "tints": {}
    },
    "scutum": {
@@ -374,6 +458,14 @@
    },
    "sword": {
     "sheet": "figure_sword.png",
+    "tints": {}
+   },
+   "torc_bronze": {
+    "sheet": "figure_torc_bronze.png",
+    "tints": {}
+   },
+   "torc_gold": {
+    "sheet": "figure_torc_gold.png",
     "tints": {}
    }
   }

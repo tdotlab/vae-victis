@@ -9,7 +9,7 @@ Four source-cited reports, written 2026-11-18 to check the game against primary 
 | [dress-and-arms.md](dress-and-arms.md) | Gallic, Roman and Germanic dress, hair, arms and armor; the raven_helm and chief_mail items |
 | [society-and-language.md](society-and-language.md) | Clientship, law, druids, religion, food, salt, coinage, time-keeping, names |
 
-Nothing in the game has been changed from these yet. The corrections below wait for T.
+Applied so far: the clock, the content and name fixes, and the figure art (2026-11-18). Still waiting: the rampart, interiors and props.
 
 ## Corrections, by how much they matter
 

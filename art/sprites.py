@@ -203,11 +203,11 @@ def new_scene(samples=48):
     sc.world = w
     bg = w.node_tree.nodes["Background"]
     bg.inputs[0].default_value = (*C("#7d8796"), 1)  # winter sky fill
-    bg.inputs[1].default_value = 0.85
+    bg.inputs[1].default_value = 0.32
     sun = bpy.data.lights.new("sun", "SUN")
-    sun.energy = 3.4
+    sun.energy = 4.5
     sun.color = C("#fff0dc")
-    sun.angle = math.radians(4)
+    sun.angle = math.radians(2)
     so = bpy.data.objects.new("sun", sun)
     sc.collection.objects.link(so)
     so.rotation_euler = Vector((0.55, 0.6, -1.05)).normalized().to_track_quat("-Z", "Y").to_euler()
@@ -630,10 +630,11 @@ def render_props():
 # rendered neutral gray and recolored in the game from each NPC's look; a
 # second render of flat colors (the mask) says which pixel is which.
 
-FIG_FRAME = (92, 116, 22)
+FIG_FRAME = (108, 120, 22)
 FIG_SCALE = 1.3  # people are drawn larger than life, as in Fallout, so they read
 NEUTRAL = "#9a9a9a"
-MASK_COLORS = {"tunic": (1, 0, 0), "trousers": (0, 1, 0), "hair": (0, 0, 1), "board": (1, 0, 0), "cloak": (1, 0, 0)}
+MASK_COLORS = {"tunic": (1, 0, 0), "trousers": (0, 1, 0), "hair": (0, 0, 1), "board": (1, 0, 0), "cloak": (1, 0, 0),
+               "hide": (1, 0, 0)}
 
 
 def torus(name, R, r, m, seg=18, rseg=6, **kw):
@@ -674,9 +675,84 @@ def half_ball(name, r, m, sz=1.0, **kw):
     return _obj(name, bm, [m], smooth=True, **kw)
 
 
+def curved_oval(name, a, b, R, m, nu=12, nv=24, **kw):
+    """A shield board: an oval 2a wide and 2b tall, bent around a vertical
+    axis of radius R so it bulges toward +y. Each row of the grid spans the
+    oval's width at that height, so the outline is smooth."""
+    bm = bmesh.new()
+    rows = []
+    for j in range(nv + 1):
+        v = -b + 2 * b * j / nv
+        hw = max(0.012, a * math.sqrt(max(0.0, 1 - (v / b) ** 2)))
+        row = []
+        for i in range(nu + 1):
+            u = -hw + 2 * hw * i / nu
+            t = u / R
+            row.append(bm.verts.new((R * math.sin(t), R * math.cos(t) - R, v)))
+        rows.append(row)
+    for j in range(nv):
+        for i in range(nu):
+            bm.faces.new((rows[j][i], rows[j][i + 1], rows[j + 1][i + 1], rows[j + 1][i]))
+    ob = _obj(name, bm, [m], smooth=True, **kw)
+    sol = ob.modifiers.new("thick", "SOLIDIFY")
+    sol.thickness = 0.035
+    sol.offset = 0.0
+    return ob
+
+
+def pattern_mask():
+    """Mask material for patterned cloth: red ground (channel 0) crossed by
+    bands of green (channel 1) running across and down the cloth, a coarse
+    check the game tints with a second color."""
+    m = bpy.data.materials.new("check")
+    N = m.node_tree.nodes
+    L = m.node_tree.links
+    for n in list(N):
+        if n.type != "OUTPUT_MATERIAL":
+            N.remove(n)
+    tc = N.new("ShaderNodeTexCoord")
+    sep = N.new("ShaderNodeSeparateXYZ")
+    L.new(tc.outputs["Object"], sep.inputs[0])
+    bands = []
+    for axis in ("Y", "Z"):
+        mul = N.new("ShaderNodeMath")
+        mul.operation = "MULTIPLY"
+        mul.inputs[1].default_value = 7.0
+        L.new(sep.outputs[axis], mul.inputs[0])
+        fr = N.new("ShaderNodeMath")
+        fr.operation = "FRACT"
+        L.new(mul.outputs[0], fr.inputs[0])
+        lt = N.new("ShaderNodeMath")
+        lt.operation = "LESS_THAN"
+        lt.inputs[1].default_value = 0.28
+        L.new(fr.outputs[0], lt.inputs[0])
+        bands.append(lt)
+    mx = N.new("ShaderNodeMath")
+    mx.operation = "MAXIMUM"
+    L.new(bands[0].outputs[0], mx.inputs[0])
+    L.new(bands[1].outputs[0], mx.inputs[1])
+    inv = N.new("ShaderNodeMath")
+    inv.operation = "SUBTRACT"
+    inv.inputs[0].default_value = 1.0
+    L.new(mx.outputs[0], inv.inputs[1])
+    rgb = N.new("ShaderNodeCombineColor")
+    L.new(inv.outputs[0], rgb.inputs[0])
+    L.new(mx.outputs[0], rgb.inputs[1])
+    e = N.new("ShaderNodeEmission")
+    L.new(rgb.outputs[0], e.inputs["Color"])
+    L.new(e.outputs[0], N["Material Output"].inputs["Surface"])
+    return m
+
+
 class Figure:
-    """One Gaul in gray. Parts tagged in mask_parts are recolored in the game.
-    Everything else that can be worn or held is a layer of its own."""
+    """People in gray. Three bodies share a head, arms and pose: a Gallic man
+    (tunic and trousers), a woman (ankle-length dress) and a Roman (knee-length
+    tunic, bare legs, caligae). Hair, beards, torcs and everything worn or held
+    are layers of their own, so the game can stack any combination. Parts
+    tagged in mask_parts are recolored in the game.
+
+    Proportions follow docs/research/dress-and-arms.md, section 7: the body
+    is about 1.94 units tall before FIG_SCALE."""
 
     def __init__(self):
         self.mask_parts = {}  # object -> mask key
@@ -688,42 +764,31 @@ class Figure:
         wood = mat("wood", "#7a5a36", "#8a6a40", scale=20)
         dark_wood = mat("dwood", "#4e3822", "#5e4428", scale=16)
         iron = mat("iron", "#4e4a44", metal=0.7, rough=0.5)
+        dark_iron = mat("diron", "#3a3836", "#4a4642", metal=0.6, rough=0.55, scale=30)
         gold = mat("gold", "#c89a3a", metal=0.9, rough=0.3)
         bronze = mat("bronze", "#a87a3a", "#8a6230", metal=0.85, rough=0.35, scale=10)
+        bone = mat("bone", "#d8ccb0", "#c4b494", scale=30, rough=0.5)
         self.root = root = empty("root")
         root.scale = (FIG_SCALE,) * 3
-        self.body = []
+        self.body_sets = {"body": [], "body_f": [], "body_roman": []}
+        self.items = {}
 
-        def part(ob, key=None):
-            self.body.append(ob)
+        def part(ob, key=None, bodies=("body", "body_f", "body_roman")):
+            for b in bodies:
+                self.body_sets[b].append(ob)
             if key:
                 self.mask_parts[ob] = key
             return ob
 
+        # --- Shared: head, neck, arms -----------------------------------------
         self.hip = {}
         self.sho = {}
         for side, y in (("L", 0.11), ("R", -0.11)):
-            hp = empty("hip" + side, root, (0, y, 0.88))
-            self.hip[side] = hp
-            part(cyl("leg", 0.105, 0.078, -0.74, gray, seg=8, parent=hp), "trousers")
-            part(cyl("boot", 0.08, 0.075, -0.16, leather, seg=8, z0=-0.72, parent=hp))
-            part(box("foot", 0.24, 0.12, 0.08, leather, parent=hp, loc=(0.05, 0, -0.88)))
-        # Tunic: a skirt that flares over the trousers, then the chest, wider
-        # at the shoulders.
-        part(cyl("skirt", 0.3, 0.235, 0.44, gray, seg=14, z0=0.6, parent=root, scale=(0.82, 1.08, 1)), "tunic")
-        part(cyl("torso", 0.235, 0.28, 0.52, gray, seg=14, z0=1.0, parent=root, scale=(0.76, 1.1, 1)), "tunic")
-        part(ball("chest", 0.2, gray, parent=root, loc=(0.03, 0, 1.38), scale=(0.95, 1.35, 0.7)), "tunic")
-        part(cyl("belt", 0.245, 0.245, 0.08, leather, seg=14, z0=0.99, parent=root, scale=(0.8, 1.1, 1)))
-        part(box("buckle", 0.03, 0.08, 0.06, bronze, parent=root, loc=(0.2, 0, 1.0)))
+            self.hip[side] = empty("hip" + side, root, (0, y, 0.88))
         part(cyl("neck", 0.065, 0.065, 0.14, skin, seg=8, z0=1.5, parent=root))
-        part(torus("torc", 0.085, 0.018, gold, parent=root, loc=(0.0, 0, 1.54), rot=(0, math.radians(-12), 0)))
         part(ball("head", 0.15, skin, parent=root, loc=(0.015, 0, 1.76), scale=(0.95, 0.86, 1.05)))
         part(box("nose", 0.05, 0.035, 0.07, skin, parent=root, loc=(0.15, 0, 1.73)))
-        part(ball("hair", 0.162, hairm, parent=root, loc=(-0.025, 0, 1.81), scale=(1.0, 0.98, 0.82)), "hair")
-        part(ball("hairback", 0.13, hairm, parent=root, loc=(-0.09, 0, 1.63), scale=(0.75, 1.15, 1.35)), "hair")
-        for s in (1, -1):
-            part(box("mous", 0.035, 0.07, 0.11, hairm, parent=root, loc=(0.145, s * 0.045, 1.65),
-                     rot=(math.radians(s * 18), 0, 0)), "hair")
+        part(ball("ears", 0.035, skin, sub=1, parent=root, loc=(-0.01, 0, 1.74), scale=(0.8, 4.3, 1.2)))
         for side, y in (("L", 0.3), ("R", -0.3)):
             sh = empty("sho" + side, root, (0, y, 1.44), (math.radians(8 if side == "L" else -8), 0, 0))
             self.sho[side] = sh
@@ -734,59 +799,213 @@ class Figure:
         self.hand_r = empty("handR", self.sho["R"], (0, 0, -0.64))
         self.hand_l = empty("handL", self.sho["L"], (0, 0, -0.62))
 
-        # --- Worn things -----------------------------------------------------
-        self.items = {}
+        # --- Gallic man: tunic to mid-thigh over trousers, short boots ----------
+        M = ("body",)
+        for hp in self.hip.values():
+            part(cyl("leg", 0.105, 0.078, -0.74, gray, seg=8, parent=hp), "trousers", M)
+            part(cyl("boot", 0.08, 0.075, -0.16, leather, seg=8, z0=-0.72, parent=hp), None, M)
+            part(box("foot", 0.24, 0.12, 0.08, leather, parent=hp, loc=(0.05, 0, -0.88)), None, M)
+        part(cyl("skirt", 0.3, 0.235, 0.44, gray, seg=14, z0=0.6, parent=root, scale=(0.82, 1.08, 1)), "tunic", M)
+
+        # --- Roman: knee-length tunic, bare legs, open-work caligae -------------
+        R = ("body_roman",)
+        caliga = mat("caliga", "#2e2016", "#4a3020", scale=50, bump=0.6)
+        for hp in self.hip.values():
+            part(cyl("leg", 0.088, 0.062, -0.76, skin, seg=8, parent=hp), None, R)
+            part(cyl("strap", 0.068, 0.07, -0.13, caliga, seg=8, z0=-0.75, parent=hp), None, R)
+            part(box("foot", 0.24, 0.12, 0.07, caliga, parent=hp, loc=(0.05, 0, -0.88)), None, R)
+        part(cyl("skirt", 0.31, 0.235, 0.58, gray, seg=14, z0=0.46, parent=root, scale=(0.82, 1.08, 1)), "tunic", R)
+
+        # --- Woman: ankle-length belted dress, pinned at both shoulders ---------
+        F = ("body_f",)
+        for hp in self.hip.values():
+            part(cyl("leg", 0.07, 0.055, -0.76, skin, seg=8, parent=hp), None, F)
+            part(box("foot", 0.2, 0.1, 0.07, leather, parent=hp, loc=(0.04, 0, -0.88)), None, F)
+        part(cyl("dress", 0.36, 0.235, 0.98, gray, seg=16, z0=0.04, parent=root, scale=(0.8, 1.02, 1)), "tunic", F)
+        part(cyl("torso", 0.225, 0.26, 0.5, gray, seg=14, z0=1.0, parent=root, scale=(0.76, 1.04, 1)), "tunic", F)
+        part(ball("chest", 0.19, gray, parent=root, loc=(0.04, 0, 1.36), scale=(1.0, 1.3, 0.72)), "tunic", F)
+        part(cyl("belt", 0.235, 0.235, 0.06, leather, seg=14, z0=1.0, parent=root, scale=(0.8, 1.06, 1)), None, F)
+        for s in (1, -1):
+            part(ball("brooch", 0.03, bronze, sub=1, parent=root, loc=(0.09, s * 0.16, 1.5)), None, F)
+
+        # The man's and the Roman's chest and belt.
+        MR = ("body", "body_roman")
+        part(cyl("torso", 0.235, 0.28, 0.52, gray, seg=14, z0=1.0, parent=root, scale=(0.76, 1.1, 1)), "tunic", MR)
+        part(ball("chest", 0.2, gray, parent=root, loc=(0.03, 0, 1.38), scale=(0.95, 1.35, 0.7)), "tunic", MR)
+        part(cyl("belt", 0.245, 0.245, 0.08, leather, seg=14, z0=0.99, parent=root, scale=(0.8, 1.1, 1)), None, MR)
+        part(box("buckle", 0.03, 0.08, 0.06, bronze, parent=root, loc=(0.2, 0, 1.0)), None, MR)
+
+        # --- Hair (hair mask), each style its own layer --------------------------
+        def layer(name):
+            e = empty(name, root)
+            self.items[name] = e
+            return e
+
+        def hair(e, ob):
+            self.mask_parts[ob] = "hair"
+            return ob
+
+        e = layer("hair_short")  # Roman: cropped close
+        hair(e, ball("cap", 0.158, hairm, parent=e, loc=(-0.03, 0, 1.8), scale=(1.0, 0.96, 0.76)))
+        hair(e, ball("nape", 0.1, hairm, parent=e, loc=(-0.08, 0, 1.7), scale=(0.7, 1.15, 0.8)))
+
+        e = layer("hair_long")  # most Gallic men: to the shoulders
+        hair(e, ball("cap", 0.162, hairm, parent=e, loc=(-0.025, 0, 1.81), scale=(1.0, 0.98, 0.82)))
+        hair(e, ball("back", 0.14, hairm, parent=e, loc=(-0.1, 0, 1.6), scale=(0.72, 1.2, 1.6)))
+        for s in (1, -1):
+            hair(e, ball("lock", 0.06, hairm, parent=e, loc=(-0.03, s * 0.13, 1.6), scale=(0.9, 0.75, 1.9)))
+
+        e = layer("hair_swept")  # limed and combed back into a stiff mane
+        hair(e, ball("cap", 0.168, hairm, parent=e, loc=(-0.04, 0, 1.84), scale=(1.02, 0.96, 0.78)))
+        hair(e, ball("mane", 0.13, hairm, parent=e, loc=(-0.17, 0, 1.86), scale=(1.45, 0.9, 0.7),
+                     rot=(0, math.radians(-18), 0)))
+        hair(e, ball("nape", 0.11, hairm, parent=e, loc=(-0.1, 0, 1.66), scale=(0.7, 1.12, 1.0)))
+
+        e = layer("hair_knot")  # Suebian: combed sideways, knotted on the right
+        hair(e, ball("cap", 0.162, hairm, parent=e, loc=(-0.025, -0.01, 1.81), scale=(1.0, 0.98, 0.8)))
+        hair(e, ball("back", 0.12, hairm, parent=e, loc=(-0.09, 0, 1.66), scale=(0.72, 1.15, 1.1)))
+        hair(e, ball("knot", 0.072, hairm, parent=e, loc=(-0.03, -0.17, 1.86)))
+        hair(e, ball("tail", 0.045, hairm, parent=e, loc=(-0.05, -0.2, 1.77), scale=(1, 0.8, 1.8)))
+
+        e = layer("hair_braid")  # women: parted, one braid down the back
+        hair(e, ball("cap", 0.16, hairm, parent=e, loc=(-0.025, 0, 1.81), scale=(1.0, 0.98, 0.82)))
+        hair(e, ball("back", 0.12, hairm, parent=e, loc=(-0.1, 0, 1.66), scale=(0.72, 1.12, 1.15)))
+        for k in range(7):
+            hair(e, ball("plait", 0.048 - k * 0.003, hairm, sub=1, parent=e,
+                         loc=(-0.17 - k * 0.012, 0, 1.6 - k * 0.07), scale=(0.9, 1, 1.2)))
+
+        e = layer("hair_bun")  # older women: gathered in a knot at the back
+        hair(e, ball("cap", 0.16, hairm, parent=e, loc=(-0.025, 0, 1.81), scale=(1.0, 0.98, 0.8)))
+        hair(e, ball("bun", 0.085, hairm, parent=e, loc=(-0.16, 0, 1.76)))
+
+        # --- Faces --------------------------------------------------------------
+        def moustache(e):
+            for s in (1, -1):
+                hair(e, box("mous", 0.035, 0.07, 0.12, hairm, parent=e, loc=(0.145, s * 0.045, 1.64),
+                            rot=(math.radians(s * 18), 0, 0)))
+
+        e = layer("moustache")  # the noble fashion: long moustache, shaved cheeks
+        moustache(e)
+        e = layer("beard")
+        moustache(e)
+        hair(e, ball("beard", 0.1, hairm, parent=e, loc=(0.085, 0, 1.63), scale=(0.75, 1.15, 0.95)))
+        for s in (1, -1):
+            hair(e, ball("cheek", 0.05, hairm, sub=1, parent=e, loc=(0.06, s * 0.1, 1.7), scale=(0.8, 0.6, 1.4)))
+
+        # --- Torcs ----------------------------------------------------------------
+        for name, metal_ in (("torc_gold", gold), ("torc_bronze", bronze)):
+            e = layer(name)
+            torus("torc", 0.09, 0.02, metal_, parent=e, loc=(0.0, 0, 1.55), rot=(0, math.radians(-12), 0))
+            for s in (1, -1):
+                ball("terminal", 0.028, metal_, sub=1, parent=e, loc=(0.09, s * 0.035, 1.57))
+
+        # --- Worn things -----------------------------------------------------------
+        # Cloak: pinned on the right shoulder, the drape falling over the left
+        # arm. In the mask it is checked (see pattern_mask).
         cloth = mat("cloak", NEUTRAL, "#a2a2a2", scale=14, bump=0.4)
-        ck = empty("cloak", root)
-        c = shell("cape", 0.42, 0.31, 0.95, cloth, lambda x, y: x < 0.04, seg=24, z0=0.52, parent=ck,
-                  loc=(-0.06, 0, 0), scale=(0.62, 1.12, 1))
+        ck = layer("cloak")
+        c = shell("cape", 0.42, 0.31, 0.95, cloth, lambda x, y: x < 0.04 + max(0.0, y) * 0.55, seg=24, z0=0.52,
+                  parent=ck, loc=(-0.06, 0, 0), scale=(0.62, 1.12, 1))
         self.mask_parts[c] = "cloak"
         c2 = torus("collar", 0.22, 0.05, cloth, parent=ck, loc=(-0.02, 0, 1.5), scale=(0.8, 1.2, 1))
         self.mask_parts[c2] = "cloak"
-        ball("brooch", 0.035, gold, sub=1, parent=ck, loc=(0.13, 0.12, 1.47))
-        self.items["cloak"] = ck
+        ball("brooch", 0.04, bronze, sub=1, parent=ck, loc=(0.1, -0.2, 1.5))
 
+        # Hide cape: what Germans wore instead of a cloak (Caesar IV.1, VI.21).
+        fur = mat("fur", NEUTRAL, "#7a7a7a", scale=70, bump=1.0, rough=0.95)
+        hd = layer("hide")
+        c3 = shell("hide", 0.44, 0.3, 0.6, fur, lambda x, y: x < 0.08, seg=20, z0=0.92, parent=hd,
+                   loc=(-0.05, 0, 0), scale=(0.64, 1.14, 1))
+        self.mask_parts[c3] = "hide"
+        c4 = torus("ruff", 0.22, 0.07, fur, parent=hd, loc=(-0.02, 0, 1.5), scale=(0.82, 1.2, 1))
+        self.mask_parts[c4] = "hide"
+
+        # Mail with the shoulders doubled, Gallic and Roman alike.
         mailm = mat("mail", "#5e5e5a", "#86867e", scale=90, metal=0.6, rough=0.45, bump=0.9)
-        ml = empty("mail", root)
+        ml = layer("mail")
         cyl("mskirt", 0.31, 0.25, 0.36, mailm, seg=14, z0=0.68, parent=ml, scale=(0.86, 1.13, 1))
         cyl("mtorso", 0.25, 0.295, 0.5, mailm, seg=14, z0=1.02, parent=ml, scale=(0.8, 1.14, 1))
         ball("mchest", 0.21, mailm, parent=ml, loc=(0.03, 0, 1.38), scale=(0.97, 1.38, 0.72))
         for s in (1, -1):
             ball("mshoulder", 0.115, mailm, parent=ml, loc=(0, s * 0.3, 1.46))
+        shell("doubling", 0.33, 0.17, 0.17, mailm, lambda x, y: True, seg=18, z0=1.37, parent=ml,
+              scale=(0.72, 1.14, 1))
         cyl("mbelt", 0.26, 0.26, 0.08, leather, seg=14, z0=1.0, parent=ml, scale=(0.84, 1.14, 1))
-        self.items["mail"] = ml
 
-        cp = empty("cap", root)
+        cp = layer("cap")
         half_ball("capdome", 0.172, leather, sz=0.8, parent=cp, loc=(-0.02, 0, 1.79))
         torus("capband", 0.168, 0.018, leather, parent=cp, loc=(-0.02, 0, 1.79))
-        self.items["cap"] = cp
 
-        hm = empty("helmet", root)
-        half_ball("dome", 0.18, bronze, sz=0.95, parent=hm, loc=(-0.02, 0, 1.78))
-        cyl("knob", 0.03, 0.015, 0.08, bronze, seg=8, z0=1.95, parent=hm)
-        shell("guard", 0.2, 0.19, 0.06, bronze, lambda x, y: x < 0.02, z0=1.73, parent=hm, loc=(-0.04, 0, 0))
+        # Bronze Montefortino: the Roman helmet, knob on top, neck guard, cheeks.
+        hm = layer("helmet")
+        half_ball("dome", 0.18, bronze, sz=1.05, parent=hm, loc=(-0.02, 0, 1.78))
+        cyl("knob", 0.03, 0.015, 0.08, bronze, seg=8, z0=1.96, parent=hm)
+        shell("guard", 0.22, 0.19, 0.05, bronze, lambda x, y: x < 0.02, z0=1.73, parent=hm, loc=(-0.04, 0, 0))
         for s in (1, -1):
-            box("cheek", 0.1, 0.02, 0.14, bronze, parent=hm, loc=(0.06, s * 0.15, 1.62))
-        self.items["helmet"] = hm
+            box("cheek", 0.1, 0.02, 0.15, bronze, parent=hm, loc=(0.06, s * 0.155, 1.6))
 
-        # --- Held things -------------------------------------------------------
+        # Iron Agen/Alesia cap: the Gallic helmet. Ridge at the base, the rim
+        # flaring at the back into a neck guard.
+        def iron_cap(e):
+            half_ball("dome", 0.182, dark_iron, sz=0.88, parent=e, loc=(-0.02, 0, 1.78))
+            torus("ridge", 0.182, 0.016, dark_iron, parent=e, loc=(-0.02, 0, 1.79))
+            shell("rim", 0.235, 0.19, 0.05, dark_iron, lambda x, y: x < 0.0, seg=20, z0=1.73, parent=e,
+                  loc=(-0.05, 0, 0))
+            for s in (1, -1):
+                box("cheek", 0.11, 0.018, 0.15, dark_iron, parent=e, loc=(0.05, s * 0.158, 1.6))
+
+        hi = layer("helmet_iron")
+        iron_cap(hi)
+        ball("knob", 0.025, dark_iron, sub=1, parent=hi, loc=(-0.02, 0, 1.95))
+
+        # The raven helm: an old iron cap with a bronze bird on the crown, its
+        # wings spread (after the Tintignac bird helmet).
+        hb = layer("helmet_bird")
+        iron_cap(hb)
+        dark_bronze = mat("dbronze", "#5a4024", "#3a2a1a", metal=0.85, rough=0.4, scale=12)
+        ball("bird", 0.08, dark_bronze, parent=hb, loc=(-0.02, 0, 2.02), scale=(1.6, 0.7, 0.75))
+        ball("bhead", 0.05, dark_bronze, parent=hb, loc=(0.12, 0, 2.1))
+        cyl("beak", 0.026, 0.0, 0.09, dark_bronze, seg=6, parent=hb, loc=(0.16, 0, 2.1), rot=(0, math.radians(100), 0))
+        for s in (1, -1):
+            box("wing", 0.2, 0.3, 0.02, dark_bronze, parent=hb, loc=(-0.04, s * 0.16, 2.1),
+                rot=(math.radians(s * 40), 0, 0))
+        cyl("tail", 0.04, 0.0, 0.1, dark_bronze, seg=4, parent=hb, loc=(-0.12, 0, 2.0), rot=(0, math.radians(-100), 0),
+            scale=(0.4, 1.4, 1))
+
+        # --- Held things -------------------------------------------------------------
         def held(name, hand, rot=(0, 0, 0), loc=(0, 0, 0)):
             e = empty(name, hand, loc, rot)
             self.items[name] = e
             return e
 
+        along = (0, math.radians(90), 0)  # turns a cylinder from +z to +x
+
+        # Gallic long sword: blade about 47% of body height, parallel edges, a
+        # short point, a narrow bell-shaped guard and no crossbar.
         sw = held("sword", self.hand_r, (0, math.radians(-35), 0))
-        cyl("grip", 0.025, 0.025, 0.14, leather, seg=6, parent=sw, rot=(0, math.radians(90), 0))
-        box("guard", 0.03, 0.16, 0.03, iron, parent=sw, loc=(0.08, 0, -0.015))
-        box("blade", 0.78, 0.055, 0.015, steel, x0=0.09, parent=sw, loc=(0, 0, -0.008))
-        ball("pommel", 0.035, iron, sub=1, parent=sw, loc=(-0.08, 0, 0))
+        cyl("grip", 0.024, 0.024, 0.15, leather, seg=6, z0=-0.075, parent=sw, rot=along)
+        ball("pommel", 0.026, iron, sub=1, parent=sw, loc=(-0.085, 0, 0))
+        cyl("bell", 0.024, 0.04, 0.045, iron, seg=10, z0=0.075, parent=sw, rot=along, scale=(0.45, 1, 1))
+        box("blade", 0.86, 0.05, 0.014, steel, x0=0.12, parent=sw, loc=(0, 0, -0.007))
+        cyl("point", 0.025, 0.0, 0.07, steel, seg=4, z0=0.98, parent=sw, rot=along, scale=(0.3, 1, 1))
+
+        # Gladius: blade about 37%, long tapering point, bone guard, grip and
+        # ball pommel.
+        gl = held("gladius", self.hand_r, (0, math.radians(-35), 0))
+        cyl("grip", 0.026, 0.026, 0.12, bone, seg=8, z0=-0.06, parent=gl, rot=along)
+        for x in (-0.03, 0.0, 0.03):
+            torus("ridge", 0.027, 0.006, bone, seg=10, rseg=4, parent=gl, loc=(x, 0, 0), rot=along)
+        ball("pommel", 0.04, bone, parent=gl, loc=(-0.08, 0, 0), scale=(0.8, 1, 1))
+        ball("guard", 0.05, bone, parent=gl, loc=(0.075, 0, 0), scale=(0.45, 1.25, 0.7))
+        box("blade", 0.52, 0.06, 0.016, steel, x0=0.1, parent=gl, loc=(0, 0, -0.008))
+        cyl("point", 0.03, 0.0, 0.2, steel, seg=4, z0=0.62, parent=gl, rot=along, scale=(0.27, 1, 1))
 
         dg = held("dagger", self.hand_r, (0, math.radians(-30), 0))
-        cyl("grip", 0.022, 0.022, 0.11, leather, seg=6, parent=dg, rot=(0, math.radians(90), 0))
+        cyl("grip", 0.022, 0.022, 0.11, leather, seg=6, parent=dg, rot=along)
         box("blade", 0.3, 0.05, 0.014, steel, x0=0.06, parent=dg)
 
         ax = held("axe", self.hand_r, (0, math.radians(-40), 0))
-        cyl("haft", 0.028, 0.028, 0.75, wood, seg=6, z0=-0.1, parent=ax, rot=(0, math.radians(90), 0))
+        cyl("haft", 0.028, 0.028, 0.75, wood, seg=6, z0=-0.1, parent=ax, rot=along)
         box("head", 0.12, 0.03, 0.2, iron, parent=ax, loc=(0.6, 0, -0.06))
 
         sp = held("spear", self.hand_r, (0, math.radians(8), 0))
@@ -797,46 +1016,70 @@ class Figure:
         cyl("shaft", 0.03, 0.026, 1.95, dark_wood, seg=7, z0=-0.75, parent=st)
 
         cb = held("club", self.hand_r, (0, math.radians(-38), 0))
-        cyl("club", 0.03, 0.065, 0.7, dark_wood, seg=8, z0=-0.08, parent=cb, rot=(0, math.radians(90), 0))
+        cyl("club", 0.03, 0.065, 0.7, dark_wood, seg=8, z0=-0.08, parent=cb, rot=along)
 
         jv = held("javelin", self.hand_r, (0, math.radians(10), 0))
         cyl("shaft", 0.018, 0.018, 1.6, wood, seg=6, z0=-0.55, parent=jv)
         cyl("head", 0.03, 0.0, 0.2, iron, seg=6, z0=1.05, parent=jv)
+
+        # Pilum: about 105% of body height, the top third a thin iron shank
+        # with a small pyramidal point, and a block where iron meets wood.
+        pl = held("pilum", self.hand_r, (0, math.radians(10), 0))
+        cyl("shaft", 0.024, 0.024, 1.2, wood, seg=6, z0=-0.7, parent=pl)
+        box("block", 0.07, 0.07, 0.09, wood, parent=pl, loc=(0, 0, 0.5))
+        cyl("shank", 0.01, 0.01, 0.74, iron, seg=5, z0=0.58, parent=pl)
+        cyl("point", 0.022, 0.0, 0.07, iron, seg=4, z0=1.32, parent=pl)
 
         sl = held("sling", self.hand_r)
         cord = mat("cord", "#6a5434", "#7a6440", scale=30)
         cyl("cord", 0.008, 0.008, -0.42, cord, seg=4, parent=sl)
         ball("pouch", 0.04, leather, sub=1, parent=sl, loc=(0, 0, -0.44), scale=(1, 1, 0.7))
 
-        bw = held("bow", self.hand_l)
-        R, span = 0.7, math.radians(52)
-        pts = [(R - R * math.cos(t) + 0.02, R * math.sin(t)) for t in [-span + 2 * span * i / 8 for i in range(9)]]
-        for i in range(8):
+        # Self bow, about 85-90% of body height, held low enough to clear
+        # the ground.
+        bw = held("bow", self.hand_l, loc=(0, 0, 0.12))
+        R_, span = 1.05, math.radians(52)
+        pts = [(R_ - R_ * math.cos(t) + 0.02, R_ * math.sin(t)) for t in [-span + 2 * span * i / 10 for i in range(11)]]
+        for i in range(10):
             (x0, z0), (x1, z1) = pts[i], pts[i + 1]
             ln = math.hypot(x1 - x0, z1 - z0)
             ang = math.atan2(x1 - x0, z1 - z0)
-            cyl("limb", 0.022, 0.022, ln, dark_wood, seg=6, parent=bw, loc=(x0, 0, z0), rot=(0, ang, 0))
+            th = 0.024 - 0.008 * abs(i - 4.5) / 4.5
+            cyl("limb", th, th, ln, dark_wood, seg=6, parent=bw, loc=(x0, 0, z0), rot=(0, ang, 0))
         (xa, za), (xb, zb) = pts[0], pts[-1]
         cyl("string", 0.005, 0.005, zb - za, cord, seg=4, z0=za, parent=bw, loc=(xa, 0, 0))
 
+        # Gallic shield: a tall narrow oval, about 65% of body height, with a
+        # spine and an iron boss.
         board = mat("board", NEUTRAL, "#a8a8a8", scale=10, bump=0.2)
-        sh = held("shield", self.hand_l, (0, 0, math.radians(25)), (0.08, 0.1, 0.2))
-        b = cyl("board", 0.5, 0.5, 0.04, board, seg=24, parent=sh, rot=(math.radians(90), 0, 0), scale=(0.62, 1.0, 1.0))
+        sh = held("shield", self.hand_l, (0, 0, math.radians(25)), (0.08, 0.1, 0.12))
+        b = cyl("board", 0.63, 0.63, 0.04, board, seg=28, parent=sh, rot=(math.radians(90), 0, 0), scale=(0.56, 1.0, 1.0))
         self.mask_parts[b] = "board"
-        box("spine", 0.06, 0.03, 0.85, wood, parent=sh, loc=(0, 0.035, -0.42))
-        ball("boss", 0.09, iron, parent=sh, loc=(0, 0.04, 0), scale=(1.3, 0.6, 1.0))
+        box("spine", 0.06, 0.03, 1.1, wood, parent=sh, loc=(0, 0.035, -0.55))
+        ball("boss", 0.09, iron, parent=sh, loc=(0, 0.045, 0), scale=(1.4, 0.6, 1.0))
 
         ss = held("small_shield", self.hand_l, (0, 0, math.radians(25)), (0.06, 0.1, 0.05))
         b2 = cyl("board", 0.3, 0.3, 0.035, board, seg=20, parent=ss, rot=(math.radians(90), 0, 0))
         self.mask_parts[b2] = "board"
         ball("boss", 0.07, iron, parent=ss, loc=(0, 0.03, 0), scale=(1, 0.6, 1))
 
-        sc = held("scutum", self.hand_l, (0, 0, math.radians(20)), (0.08, 0.06, 0.15))
-        b3 = shell("board", 0.62, 0.62, 1.1, board, lambda x, y: y > 0.5, seg=36, z0=-0.55, parent=sc,
-                   loc=(0, -0.55, 0))
+        # Scutum of the Republic: a tall curved oval, about 75% of body height
+        # and half as wide, a spine from rim to rim, a bronze boss.
+        sc = held("scutum", self.hand_l, (0, 0, math.radians(20)), (0.1, 0.07, 0.04))
+        b3 = curved_oval("board", 0.37, 0.73, 0.55, board, parent=sc)
         self.mask_parts[b3] = "board"
-        ball("boss", 0.08, bronze, parent=sc, loc=(0, 0.08, 0), scale=(1.2, 0.6, 1.0))
+        box("spine", 0.05, 0.03, 1.4, wood, parent=sc, loc=(0, 0.03, -0.7))
+        ball("boss", 0.085, bronze, parent=sc, loc=(0, 0.045, 0), scale=(1.25, 0.6, 1.0))
         self._mats = {}
+
+    @property
+    def body(self):
+        seen = []
+        for objs in self.body_sets.values():
+            for o in objs:
+                if o not in seen:
+                    seen.append(o)
+        return seen
 
     def pose(self, facing, step):
         self.root.rotation_euler = (0, 0, math.radians(60 * facing))
@@ -857,6 +1100,7 @@ class Figure:
         sc = bpy.context.scene
         if on:
             black = emission("black", (0, 0, 0))
+            check = pattern_mask()
             cache = {}
             for ob in [o for o in bpy.data.objects if o.type == "MESH" and o.name != "catcher"]:
                 self._mats[ob] = list(ob.data.materials)
@@ -864,8 +1108,9 @@ class Figure:
                 col = MASK_COLORS[key] if key else None
                 if col and col not in cache:
                     cache[col] = emission("mask%s" % (col,), col)
+                m = check if key == "cloak" else (cache[col] if col else black)
                 for i in range(len(ob.data.materials)):
-                    ob.data.materials[i] = cache[col] if col else black
+                    ob.data.materials[i] = m
             bpy.data.objects["catcher"].hide_render = True
             sc.cycles.samples = 8
             sc.cycles.use_denoising = False
@@ -878,22 +1123,40 @@ class Figure:
             sc.cycles.use_denoising = True
 
 
-MASKED = ("body", "cloak", "shield", "small_shield", "scutum")
+BODIES = ["body", "body_f", "body_roman"]
+HAIR = ["hair_long", "hair_swept", "hair_short", "hair_knot", "hair_braid", "hair_bun"]
+FACES = ["moustache", "beard"]
+TORCS = ["torc_gold", "torc_bronze"]
+GEAR_LAYERS = ["cloak", "hide", "mail", "cap", "helmet", "helmet_iron", "helmet_bird", "sword", "gladius", "dagger",
+               "axe", "spear", "staff", "club", "javelin", "pilum", "sling", "bow", "shield", "small_shield", "scutum"]
+FIG_LAYERS = BODIES + HAIR + FACES + TORCS + GEAR_LAYERS
+# Layers drawn on the dead and the fallen as well as the standing.
+DOWN_LAYERS = BODIES + HAIR + FACES + TORCS
+# Which body hides what is behind it when a layer renders. Women's hair goes
+# with the woman's body; everything else with the man's (the heads, arms and
+# shoulders are the same).
+HOLDOUT = {"hair_braid": "body_f", "hair_bun": "body_f"}
 
 
 def render_layers(f, layers, folder, down_layers=("body",)):
-    """Render each layer at 6 facings x 3 steps. The body renders alone; each
-    other layer renders with the body as a holdout, so the game can stack
-    them in any combination."""
+    """Render each layer at 6 facings x 3 steps. A body renders alone; each
+    other layer renders with a body as a holdout, so the game can stack
+    them in any combination. A layer gets a mask render if any of its parts
+    is tagged for recoloring."""
     items = list(f.items.values())
+    sets = getattr(f, "body_sets", {"body": f.body})
     for name in layers:
         item = f.items.get(name)
+        base = name if name in sets else HOLDOUT.get(name, "body")
         show(items, False)
         for ob in f.body:
+            ob.hide_render = ob not in sets[base]
             ob.is_holdout = item is not None
         if item is not None:
             show([item], True)
-        for mode in (["lit", "mask"] if name in MASKED and f.mask_parts else ["lit"]):
+        shown = sets[base] if item is None else [o for o in item.children_recursive if o.type == "MESH"]
+        masked = any(o in f.mask_parts for o in shown)
+        for mode in (["lit", "mask"] if masked else ["lit"]):
             f.mask_mode(mode == "mask")
             for facing in range(6):
                 for k, step in enumerate((0, 1, -1)):
@@ -905,10 +1168,7 @@ def render_layers(f, layers, folder, down_layers=("body",)):
         f.mask_mode(False)
     for ob in f.body:
         ob.is_holdout = False
-
-
-FIG_LAYERS = ["body", "cloak", "mail", "cap", "helmet", "sword", "dagger", "axe", "spear", "staff", "club",
-              "javelin", "sling", "bow", "shield", "small_shield", "scutum"]
+        ob.hide_render = False
 
 
 def render_figure():
@@ -916,7 +1176,7 @@ def render_figure():
     frame(*FIG_FRAME)
     f = Figure()
     want = [l for l in FIG_LAYERS if not ONLY or "figure" in ONLY or l in ONLY]
-    render_layers(f, want, "figure")
+    render_layers(f, want, "figure", DOWN_LAYERS)
 
 
 # --- Beasts ---------------------------------------------------------------------
@@ -986,23 +1246,33 @@ def render_beasts():
 
 
 def render_preview():
-    """Development check, not part of the build: a few gear combinations at
-    two facings, and the wolf, at 4x size."""
+    """Development check, not part of the build: some people at two facings,
+    and the wolf, at full render size."""
     new_scene(32)
     frame(*FIG_FRAME)
-    sc = bpy.context.scene
     f = Figure()
-    combos = {"warrior": ["cloak", "helmet", "sword", "shield"], "spear": ["cap", "spear", "small_shield"],
-              "roman": ["mail", "helmet", "sword", "scutum"], "hunter": ["cloak", "bow"],
-              "plain": ["staff"], "slinger": ["sling", "axe"]}
-    for name, gear in combos.items():
+    combos = {"warrior": ("body", ["hair_swept", "moustache", "cloak", "torc_bronze", "sword", "shield"]),
+              "noble": ("body", ["mail", "hair_long", "moustache", "torc_gold", "helmet_iron", "sword", "shield"]),
+              "raven": ("body", ["hair_long", "beard", "cloak", "helmet_bird", "spear"]),
+              "roman": ("body_roman", ["mail", "hair_short", "helmet", "gladius", "scutum"]),
+              "pilum": ("body_roman", ["hair_short", "pilum"]),
+              "woman": ("body_f", ["hair_braid", "torc_gold"]), "elder": ("body_f", ["hair_bun", "cloak"]),
+              "german": ("body", ["hair_knot", "beard", "hide", "spear", "small_shield"]),
+              "hunter": ("body", ["hair_long", "beard", "bow"])}
+    sets = f.body_sets
+    for name, (body, gear) in combos.items():
         show(list(f.items.values()), False)
+        for ob in f.body:
+            ob.hide_render = ob not in sets[body]
         show([f.items[g] for g in gear], True)
-        for facing in (5, 1):
+        for facing in (5, 1, 3):
             f.pose(facing, 1 if facing == 1 else 0)
             render(os.path.join(OUT, "preview", "%s_%d.png" % (name, facing)))
     f.lie()
+    for ob in f.body:
+        ob.hide_render = ob not in sets["body"]
     show(list(f.items.values()), False)
+    show([f.items["hair_long"], f.items["beard"]], True)
     render(os.path.join(OUT, "preview", "down.png"))
     new_scene(32)
     frame(*BEAST_FRAME)

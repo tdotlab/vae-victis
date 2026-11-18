@@ -1,9 +1,11 @@
 {
-  "_comment": "Art styles for the style proof (M7). F2 on a map cycles them. 'sprites' uses the rendered sprites; 'pixel' is the size of one art pixel at 720p; 'palette' snaps colors to a fixed set.",
+  "_comment": "Art styles for the style proof (M7). F2 on a map cycles them. 'sprites' uses the rendered sprites; 'pixel' is the size of one art pixel at 720p; 'palette' snaps colors to a fixed set; 'grade' is a color grade over the map (contrast, saturation, a multiplying tint, vignette strength).",
   "message": "Art style: %s (F2 to change)",
   "styles": [
-    {"id": "rendered", "name": "Rendered", "sprites": true},
-    {"id": "pixel", "name": "Pixel", "sprites": true, "pixel": 3},
+    {"id": "rendered", "name": "Rendered", "sprites": true,
+     "grade": {"contrast": 1.12, "saturation": 0.82, "tint": "#fff4e2", "vignette": 0.35}},
+    {"id": "pixel", "name": "Pixel", "sprites": true, "pixel": 3,
+     "grade": {"contrast": 1.12, "saturation": 0.82, "tint": "#fff4e2", "vignette": 0.35}},
     {"id": "pixel_palette", "name": "Pixel, fixed palette", "sprites": true, "pixel": 4, "dither": 0.3,
      "palette": ["#141210", "#24201c", "#3a3128", "#4e4134", "#66563f", "#7f6c4f", "#9a8664", "#b8a47e",
                  "#d8c8a0", "#f0e6c8", "#1e2614", "#2f3a1e", "#44502a", "#5a6634", "#727a42", "#8c8c52",
