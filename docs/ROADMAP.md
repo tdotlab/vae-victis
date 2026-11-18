@@ -32,7 +32,7 @@ Ending slides, balance passes, a full playthrough per major build style (fighter
 
 Wanted, not now. Pick up when the time is right.
 
-- **Grit pass toward Fallout** (T, 2026-11-18). T wants the art "a little closer" to Fallout, specifically the look T knows: Fallout 1 played in the Fallout 2 engine (the Fallout: Et Tu / Fallout 1in2 mods, likely with a hi-res patch). Look at reference shots first. Likely levers: a harder, lower sun and stronger shadows; darker, more contrasty ground; denser clutter on maps; a dark outline on figures; maybe a mild palette tuned for Gaul rather than Fallout's browns. Do it after T's playtest, and check combat stays readable. Before and after shots for T to pick. T wants to lean further rather than less: the flatter, more painted Fallout finish also hides how simple our script-built models are, which is the point of pre-rendering in the first place.
+Nothing parked right now.
 
 ## Working notes
 
