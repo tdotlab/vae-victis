@@ -29,6 +29,8 @@ var _move_token := 0
 var _wander_timer := 0.0
 var _camera: Camera2D
 var _cam_offset := Vector2.ZERO
+var _map_rect := Rect2()
+const HUD_BAR_H := 152.0
 var _floor: _Layer
 var _things: _Layer
 var _over: _Layer
@@ -74,7 +76,7 @@ func _ready() -> void:
 	_setup_containers_and_exits()
 	_update_night()
 	hud.refresh()
-	var cam_target := display_pos[player] as Vector2
+	var cam_target := _clamp_to_map(display_pos[player] as Vector2)
 	_camera.position = cam_target
 	_camera.reset_smoothing()
 	var first_visit: bool = not gs.map_states.has(map.id) or not gs.map_states[map.id].get("visited", false)
@@ -535,9 +537,26 @@ func _update_camera(delta: float) -> void:
 	var focus: Vector2 = display_pos[player]
 	if combat.active and combat.current and combat.current != player:
 		focus = display_pos[combat.current]
-	_camera.position = focus + _cam_offset
+	var want := _clamp_to_map(focus + _cam_offset)
+	_cam_offset = want - focus
+	_camera.position = want
 	if player.has_meta("walking"):
 		_cam_offset = _cam_offset.lerp(Vector2.ZERO, minf(1.0, delta * 3.0))
+
+
+## Keeps the view over the map: no panning off into the void. A map smaller
+## than the screen stays centered on that axis.
+func _clamp_to_map(p: Vector2) -> Vector2:
+	if _map_rect.size == Vector2.ZERO:
+		_map_rect = map.bounds_px(Paint.HEX).grow(-Paint.HEX * 1.2)
+	var half := get_viewport_rect().size / (2.0 * _camera.zoom)
+	var bar := HUD_BAR_H / _camera.zoom.y  # the HUD hides the bottom of the view
+	var lo := _map_rect.position + half
+	var hi := _map_rect.end - half + Vector2(0, bar)
+	var out := p
+	for ax in [0, 1]:
+		out[ax] = (lo[ax] + hi[ax]) / 2.0 if lo[ax] > hi[ax] else clampf(p[ax], lo[ax], hi[ax])
+	return out
 
 
 func _npc_idle_moves() -> void:
