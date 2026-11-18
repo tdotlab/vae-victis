@@ -1,0 +1,109 @@
+class_name Scenarios
+extends RefCounted
+## Ready-made game situations for development and screenshot checks.
+## Not reachable from the game's menus.
+
+
+static func test_hero() -> CharacterSheet:
+	var s := CharacterSheet.create("Tester", {"STR": 6, "END": 6, "AGI": 7, "PER": 6, "WIT": 6, "PRE": 6, "FOR": 3},
+		["blades", "speech", "missiles"], [])
+	for id in ["gallic_sword", "gallic_shield", "leather_jerkin"]:
+		s.inventory.add(id, 1)
+		s.equip(id)
+	s.inventory.add("javelin", 3)
+	s.inventory.add("herbs", 2)
+	s.silver = 30
+	s.hp = s.max_hp()
+	return s
+
+
+static func start(name: String) -> void:
+	match name:
+		"title":
+			Game.goto("title", {})
+		"create":
+			Game.goto("create", {})
+		"sandbox", "fight", "talk", "loot", "inventory", "character", "barter":
+			Game.new_game(test_hero())
+			Game.state.map_id = "sandbox"
+			Game.goto("map", {})
+		"world":
+			Game.new_game(test_hero())
+			Game.state.set_quest("hostages", "find_tally")
+			Game.goto("world", {})
+		"newgame":
+			Game.new_game(test_hero())
+			Game.start_story()
+		_:
+			# Any map id: drop the test hero there.
+			Game.new_game(test_hero())
+			Game.state.map_id = name
+			Game.goto("map", {})
+
+
+## Scripted actions for screenshot runs: walk:x:y, fight, talk:<uid>,
+## open:<panel>, wait:<frames>, attack:<uid>, endturn, key:<choice number>.
+static func act(main: Node, a: String) -> void:
+	var parts := a.split(":")
+	var tree := main.get_tree()
+	var screen: Node = main.current_screen()
+	var map := screen as LocalMap
+	match parts[0]:
+		"wait":
+			for i in range(int(parts[1])):
+				await tree.process_frame
+		"walk":
+			if map:
+				var c := Hex.offset_to_axial(int(parts[1]), int(parts[2]))
+				var path := Pathfinder.find_path(map.map, map.player.cell, c, map.occupied(map.player))
+				await map._walk_player(path)
+		"fight":
+			if map:
+				map.combat.start_combat(map.player)
+				await tree.process_frame
+		"attack":
+			if map:
+				var t := map.find_actor(parts[1])
+				await map.combat.player_attack(t, parts[2] if parts.size() > 2 else "torso")
+		"endturn":
+			if map:
+				map.combat.player_end_turn()
+				for i in range(90):
+					await tree.process_frame
+		"talk":
+			if map:
+				var t2 := map.find_actor(parts[1])
+				map.open_dialogue(t2.dialogue, t2)
+				await tree.process_frame
+		"key":
+			var ev := InputEventKey.new()
+			ev.keycode = KEY_1 + int(parts[1]) - 1
+			ev.pressed = true
+			Input.parse_input_event(ev)
+			await tree.process_frame
+			await tree.process_frame
+		"open":
+			if map:
+				match parts[1]:
+					"inventory":
+						map.hud.open_inventory()
+					"character":
+						map.hud.open_character()
+					"journal":
+						map.hud.open_journal()
+					"chest":
+						map.open_container(parts[2] if parts.size() > 2 else "chest")
+					"barter":
+						map.hud.open_barter(map.find_actor(parts[2]))
+				await tree.process_frame
+		"hover":
+			if map:
+				map.hover = Hex.offset_to_axial(int(parts[1]), int(parts[2]))
+		"time":
+			Game.state.advance(int(parts[1]) * 60)
+		"click":
+			if map:
+				var c2 := Hex.offset_to_axial(int(parts[1]), int(parts[2]))
+				map.combat.on_click(c2, MOUSE_BUTTON_LEFT)
+				for i in range(60):
+					await tree.process_frame

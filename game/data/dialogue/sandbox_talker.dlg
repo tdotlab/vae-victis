@@ -1,0 +1,23 @@
+// Test conversation for the sandbox map.
+=== start
+[flag sandbox_met] -> again
+~ set sandbox_met
+The old man squints at you. "Bandits by the river. Two of them. Took my grandson's spear."
+* [speech 30] "I'll get it back. What's it worth to you?" -> reward
+* "Show me what you've got to trade." -> trade
+* "Not my problem." -> END
+
+=== again
+"Back again? The bandits are still out there."
+* "Trade." -> trade
+* "Bye." -> END
+
+=== reward
+"Twenty silver, all I have." He means it.
+~ quest sandbox_spear get_spear
+* "Done." -> END
+
+=== trade
+~ barter
+"Look all you like."
+* "Thanks." -> END

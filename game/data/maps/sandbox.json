@@ -1,0 +1,105 @@
+{
+  "id": "sandbox",
+  "name": "Testing ground",
+  "default": "grass",
+  "legend": {
+    ".": "grass",
+    ",": "meadow",
+    "_": "road",
+    "#": "wall_stone",
+    "T": "tree",
+    "P": "pine",
+    "~": "water",
+    "s": "shallows",
+    "b": "bush",
+    "r": "rock",
+    "w": "wall_wood",
+    "d": "door",
+    "f": "floor_earth",
+    "h": "hearth",
+    "m": "mud",
+    "@": {
+      "terrain": "road",
+      "mark": "start"
+    },
+    "1": {
+      "terrain": "grass",
+      "mark": "enemy"
+    },
+    "2": {
+      "terrain": "floor_earth",
+      "mark": "talker"
+    },
+    "3": {
+      "terrain": "grass",
+      "mark": "enemy2"
+    },
+    "c": {
+      "terrain": "crate",
+      "mark": "chest"
+    },
+    "e": {
+      "terrain": "road",
+      "mark": "exit_w"
+    }
+  },
+  "rows": [
+    "  ....,,,,....TT.......  ",
+    " ...,,,,,.....TTT........",
+    "...........b.....P.....rr",
+    "..TT....___________....r.",
+    "eTTT...._.........._.....",
+    "e.T.....@....wwwww._..1..",
+    "e......._....wfcfw._.....",
+    "...bb..._....wf2fd._...3.",
+    "........_....wfhfw._.....",
+    "..m.....______wwww.__....",
+    ".mmm.........ss..........",
+    "...~~~~~~~~~~ss~~~~~~~...",
+    "..~~~~~~~~~~~ss~~~~~~~~~.",
+    "  ......,,,,.....,,,.... "
+  ],
+  "actors": [
+    {
+      "uid": "cottos",
+      "template": "test_villager",
+      "mark": "talker"
+    },
+    {
+      "uid": "bandit1",
+      "template": "test_bandit",
+      "mark": "enemy"
+    },
+    {
+      "uid": "bandit2",
+      "template": "test_spearman",
+      "mark": "enemy2"
+    }
+  ],
+  "containers": [
+    {
+      "mark": "chest",
+      "name": "Wooden chest",
+      "items": [
+        [
+          "herbs",
+          2
+        ],
+        [
+          "javelin",
+          3
+        ]
+      ],
+      "silver": 20,
+      "lock": 10
+    }
+  ],
+  "exits": [
+    {
+      "mark": "exit_w",
+      "to": "world",
+      "label": "The road west"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,7 @@
+Left-click the ground to walk. Left-click a person to talk to them, a chest to open it, a body to search it. Right-click anything to look at it.
+
+Fighting is turn-based. Each turn you have action points (AP). Moving costs AP per hex (more in mud and brush); attacking costs what the weapon says. Right-click an enemy to aim at a body part. AP you don't spend make you harder to hit. Space ends your turn; Enter ends the fight once no enemy is close.
+
+Shields stop blows that come from the front. A javelin that hits a shield can stick in it and make it useless for the rest of the fight.
+
+Keys: I gear, C character, J journal, M travel, S sneak, A start a fight, F5 save, F9 load, arrow keys move the view, mouse wheel zooms, Home recenters.

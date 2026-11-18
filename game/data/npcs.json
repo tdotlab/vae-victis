@@ -1,0 +1,16 @@
+{
+  "npcs": [
+    {"id": "test_villager", "name": "Old Cottos", "faction": "villager", "attrs": {"PRE": 6}, "ai": "wander",
+     "dialogue": "sandbox_talker", "items": [["bread", 3], ["salt", 2]], "silver": 40,
+     "desc": "A stooped man with a beard like a thornbush.", "look": {"tunic": "#7a6a3a", "hair": "#c8c0b0"}},
+    {"id": "test_bandit", "name": "Bandit", "faction": "bandit", "hostile": true, "ai": "guard",
+     "attrs": {"STR": 6, "AGI": 6, "END": 5}, "tags": ["blades"], "equip": ["dagger", "leather_jerkin"],
+     "items": [["bread", 1]], "silver": 12, "xp": 40, "desc": "Hungry and armed.", "look": {"tunic": "#5a3a3a"}},
+    {"id": "test_spearman", "name": "Bandit spearman", "faction": "bandit", "hostile": true, "ai": "guard",
+     "attrs": {"STR": 6, "AGI": 5, "END": 6, "PER": 6}, "tags": ["spears", "missiles"], "equip": ["spear", "small_shield"],
+     "items": [["javelin", 2]], "silver": 5, "xp": 50, "desc": "Javelins over his shoulder.", "look": {"tunic": "#5a3a3a", "shield": "#6a3a20"}},
+    {"id": "wolf", "name": "Wolf", "faction": "beast", "hostile": true, "ai": "wander",
+     "attrs": {"STR": 4, "AGI": 8, "END": 4, "PER": 8}, "tags": ["brawling"], "equip": ["wolf_bite"],
+     "items": [["wolf_pelt", 1]], "xp": 30, "desc": "Grey, lean, and not afraid of you.", "look": {"beast": true, "tunic": "#6a6460"}}
+  ]
+}

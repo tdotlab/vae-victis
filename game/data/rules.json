@@ -1,0 +1,72 @@
+{
+  "attributes": [
+    {"id": "STR", "name": "Strength", "desc": "Raw power. Melee damage, carry weight, heavy shields."},
+    {"id": "END", "name": "Endurance", "desc": "Toughness. Hit points, resistance to poison and sickness, recovery."},
+    {"id": "AGI", "name": "Agility", "desc": "Speed and coordination. Action points, defense, sneaking."},
+    {"id": "PER", "name": "Perception", "desc": "Senses. Ranged accuracy, who acts first, noticing what others miss."},
+    {"id": "WIT", "name": "Wits", "desc": "Learning and cunning. Skill points per level, lore, sharper things to say."},
+    {"id": "PRE", "name": "Presence", "desc": "Bearing and charm. Speech, barter, how strangers take you at first sight."},
+    {"id": "FOR", "name": "Fortune", "desc": "The favor of the gods. Critical hits, strange encounters, luck at dice."}
+  ],
+  "attribute_start": 5,
+  "attribute_bonus_points": 5,
+  "attribute_min": 1,
+  "attribute_max": 10,
+  "skills": [
+    {"id": "blades", "name": "Blades", "group": "Combat", "base": "10 + 2*(STR+AGI)", "desc": "Swords, daggers, axes."},
+    {"id": "spears", "name": "Spears", "group": "Combat", "base": "10 + 2*(STR+PER)", "desc": "Thrusting spears and polearms. Reach from the second rank."},
+    {"id": "missiles", "name": "Missiles", "group": "Combat", "base": "5 + 2*(PER+AGI)", "desc": "Javelins, slings, bows."},
+    {"id": "brawling", "name": "Brawling", "group": "Combat", "base": "20 + 2*(STR+END)", "desc": "Fists, knees, heads. Also clubs and staves."},
+    {"id": "shield", "name": "Shield", "group": "Combat", "base": "10 + 2*(STR+END)", "desc": "Catching blows on a shield instead of your body."},
+    {"id": "sneak", "name": "Sneak", "group": "Covert", "base": "5 + 3*AGI", "desc": "Moving unseen and unheard."},
+    {"id": "locks", "name": "Locks", "group": "Covert", "base": "10 + PER + AGI", "desc": "Roman locks, Gallic latches, strongboxes."},
+    {"id": "steal", "name": "Steal", "group": "Covert", "base": "3*AGI", "desc": "Taking from pockets and purses, or putting things in them."},
+    {"id": "traps", "name": "Traps", "group": "Covert", "base": "10 + PER + AGI", "desc": "Finding, setting and disarming snares, pits and spikes."},
+    {"id": "healing", "name": "Healing", "group": "Body", "base": "2*(PER+WIT)", "desc": "Herbs, poultices and bandages. Quick help on the field."},
+    {"id": "surgery", "name": "Surgery", "group": "Body", "base": "5 + PER + WIT", "desc": "Deep wounds, broken bones, fevers. Slow and serious."},
+    {"id": "speech", "name": "Speech", "group": "Social", "base": "5*PRE", "desc": "Persuading, lying, threatening, soothing."},
+    {"id": "barter", "name": "Barter", "group": "Social", "base": "4*PRE", "desc": "Getting a better price."},
+    {"id": "gambling", "name": "Gambling", "group": "Social", "base": "5*FOR", "desc": "Dice and knucklebones, Roman or Gallic."},
+    {"id": "lore", "name": "Lore", "group": "Knowledge", "base": "4*WIT", "desc": "Gods, sacred places, plants, omens, and Gaulish written in Greek letters."},
+    {"id": "latin", "name": "Latin", "group": "Knowledge", "base": "2*WIT", "desc": "Speaking and reading the conqueror's tongue."},
+    {"id": "survival", "name": "Survival", "group": "Knowledge", "base": "2*(END+WIT)", "desc": "Travel, foraging, weather, tracks, and not being ambushed."}
+  ],
+  "tag_count": 3,
+  "tag_bonus": 20,
+  "skill_cap": 200,
+  "derived": {
+    "max_hp": "15 + STR + 2*END",
+    "hp_per_level": "3 + floor(END/2)",
+    "ap": "5 + floor(AGI/2)",
+    "defense": "AGI",
+    "carry": "25 + 25*STR",
+    "sequence": "2*PER",
+    "crit": "FOR",
+    "heal_rate": "max(1, floor(END/3))",
+    "melee_bonus": "max(0, STR-5)",
+    "skill_points": "5 + 2*WIT",
+    "sight": "4 + PER"
+  },
+  "perk_every": 3,
+  "max_traits": 2,
+  "traits": [
+    {"id": "once_sold", "name": "Once Sold", "desc": "You were a slave and bought your freedom. +15 Latin, +10 Barter. Romans and slavers know the brand; Gallic nobles look down on you.", "mods": {"skills": {"latin": 15, "barter": 10}}, "flags": ["branded"]},
+    {"id": "grove_raised", "name": "Raised in the Grove", "desc": "A druid's foster child. +15 Lore, +10 Healing. Shedding blood in a sacred place costs you dearly.", "mods": {"skills": {"lore": 15, "healing": 10}}, "flags": ["grove_raised"]},
+    {"id": "champions_pride", "name": "Champion's Pride", "desc": "+3 melee damage. You can't refuse a challenge to single combat without losing Honor, and your Speech suffers from it (-10).", "mods": {"derived": {"melee_bonus": 3}, "skills": {"speech": -10}}, "flags": ["proud"]},
+    {"id": "saddle_born", "name": "Born in the Saddle", "desc": "You travel a quarter faster across the land. On foot and in a fight you are clumsier: -1 action point.", "mods": {"derived": {"ap": -1}}, "flags": ["saddle_born"]},
+    {"id": "hostage_bred", "name": "Hostage-Bred", "desc": "You grew up as a hostage among the Arverni. +10 Speech, and the Arverni treat you as kin. Your own people trust you less.", "mods": {"skills": {"speech": 10}}, "flags": ["hostage_bred"]},
+    {"id": "gods_touched", "name": "Gods-Touched", "desc": "The gods are watching, and they are bored. Critical hits are three times as likely, and so are critical failures.", "mods": {}, "flags": ["gods_touched"]}
+  ],
+  "perks": [
+    {"id": "toughened", "name": "Toughened", "desc": "+4 hit points per level from now on, retroactively.", "level": 3, "mods": {"derived_per_level": {"max_hp": 4}}},
+    {"id": "quick_hands", "name": "Quick Hands", "desc": "+1 action point.", "level": 3, "mods": {"derived": {"ap": 1}}},
+    {"id": "shield_wall", "name": "Shield Wall", "desc": "+10 Shield, and allies beside you share half your shield bonus.", "level": 3, "mods": {"skills": {"shield": 10}}, "flags": ["shield_wall"]},
+    {"id": "bards_friend", "name": "Bard's Friend", "desc": "Your renown grows half again as fast, and the bards are kinder.", "level": 3, "mods": {}, "flags": ["bards_friend"]},
+    {"id": "knows_the_fords", "name": "Knows the Fords", "desc": "+20 Survival; fewer ambushes on the road.", "level": 3, "mods": {"skills": {"survival": 20}}},
+    {"id": "keen_eyed", "name": "Keen-Eyed", "desc": "+2 sight, +10 Missiles.", "level": 3, "mods": {"derived": {"sight": 2}, "skills": {"missiles": 10}}},
+    {"id": "head_taker", "name": "Head-Taker", "desc": "When you kill an enemy, every other enemy who sees it must test their nerve.", "level": 6, "mods": {}, "flags": ["head_taker"]},
+    {"id": "speaks_like_a_roman", "name": "Speaks Like a Roman", "desc": "+25 Latin. Romans treat you as one of the better sort of provincial.", "level": 6, "mods": {"skills": {"latin": 25}}},
+    {"id": "slippery", "name": "Slippery", "desc": "+20 Sneak, +10 Steal.", "level": 3, "mods": {"skills": {"sneak": 20, "steal": 10}}},
+    {"id": "silver_tongue", "name": "Silver Tongue", "desc": "+15 Speech, +10 Barter.", "level": 3, "mods": {"skills": {"speech": 15, "barter": 10}}}
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "quests": [
+    {
+      "id": "hostages",
+      "name": "The Three Hostages",
+      "main": true,
+      "xp": 0,
+      "stages": {
+        "find_tally": "The elders want the hostages back before the spring assembly. Find out where Rome sent them."
+      }
+    }
+  ]
+}
