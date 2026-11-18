@@ -45,6 +45,8 @@ tools/export-web.sh && tools/serve-web.sh
 
 That builds the browser version into `build/web` and serves it on http://localhost:8060. The web build is single-threaded, so any static host works without special headers.
 
+The demo is online at https://vae-victis.vercel.app (Vercel project `vae-victis`, public). `tools/deploy-web.sh` publishes the current `build/web` there; it needs the Vercel CLI login.
+
 ```bash
 tools/build-art.sh
 ```
