@@ -74,7 +74,7 @@ The fire jumps when you lift it, or seems to. The idol's nail eyes catch the lig
 
 === lore
 "The hanging dead? Old, that's whose." But he glances toward the passage.
-* [roll lore -10] "Taranis's share. Given in battle, a hundred years before your grandfather. The old songs say what happens to men who sleep under the god's portion and steal from his shrine. You've been dreaming of falling, haven't you?" -> lore_win | lore_fail
+* [roll lore -10] "Esus's share. Given in battle, a hundred years before your grandfather. The old songs say what happens to men who sleep under the god's portion and steal from his shrine. You've been dreaming of falling, haven't you?" -> lore_win | lore_fail
 
 === lore_win
 ~ give hostage_tally; set tally_given; quest grotto done_scared done; xp 125; leave_all grotto

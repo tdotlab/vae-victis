@@ -32,26 +32,26 @@ What we deliberately don't copy: the names (SPECIAL, Pip-Boy, Vault, and so on),
 
 ### Where and when
 
-Central Gaul, from late January to late September of 52 BC, which is the Great Revolt from its first spark to its end at Alesia. Roughly 240 in-game days.
+Central Gaul, from midwinter to mid-autumn of 52 BC, which is the Great Revolt from its first spark to its end at Alesia. Roughly 285 in-game days; day 1 is the Cenabum massacre, about 9 January. Dates follow [research/chronology-52bc.md](research/chronology-52bc.md).
 
 Gaul in 52 BC is a patchwork of rival peoples (Caesar's *civitates*) ruled by aristocrats, advised and judged by druids, wealthy from trade, and six years into Roman conquest. Caesar has spent those years playing tribes against each other, taking hostages to guarantee loyalty, and selling entire defeated populations into slavery. Some Gallic nobles got rich alongside him. Gallic aristocrats had been selling slaves to Roman traders for wine long before the legions came.
 
 ### The historical clock
 
-These events happen on schedule. The player can witness them, take part in them, and change their local consequences, but not their outcome. Day numbers are approximate and will be tuned for pacing.
+These events happen on schedule. The player can witness them, take part in them, and change their local consequences, but not their outcome. Day numbers follow the research, which reconstructs them from Caesar's own day counts and seasons; Caesar gives no calendar dates, so each is approximate.
 
 | Day | Event | Effect on the game |
 |---|---|---|
 | ~1 | Carnutes massacre the Roman traders at Cenabum. News crosses Gaul by men shouting from field to field and reaches the Arverni by nightfall. | Game start. The revolt is lit. |
-| ~5 | Vercingetorix, expelled from Gergovia by his own uncle, raises an army and takes the town. | Gergovia changes hands; its quests change. |
-| ~25 | Caesar crosses the Cevennes through deep snow and appears where no one expected him. | Roman patrols appear on the world map. |
-| ~50 | Scorched earth: the Bituriges burn more than twenty of their own towns in one day to starve Caesar. They beg to spare Avaricum, and are allowed to. | Several world-map locations burn. Refugees appear. |
-| ~60–85 | Siege and sack of Avaricum. Caesar says barely 800 of about 40,000 escaped. | Avaricum is a timed location: after it falls, it's ruins. |
-| ~120 | Caesar is beaten at Gergovia. | Revolt morale peaks; Roman standing drops everywhere. |
-| ~130 | The Aedui, Rome's oldest allies, defect. They seize the Roman depot at Noviodunum, kill its garrison, and take the hostages to Bibracte. | The Act I goal changes location. |
-| ~140 | Vercingetorix is confirmed supreme commander at an assembly at Bibracte. | Political endgame begins. |
-| ~180–240 | Siege of Alesia. The Mandubii expel their women and children, who starve between the lines. A relief army fails. Vercingetorix surrenders. Caesar gives one captive to each of his soldiers. | Act III. The game ends here. |
-| Epilogue | Next year, at Uxellodunum in Cadurci country, Caesar cuts off the town's water by tunneling into its spring, then cuts off the hands of every defender who bore arms. | The final ending slide for the player's home region. |
+| ~7 | Vercingetorix, expelled from Gergovia by his own uncle, raises the rural poor, comes back, drives out his opponents and is hailed king. | Gergovia changes hands; its quests change. |
+| ~56 | Caesar crosses the Cevennes through deep snow and appears where no one expected him. | Roman patrols appear on the world map. |
+| ~105 | Scorched earth: the Bituriges burn more than twenty of their own towns in one day to starve Caesar. They beg to spare Avaricum, and are allowed to. | Several world-map locations burn. Refugees appear. |
+| ~108–137 | Siege and sack of Avaricum. Caesar says barely 800 of about 40,000 escaped. | Avaricum is a timed location: after it falls, it's ruins. |
+| ~190 | Caesar is beaten at Gergovia. | Revolt morale peaks; Roman standing drops everywhere. |
+| ~196 | The Aedui, Rome's oldest allies, defect. They seize the Roman depot at Noviodunum, kill its garrison, and take the hostages to Bibracte. | The Act I goal changes location. |
+| ~215 | Vercingetorix is confirmed supreme commander at an assembly at Bibracte. | Political endgame begins. |
+| ~230–284 | Siege of Alesia. The Mandubii expel their women and children, and Caesar refuses to take them in (that they starved between the lines is Cassius Dio's detail, not Caesar's). A relief army fails. Vercingetorix surrenders. Caesar gives one captive to each of his soldiers, except the Aedui and Arverni, whose men he sends home. | Act III. The game ends here. |
+| Epilogue | Next year, at Uxellodunum in Cadurci country, Caesar cuts off the town's water by tunneling into its spring, then cuts off the hands of every defender who bore arms, and spares their lives. | The final ending slide for the player's home region. |
 
 ### Tone
 
@@ -73,7 +73,7 @@ Guardrails:
 
 The player is from **Brigodunon** (placeholder name), a small hill fort of the Cadurci in the limestone country of the southwest, the region of modern Lot. Five years ago, when Caesar's influence reached the Cadurci, Brigodunon gave three hostages to Rome as a guarantee of good behavior. One of them is the player's sibling.
 
-The game opens on the day the news from Cenabum arrives, shouted across the hills. The elders understand at once: if the Cadurci join the revolt, Rome's hostages die or are sold. If they don't join, Vercingetorix will treat them as traitors. Brigodunon will be forced to choose a side at the spring assembly, about 120 days away. The elders send the player out to bring the hostages home before that choice is made, or at least to learn where they are and what it would take to free them.
+The game opens on the day the news from Cenabum arrives, shouted across the hills. The elders understand at once: if the Cadurci join the revolt, Rome's hostages die or are sold. If they don't join, Vercingetorix will treat them as traitors. Brigodunon will be forced to choose a side at the spring assembly, about 120 days away (an invented deadline, not Caesar's). The elders send the player out to bring the hostages home before that choice is made, or at least to learn where they are and what it would take to free them.
 
 That is the water chip: personal, specific, and on a clock.
 
@@ -87,7 +87,7 @@ Along the way the player discovers that the hostages' fate is a business matter.
 
 Fallout's second act is the discovery that the water chip was never the real problem. Ours is the same move. The real enemy isn't Rome, which no one can beat. It's the people who turned the conquest into a market and are positioned to profit from every outcome, including the revolt. Dannotalos helps arm the rebels, because a bigger war means more captives.
 
-The Aedui defection at around day 130 scrambles everything. The player can be inside Noviodunum when it falls, help seize it, or arrive after. The hostages move to Bibracte. The player can go after Vettius's network through its funding, its Gallic partners, its depot (**The Pens**, a holding compound at a river crossing), or its paper. The druids, the Germanic mercenaries, and the Aeduan factions each offer a different way in, at a different price.
+The Aedui defection at around day 196 scrambles everything. The player can be inside Noviodunum when it falls, help seize it, or arrive after. The hostages move to Bibracte. The player can go after Vettius's network through its funding, its Gallic partners, its depot (**The Pens**, a holding compound at a river crossing), or its paper. The druids, the Germanic mercenaries, and the Aeduan factions each offer a different way in, at a different price.
 
 ### Act III: Alesia (days ~180 to ~240)
 
@@ -119,11 +119,11 @@ A world map of central Gaul on a grid, like Fallout's, traveled in days. Travel 
 | **The Grotto of the Hanging Dead** | First dungeon near home. A cave shrine used by bandits, and worse. | The rat caves |
 | **Vindomagos** (placeholder) | Small farming and salt-trading village, the first friendly outsiders | Shady Sands |
 | **Gergovia** | Arverni capital. Vercingetorix's rise, politics, recruitment, a big market. | The Hub |
-| **Avaricum** | The richest city in Gaul. Timed: sacked around day 85. | Necropolis (a place that changes or ends on a timer) |
+| **Avaricum** | The richest city in Gaul. Timed: sacked around day 137. | Necropolis (a place that changes or ends on a timer) |
 | **The Carnute forest** | Annual assembly of the druids, the closest thing Gaul has to a center. Knowledge, judgment, initiation. | Brotherhood of Steel |
 | **Cenabum** | Burned trade town where the revolt began. Scavengers and grudges. | Junktown |
 | **Bibracte** | Aeduan capital. Rich, Romanized, collaborating until it isn't. Endless intrigue. | The Boneyard / Adytum politics |
-| **Noviodunum** | Caesar's depot on the Loire. Hostages, baggage, horses. Seized by the Aedui around day 130. | Military Base, act one version |
+| **Noviodunum** | Caesar's depot on the Loire. Hostages, baggage, horses. Seized by the Aedui around day 196. | Military Base, act one version |
 | **The Germanic camp** | Mounted mercenaries in Caesar's pay, and deserters from them. Raiders, horse thieves. | The Khans |
 | **The Bone Field** | An old battlefield shrine where the victors displayed the dead. Superstition, plague, and grave robbers. | The Glow |
 | **The Pens** | Vettius's captive depot at a river crossing. | The Cathedral / Mariposa |
@@ -286,7 +286,7 @@ Roughly Fallout 1's size: about a dozen locations, 60 or more named characters w
 
 ## Open questions for T
 
-- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Epona.
+- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina.
 - The secret ahistorical path: yes or no. Default no.
 - Is the player character fixed (a named person) or player-made? Default: player-made name and sex, fixed origin in Brigodunon, like Fallout.
 - How dark the Avaricum and Alesia sequences may get. Default: shown plainly, never lingered on.

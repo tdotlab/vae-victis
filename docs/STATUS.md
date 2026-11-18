@@ -2,7 +2,7 @@
 
 Updated 2026-11-18.
 
-**Phase:** M7 art. The demo maps are fully dressed in the Rendered style: bigger people with worn and carried gear as layers, the wolf, cliffs, cave walls, rocks and thatched roofs. Art is frozen while T plays the demo; content comes next, from T's notes.
+**Phase:** T has played the demo ("a damn solid foundation"). The cleanup pass is done: the clock follows Caesar (about 285 days), the research's text fixes are in, three known bugs are fixed. Next: the figure rework (women, Roman kit, optional torc and moustache, hairstyles) with the parked grit pass, then Phase 3, starting at Gergovia. Not yet applied from [research/](research/README.md): the rampart redraw, interiors and props, item descriptions, the raven_helm re-anchor.
 
 **Working:**
 - M0 Foundation: hex map in isometric view, click-to-walk with A* pathfinding, camera pan and zoom, data loading, headless test runner (fails on any script error), web export that runs in a browser.
@@ -22,10 +22,7 @@ Updated 2026-11-18.
 
 **Known rough edges:**
 - Art: water is a plain texture, skin tone is not recolored, only the wolf has a beast sprite (other beasts fall back to the placeholder), and the world map and title screen are unchanged.
-- Enemies that haven't seen you stay out of a fight even when their friends are in it.
-- Winning the ford by force only closes the quest with Sulicena if you loot Haldo's pay tablet.
-- The ford's toll rider charges you every crossing until the ford is settled.
 - Consequences that pay off later (hired riders in Act III, the discovered lie, the pardoned exile) are recorded as flags; the content that uses them doesn't exist yet.
 - Balance is untested by a human: check odds, enemy strength, prices.
 
-**Waiting on T:** play the demo; the open questions at the end of [DESIGN.md](DESIGN.md), including real names for the placeholders.
+**Waiting on T:** the open questions at the end of [DESIGN.md](DESIGN.md), including real names for the placeholders.

@@ -2,6 +2,12 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-18 (cleanup pass after the research)
+
+- **The clock follows Caesar, not 240 days.** Caesar's own day counts don't fit in 240; Alesia surrenders about day 284. Events moved: Cevennes 56, scorched earth 105, Avaricum 137, Gergovia 190, new Noviodunum event 196. Seasons: winter to day 70, spring to 160, summer to 255. Roman foragers start at day 45. The "spring assembly" deadline (120) stays as an invented in-game deadline.
+- **The Grotto's hanged dead belong to Esus**, the one god the sources tie to hanging. Shrine theft is a capital crime judged by druids, so pardoning Dubnacos is a heavier ask. Epona is now Eponina (the girl's-name form that is attested). Haldo's saddle is explained: Caesar's tribunes gave the Germans their horses and saddles (BG VII.65), because his people think saddles soft (IV.2).
+- **Enemies hear their friends fight.** A hostile within 10 hexes of a same-faction fighter joins the fight even if it hasn't seen the player. When a faction's last member dies the game sets `wiped_<faction>`, which Sulicena accepts as proof the riders are dead, so winning the ford by force no longer needs the pay tablet. The toll rider remembers being paid.
+
 ## 2026-11-18 (T's first playtest)
 
 - **No brown in the interface.** T hates it. Panels are charcoal iron with iron-gray edges, bone text and brass accents (`src/ui/ui_theme.gd`). The map itself stays earthy; this is about the interface.

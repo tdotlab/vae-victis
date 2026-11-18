@@ -69,11 +69,11 @@ func get_standing(faction: String) -> int:
 
 func season() -> String:
 	var d := day()
-	if d <= 45:
+	if d <= 70:
 		return "winter"
-	if d <= 135:
+	if d <= 160:
 		return "spring"
-	if d <= 230:
+	if d <= 255:
 		return "summer"
 	return "autumn"
 

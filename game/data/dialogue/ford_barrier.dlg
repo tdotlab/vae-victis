@@ -2,13 +2,19 @@
 @speaker A rider at the barrier
 === start
 [flag ford_fought] -> empty
+[flag ford_waded] -> waved
 A rider wades into the water in front of the stakes, spear held low and easy. "Toll," he says in bad Gaulish. "Five." He holds up five fingers in case you missed it.
 * [silver 5] Pay him five silver and wade across. -> paid ~ silver -5
 * "I'll talk to Haldo first." -> back
 * Push past him. -> fight
 
 === paid
+~ set ford_waded
 He steps aside. "Come back soon," he says, and seems pleased with the phrase.
+* Cross. -> END
+
+=== waved
+The rider looks at you, remembers the five silver, and waves you through with his spear. "Paid. Go."
 * Cross. -> END
 
 === back

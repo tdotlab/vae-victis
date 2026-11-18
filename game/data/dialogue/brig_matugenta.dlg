@@ -10,7 +10,7 @@
 -> hub
 
 === hub
-* "Tell me about Epona." -> epona
+* "Tell me about Eponina." -> epona
 * [!flag mother_gift] "I'll need things for the road." -> gift
 * [quest hostages active] "I'm going to find her." -> going
 * "Later." -> END

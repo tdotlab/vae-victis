@@ -1,24 +1,27 @@
 {
-  "_comment": "The historical clock. Each event fires once, when its day arrives, and sets the flags listed. Text is the news as it reaches the Cadurci hills. Day numbers follow docs/DESIGN.md and will be tuned.",
+  "_comment": "The historical clock. Each event fires once, when its day arrives, and sets the flags listed. Text is the news as it reaches the Cadurci hills. Day 1 is the Cenabum massacre, about 9 January 52 BC; day numbers follow docs/research/chronology-52bc.md.",
   "events": [
     {"id": "cenabum", "day": 1, "silent": true, "flags": {"revolt_begun": 1}},
-    {"id": "gergovia_taken", "day": 5, "title": "News from the Arverni",
-     "text": "A potter coming down from the north says Vercingetorix, the young Arvernian noble whose own uncle threw him out of Gergovia, came back with an army of the poor and the desperate and took the town. They call him king now. The potter says he's handsome. The potter is not a reliable witness.",
+    {"id": "gergovia_taken", "day": 7, "title": "News from the Arverni",
+     "text": "A potter coming down from the north says Vercingetorix, the young Arvernian noble whose own uncle threw him out of Gergovia, came back with an army of the poor and the desperate and drove out every elder who told him to wait. They call him king now. The potter says he's handsome. The potter is not a reliable witness.",
      "flags": {"gergovia_taken": 1}},
     {"id": "lucterius", "day": 12, "title": "A rider in the hills",
      "text": "Lucterius of the Cadurci is riding from hall to hall, calling men to the revolt in Vercingetorix's name. Every hearth in the hills is arguing about it. Every hearth in Brigodunon is thinking about three hostages.",
      "flags": {"lucterius_recruiting": 1}},
-    {"id": "cevennes", "day": 25, "title": "Caesar in the snow",
+    {"id": "cevennes", "day": 56, "title": "Caesar in the snow",
      "text": "Caesar has crossed the Cevennes through snow six feet deep, where everyone agreed no army could go, and his horsemen are burning Arvernian farms. In his own account he will call this a demonstration of Roman diligence. The farmers have another word for it.",
      "flags": {"caesar_crossed": 1}},
-    {"id": "scorched_earth", "day": 50, "title": "Smoke in the north",
+    {"id": "scorched_earth", "day": 105, "title": "Smoke in the north",
      "text": "The Bituriges have burned more than twenty of their own towns in a single day, so Caesar's army would find nothing to eat. They begged to spare Avaricum, the most beautiful city in Gaul, and the council let them.",
      "flags": {"scorched_earth": 1}},
-    {"id": "avaricum_fallen", "day": 85, "title": "Avaricum",
+    {"id": "avaricum_fallen", "day": 137, "title": "Avaricum",
      "text": "Avaricum has fallen. Those who got out say the Romans spared no one: not the old, not the women, not the children. Of about forty thousand people, some eight hundred reached Vercingetorix's camp.",
      "flags": {"avaricum_fallen": 1}},
-    {"id": "gergovia_victory", "day": 120, "title": "Caesar beaten",
+    {"id": "gergovia_victory", "day": 190, "title": "Caesar beaten",
      "text": "Caesar has been beaten under the walls of Gergovia. For the first time in six years, the legions are the ones retreating.",
-     "flags": {"caesar_beaten": 1}}
+     "flags": {"caesar_beaten": 1}},
+    {"id": "noviodunum", "day": 196, "title": "The Aedui turn",
+     "text": "The Aedui, Rome's oldest friends in Gaul, have thrown over Caesar. They seized his depot at Noviodunum, killed the garrison, and took the hostages, the grain and the pay chest to Bibracte. Somewhere in that baggage are the children of half the peoples of Gaul.",
+     "flags": {"aedui_defected": 1}}
   ]
 }

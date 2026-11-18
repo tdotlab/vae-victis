@@ -41,8 +41,8 @@ The vates is on his knees by the altar stone, picking splinters of the offering 
 === lore
 ~ set vates_lore
 [lore 30] ~ xp 20
-[lore 30] You know some of this already, from your grandmother: the old peoples gave Taranis his share of the battle dead, hung in high places, and you don't take back what's been given. The vates sees you know it, and nods.
-"Old dead, given to the thunderer. The old songs say anyone who sleeps under them dreams of falling, and anyone who steals from them falls." He smiles a little. "The songs say a great many things. But outlaws are superstitious men. They'll have stayed near the mouth, I'd guess, and kept away from the deep chambers."
+[lore 30] You know some of this already, from your grandmother: the old peoples gave Esus his share of the battle dead, hung from the trees and the high ledges, and you don't take back what's been given. The vates sees you know it, and nods.
+"Old dead, given to Esus, who takes his share from a branch. The old songs say anyone who sleeps under them dreams of falling, and anyone who steals from them falls. The druids judge that kind of theft, not the elders, and they have never judged it kindly." He smiles a little. "The songs say a great many things. But outlaws are superstitious men. They'll have stayed near the mouth, I'd guess, and kept away from the deep chambers."
 -> hub
 
 === heal

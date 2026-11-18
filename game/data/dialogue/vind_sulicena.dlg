@@ -17,6 +17,7 @@ The headwoman of Vindomagos is counting sacks in her own storeroom, and makes yo
 * [quest ford none] "Vellaunos sends his greetings. Is there anything Vindomagos needs?" -> ford_offer
 * [quest ford active, !flag ford_settled, latin 40, !item roman_order, !flag sul_forge] "Those riders were Roman cavalry. What if Rome called them home?" -> forge
 * [item rider_tablet, quest ford active, !flag ford_settled] "The riders at the ford are dead." -> done_dead
+* [flag wiped_riders, !item rider_tablet, quest ford active, !flag ford_settled] "The riders at the ford are dead." -> done_dead
 * [flag ford_settled, !flag ford_done, quest ford active] "The ford is open." -> done
 * [flag ford_done] "Has the grain gone up the hill?" -> grain
 * "Can I sleep here tonight?" -> sleep
@@ -83,7 +84,8 @@ She looks at you a little differently, as if she's revised a price. Then she fet
 
 === done_dead
 ~ quest ford riders_dead; quest ford done done; set ford_done; set ford_settled; set ford_open; standing vindomagos 20; silver 25; xp 50
-She looks at the tablet, at the blood on it, and doesn't touch it. "All of them?"
+[item rider_tablet] She looks at the tablet, at the blood on it, and doesn't touch it. "All of them?"
+[!item rider_tablet] She looks at your hands, then your face, and doesn't ask for proof. "All of them?"
 
 "Well." She lets out a long breath. "It had to be someone. I'm glad it wasn't my boys." She counts out silver. "The carts go up the hill tomorrow. Brigodunon eats this summer."
 -> hub

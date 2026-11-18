@@ -6,7 +6,7 @@
 [flag ford_toll_paid] -> paid_again
 [flag haldo_met] -> again
 ~ set haldo_met
-He's the one with the mail shirt, sitting on a saddle by the fire with a spear across his knees. Fair hair knotted on the side of his head the way his people wear it, and a face that's been out in all weathers for years.
+He's the one with the mail shirt, sitting on a Roman officer's saddle by the fire with a spear across his knees. Fair hair knotted on the side of his head the way his people wear it, and a face that's been out in all weathers for years.
 
 "Another one from the village." His Gaulish is good, with an accent like gravel. "Toll is five silver a head. Grain is two a sack. Horses, four. Children, free." He smiles without much in it. "I am Haldo. What do you want?"
 -> hub
@@ -27,7 +27,7 @@ He's the one with the mail shirt, sitting on a saddle by the fire with a spear a
 * "Nothing. Goodbye." -> END
 
 === who
-"Batavi. Ubii. A Sueb or two." He shrugs. "Caesar hired us across the Rhenus four years ago. Good pay, he said. We rode for him in the Belgae lands and in Britannia." He spits into the fire. "This autumn the pay stopped. So we took our horses as our wages, and here we are. A ford is a good place to sit. Everyone has to cross a river sometime."
+"Batavi. Ubii. A Sueb or two." He shrugs. "Caesar hired us across the Rhenus four years ago. Good pay, he said. We rode for him in the Belgae lands and in Britannia." He spits into the fire. "This autumn the pay stopped. So we took our horses as our wages, and here we are. A ford is a good place to sit. Everyone has to cross a river sometime." He pats the saddle. "My people think a saddle is for the soft. Caesar's tribunes gave us their horses, and these, and said a man can't fight Gauls on a blanket. They were right. We kept the saddles."
 -> hub
 
 === tally

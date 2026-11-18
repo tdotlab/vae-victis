@@ -38,7 +38,7 @@ The hall smells of smoke and wet wool. The elders are all here, arguing, and whe
 * "Goodbye." -> END
 
 === hostages
-"Ateula is mine. Twelve when they took her; she'd be seventeen. Clever. Too clever for her own good, her mother said." He stops for a moment. "Iccios is Cobnertos's boy. Big for his age. He wanted to be a smith like his father. And Epona you know better than I do."
+"Ateula is mine. Twelve when they took her; she'd be seventeen. Clever. Too clever for her own good, her mother said." He stops for a moment. "Iccios is Cobnertos's boy. Big for his age. He wanted to be a smith like his father. And Eponina you know better than I do."
 
 "Rome takes the children of the people it doesn't trust, and raises them Roman, or tries. Some come back speaking Latin and wearing their hair short. Some don't come back."
 -> hub
@@ -69,7 +69,7 @@ You hold the tally to the light. The letters are worn, and Roman soldiers abbrev
 === pardon
 "Dubnacos." He says the name like something he found in his food. "He killed Senovir's son over a cow, three winters ago. Seven winters' exile, that was the judgment, and Senovir thinks it was too soft."
 
-"And now he steals from the gods' shrine and wants to come home for it." He shakes his head. "Give me a reason."
+"And now he steals from the gods' shrine and wants to come home for it. That isn't mine to forgive. The druids judge what's taken from the gods, and the judgment is death." He shakes his head. "Give me a reason. A good one."
 * [speech 45] "Brigodunon is about to need every man who can hold a sword. He's one. Exile doesn't make him any less ours." -> pardon_yes
 * [honor >= 15] "Let him come home on my word. If he breaks the peace, the shame is mine." -> pardon_oath
 * [PRE 7] "That tally is the only thread to Ateula. What's a cow against your daughter?" -> pardon_yes

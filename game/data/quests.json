@@ -7,7 +7,7 @@
       "xp": 0,
       "stages": {
         "summoned": "Vellaunos has sent for me. Whatever it is, it has to do with the news from Cenabum.",
-        "find_tally": "Five years ago Brigodunon gave Rome three hostages: Ateula, Iccios, and my sibling Epona. If the Cadurci join the revolt, Rome kills or sells them. Vellaunos wants them home before the spring assembly. First I need the Roman tally that says where they were sent. It was kept at the shrine, and it is gone. Cintugnatos the vates knows more.",
+        "find_tally": "Five years ago Brigodunon gave Rome three hostages: Ateula, Iccios, and my sibling Eponina. If the Cadurci join the revolt, Rome kills or sells them. Vellaunos wants them home before the spring assembly. First I need the Roman tally that says where they were sent. It was kept at the shrine, and it is gone. Cintugnatos the vates knows more.",
         "read_tally": "I have the tally back. Nobody in Brigodunon reads Roman letters. Vellaunos says Sulicena, headwoman of Vindomagos, trades with everyone; she may know who can.",
         "ask_riders": "Sulicena can't read the tally either. The horsemen holding the ford at the Oltis served in Caesar's cavalry and would know a Roman depot mark. So would Lugurix, the salt merchant in Vindomagos, for a price.",
         "north": "The tally was cut at Noviodunum, Caesar's depot on the Liger, in Aedui country. Vellaunos should hear this.",

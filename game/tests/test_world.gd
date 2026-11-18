@@ -107,6 +107,24 @@ func test_real_calendar_is_ordered_and_valid() -> void:
 			check(e.has("text") and e.has("title"), "%s has title and text" % e["id"])
 
 
+func test_calendar_follows_caesar_not_a_240_day_year() -> void:
+	var day := {}
+	for e in DB.calendar():
+		day[e["id"]] = int(e["day"])
+	check(day["cevennes"] >= 44, "Caesar must reach Narbo before the Cevennes (about day 44)")
+	check(day["avaricum_fallen"] > day["scorched_earth"] + 25, "the Avaricum ramp alone took 25 days")
+	check(day["gergovia_victory"] > day["avaricum_fallen"] + 40, "Gergovia is weeks after Avaricum")
+	check(day["noviodunum"] >= day["gergovia_victory"], "the Aedui turn after Gergovia")
+
+
+func test_seasons_follow_the_calendar() -> void:
+	var gs := GameState.new()
+	var want := {1: "winter", 70: "winter", 71: "spring", 160: "spring", 161: "summer", 255: "summer", 256: "autumn"}
+	for d in want:
+		gs.minutes = (d - 1) * 1440 + 8 * 60
+		eq(gs.season(), want[d], "season on day %d" % d)
+
+
 func test_discovery() -> void:
 	var w := _w()
 	var c := w.location_cell(w.location("grotto"))

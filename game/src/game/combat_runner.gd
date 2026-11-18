@@ -38,6 +38,10 @@ func start_combat(initiator: Actor, target: Actor = null) -> void:
 			participants.append(a)
 	if target and not participants.has(target):
 		participants.append(target)
+	# Their friends hear the fight and come, even without seeing you.
+	for a in map.actors:
+		if a.is_active() and a.hostile and not participants.has(a) and _hears_friends(a, participants):
+			participants.append(a)
 	for a in participants:
 		_join(a)
 	order = CombatRules.turn_order(participants)
@@ -54,6 +58,15 @@ func _aware(a: Actor) -> bool:
 		if (o.is_player or o.is_companion) and o.is_active():
 			if map.can_see(a, o) or Hex.distance(a.cell, o.cell) <= 3:
 				return true
+	return false
+
+
+## True if a hostile who hasn't noticed the player has a same-faction friend
+## already fighting within earshot.
+func _hears_friends(a: Actor, fighters: Array) -> bool:
+	for o in fighters:
+		if o != a and o.hostile and o.is_active() and o.faction == a.faction and Hex.distance(a.cell, o.cell) <= 10:
+			return true
 	return false
 
 
@@ -78,10 +91,24 @@ func _end_combat() -> void:
 			a.unconscious = false
 		if a.has_meta("broken"):
 			a.remove_meta("broken")
+	_note_wiped_factions()
 	Game.say("The fighting is over.")
 	map.busy = false
 	map.hud.refresh()
 	map.save_map_state()
+
+
+## Sets wiped_<faction> when every member of a faction on this map is dead,
+## so quests can notice a clean kill without the player carrying proof.
+func _note_wiped_factions() -> void:
+	var seen := {}
+	for a in map.actors:
+		if a.faction == "neutral" or a.is_player or a.is_companion:
+			continue
+		seen[a.faction] = bool(seen.get(a.faction, true)) and a.dead
+	for f in seen:
+		if seen[f]:
+			Game.state.set_flag("wiped_" + f)
 
 
 func can_end_combat() -> bool:
@@ -153,7 +180,7 @@ func _run() -> void:
 
 func _recruit_newly_aware() -> void:
 	for a in map.actors:
-		if a.hostile and a.is_active() and not order.has(a) and _aware(a):
+		if a.hostile and a.is_active() and not order.has(a) and (_aware(a) or _hears_friends(a, order)):
 			_join(a)
 			order.append(a)
 
