@@ -45,7 +45,7 @@ static func fill_hex(ci: CanvasItem, c: Vector2i, color: Color) -> void:
 
 
 ## Raised block (wall, rock, furniture) standing on cell c.
-static func block(ci: CanvasItem, c: Vector2i, tdef: Dictionary, fade: bool = false) -> void:
+static func block(ci: CanvasItem, c: Vector2i, tdef: Dictionary, fade: float = 1.0) -> void:
 	var h := float(tdef.get("height", 20))
 	var p := Hex.to_pixel(c, HEX)
 	var base := Hex.corners(p, HEX)
@@ -54,7 +54,7 @@ static func block(ci: CanvasItem, c: Vector2i, tdef: Dictionary, fade: bool = fa
 		top.append(v - Vector2(0, h))
 	var col := Color(tdef.get("color", "#777777"))
 	col = col.lightened((_hash(c) - 0.5) * 0.08)
-	var a := 0.45 if fade else 1.0
+	var a := fade
 	# Visible side faces: edges 0-1, 1-2, 2-3, 3-4 (right through left, front).
 	var shades := [0.30, 0.22, 0.12, 0.05]
 	for i in range(4):
@@ -71,11 +71,11 @@ static func block(ci: CanvasItem, c: Vector2i, tdef: Dictionary, fade: bool = fa
 		ci.draw_circle(p - Vector2(0, h + 4), 3.0, Color(1.0, 0.85, 0.4, 0.95))
 
 
-static func tree(ci: CanvasItem, c: Vector2i, tdef: Dictionary, fade: bool = false) -> void:
+static func tree(ci: CanvasItem, c: Vector2i, tdef: Dictionary, fade: float = 1.0) -> void:
 	var p := Hex.to_pixel(c, HEX)
 	var h := float(tdef.get("height", 46))
 	var col := Color(tdef.get("color", "#2f3d1c"))
-	var a := 0.4 if fade else 1.0
+	var a := fade
 	ci.draw_set_transform(p, 0, Vector2(1, 0.5))
 	ci.draw_circle(Vector2.ZERO, 14.0, Color(0, 0, 0, 0.25 * a))
 	ci.draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)

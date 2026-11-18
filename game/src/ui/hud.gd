@@ -50,7 +50,7 @@ func _build_bar() -> void:
 	_log.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_log.add_theme_font_size_override("normal_font_size", 14)
 	var log_bg := StyleBoxFlat.new()
-	log_bg.bg_color = Color("#140f0a")
+	log_bg.bg_color = Color("#0e1012")
 	log_bg.set_content_margin_all(6)
 	_log.add_theme_stylebox_override("normal", log_bg)
 	hb.add_child(_log)

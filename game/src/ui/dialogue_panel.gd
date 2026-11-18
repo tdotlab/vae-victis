@@ -111,8 +111,8 @@ func _choice_button(text: String, cb: Callable) -> Button:
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD
 	b.custom_minimum_size.x = 760
 	b.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
-	b.add_theme_color_override("font_color", Color("#d8c48a"))
-	b.add_theme_color_override("font_hover_color", Color("#fff0c0"))
+	b.add_theme_color_override("font_color", Color("#e2c77a"))
+	b.add_theme_color_override("font_hover_color", Color("#ffffff"))
 	return b
 
 

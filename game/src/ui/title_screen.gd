@@ -7,7 +7,7 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	theme = UITheme.get_theme()
 	var bg := ColorRect.new()
-	bg.color = Color("#140e09")
+	bg.color = Color("#0f1114")
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 	var art := _Backdrop.new()
@@ -21,7 +21,7 @@ func _ready() -> void:
 	center.add_child(vb)
 	var t := UITheme.label("VAE VICTIS", 72, UITheme.BRONZE)
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	t.add_theme_color_override("font_outline_color", Color("#2a1a0c"))
+	t.add_theme_color_override("font_outline_color", Color("#0a0b0d"))
 	t.add_theme_constant_override("outline_size", 10)
 	vb.add_child(t)
 	var sub := UITheme.label(DB.story().get("tagline", "Gaul, 52 BC"), 18, UITheme.DIM)
@@ -46,16 +46,16 @@ class _Backdrop extends Control:
 		var w := size.x
 		var h := size.y
 		var sky := PackedVector2Array([Vector2(0, 0), Vector2(w, 0), Vector2(w, h), Vector2(0, h)])
-		draw_polygon(sky, PackedColorArray([Color("#2a2420"), Color("#2a2420"), Color("#120c08"), Color("#120c08")]))
+		draw_polygon(sky, PackedColorArray([Color("#2a2f36"), Color("#2a2f36"), Color("#101216"), Color("#101216")]))
 		# The fort sits low, under the menu, so the palisade never shows between buttons.
 		var hill := PackedVector2Array([Vector2(0, h * 0.9), Vector2(w * 0.18, h * 0.86), Vector2(w * 0.38, h * 0.8),
 			Vector2(w * 0.62, h * 0.79), Vector2(w * 0.8, h * 0.84), Vector2(w, h * 0.88), Vector2(w, h), Vector2(0, h)])
-		draw_colored_polygon(hill, Color("#1a130d"))
+		draw_colored_polygon(hill, Color("#15181b"))
 		# Palisade on the hilltop.
 		for i in range(48):
 			var x := w * 0.4 + i * (w * 0.2 / 48.0)
 			var top := h * 0.755 - (sin(i * 1.7) * 3.0)
-			draw_line(Vector2(x, h * 0.797), Vector2(x, top), Color("#0e0906"), 4.0)
+			draw_line(Vector2(x, h * 0.797), Vector2(x, top), Color("#0b0c0e"), 4.0)
 		# Smoke from the hearths.
 		for j in range(3):
 			var sx := w * (0.45 + j * 0.05)

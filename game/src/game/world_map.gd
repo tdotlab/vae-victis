@@ -484,14 +484,14 @@ func _update_hover() -> void:
 
 func _draw() -> void:
 	var season := Game.state.season()
-	draw_rect(Rect2(Vector2(-2000, -2000), Vector2(world.width * CELL + 4000, world.height * CELL + 4000)), Color("#100c08"))
+	draw_rect(Rect2(Vector2(-2000, -2000), Vector2(world.width * CELL + 4000, world.height * CELL + 4000)), Color("#0f1113"))
 	for y in range(world.height):
 		for x in range(world.width):
 			var c := Vector2i(x, y)
 			var r := Rect2(Vector2(x, y) * CELL, Vector2(CELL, CELL))
 			if not _is_seen(c):
 				var h := Paint._hash(c)
-				draw_rect(r, Color("#17120c").lightened(h * 0.04))
+				draw_rect(r, Color("#16191c").lightened(h * 0.04))
 				continue
 			_draw_cell(c, r, season)
 	# Faint grid over the known country.

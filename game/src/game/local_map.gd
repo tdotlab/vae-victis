@@ -6,8 +6,8 @@ extends Node2D
 
 signal clicked_cell(cell: Vector2i, button: int)
 
-const STEP_TIME := 0.13
-const COMBAT_STEP_TIME := 0.16
+const STEP_TIME := 0.2
+const COMBAT_STEP_TIME := 0.22
 
 var map: MapData
 var actors: Array = []
@@ -391,12 +391,13 @@ func _walk_player(path: Array[Vector2i], then: Callable = Callable()) -> void:
 	var token := _move_token
 	player.set_meta("walking", true)
 	busy = true
-	for c in path:
+	for i in path.size():
+		var c := path[i]
 		if token != _move_token:
 			return
 		if actor_at(c) != null:
 			break
-		await step_actor(player, c, STEP_TIME)
+		await step_actor(player, c, STEP_TIME, path[mini(i + 2, path.size() - 1)])
 		_after_player_step()
 		if combat.active or _leaving:
 			break
@@ -471,21 +472,41 @@ func face(a: Actor, target: Vector2i) -> void:
 		a.facing = Hex.direction_to(a.cell, target)
 
 
-func step_actor(a: Actor, c: Vector2i, dur: float) -> void:
-	face(a, c)
+## Faces toward `look` unless the current facing is already close enough.
+## Hex paths zigzag (straight south is SE, SW, SE...), so facing each next cell
+## would flip the figure every step; looking a couple of cells ahead with some
+## slack keeps it steady.
+func _face_along(a: Actor, look: Vector2i) -> void:
+	if look == a.cell:
+		return
+	var v := Hex.to_flat(look) - Hex.to_flat(a.cell)
+	var ang := atan2(-v.y, v.x)
+	if absf(angle_difference(a.facing * PI / 3.0, ang)) <= deg_to_rad(42.0):
+		return
+	a.facing = posmod(int(round(ang / (PI / 3.0))), 6)
+
+
+## Moves an actor one hex. Each hex is half a stride: the walk cycle runs
+## from standing to one leg forward and back to standing, and the next hex
+## uses the other leg, so the feet keep pace with the ground.
+func step_actor(a: Actor, c: Vector2i, dur: float, look: Vector2i = c) -> void:
+	if look == c:
+		face(a, c)
+	else:
+		_face_along(a, look)
 	var from: Vector2 = display_pos[a]
 	var to := Hex.to_pixel(c, Paint.HEX)
 	a.cell = c
+	var start := fmod(float(walk_phase[a]), TAU)
 	var t := 0.0
 	while t < dur:
-		var dt := get_process_delta_time()
-		t += dt
+		t += get_process_delta_time()
 		var k := minf(1.0, t / dur)
 		display_pos[a] = from.lerp(to, k)
-		walk_phase[a] = float(walk_phase[a]) + dt * 14.0
+		walk_phase[a] = start + k * PI
 		await get_tree().process_frame
 	display_pos[a] = to
-	walk_phase[a] = 0.0
+	walk_phase[a] = start + PI
 
 
 func lunge(a: Actor, target: Vector2i) -> void:
@@ -600,10 +621,11 @@ func _npc_idle_moves() -> void:
 
 func _walk_npc(a: Actor, path: Array[Vector2i]) -> void:
 	a.set_meta("walking", true)
-	for c in path:
+	for i in path.size():
+		var c := path[i]
 		if combat.active or actor_at(c) != null:
 			break
-		await step_actor(a, c, STEP_TIME)
+		await step_actor(a, c, STEP_TIME, path[mini(i + 2, path.size() - 1)])
 	a.remove_meta("walking")
 
 
@@ -860,6 +882,19 @@ func _draw_overlay(ci: CanvasItem) -> void:
 		Paint.grid_hex(ci, hover, col, 2.0)
 
 
+## Opacity of a tall thing standing at `p` with the player at `pp`: an oval
+## window that thins out whatever stands in front of the player, fading
+## smoothly with distance so walls never pop one segment at a time.
+func _see_through(p: Vector2, pp: Vector2) -> float:
+	var dy := p.y - pp.y
+	var front := smoothstep(-4.0, 14.0, dy)
+	if front <= 0.0:
+		return 1.0
+	var d := Vector2((p.x - pp.x) / 80.0, dy / 76.0).length()
+	var hole := 1.0 - smoothstep(0.5, 1.0, d)
+	return 1.0 - 0.68 * hole * front
+
+
 func _draw_things(ci: CanvasItem) -> void:
 	var tdefs := DB.terrain()
 	var sprites := Art.on()
@@ -886,8 +921,7 @@ func _draw_things(ci: CanvasItem) -> void:
 			var c: Vector2i = it[2]
 			var t: Dictionary = tdefs[map.cells[c]]
 			var p := Hex.to_pixel(c, Paint.HEX)
-			# Fade blocks that stand in front of the player and would hide them.
-			var fade := p.y > pp.y and p.y - pp.y < 60 and absf(p.x - pp.x) < 40 and float(t.get("height", 0)) > 20
+			var fade := _see_through(p, pp) if float(t.get("height", 0)) > 20 else 1.0
 			var tid: String = map.cells[c]
 			if sprites and Art.has_wall(tid):
 				Art.draw_wall(ci, map, c, tid, fade)

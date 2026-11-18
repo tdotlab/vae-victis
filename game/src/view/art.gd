@@ -143,18 +143,18 @@ static func has_thing(terrain: String) -> bool:
 
 ## Draws a wall hex joined to its neighbors. Bit d of the frame is set when
 ## the neighbor in Hex.DIRECTIONS[d] continues the wall.
-static func draw_wall(ci: CanvasItem, map: MapData, c: Vector2i, terrain: String, fade: bool) -> void:
+static func draw_wall(ci: CanvasItem, map: MapData, c: Vector2i, terrain: String, fade: float) -> void:
 	var e: Dictionary = manifest()["walls"][terrain]
 	var mask := 0
 	for d in range(6):
 		if str(map.cells.get(Hex.neighbor(c, d), "")) in e.get("connect", []):
 			mask |= 1 << d
-	_frame(ci, e, e["sheet"], mask, Hex.to_pixel(c, Paint.HEX), Color(1, 1, 1, 0.45 if fade else 1.0))
+	_frame(ci, e, e["sheet"], mask, Hex.to_pixel(c, Paint.HEX), Color(1, 1, 1, fade))
 
 
-static func draw_thing(ci: CanvasItem, c: Vector2i, terrain: String, fade: bool) -> void:
+static func draw_thing(ci: CanvasItem, c: Vector2i, terrain: String, fade: float) -> void:
 	var m := manifest()
-	var mod := Color(1, 1, 1, 0.4 if fade else 1.0)
+	var mod := Color(1, 1, 1, fade)
 	var p := Hex.to_pixel(c, Paint.HEX)
 	if m["trees"].has(terrain):
 		var e: Dictionary = m["trees"][terrain]

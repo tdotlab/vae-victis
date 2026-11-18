@@ -2,6 +2,12 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-18 (T's first playtest)
+
+- **No brown in the interface.** T hates it. Panels are charcoal iron with iron-gray edges, bone text and brass accents (`src/ui/ui_theme.gd`). The map itself stays earthy; this is about the interface.
+- **A hex is half a stride.** The walk cycle used to restart on every hex, so figures stepped with one leg and shuffled. Now each hex moves one leg forward and back, alternating, and a step takes 0.2 s instead of 0.13 s. Facing looks two cells ahead with some slack, so zigzag paths don't flip the figure every step.
+- **See-through walls as an oval, not single segments.** Tall things in front of the player thin out smoothly by distance (`LocalMap._see_through`), the way Fallout 2 cuts a window around the player, instead of fading one hex at a time.
+
 ## 2026-11-18 (dressing the demo, M7)
 
 - **People are drawn 1.3 times life size against the hexes.** At true scale a person was a smudge next to a house; Fallout cheats the same way. Walls and trees keep their scale.
