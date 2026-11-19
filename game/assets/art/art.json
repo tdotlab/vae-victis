@@ -202,7 +202,7 @@
     160
    ],
    "sheet": "props.png",
-   "cols": 5,
+   "cols": 15,
    "frame": 0,
    "under": "floor_earth"
   },
@@ -216,7 +216,7 @@
     160
    ],
    "sheet": "props.png",
-   "cols": 5,
+   "cols": 15,
    "frame": 1,
    "under": "floor_earth"
   },
@@ -230,7 +230,7 @@
     160
    ],
    "sheet": "props.png",
-   "cols": 5,
+   "cols": 15,
    "frame": 2,
    "under": "floor_earth"
   },
@@ -244,7 +244,7 @@
     160
    ],
    "sheet": "props.png",
-   "cols": 5,
+   "cols": 15,
    "frame": 3,
    "under": "floor_earth"
   },
@@ -258,9 +258,149 @@
     160
    ],
    "sheet": "props.png",
-   "cols": 5,
+   "cols": 15,
    "frame": 4,
    "under": null
+  },
+  "stall": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 5,
+   "under": "dirt"
+  },
+  "amphorae": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 6,
+   "under": "dirt"
+  },
+  "loom": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 7,
+   "under": "floor_earth"
+  },
+  "granary": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 8,
+   "under": null
+  },
+  "quern": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 9,
+   "under": "floor_earth"
+  },
+  "woodpile": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 10,
+   "under": "dirt"
+  },
+  "cart": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 11,
+   "under": "dirt"
+  },
+  "tent": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 12,
+   "under": "dirt"
+  },
+  "rubble": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 13,
+   "under": "dirt"
+  },
+  "smithy": {
+   "cell": [
+    224,
+    240
+   ],
+   "anchor": [
+    112,
+    160
+   ],
+   "sheet": "props.png",
+   "cols": 15,
+   "frame": 14,
+   "under": "dirt"
   }
  },
  "figure": {
@@ -390,6 +530,12 @@
      "hair": "figure_hair_swept_hair.png"
     }
    },
+   "hair_wrap": {
+    "sheet": "figure_hair_wrap.png",
+    "tints": {
+     "wrap": "figure_hair_wrap_wrap.png"
+    }
+   },
    "helmet": {
     "sheet": "figure_helmet.png",
     "tints": {}
@@ -406,6 +552,12 @@
     "sheet": "figure_hide.png",
     "tints": {
      "hide": "figure_hide_hide.png"
+    }
+   },
+   "hood": {
+    "sheet": "figure_hood.png",
+    "tints": {
+     "hood": "figure_hood_hood.png"
     }
    },
    "javelin": {

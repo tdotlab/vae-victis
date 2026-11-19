@@ -2,7 +2,7 @@
 
 Updated 2026-11-18.
 
-**Phase:** T has played the demo ("a damn solid foundation"). The cleanup pass is done (the clock follows Caesar, the research's text fixes, three bugs). The figure rework and grit pass are done: women, Roman kit, optional torcs, moustaches and beards, seven hairstyles, hide capes, checked cloaks, an iron Gallic helmet and a bird helm; harder light, outlines, a darker winter ground and a color grade. Phase 3 has started: Gergovia is built and pushed, Avaricum is built (local commit). Neither is deployed. Next: T plays both, then Cenabum and the Carnute forest. Not yet applied from [research/](research/README.md): the rampart redraw, interiors and props. Gear swaps the research suggests but that change balance are left for T: rider archers with javelins, the German riders' leather jerkins for hide cloaks, padded linen for Vellaunos, and a sword worn on the right hip (the sword layer has no scabbard).
+**Phase:** T has played the demo ("a damn solid foundation"). The cleanup pass is done (the clock follows Caesar, the research's text fixes, three bugs). The figure rework and grit pass are done: women, Roman kit, optional torcs, moustaches and beards, seven hairstyles, hide capes, checked cloaks, an iron Gallic helmet and a bird helm; harder light, outlines, a darker winter ground and a color grade. Phase 3 has started: Gergovia is built and pushed, Avaricum is built (local commit). Neither is deployed. An art pass followed (local commit): hoods and headwraps, a shorter stride for women, ten new props and rebuilt furniture, and smoke, firelight and rain on the local maps. Next: T plays both, then Cenabum and the Carnute forest. Not yet applied from [research/](research/README.md): the rampart redraw, the steeper 48 degree roof pitch, and dressing Brigodunon and Vindomagos with the new props. Gear swaps the research suggests but that change balance are left for T: rider archers with javelins, the German riders' leather jerkins for hide cloaks, padded linen for Vellaunos, and a sword worn on the right hip (the sword layer has no scabbard).
 
 **Working:**
 - M0 Foundation: hex map in isometric view, click-to-walk with A* pathfinding, camera pan and zoom, data loading, headless test runner (fails on any script error), web export that runs in a browser.
@@ -27,12 +27,12 @@ Updated 2026-11-18.
   - What the Soldiers Left: get the girl out of the ruins by stealth at night, by a Latin lie at the gate, by paying a legionary, by Epomeduos's word, or by fighting the camp.
   - Hermeros, the Vettius freedman, sells wine and bread and the people in his pen; the player can buy them free, read his day book (which shows Brigodunon's three at Noviodunum), or pay him to read the factor's letter.
 
-**Tests:** 111 headless tests, including content validation (every dialogue, map, NPC and quest reference resolves; everything on a map is reachable; the ford barrier can't be walked around) and scripted playthroughs of every quest route through the real dialogue files.
+**Tests:** 114 headless tests, including content validation (every dialogue, map, NPC and quest reference resolves; everything on a map is reachable; the ford barrier can't be walked around) and scripted playthroughs of every quest route through the real dialogue files.
 
 **Partial:** save and load (quick slot and title-screen Continue; no slot browser yet).
 
 **Known rough edges:**
-- Art: water is a plain texture, skin tone is not recolored, hair can show under a cloak in back views, and gear cut by the body holdout gets a thin outline on the body edge, only the wolf has a beast sprite (other beasts fall back to the placeholder), and the world map and title screen are unchanged.
+- Art: the indoor firelight (shown only while the player is inside) is untested on screen, water is a plain texture, skin tone is not recolored, hair can show under a cloak in back views, and gear cut by the body holdout gets a thin outline on the body edge, only the wolf has a beast sprite (other beasts fall back to the placeholder), and the world map and title screen are unchanged.
 - Consequences that pay off later (hired riders in Act III, the discovered lie, the pardoned exile, Brigodunon's levy, the king's surety, the betrayed clerk) are recorded as flags; the content that uses them doesn't exist yet.
 - Theron has no personal quest beyond joining, no way to part ways, and no ending slide yet.
 - Balance is untested by a human: check odds, enemy strength, prices.

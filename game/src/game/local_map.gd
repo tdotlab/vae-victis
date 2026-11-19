@@ -39,6 +39,7 @@ var _fired_triggers: Dictionary = {}
 var _leaving := false
 var _post: CanvasLayer
 var _roofs: Array = []
+var _atmos: Atmos
 
 
 class _Layer extends Node2D:
@@ -70,6 +71,9 @@ func _ready() -> void:
 	_camera.position_smoothing_enabled = true
 	_camera.position_smoothing_speed = 6.0
 	add_child(_camera)
+	_atmos = Atmos.new()
+	_atmos.setup(map, _roofs)
+	add_child(_atmos)
 	_post = Art.make_post_layer()
 	add_child(_post)
 	ui_layer = CanvasLayer.new()
@@ -584,6 +588,7 @@ func _process(delta: float) -> void:
 	floaters = floaters.filter(func(f): return f[3] < 1.4)
 	_things.queue_redraw()
 	_over.queue_redraw()
+	_atmos.tick(delta, _night.color, player.cell)
 	if combat.active or modal_open or _leaving:
 		return
 	_wander_timer -= delta

@@ -151,12 +151,28 @@ def box(name, sx, sy, sz, m, top=None, x0=None, **kw):
     return _obj(name, bm, mats, **kw)
 
 
-def cyl(name, r1, r2, h, m, seg=10, z0=0.0, smooth=True, top=None, **kw):
+def pleat(bm, folds, depth):
+    """Folds in hanging cloth: push the lowest ring of vertices in and out
+    around the axis, so the folds fade toward the top."""
+    if not folds:
+        return
+    zs = [v.co.z for v in bm.verts]
+    lo, hi = min(zs), max(zs)
+    for v in bm.verts:
+        t = 1.0 - (v.co.z - lo) / max(1e-6, hi - lo)
+        a = math.atan2(v.co.y, v.co.x)
+        k = 1.0 + depth * t * math.cos(folds * a)
+        v.co.x *= k
+        v.co.y *= k
+
+
+def cyl(name, r1, r2, h, m, seg=10, z0=0.0, smooth=True, top=None, folds=0, fold_depth=0.07, **kw):
     """Cylinder or cone along +Z from z0 to z0+h (negative h goes down)."""
     bm = bmesh.new()
     bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=seg, radius1=r1, radius2=r2, depth=abs(h))
     for v in bm.verts:
         v.co.z = v.co.z * (1 if h > 0 else -1) + z0 + h / 2
+    pleat(bm, folds, fold_depth)
     mats = [m]
     if top:
         mats.append(top)
@@ -555,21 +571,110 @@ def render_trees():
 
 
 # --- Props: things standing in a hex -------------------------------------------------
+# A hex is about 1 unit across its flats. People are drawn 1.3 times life
+# size, so props are a little larger than life too, to sit beside them.
+# Furniture follows docs/research/settlements-and-houses.md: low tables,
+# straw pallets, clay-plate hearths with firedogs, wooden-hooped barrels.
+
+def lathe(name, prof, m, seg=16, smooth=True, **kw):
+    """A turned shape: prof is (radius, z) from the bottom up. A radius of 0
+    closes the shape at that end."""
+    bm = bmesh.new()
+    rings = []
+    for r, z in prof:
+        if r <= 0:
+            rings.append([bm.verts.new((0, 0, z))])
+            continue
+        rings.append([bm.verts.new((r * math.cos(2 * math.pi * i / seg), r * math.sin(2 * math.pi * i / seg), z))
+                      for i in range(seg)])
+    for a, b in zip(rings, rings[1:]):
+        for i in range(seg):
+            j = (i + 1) % seg
+            if len(a) == 1:
+                bm.faces.new((a[0], b[i], b[j]))
+            elif len(b) == 1:
+                bm.faces.new((a[i], a[j], b[0]))
+            else:
+                bm.faces.new((a[i], a[j], b[j], b[i]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return _obj(name, bm, [m], smooth=smooth, **kw)
+
+
+def rod(name, p, q, r, m, seg=6, **kw):
+    """A round bar from point p to point q."""
+    p, q = Vector(p), Vector(q)
+    d = q - p
+    rot = d.to_track_quat("Z", "Y").to_euler()
+    return cyl(name, r, r, d.length, m, seg=seg, loc=p, rot=rot, **kw)
+
+
+def wood_mats():
+    return (mat("plank", "#6b4a2a", "#80603a", scale=14), mat("post", "#4a3420", "#5a4028", scale=14))
+
+
+def clay_mat():
+    return mat("clay", "#9a5a36", "#b06e46", scale=9, bump=0.3)
+
+
+def sack(name, r, loc, m, rot=0.0):
+    ball(name, r, m, sub=2, loc=loc, scale=(0.9, 0.8, 1.05), rot=(0, 0, rot))
+    cyl(name + "_neck", r * 0.28, r * 0.18, r * 0.45, m, seg=8, loc=(loc[0], loc[1], loc[2] + r * 0.9))
+
+
+def amphora(name, m, loc=(0, 0, 0), rot=(0, 0, 0), s=1.0, stop=None):
+    """A Dressel 1A wine jar: spike toe, tall body, sharp shoulder, long neck,
+    two straight handles; stop, a material, seals the mouth (pitch over the
+    cork)."""
+    e = empty(name, loc=loc, rot=rot)
+    prof = [(0, 0), (0.035, 0.0), (0.035, 0.09), (0.07, 0.16), (0.13, 0.3), (0.155, 0.5), (0.155, 0.72),
+            (0.14, 0.82), (0.06, 0.88), (0.05, 0.92), (0.048, 1.2), (0.07, 1.21), (0.07, 1.28), (0.04, 1.28), (0, 1.27)]
+    lathe(name + "_body", [(r * s, z * s) for r, z in prof], m, seg=14, parent=e)
+    for y in (0.085, -0.085):
+        rod(name + "_handle", (0, y * s, 0.86 * s), (0, y * s, 1.19 * s), 0.016 * s, m, parent=e)
+        rod(name + "_handle2", (0, y * s, 1.19 * s), (0, y * 0.5 * s, 1.2 * s), 0.016 * s, m, parent=e)
+    if stop:
+        cyl(name + "_stop", 0.075 * s, 0.06 * s, 0.05 * s, stop, seg=10, parent=e, loc=(0, 0, 1.26 * s))
+    return e
+
 
 def hearth():
-    st = mat("st", "#7a746a", "#958e80", scale=8)
+    """A slightly sunk clay plate with a pair of iron firedogs, logs across
+    them, a cauldron in the coals and a spit."""
+    plate = mat("plate", "#8c6c4a", "#a2835e", scale=6, bump=0.4)
+    sherd = clay_mat()
     ash = mat("ash", "#3a3430", "#5a524a", scale=20)
     ember = mat("ember", "#5a2a10", emit=("#ff7a28", 6.0))
     log = mat("log", "#3a2818", "#4e3826", scale=12)
+    iron = mat("iron", "#2c2a28", "#3c3834", scale=30, metal=0.5, rough=0.6)
+    meat = mat("meat", "#6a2e1e", "#8a4a2a", scale=20)
     rnd = random.Random(5)
-    cyl("ash", 0.42, 0.42, 0.03, ash, seg=14, smooth=False)
-    for i in range(11):
-        a = i * math.tau / 11
-        ball("s", rnd.uniform(0.09, 0.12), st, sub=1, smooth=False, loc=(math.cos(a) * 0.48, math.sin(a) * 0.48, 0.05), scale=(1.2, 1, 0.8))
-    for i in range(3):
-        a = i * math.tau / 3 + 0.3
-        cyl("log", 0.05, 0.05, 0.55, log, seg=6, loc=(math.cos(a) * 0.12, math.sin(a) * 0.12, 0.08), rot=(math.radians(75), 0, a + math.pi / 2))
-    ball("embers", 0.16, ember, sub=1, smooth=False, loc=(0, 0, 0.05), scale=(1.4, 1.4, 0.5))
+    cyl("plate", 0.55, 0.55, 0.04, plate, seg=20)
+    sherd = mat("sherd", "#6e4430", "#7e5038", scale=9)
+    for i in range(16):
+        a = i * math.tau / 16 + rnd.uniform(-0.1, 0.1)
+        box("sherd", 0.12, 0.05, 0.02, sherd, loc=(math.cos(a) * 0.57, math.sin(a) * 0.57, 0.0), rot=(0, 0, a + math.pi / 2))
+    cyl("ash", 0.36, 0.36, 0.02, ash, seg=14, z0=0.04)
+    ball("embers", 0.17, ember, sub=1, smooth=False, loc=(0, 0, 0.04), scale=(1.5, 1.3, 0.45))
+    # Two firedogs, the bars running back to front; the front uprights end in
+    # small horned heads.
+    for x in (-0.2, 0.2):
+        box("bar", 0.035, 0.62, 0.035, iron, loc=(x, 0, 0.1))
+        for y in (-0.3, 0.3):
+            box("foot", 0.12, 0.03, 0.1, iron, loc=(x, y, 0.0))
+        rod("upright", (x, -0.3, 0.1), (x, -0.3, 0.42), 0.022, iron)
+        ball("head", 0.04, iron, sub=1, loc=(x, -0.31, 0.44), scale=(1, 1.3, 1))
+        for s in (1, -1):
+            rod("horn", (x, -0.31, 0.47), (x + s * 0.05, -0.33, 0.53), 0.01, iron)
+    for i, y in enumerate((-0.12, 0.02, 0.16)):
+        cyl("log", 0.05, 0.045, 0.6, log, seg=7, loc=(-0.3, y, 0.16 + 0.02 * i), rot=(0, math.radians(90), rnd.uniform(-0.15, 0.15)))
+    # The spit across the horned uprights, a joint of meat on it.
+    rod("spit", (-0.3, -0.31, 0.4), (0.32, -0.31, 0.4), 0.012, iron)
+    ball("joint", 0.09, meat, sub=2, loc=(0.02, -0.31, 0.38), scale=(1.4, 0.9, 0.9))
+    # The cauldron sits in the coals at the back.
+    lathe("cauldron", [(0, 0.06), (0.1, 0.07), (0.17, 0.14), (0.19, 0.24), (0.17, 0.32), (0.18, 0.34), (0.15, 0.34),
+                       (0.14, 0.3)], iron, seg=16, loc=(0.05, 0.32, 0))
+    rod("bail", (-0.12, 0.32, 0.33), (0.05, 0.32, 0.5), 0.008, iron)
+    rod("bail2", (0.05, 0.32, 0.5), (0.22, 0.32, 0.33), 0.008, iron)
     lamp = bpy.data.lights.new("fire", "POINT")
     lamp.energy = 40
     lamp.color = C("#ff9a50")
@@ -580,34 +685,57 @@ def hearth():
 
 
 def bed():
-    straw = mat("straw", "#9c8a55", "#b8a46a", scale=20, bump=0.5)
-    wool = mat("wool", "#6a5a48", "#7c6a54", scale=10)
-    fr = mat("frame", "#4e3826")
-    box("frame", 1.3, 0.75, 0.18, fr)
-    box("straw", 1.22, 0.68, 0.12, straw, loc=(0, 0, 0.18))
-    box("blanket", 0.7, 0.7, 0.06, wool, loc=(-0.25, 0, 0.29), rot=(0, 0.05, 0.08))
+    """A straw pallet on the floor: straw, a linen mattress, a wool blanket
+    and a sheepskin. No frame."""
+    straw = mat("straw", "#9c8a55", "#b8a46a", scale=20, bump=0.8)
+    linen = mat("linen", "#bdb294", "#cfc6aa", scale=8, bump=0.3)
+    wool = mat("wool", "#5e3e30", "#74503a", scale=10, bump=0.4)
+    fleece = mat("fleece", "#b8ac90", "#d2c8ae", scale=40, bump=1.0)
+    rnd = random.Random(9)
+    for i in range(14):
+        ball("straw", rnd.uniform(0.12, 0.18), straw, sub=1, smooth=False,
+             loc=(rnd.uniform(-0.6, 0.6), rnd.uniform(-0.35, 0.35), 0.0), scale=(1.6, 1.2, 0.35))
+    ball("mattress", 0.5, linen, sub=3, loc=(0, 0, 0.1), scale=(1.25, 0.66, 0.16))
+    ball("pillow", 0.18, linen, sub=2, loc=(-0.45, 0, 0.2), scale=(0.8, 1.4, 0.45))
+    box("blanket", 0.7, 0.72, 0.05, wool, loc=(0.2, 0, 0.13), rot=(0, -0.04, 0.04))
+    ball("fold", 0.06, wool, sub=1, loc=(-0.15, 0, 0.17), scale=(0.8, 6.0, 0.8))
+    ball("sheepskin", 0.3, fleece, sub=2, loc=(0.25, -0.5, 0.0), scale=(1.3, 0.75, 0.12), rot=(0, 0, 0.2))
 
 
 def table():
-    w = mat("plank", "#6b4a2a", "#80603a", scale=14)
-    box("top", 1.25, 0.65, 0.07, w, loc=(0, 0, 0.7))
-    for x in (-0.45, 0.45):
-        box("leg", 0.08, 0.5, 0.7, w, loc=(x, 0, 0))
-    bowl = mat("bowl", "#7a5a3a")
-    cyl("bowl", 0.08, 0.12, 0.08, bowl, seg=10, loc=(0.2, 0.05, 0.77))
-    cyl("jug", 0.07, 0.06, 0.22, mat("clay", "#8a5a3a", "#9a6a46", scale=10), seg=10, loc=(-0.25, -0.1, 0.77))
+    """A low table, seated at on skins on the floor."""
+    w, p = wood_mats()
+    fur = mat("skin", "#5a4632", "#7a6046", scale=40, bump=1.0, rough=0.95)
+    clay = clay_mat()
+    bread = mat("bread", "#8a6232", "#a07a42", scale=14, bump=0.6)
+    box("top", 1.1, 0.6, 0.07, w, loc=(0, 0, 0.36))
+    for x in (-0.44, 0.44):
+        for y in (-0.22, 0.22):
+            box("leg", 0.08, 0.08, 0.36, p, loc=(x, y, 0))
+    for y, r in ((-0.55, 0.15), (0.55, -0.1)):
+        ball("skin", 0.34, fur, sub=2, loc=(0.05, y, 0.0), scale=(1.4, 0.6, 0.08), rot=(0, 0, r))
+    lathe("bowl", [(0, 0.43), (0.06, 0.43), (0.12, 0.47), (0.13, 0.5), (0.11, 0.5), (0.05, 0.46), (0, 0.46)], p, seg=12,
+          loc=(0.22, 0.05, 0))
+    lathe("jug", [(0, 0.43), (0.07, 0.43), (0.1, 0.52), (0.09, 0.6), (0.045, 0.66), (0.05, 0.7), (0.035, 0.7), (0, 0.69)],
+          clay, seg=12, loc=(-0.25, -0.08, 0))
+    ball("loaf", 0.1, bread, sub=2, loc=(0.0, 0.12, 0.44), scale=(1.2, 1.0, 0.55))
 
 
 def crate():
+    """Household stores: a barrel bound with wooden hoops, a storage jar,
+    sacks of grain."""
     w = mat("staves", "#6a4a2c", "#7d5d36", scale=16)
-    hoop = mat("hoop", "#3a3632", metal=0.6, rough=0.5)
-    sack = mat("sack", "#8a7a58", "#9c8c66", scale=14, bump=0.5)
-    cyl("barrel", 0.26, 0.3, 0.75, w, seg=12, loc=(-0.25, 0.15, 0))
-    for z in (0.12, 0.62):
-        cyl("hoop", 0.31, 0.31, 0.04, hoop, seg=12, loc=(-0.25, 0.15, z))
-    ball("sack", 0.28, sack, sub=2, loc=(0.25, -0.1, 0.22), scale=(0.9, 0.8, 1.0))
-    ball("sack2", 0.22, sack, sub=2, loc=(0.35, 0.3, 0.18), scale=(1.0, 0.9, 0.9))
-    box("crate", 0.4, 0.4, 0.35, w, loc=(0.0, -0.4, 0), rot=(0, 0, 0.3))
+    withy = mat("withy", "#8a6a40", "#9c7a4a", scale=30)
+    sackm = mat("sack", "#8a7a58", "#9c8c66", scale=14, bump=0.5)
+    clay = clay_mat()
+    lathe("barrel", [(0, 0), (0.24, 0), (0.29, 0.2), (0.3, 0.38), (0.29, 0.56), (0.24, 0.76), (0, 0.76)], w, seg=14,
+          loc=(-0.28, 0.18, 0))
+    for z, r in ((0.08, 0.265), (0.16, 0.285), (0.6, 0.285), (0.68, 0.265)):
+        cyl("hoop", r, r, 0.035, withy, seg=14, loc=(-0.28, 0.18, z))
+    lathe("dolium", [(0, 0), (0.13, 0), (0.24, 0.15), (0.28, 0.35), (0.24, 0.58), (0.13, 0.66), (0.15, 0.7), (0.11, 0.7),
+                     (0, 0.66)], clay, seg=16, loc=(0.3, 0.25, 0))
+    sack("sack", 0.26, (0.22, -0.25, 0.18), sackm, 0.4)
+    sack("sack2", 0.21, (-0.22, -0.3, 0.14), sackm, -0.3)
 
 
 def altar():
@@ -616,8 +744,297 @@ def altar():
     box("slab", 1.05, 0.72, 0.1, mat("slab", "#8c887a", "#a09c8c", scale=6), loc=(0, 0, 0.65))
 
 
+def stall():
+    """A market stall: a board on trestles under a striped awning, cloth,
+    pots and apples for sale."""
+    w, p = wood_mats()
+    awn = [mat("awn", "#8e3a24", "#9c4630", scale=10, bump=0.2), mat("awn2", "#c4b48c", "#d2c29a", scale=10, bump=0.2)]
+    box("board", 1.35, 0.55, 0.05, w, loc=(0, 0.05, 0.6))
+    for x in (-0.55, 0.55):
+        for y in (-0.15, 0.25):
+            rod("trestle", (x, y, 0), (x + (0.06 if y > 0 else -0.06), y, 0.6), 0.03, p)
+    for x in (-0.66, 0.66):
+        rod("post", (x, 0.36, 0), (x, 0.36, 1.7), 0.04, p)
+        rod("post", (x, -0.42, 0), (x, -0.42, 1.38), 0.035, p)
+    rod("beam", (-0.7, 0.36, 1.68), (0.7, 0.36, 1.68), 0.035, p)
+    ang = math.atan2(0.3, 0.8)
+    for i in range(7):
+        x = -0.72 + 0.1 + i * 0.205
+        box("awning", 0.205, 0.88, 0.02, awn[i % 2], loc=(x, -0.03, 1.53), rot=(ang, 0, 0))
+        box("valance", 0.205, 0.02, 0.12, awn[i % 2], loc=(x, -0.45, 1.27))
+    # Goods: bolts of linen and wool, pots, a basket of apples.
+    cloths = ["#c8bc9c", "#5a6e8a", "#8a3a2a", "#6a7a4a"]
+    for i, col in enumerate(cloths):
+        cyl("bolt", 0.07, 0.07, 0.45, mat("bolt%d" % i, col, scale=8), seg=10, loc=(-0.5 + i * 0.15, -0.05, 0.72),
+            rot=(math.radians(90), 0, 0))
+    clay = clay_mat()
+    for i, (x, y) in enumerate(((0.25, 0.15), (0.38, 0.1), (0.3, -0.08))):
+        lathe("pot", [(0, 0.65), (0.05, 0.65), (0.08, 0.72), (0.075, 0.8), (0.05, 0.84), (0.055, 0.86), (0, 0.86)], clay,
+              seg=12, loc=(x, y, 0))
+    basket = mat("basket", "#8a6a3a", "#a4824a", scale=40, bump=0.8)
+    apple = mat("apple", "#8a2a1a", "#a8482a", scale=10)
+    lathe("basket", [(0, 0.65), (0.11, 0.65), (0.14, 0.75), (0.12, 0.75), (0, 0.72)], basket, seg=12, loc=(0.52, -0.1, 0))
+    for i in range(5):
+        a = i * math.tau / 5
+        ball("apple", 0.035, apple, sub=1, loc=(0.52 + math.cos(a) * 0.05, -0.1 + math.sin(a) * 0.05, 0.75))
+
+
+def amphorae():
+    """Italian wine in Dressel 1A jars: three standing in the sand, leaning
+    together, one on its side."""
+    # Campanian brick-red fabric, gone dull with handling, mouths sealed
+    # with black pitch.
+    clay = mat("amph", "#7a4632", "#8e5640", scale=7, bump=0.45, rough=0.85)
+    pitch = mat("pitch", "#1c1612", rough=0.3)
+    sand = mat("sand", "#5e5442", "#6c624e", scale=10, bump=0.5)
+    ball("sand", 0.5, sand, sub=2, scale=(1.2, 0.9, 0.08))
+    for i, (x, y, tx, ty) in enumerate(((-0.25, 0.1, 0.12, 0), (0.05, 0.22, 0, 0.08), (0.28, 0.05, -0.12, 0.05))):
+        amphora("amph%d" % i, clay, loc=(x, y, -0.05), rot=(tx, ty, i * 1.3), s=1.05, stop=pitch)
+    amphora("lying", clay, loc=(-0.5, -0.35, 0.16), rot=(0, math.radians(84), 0.3), s=1.0, stop=pitch)
+
+
+def loom():
+    """A warp-weighted loom leaning on its uprights: linen half woven, the
+    warp hanging in bundles from clay weights."""
+    w, p = wood_mats()
+    linen = mat("weave", "#c4b896", "#d2c8a8", scale=60, bump=0.4)
+    band = mat("band", "#7a3424", scale=20)
+    clay = mat("weight", "#8a6448", "#9c7656", scale=10, bump=0.4)
+    thread = mat("thread", "#cfc5a5")
+    lean = math.radians(12)
+    def at(z, x=0.0, dy=0.0):
+        return (x, 0.12 + z * math.tan(lean) + dy, z)
+    for x in (-0.62, 0.62):
+        rod("upright", (x, 0.1, 0), at(2.0, x), 0.05, p)
+    rod("beam", at(1.9, -0.72), at(1.9, 0.72), 0.06, p)
+    rod("shed_rod", at(0.55, -0.66, -0.04), at(0.55, 0.66, -0.04), 0.025, p)
+    rod("heddle", at(0.8, -0.7, -0.14), at(0.8, 0.7, -0.14), 0.025, p)
+    for x in (-0.62, 0.62):
+        rod("arm", at(0.8, x, 0), at(0.8, x, -0.16), 0.02, p)
+    box("cloth", 1.08, 0.02, 0.85, linen, loc=at(1.02, 0, -0.03), rot=(-lean, 0, 0))
+    box("cloth_band", 1.08, 0.025, 0.08, band, loc=at(1.1, 0, -0.035), rot=(-lean, 0, 0))
+    box("cloth_band2", 1.08, 0.025, 0.04, band, loc=at(1.24, 0, -0.035), rot=(-lean, 0, 0))
+    rnd = random.Random(3)
+    for i in range(10):
+        x = -0.48 + i * 0.107
+        for k, dy in enumerate((-0.05, 0.05)):
+            wz = 0.18 + 0.06 * k + rnd.uniform(-0.02, 0.02)
+            top = at(1.02, x, -0.03)
+            bot = (x, top[1] + dy - 0.04, wz + 0.12)
+            rod("warp", top, bot, 0.012, thread, seg=4)
+            cyl("weight", 0.055, 0.03, 0.13, clay, seg=4, loc=(x, bot[1], wz), rot=(0, 0, math.radians(45)))
+
+
+def granary():
+    """A four-post granary: wattle walls and a thatched roof raised on posts
+    against damp and rats, a ladder to the door."""
+    w, p = wood_mats()
+    wattle = mat("wattle", "#7a6446", "#94805c", scale=22, bump=0.9)
+    thatch = mat("thatch", "#6e5a34", "#8e7646", scale=26, bump=0.9)
+    for x in (-0.42, 0.42):
+        for y in (-0.42, 0.42):
+            cyl("post", 0.07, 0.065, 0.72, p, seg=8, loc=(x, y, 0))
+    box("floor", 1.05, 1.05, 0.08, w, loc=(0, 0, 0.7))
+    box("walls", 0.95, 0.95, 0.72, wattle, loc=(0, 0, 0.78))
+    box("door", 0.3, 0.02, 0.45, mat("dark", "#2a1e14"), loc=(0.15, -0.48, 0.82))
+    roof = cyl("roof", 0.98, 0.0, 0.86, thatch, seg=4, smooth=False, loc=(0, 0, 1.46), rot=(0, 0, math.radians(45)))
+    roof.scale = (1.0, 1.0, 1.0)
+    for x in (0.0, 0.3):
+        rod("rail", (x, -0.95, 0), (x, -0.5, 0.78), 0.022, p)
+    for k in range(1, 4):
+        t = k / 4
+        rod("rung", (0, -0.95 + 0.45 * t, 0.78 * t), (0.3, -0.95 + 0.45 * t, 0.78 * t), 0.015, p)
+
+
+def quern():
+    """A rotary quern on a skin: the bedstone, the runner with its handle,
+    grain in a sack, flour in a bowl."""
+    stone = mat("lava", "#5a5650", "#6e6a62", scale=30, bump=1.0)
+    fur = mat("skin", "#5a4632", "#7a6046", scale=40, bump=1.0, rough=0.95)
+    sackm = mat("sack", "#8a7a58", "#9c8c66", scale=14, bump=0.5)
+    flour = mat("flour", "#d8d0bc")
+    w, p = wood_mats()
+    ball("skin", 0.45, fur, sub=2, scale=(1.3, 1.0, 0.06))
+    cyl("bedstone", 0.27, 0.25, 0.14, stone, seg=16, z0=0.02)
+    lathe("runner", [(0.25, 0.16), (0.26, 0.2), (0.24, 0.27), (0.06, 0.32), (0.04, 0.32), (0.04, 0.26), (0, 0.26)],
+          stone, seg=16)
+    rod("handle", (0.18, 0, 0.24), (0.2, 0, 0.5), 0.025, p)
+    ball("spill", 0.12, flour, sub=1, loc=(0, -0.24, 0.02), scale=(1.4, 0.8, 0.2))
+    sack("sack", 0.22, (-0.42, 0.25, 0.16), sackm, 0.3)
+    lathe("bowl", [(0, 0.0), (0.07, 0.0), (0.14, 0.05), (0.15, 0.09), (0.13, 0.09), (0.06, 0.04), (0, 0.04)], p, seg=12,
+          loc=(0.38, -0.22, 0))
+    ball("flour", 0.1, flour, sub=1, loc=(0.38, -0.22, 0.07), scale=(1.1, 1.1, 0.3))
+
+
+def woodpile():
+    """Split logs stacked end-on to the lane, a chopping block with the axe
+    left in it."""
+    bark = mat("bark", "#3e2e20", "#54402c", scale=20, bump=0.8)
+    end = mat("endgrain", "#a07a4e", "#b48c5c", scale=30)
+    iron = mat("iron", "#3a3836", metal=0.5, rough=0.5)
+    rnd = random.Random(7)
+    # Logs lie across the view: running toward the camera they would read
+    # as upright sticks.
+    for row, n in enumerate((5, 4, 3, 2)):
+        for i in range(n):
+            y = 0.22 + (i - (n - 1) / 2) * 0.15
+            z = 0.075 + row * 0.13
+            r = rnd.uniform(0.068, 0.08)
+            cyl("log", r, r, 0.95, bark, seg=7, top=end, smooth=False,
+                loc=(-0.55 + rnd.uniform(-0.05, 0.05), y, z), rot=(0, math.radians(90), rnd.uniform(-0.04, 0.04)))
+    cyl("block", 0.2, 0.21, 0.38, bark, seg=10, top=end, loc=(0.42, -0.42, 0))
+    rod("haft", (0.42, -0.42, 0.42), (0.62, -0.62, 0.75), 0.02, mat("haft", "#6a4a2a"))
+    box("blade", 0.04, 0.16, 0.1, iron, loc=(0.42, -0.42, 0.33), rot=(0, 0, math.radians(-45)))
+    for i in range(4):
+        box("chip", 0.08, 0.04, 0.02, end, loc=(rnd.uniform(0.1, 0.6), rnd.uniform(-0.7, -0.2), 0), rot=(0, 0, rnd.uniform(0, 3)))
+
+
+def cart():
+    """A two-wheeled cart, shafts down, loaded with sacks."""
+    w, p = wood_mats()
+    iron = mat("iron", "#2e2c2a", metal=0.5, rough=0.6)
+    sackm = mat("sack", "#8a7a58", "#9c8c66", scale=14, bump=0.5)
+    for y in (-0.5, 0.5):
+        torus("tyre", 0.42, 0.035, iron, seg=24, rseg=6, loc=(0, y, 0.44), rot=(math.radians(90), 0, 0))
+        torus("felloe", 0.38, 0.04, p, seg=24, rseg=6, loc=(0, y, 0.44), rot=(math.radians(90), 0, 0))
+        cyl("hub", 0.07, 0.07, 0.2, p, seg=10, loc=(0, y - 0.1, 0.44), rot=(math.radians(-90), 0, 0))
+        for k in range(10):
+            a = k * math.tau / 10
+            rod("spoke", (0, y, 0.44), (math.cos(a) * 0.38, y, 0.44 + math.sin(a) * 0.38), 0.018, p)
+    rod("axle", (0, -0.6, 0.44), (0, 0.6, 0.44), 0.04, p)
+    box("bed", 1.25, 0.8, 0.06, w, loc=(-0.05, 0, 0.5))
+    for y in (-0.38, 0.38):
+        box("side", 1.25, 0.04, 0.2, w, loc=(-0.05, y, 0.56))
+    box("tail", 0.04, 0.8, 0.2, w, loc=(-0.66, 0, 0.56))
+    for y in (-0.3, 0.3):
+        rod("shaft", (0.55, y, 0.53), (1.25, y * 0.85, 0.02), 0.03, p)
+    for i, (x, y) in enumerate(((-0.35, -0.15), (-0.3, 0.18), (0.05, 0.0), (0.35, -0.12))):
+        ball("sack", 0.2, sackm, sub=2, loc=(x, y, 0.68), scale=(1.2, 0.9, 0.75), rot=(0, 0, i * 0.7))
+
+
+def tent():
+    """A legion's leather tent (papilio): a ridge tent of sewn calfskin panels,
+    door flaps tied back on the end toward the viewer, guy ropes and pegs."""
+    leather = mat("leather", "#6e5236", "#82623e", scale=6, bump=0.3)
+    seam = mat("seam", "#4a3622")
+    rope = mat("rope", "#9a8a68")
+    dark = mat("dark", "#1e1610")
+    L, W, H, Hw = 0.72, 0.62, 1.25, 0.32
+    bm = bmesh.new()
+    v = {}
+    for sy in (-1, 1):
+        for sx in (-1, 1):
+            v["g", sx, sy] = bm.verts.new((sx * W, sy * L, 0))
+            v["w", sx, sy] = bm.verts.new((sx * W, sy * L, Hw))
+        v["r", sy] = bm.verts.new((0, sy * (L + 0.04), H))
+    for sx in (-1, 1):
+        bm.faces.new((v["g", sx, -1], v["g", sx, 1], v["w", sx, 1], v["w", sx, -1]))
+        bm.faces.new((v["w", sx, -1], v["w", sx, 1], v["r", 1], v["r", -1]))
+    for sy in (-1, 1):
+        bm.faces.new((v["g", -1, sy], v["g", 1, sy], v["w", 1, sy], v["r", sy], v["w", -1, sy]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    _obj("tent", bm, [leather])
+    # Seams down the roof and the ridge pole's end.
+    ang = math.atan2(H - Hw, W)
+    for sx in (-1, 1):
+        for y in (-0.36, 0.0, 0.36):
+            rod("seam", (sx * W, y, Hw), (0, y, H), 0.012, seam, seg=4)
+    rod("ridge", (0, -(L + 0.08), H), (0, L + 0.08, H), 0.025, seam)
+    # The door: a dark opening on the near end with the flaps tied back.
+    bm = bmesh.new()
+    a, b, c = bm.verts.new((-0.28, -L - 0.005, 0)), bm.verts.new((0.28, -L - 0.005, 0)), bm.verts.new((0, -L - 0.005, 0.95))
+    bm.faces.new((a, b, c))
+    _obj("door", bm, [dark])
+    for sx in (-1, 1):
+        bm = bmesh.new()
+        a = bm.verts.new((sx * 0.28, -L - 0.01, 0))
+        b = bm.verts.new((sx * 0.5, -L - 0.08, 0))
+        c = bm.verts.new((sx * 0.08, -L - 0.03, 0.85))
+        bm.faces.new((a, b, c))
+        _obj("flap", bm, [leather])
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            rod("guy", (sx * W, sy * L * 0.7, Hw), (sx * (W + 0.32), sy * L * 0.7, 0.02), 0.008, rope, seg=4)
+            box("peg", 0.03, 0.03, 0.08, seam, loc=(sx * (W + 0.32), sy * L * 0.7, 0))
+
+
+def rubble():
+    """What is left of a burnt house: fallen daub, footing stones, charred
+    beams, a post still standing."""
+    st = mat("st", "#8a8476", "#a49e8e", scale=4, bump=0.8)
+    daub = mat("daub", "#8a7456", "#a89070", scale=3.5, bump=0.7)
+    char = mat("char", "#1c1814", "#2e2620", scale=30, bump=0.9, rough=0.95)
+    ash = mat("ash", "#4a4440", "#625a54", scale=12)
+    rnd = random.Random(21)
+    ball("ash", 0.6, ash, sub=2, scale=(1.3, 1.0, 0.07))
+    for i in range(9):
+        a, r = rnd.uniform(0, math.tau), rnd.uniform(0.1, 0.65)
+        ball("stone", rnd.uniform(0.07, 0.13), st, sub=1, smooth=False, loc=(math.cos(a) * r, math.sin(a) * r * 0.8, 0.02),
+             scale=(1.3, 1.0, 0.7))
+    for i in range(7):
+        a, r = rnd.uniform(0, math.tau), rnd.uniform(0.1, 0.6)
+        box("daub", rnd.uniform(0.12, 0.25), rnd.uniform(0.08, 0.16), 0.05, daub,
+            loc=(math.cos(a) * r, math.sin(a) * r * 0.8, 0.0), rot=(rnd.uniform(-0.3, 0.3), rnd.uniform(-0.3, 0.3), rnd.uniform(0, 3)))
+    for i in range(3):
+        a = rnd.uniform(0, math.tau)
+        box("beam", 0.95, 0.1, 0.1, char, loc=(math.cos(a) * 0.15, math.sin(a) * 0.15, 0.04 + 0.08 * i),
+            rot=(0, rnd.uniform(-0.15, 0.15), rnd.uniform(0, 3)))
+    cyl("post", 0.08, 0.06, 0.75, char, seg=7, smooth=False, loc=(-0.35, 0.3, 0), rot=(0.15, -0.1, 0))
+
+
+def smithy():
+    """A smith's corner: a clay forge with its fire showing, bellows, the
+    anvil on a stump, a quenching trough."""
+    clay = mat("forge", "#7a5a40", "#94704e", scale=6, bump=0.6)
+    soot = mat("soot", "#2a2420", "#3a322a", scale=20)
+    ember = mat("ember", "#5a2a10", emit=("#ff7a28", 5.0))
+    iron = mat("iron", "#2c2a28", "#3e3a36", scale=30, metal=0.6, rough=0.45)
+    bark = mat("bark", "#3e2e20", "#54402c", scale=20, bump=0.8)
+    end = mat("endgrain", "#a07a4e", "#b48c5c", scale=30)
+    hide = mat("bellows", "#5a4230", "#6e5038", scale=20, bump=0.5)
+    w, p = wood_mats()
+    water = mat("water", "#24343a", rough=0.1)
+    # A waist-high forge hearth of clay over stones, its coal bed on top,
+    # the bellows behind.
+    box("forge", 0.62, 0.55, 0.42, clay, loc=(-0.3, 0.22, 0))
+    box("rim", 0.62, 0.55, 0.05, soot, loc=(-0.3, 0.22, 0.42))
+    # A bed of black charcoal with the heat showing through it in lumps,
+    # not one glowing mound.
+    coal = mat("coal", "#1a1612", "#2a2420", scale=40, bump=0.8)
+    ball("coalbed", 0.2, coal, sub=1, smooth=False, loc=(-0.3, 0.2, 0.44), scale=(1.15, 1.0, 0.22))
+    for i, (dx, dy) in enumerate(((-0.06, 0.03), (0.05, -0.04), (0.0, 0.08), (0.08, 0.06), (-0.09, -0.05))):
+        ball("ember", 0.045 + 0.01 * (i % 2), ember, sub=1, smooth=False,
+             loc=(-0.3 + dx, 0.2 + dy, 0.47), scale=(1, 1, 0.6))
+    for s in (1, -1):
+        ball("bellows", 0.13, hide, sub=2, loc=(-0.3 + s * 0.13, 0.62, 0.5), scale=(0.8, 1.4, 0.45))
+    rod("nozzle", (-0.3, 0.5, 0.48), (-0.3, 0.32, 0.46), 0.025, iron)
+    cyl("block", 0.19, 0.21, 0.42, bark, seg=10, top=end, loc=(0.25, -0.15, 0))
+    box("anvil", 0.26, 0.13, 0.11, iron, loc=(0.25, -0.15, 0.42))
+    cyl("horn", 0.05, 0.0, 0.14, iron, seg=6, loc=(0.38, -0.15, 0.49), rot=(0, math.radians(90), 0))
+    rod("hammer_haft", (0.12, -0.25, 0.53), (0.0, -0.4, 0.55), 0.015, p)
+    box("hammer_head", 0.06, 0.05, 0.05, iron, loc=(0.13, -0.24, 0.53))
+    rod("tongs", (0.42, -0.3, 0.0), (0.36, -0.22, 0.45), 0.012, iron)
+    rod("tongs2", (0.45, -0.28, 0.0), (0.37, -0.22, 0.45), 0.012, iron)
+    box("trough", 0.5, 0.25, 0.2, w, loc=(0.35, 0.35, 0))
+    box("water", 0.44, 0.19, 0.01, water, loc=(0.35, 0.35, 0.19))
+    lamp = bpy.data.lights.new("fire", "POINT")
+    lamp.energy = 25
+    lamp.color = C("#ff9a50")
+    lamp.use_shadow = False
+    lo = bpy.data.objects.new("fire", lamp)
+    lo.location = (-0.3, 0.1, 0.7)
+    bpy.context.scene.collection.objects.link(lo)
+
+
+PROP_BUILDERS = [("hearth", hearth), ("bed", bed), ("table", table), ("crate", crate), ("altar", altar),
+                 ("stall", stall), ("amphorae", amphorae), ("loom", loom), ("granary", granary), ("quern", quern),
+                 ("woodpile", woodpile), ("cart", cart), ("tent", tent), ("rubble", rubble), ("smithy", smithy)]
+
+
 def render_props():
-    for name, build in [("hearth", hearth), ("bed", bed), ("table", table), ("crate", crate), ("altar", altar)]:
+    for name, build in PROP_BUILDERS:
+        if ONLY and "props" not in ONLY and name not in ONLY:
+            continue
         new_scene(48)
         frame(*WALL_FRAME)
         build()
@@ -634,7 +1051,7 @@ FIG_FRAME = (108, 120, 22)
 FIG_SCALE = 1.3  # people are drawn larger than life, as in Fallout, so they read
 NEUTRAL = "#9a9a9a"
 MASK_COLORS = {"tunic": (1, 0, 0), "trousers": (0, 1, 0), "hair": (0, 0, 1), "board": (1, 0, 0), "cloak": (1, 0, 0),
-               "hide": (1, 0, 0)}
+               "hide": (1, 0, 0), "hood": (1, 0, 0), "wrap": (1, 0, 0)}
 
 
 def torus(name, R, r, m, seg=18, rseg=6, **kw):
@@ -656,12 +1073,13 @@ def torus(name, R, r, m, seg=18, rseg=6, **kw):
     return _obj(name, bm, [m], smooth=True, **kw)
 
 
-def shell(name, r1, r2, h, m, keep, seg=20, z0=0.0, **kw):
+def shell(name, r1, r2, h, m, keep, seg=20, z0=0.0, folds=0, fold_depth=0.07, **kw):
     """An open cone shell (no caps) keeping only vertices where keep(x, y)."""
     bm = bmesh.new()
     bmesh.ops.create_cone(bm, cap_ends=False, segments=seg, radius1=r1, radius2=r2, depth=h)
     for v in bm.verts:
         v.co.z += z0 + h / 2
+    pleat(bm, folds, fold_depth)
     bmesh.ops.delete(bm, geom=[v for v in bm.verts if not keep(v.co.x, v.co.y)], context="VERTS")
     return _obj(name, bm, [m], smooth=True, **kw)
 
@@ -673,6 +1091,17 @@ def half_ball(name, r, m, sz=1.0, **kw):
     for v in bm.verts:
         v.co.z *= sz
     return _obj(name, bm, [m], smooth=True, **kw)
+
+
+def open_ball(name, r, m, keep, **kw):
+    """A sphere with the vertices outside keep(x, y, z) cut away: a hood."""
+    bm = bmesh.new()
+    bmesh.ops.create_uvsphere(bm, u_segments=20, v_segments=12, radius=r)
+    bmesh.ops.delete(bm, geom=[v for v in bm.verts if not keep(v.co.x, v.co.y, v.co.z)], context="VERTS")
+    ob = _obj(name, bm, [m], smooth=True, **kw)
+    sol = ob.modifiers.new("thick", "SOLIDIFY")
+    sol.thickness = 0.02
+    return ob
 
 
 def curved_oval(name, a, b, R, m, nu=12, nv=24, **kw):
@@ -781,59 +1210,96 @@ class Figure:
             return ob
 
         # --- Shared: head, neck, arms -----------------------------------------
-        self.hip = {}
-        self.sho = {}
-        for side, y in (("L", 0.11), ("R", -0.11)):
-            self.hip[side] = empty("hip" + side, root, (0, y, 0.88))
-        part(cyl("neck", 0.065, 0.065, 0.14, skin, seg=8, z0=1.5, parent=root))
-        part(ball("head", 0.15, skin, parent=root, loc=(0.015, 0, 1.76), scale=(0.95, 0.86, 1.05)))
-        part(box("nose", 0.05, 0.035, 0.07, skin, parent=root, loc=(0.15, 0, 1.73)))
-        part(ball("ears", 0.035, skin, sub=1, parent=root, loc=(-0.01, 0, 1.74), scale=(0.8, 4.3, 1.2)))
-        for side, y in (("L", 0.3), ("R", -0.3)):
-            sh = empty("sho" + side, root, (0, y, 1.44), (math.radians(8 if side == "L" else -8), 0, 0))
+        # Limbs have a joint in the middle (knees, elbows) so the walk can bend
+        # them; pose() turns the empties. Bands of a darker gray (cuffs, hems,
+        # leg bindings) recolor as a darker shade of the same cloth.
+        eye = mat("eye", "#22160f", rough=0.5, bump=0.0)
+        band = mat("band", "#6c6c6c", "#787878", scale=22, bump=0.35)
+        self.hip, self.knee, self.sho, self.elbow = {}, {}, {}, {}
+        for side, y in (("L", 0.105), ("R", -0.105)):
+            self.hip[side] = empty("hip" + side, root, (0, y, 0.93))
+            self.knee[side] = empty("knee" + side, self.hip[side], (0, 0, -0.45))
+        part(cyl("neck", 0.064, 0.07, 0.17, skin, seg=8, z0=1.49, parent=root))
+        part(ball("head", 0.155, skin, parent=root, loc=(0.015, 0, 1.775), scale=(0.95, 0.84, 1.06)))
+        # A face that reads at a few pixels: a brow over two dark eyes, the
+        # nose, a jaw.
+        part(box("brow", 0.045, 0.19, 0.032, skin, parent=root, loc=(0.15, 0, 1.788)))
+        for s in (1, -1):
+            part(ball("eye", 0.021, eye, sub=1, parent=root, loc=(0.152, s * 0.05, 1.768), scale=(0.7, 1.35, 0.8)))
+        part(box("nose", 0.034, 0.032, 0.054, skin, parent=root, loc=(0.16, 0, 1.714)))
+        part(ball("jaw", 0.1, skin, parent=root, loc=(0.06, 0, 1.68), scale=(0.97, 1.05, 0.75)))
+        part(ball("ears", 0.035, skin, sub=1, parent=root, loc=(-0.01, 0, 1.75), scale=(0.8, 4.2, 1.2)))
+        G, F, R = ("body", "body_f"), ("body_f",), ("body_roman",)
+        for side, y in (("L", 0.29), ("R", -0.29)):
+            sh = empty("sho" + side, root, (0, y, 1.43), (math.radians(10 if side == "L" else -10), 0, 0))
             self.sho[side] = sh
-            part(ball("shoulder", 0.1, gray, parent=sh, loc=(0, 0, 0.02)), "tunic")
-            part(cyl("upper", 0.088, 0.075, -0.33, gray, seg=8, parent=sh), "tunic")
-            part(cyl("fore", 0.066, 0.055, -0.3, skin, seg=8, z0=-0.31, parent=sh))
-            part(ball("hand", 0.068, skin, parent=sh, loc=(0, 0, -0.64)))
-        self.hand_r = empty("handR", self.sho["R"], (0, 0, -0.64))
-        self.hand_l = empty("handL", self.sho["L"], (0, 0, -0.62))
+            part(ball("shoulder", 0.084, gray, parent=sh, loc=(0, -0.025 if side == "L" else 0.025, 0.0), scale=(1, 0.9, 0.85)), "tunic")
+            part(cyl("upper", 0.078, 0.066, -0.31, gray, seg=8, parent=sh), "tunic")
+            el = empty("elbow" + side, sh, (0, 0, -0.31))
+            self.elbow[side] = el
+            # Gauls, men and women, in long winter sleeves with a cuff; the
+            # Roman's short sleeve ends above the elbow.
+            part(ball("elbowj", 0.067, gray, sub=1, parent=el), "tunic", G)
+            part(cyl("fore", 0.066, 0.057, -0.24, gray, seg=8, parent=el), "tunic", G)
+            part(cyl("cuff", 0.062, 0.06, -0.06, band, seg=8, z0=-0.23, parent=el), "tunic", G)
+            part(cyl("hem", 0.07, 0.07, 0.05, band, seg=8, z0=0.02, parent=el), "tunic", R)
+            part(ball("elbowj", 0.06, skin, sub=1, parent=el), None, R)
+            part(cyl("fore", 0.06, 0.05, -0.29, skin, seg=8, parent=el), None, R)
+            part(ball("hand", 0.06, skin, parent=el, loc=(0.012, 0, -0.335), scale=(1.12, 0.75, 1.3)))
+        self.hand_r = empty("handR", self.elbow["R"], (0, 0, -0.33))
+        self.hand_l = empty("handL", self.elbow["L"], (0, 0, -0.31))
 
-        # --- Gallic man: tunic to mid-thigh over trousers, short boots ----------
+        def leg(hp, kn, thigh_m, shin_m, key, bodies, tr=(0.105, 0.08), sr=(0.08, 0.062)):
+            part(cyl("thigh", tr[0], tr[1], -0.45, thigh_m, seg=8, parent=hp), key, bodies)
+            part(ball("kneej", tr[1], thigh_m, sub=1, parent=kn), key, bodies)
+            part(cyl("shin", sr[0], sr[1], -0.38, shin_m, seg=8, parent=kn), key, bodies)
+
+        # --- Gallic man: tunic to mid-thigh over trousers bound at the ankle,
+        # low laced shoes (gallicae) ---------------------------------------------
         M = ("body",)
-        for hp in self.hip.values():
-            part(cyl("leg", 0.105, 0.078, -0.74, gray, seg=8, parent=hp), "trousers", M)
-            part(cyl("boot", 0.08, 0.075, -0.16, leather, seg=8, z0=-0.72, parent=hp), None, M)
-            part(box("foot", 0.24, 0.12, 0.08, leather, parent=hp, loc=(0.05, 0, -0.88)), None, M)
-        part(cyl("skirt", 0.3, 0.235, 0.44, gray, seg=14, z0=0.6, parent=root, scale=(0.82, 1.08, 1)), "tunic", M)
+        for side, hp in self.hip.items():
+            kn = self.knee[side]
+            leg(hp, kn, gray, gray, "trousers", M)
+            part(cyl("binding", 0.068, 0.065, -0.08, band, seg=8, z0=-0.3, parent=kn), "trousers", M)
+            part(cyl("ankle", 0.064, 0.064, -0.06, leather, seg=8, z0=-0.37, parent=kn), None, M)
+            part(box("foot", 0.22, 0.11, 0.075, leather, parent=kn, loc=(0.05, 0, -0.48)), None, M)
+        part(cyl("skirt", 0.27, 0.245, 0.4, gray, seg=32, folds=8, fold_depth=0.1, z0=0.66, parent=root, scale=(0.8, 1.08, 1)), "tunic", M)
+        part(cyl("hem", 0.275, 0.272, 0.055, band, seg=32, folds=8, fold_depth=0.105, z0=0.655, parent=root, scale=(0.8, 1.08, 1)), "tunic", M)
 
         # --- Roman: knee-length tunic, bare legs, open-work caligae -------------
-        R = ("body_roman",)
         caliga = mat("caliga", "#2e2016", "#4a3020", scale=50, bump=0.6)
-        for hp in self.hip.values():
-            part(cyl("leg", 0.088, 0.062, -0.76, skin, seg=8, parent=hp), None, R)
-            part(cyl("strap", 0.068, 0.07, -0.13, caliga, seg=8, z0=-0.75, parent=hp), None, R)
-            part(box("foot", 0.24, 0.12, 0.07, caliga, parent=hp, loc=(0.05, 0, -0.88)), None, R)
-        part(cyl("skirt", 0.31, 0.235, 0.58, gray, seg=14, z0=0.46, parent=root, scale=(0.82, 1.08, 1)), "tunic", R)
+        for side, hp in self.hip.items():
+            kn = self.knee[side]
+            leg(hp, kn, skin, skin, None, R, tr=(0.088, 0.066), sr=(0.066, 0.052))
+            part(cyl("strap", 0.06, 0.062, -0.12, caliga, seg=8, z0=-0.31, parent=kn), None, R)
+            part(box("foot", 0.23, 0.115, 0.07, caliga, parent=kn, loc=(0.05, 0, -0.48)), None, R)
+        part(cyl("skirt", 0.29, 0.245, 0.56, gray, seg=32, folds=8, fold_depth=0.1, z0=0.5, parent=root, scale=(0.8, 1.08, 1)), "tunic", R)
+        part(cyl("hem", 0.295, 0.292, 0.05, band, seg=32, folds=8, fold_depth=0.105, z0=0.495, parent=root, scale=(0.8, 1.08, 1)), "tunic", R)
 
-        # --- Woman: ankle-length belted dress, pinned at both shoulders ---------
-        F = ("body_f",)
-        for hp in self.hip.values():
-            part(cyl("leg", 0.07, 0.055, -0.76, skin, seg=8, parent=hp), None, F)
-            part(box("foot", 0.2, 0.1, 0.07, leather, parent=hp, loc=(0.04, 0, -0.88)), None, F)
-        part(cyl("dress", 0.36, 0.235, 0.98, gray, seg=16, z0=0.04, parent=root, scale=(0.8, 1.02, 1)), "tunic", F)
-        part(cyl("torso", 0.225, 0.26, 0.5, gray, seg=14, z0=1.0, parent=root, scale=(0.76, 1.04, 1)), "tunic", F)
-        part(ball("chest", 0.19, gray, parent=root, loc=(0.04, 0, 1.36), scale=(1.0, 1.3, 0.72)), "tunic", F)
-        part(cyl("belt", 0.235, 0.235, 0.06, leather, seg=14, z0=1.0, parent=root, scale=(0.8, 1.06, 1)), None, F)
+        # --- Woman: ankle-length belted dress over a sleeved undertunic, pinned
+        # at both shoulders ------------------------------------------------------
+        for side, hp in self.hip.items():
+            kn = self.knee[side]
+            leg(hp, kn, skin, skin, None, F, tr=(0.07, 0.058), sr=(0.058, 0.048))
+            part(box("foot", 0.19, 0.095, 0.07, leather, parent=kn, loc=(0.04, 0, -0.48)), None, F)
+        part(cyl("dress", 0.3, 0.215, 0.96, gray, seg=36, folds=9, fold_depth=0.12, z0=0.06, parent=root, scale=(0.8, 1.04, 1)), "tunic", F)
+        part(cyl("hem", 0.305, 0.3, 0.06, band, seg=36, folds=9, fold_depth=0.125, z0=0.055, parent=root, scale=(0.8, 1.04, 1)), "tunic", F)
+        part(cyl("torso", 0.21, 0.25, 0.5, gray, seg=14, z0=1.0, parent=root, scale=(0.76, 1.04, 1)), "tunic", F)
+        part(ball("chest", 0.185, gray, parent=root, loc=(0.04, 0, 1.35), scale=(1.0, 1.3, 0.72)), "tunic", F)
+        part(ball("yoke", 0.19, gray, parent=root, loc=(-0.01, 0, 1.43), scale=(0.7, 1.5, 0.42)), "tunic", F)
+        part(cyl("belt", 0.222, 0.222, 0.06, leather, seg=14, z0=1.0, parent=root, scale=(0.8, 1.06, 1)), None, F)
         for s in (1, -1):
-            part(ball("brooch", 0.03, bronze, sub=1, parent=root, loc=(0.09, s * 0.16, 1.5)), None, F)
+            part(ball("brooch", 0.032, bronze, sub=1, parent=root, loc=(0.1, s * 0.16, 1.49)), None, F)
 
-        # The man's and the Roman's chest and belt.
+        # The man's and the Roman's chest, shoulders and belt.
         MR = ("body", "body_roman")
-        part(cyl("torso", 0.235, 0.28, 0.52, gray, seg=14, z0=1.0, parent=root, scale=(0.76, 1.1, 1)), "tunic", MR)
-        part(ball("chest", 0.2, gray, parent=root, loc=(0.03, 0, 1.38), scale=(0.95, 1.35, 0.7)), "tunic", MR)
-        part(cyl("belt", 0.245, 0.245, 0.08, leather, seg=14, z0=0.99, parent=root, scale=(0.8, 1.1, 1)), None, MR)
-        part(box("buckle", 0.03, 0.08, 0.06, bronze, parent=root, loc=(0.2, 0, 1.0)), None, MR)
+        part(cyl("torso", 0.22, 0.275, 0.5, gray, seg=14, z0=1.0, parent=root, scale=(0.74, 1.1, 1)), "tunic", MR)
+        part(ball("chest", 0.2, gray, parent=root, loc=(0.03, 0, 1.36), scale=(0.95, 1.35, 0.7)), "tunic", MR)
+        part(ball("yoke", 0.2, gray, parent=root, loc=(-0.01, 0, 1.43), scale=(0.72, 1.55, 0.45)), "tunic", MR)
+        part(ball("neckline", 0.05, skin, sub=1, parent=root, loc=(0.135, 0, 1.47), scale=(0.45, 0.9, 1.4)), None, MR)
+        part(cyl("belt", 0.235, 0.235, 0.075, leather, seg=14, z0=0.99, parent=root, scale=(0.8, 1.1, 1)), None, MR)
+        part(box("buckle", 0.03, 0.08, 0.06, bronze, parent=root, loc=(0.195, 0, 1.0)), None, MR)
+        part(box("pouch", 0.09, 0.06, 0.11, leather, parent=root, loc=(0.1, 0.19, 0.88)), None, MR)
 
         # --- Hair (hair mask), each style its own layer --------------------------
         def layer(name):
@@ -878,6 +1344,16 @@ class Figure:
         hair(e, ball("cap", 0.16, hairm, parent=e, loc=(-0.025, 0, 1.81), scale=(1.0, 0.98, 0.8)))
         hair(e, ball("bun", 0.085, hairm, parent=e, loc=(-0.16, 0, 1.76)))
 
+        # Older and married women: a cloth wrapped over the hair and knotted
+        # at the nape (Gallo-Roman reliefs; plausible, not proven).
+        wrapm = mat("wrap", NEUTRAL, "#a4a4a4", scale=24, bump=0.4)
+        e = layer("hair_wrap")
+        for ob in (ball("wcap", 0.172, wrapm, parent=e, loc=(-0.035, 0, 1.815), scale=(1.0, 0.98, 0.84)),
+                   ball("wback", 0.13, wrapm, parent=e, loc=(-0.11, 0, 1.69), scale=(0.72, 1.12, 1.0)),
+                   ball("wknot", 0.07, wrapm, parent=e, loc=(-0.2, 0, 1.66), scale=(0.9, 1.1, 0.8)),
+                   cyl("wtail", 0.045, 0.02, -0.2, wrapm, seg=8, z0=1.64, parent=e, loc=(-0.2, 0, 0))):
+            self.mask_parts[ob] = "wrap"
+
         # --- Faces --------------------------------------------------------------
         def moustache(e):
             for s in (1, -1):
@@ -904,7 +1380,7 @@ class Figure:
         # arm. In the mask it is checked (see pattern_mask).
         cloth = mat("cloak", NEUTRAL, "#a2a2a2", scale=14, bump=0.4)
         ck = layer("cloak")
-        c = shell("cape", 0.42, 0.31, 0.95, cloth, lambda x, y: x < 0.04 + max(0.0, y) * 0.55, seg=24, z0=0.52,
+        c = shell("cape", 0.42, 0.31, 0.95, cloth, lambda x, y: x < 0.04 + max(0.0, y) * 0.55, seg=48, folds=11, fold_depth=0.12, z0=0.52,
                   parent=ck, loc=(-0.06, 0, 0), scale=(0.62, 1.12, 1))
         self.mask_parts[c] = "cloak"
         c2 = torus("collar", 0.22, 0.05, cloth, parent=ck, loc=(-0.02, 0, 1.5), scale=(0.8, 1.2, 1))
@@ -914,11 +1390,24 @@ class Figure:
         # Hide cape: what Germans wore instead of a cloak (Caesar IV.1, VI.21).
         fur = mat("fur", NEUTRAL, "#7a7a7a", scale=70, bump=1.0, rough=0.95)
         hd = layer("hide")
-        c3 = shell("hide", 0.44, 0.3, 0.6, fur, lambda x, y: x < 0.08, seg=20, z0=0.92, parent=hd,
+        c3 = shell("hide", 0.44, 0.3, 0.6, fur, lambda x, y: x < 0.08, seg=40, folds=7, fold_depth=0.07, z0=0.92, parent=hd,
                    loc=(-0.05, 0, 0), scale=(0.64, 1.14, 1))
         self.mask_parts[c3] = "hide"
         c4 = torus("ruff", 0.22, 0.07, fur, parent=hd, loc=(-0.02, 0, 1.5), scale=(0.82, 1.2, 1))
         self.mask_parts[c4] = "hide"
+
+        # Hooded cape (cucullus): what commoners and travelers wear over the
+        # tunic in winter, a short cape with the hood up.
+        hoodm = mat("hood", NEUTRAL, "#9c9c9c", scale=18, bump=0.45)
+        hd2 = layer("hood")
+        for ob in (shell("hcape", 0.4, 0.2, 0.5, hoodm, lambda x, y: True, seg=36, folds=9, fold_depth=0.1, z0=1.04,
+                         parent=hd2, loc=(-0.02, 0, 0), scale=(0.74, 1.08, 1)),
+                   open_ball("hood", 0.19, hoodm, lambda x, y, z: x < 0.07 - max(0.0, -z) * 0.6, parent=hd2,
+                             loc=(-0.035, 0, 1.79), scale=(1.0, 0.93, 1.06)),
+                   # The point hangs down the back, not up like a cap.
+                   cyl("point", 0.075, 0.0, 0.3, hoodm, seg=10, parent=hd2, loc=(-0.18, 0, 1.82),
+                       rot=(0, math.radians(-163), 0), scale=(0.6, 1, 1))):
+            self.mask_parts[ob] = "hood"
 
         # Mail with the shoulders doubled, Gallic and Roman alike.
         mailm = mat("mail", "#5e5e5a", "#86867e", scale=90, metal=0.6, rough=0.45, bump=0.9)
@@ -1081,14 +1570,35 @@ class Figure:
                     seen.append(o)
         return seen
 
-    def pose(self, facing, step):
+    def pose(self, facing, step, stride=1.0):
+        """Stand (step 0) or one of the two contact frames of the walk (step
+        1 or -1): legs apart, the trailing knee bent as it pushes off, the
+        arms swinging against the legs, the body a little lower. stride
+        scales the legs only (a long dress takes shorter steps); the arms
+        swing the same, so gear held in the hands still lines up."""
         self.root.rotation_euler = (0, 0, math.radians(60 * facing))
-        self.root.location = (0, 0, 0.025 * abs(step))
-        sw = math.radians(26) * step
-        self.hip["L"].rotation_euler = (0, -sw, 0)
-        self.hip["R"].rotation_euler = (0, sw, 0)
-        self.sho["L"].rotation_euler = (math.radians(8), sw * 0.6, 0)
-        self.sho["R"].rotation_euler = (math.radians(-8), -sw * 0.5 - math.radians(12), 0)
+        self.root.location = (0, 0, -0.02 * abs(step))
+        sw = math.radians(24) * step
+        lw = sw * stride
+        self.hip["L"].rotation_euler = (0, -lw, 0)
+        self.hip["R"].rotation_euler = (0, lw, 0)
+        lead, trail = ("L", "R") if step > 0 else ("R", "L")
+        if step == 0:
+            for kn in self.knee.values():
+                kn.rotation_euler = (0, math.radians(4), 0)
+        else:
+            self.knee[trail].rotation_euler = (0, math.radians(30 * stride), 0)
+            self.knee[lead].rotation_euler = (0, math.radians(5), 0)
+        self.sho["L"].rotation_euler = (math.radians(10), sw * 0.7, 0)
+        self.sho["R"].rotation_euler = (math.radians(-10), -sw * 0.45 - math.radians(12), 0)
+        # Elbows bend forward, more on the arm swinging forward. The hands turn
+        # back by the same amount, so what they hold keeps its angle to the arm.
+        bl = math.radians(14 + 16 * max(0.0, -step))
+        br = math.radians(24)
+        self.elbow["L"].rotation_euler = (0, -bl, 0)
+        self.elbow["R"].rotation_euler = (0, -br, 0)
+        self.hand_l.rotation_euler = (0, bl, 0)
+        self.hand_r.rotation_euler = (0, br, 0)
 
     def lie(self):
         self.pose(0, 0)
@@ -1124,10 +1634,10 @@ class Figure:
 
 
 BODIES = ["body", "body_f", "body_roman"]
-HAIR = ["hair_long", "hair_swept", "hair_short", "hair_knot", "hair_braid", "hair_bun"]
+HAIR = ["hair_long", "hair_swept", "hair_short", "hair_knot", "hair_braid", "hair_bun", "hair_wrap"]
 FACES = ["moustache", "beard"]
 TORCS = ["torc_gold", "torc_bronze"]
-GEAR_LAYERS = ["cloak", "hide", "mail", "cap", "helmet", "helmet_iron", "helmet_bird", "sword", "gladius", "dagger",
+GEAR_LAYERS = ["cloak", "hide", "hood", "mail", "cap", "helmet", "helmet_iron", "helmet_bird", "sword", "gladius", "dagger",
                "axe", "spear", "staff", "club", "javelin", "pilum", "sling", "bow", "shield", "small_shield", "scutum"]
 FIG_LAYERS = BODIES + HAIR + FACES + TORCS + GEAR_LAYERS
 # Layers drawn on the dead and the fallen as well as the standing.
@@ -1135,7 +1645,9 @@ DOWN_LAYERS = BODIES + HAIR + FACES + TORCS
 # Which body hides what is behind it when a layer renders. Women's hair goes
 # with the woman's body; everything else with the man's (the heads, arms and
 # shoulders are the same).
-HOLDOUT = {"hair_braid": "body_f", "hair_bun": "body_f"}
+HOLDOUT = {"hair_braid": "body_f", "hair_bun": "body_f", "hair_wrap": "body_f"}
+# Shorter steps in an ankle-length dress, so the back foot stays under it.
+STRIDE = {"body_f": 0.45}
 
 
 def render_layers(f, layers, folder, down_layers=("body",)):
@@ -1160,7 +1672,7 @@ def render_layers(f, layers, folder, down_layers=("body",)):
             f.mask_mode(mode == "mask")
             for facing in range(6):
                 for k, step in enumerate((0, 1, -1)):
-                    f.pose(facing, step)
+                    f.pose(facing, step, STRIDE.get(base, 1.0))
                     render(os.path.join(OUT, folder, name, mode, "%d_%d.png" % (facing, k)))
             if name in down_layers:
                 f.lie()
@@ -1256,7 +1768,8 @@ def render_preview():
               "raven": ("body", ["hair_long", "beard", "cloak", "helmet_bird", "spear"]),
               "roman": ("body_roman", ["mail", "hair_short", "helmet", "gladius", "scutum"]),
               "pilum": ("body_roman", ["hair_short", "pilum"]),
-              "woman": ("body_f", ["hair_braid", "torc_gold"]), "elder": ("body_f", ["hair_bun", "cloak"]),
+              "woman": ("body_f", ["hair_braid", "torc_gold"]), "elder": ("body_f", ["hair_wrap", "cloak"]),
+              "farmer": ("body", ["hair_long", "beard", "hood", "staff"]),
               "german": ("body", ["hair_knot", "beard", "hide", "spear", "small_shield"]),
               "hunter": ("body", ["hair_long", "beard", "bow"])}
     sets = f.body_sets
@@ -1266,7 +1779,7 @@ def render_preview():
             ob.hide_render = ob not in sets[body]
         show([f.items[g] for g in gear], True)
         for facing in (5, 1, 3):
-            f.pose(facing, 1 if facing == 1 else 0)
+            f.pose(facing, 1 if facing == 1 else 0, STRIDE.get(body, 1.0))
             render(os.path.join(OUT, "preview", "%s_%d.png" % (name, facing)))
     f.lie()
     for ob in f.body:
@@ -1291,6 +1804,7 @@ for g, fn in GROUPS.items():
     if g == "preview" and not (ONLY and g in ONLY):
         continue
     if (ONLY is None or g in ONLY or (g == "walls" and ONLY & WALL_KINDS)
-            or (g == "figure" and ONLY & set(FIG_LAYERS))):
+            or (g == "figure" and ONLY & set(FIG_LAYERS))
+            or (g == "props" and ONLY & {n for n, _ in PROP_BUILDERS})):
         fn()
 print("SPRITES DONE")

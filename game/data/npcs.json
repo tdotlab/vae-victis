@@ -184,7 +184,8 @@
    "xp": 35,
    "desc": "A boy with a sling and a very good arm.",
    "look": {
-    "tunic": "#5a5038"
+    "tunic": "#5a5038",
+    "hood": "#4a4030"
    }
   },
   {
@@ -208,7 +209,8 @@
    "look": {
     "tunic": "#6a6048",
     "hair": "#3a2a1a",
-    "face": "beard"
+    "face": "beard",
+    "hood": "#5a4a38"
    }
   },
   {
@@ -230,7 +232,9 @@
    "desc": "A woman carrying a bundle and watching your hands.",
    "look": {
     "tunic": "#5a5a48",
-    "hair": "#5a3a20"
+    "hair": "#5a3a20",
+    "hair_style": "wrap",
+    "wrap": "#6a5a40"
    }
   },
   {
@@ -247,7 +251,8 @@
    "look": {
     "tunic": "#58503e",
     "hair": "#c8c0b0",
-    "face": "beard"
+    "face": "beard",
+    "hood": "#4a4234"
    }
   },
   {
@@ -744,7 +749,8 @@
    "xp": 40,
    "desc": "A boy with a sling and an old man's eyes.",
    "look": {
-    "tunic": "#6a5a3a"
+    "tunic": "#6a5a3a",
+    "hood": "#4a4030"
    }
   },
   {
@@ -871,7 +877,8 @@
    "look": {
     "tunic": "#5a5a4a",
     "hair": "#e0dcd0",
-    "hair_style": "bun"
+    "hair_style": "wrap",
+    "wrap": "#8a7a5a"
    }
   },
   {
@@ -884,7 +891,8 @@
    "desc": "A farmer of Vindomagos.",
    "look": {
     "tunic": "#7a6a4a",
-    "face": "beard"
+    "face": "beard",
+    "hood": "#5e5440"
    }
   },
   {
@@ -1021,7 +1029,8 @@
    "desc": "Sitting on a cart of grain sacks with the patience of a man paid by the day.",
    "look": {
     "tunic": "#7a6a4a",
-    "face": "beard"
+    "face": "beard",
+    "hood": "#6a5a3e"
    }
   },
   {
@@ -1149,9 +1158,9 @@
    "look": {
     "tunic": "#8a8478",
     "trousers": "#5a5248",
-    "cloak": "#6a6a5a",
     "hair": "#3a2a1a",
-    "hair_style": "short"
+    "hair_style": "short",
+    "hood": "#6a6a5a"
    }
   },
   {
@@ -1615,8 +1624,8 @@
    "desc": "He keeps his hood up. Under it, where his ears were, are two healing wounds.",
    "look": {
     "tunic": "#5a5a50",
-    "cloak": "#4a4a40",
-    "hair": "#5a4a3a"
+    "hair": "#5a4a3a",
+    "hood": "#4a4a40"
    }
   },
   {
@@ -2009,7 +2018,8 @@
    "look": {
     "tunic": "#6a5a4a",
     "hair": "#3a2a1a",
-    "face": "beard"
+    "face": "beard",
+    "hood": "#4e4434"
    }
   },
   {
@@ -2137,7 +2147,9 @@
    "desc": "A woman of Avaricum with a rope on her wrists and a number in the Roman's book.",
    "look": {
     "tunic": "#5a4a48",
-    "hair": "#5a3a1a"
+    "hair": "#5a3a1a",
+    "hair_style": "wrap",
+    "wrap": "#5a4a3a"
    }
   },
   {

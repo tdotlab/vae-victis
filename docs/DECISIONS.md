@@ -2,6 +2,13 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-18 (art pass: people, props, weather)
+
+- **Hoods and headwraps are their own layers.** Commoners, refugees, carters, miners and slingers wear a hooded cape (`look.hood`, which comes down under a helmet or cap); older women wear a headwrap (`hair_style: "wrap"`). Bare heads everywhere made every crowd look like a war band. The hood replaces the cloak, so a hooded NPC takes the hood's color.
+- **Women walk with a shorter stride** (`STRIDE` in `sprites.py`, legs only, so held gear still lines up). At the man's stride the back foot showed under an ankle-length dress.
+- **Ten new props from the research,** each a terrain type like the old ones: market stall, Dressel 1A wine amphorae (sherds of them turn up under Gallic hearths and floors), warp-weighted loom, a granary on posts, a quern, a woodpile, a cart, a Roman leather tent, burnt rubble (walkable, cost 2) and a smithy. Hearth, bed, table and the stores were rebuilt: a clay hearth plate with firedogs and a cauldron, a straw pallet on the floor instead of a framed bed, a low table, a barrel with withy hoops and a dolium. Avaricum, its ruins and both Gergovia maps are dressed with them; the ruins' Roman camp gets tents.
+- **Weather and fire are a view layer (`Atmos`), not rules.** Smoke rises from every glowing cell, out at the roof ridge for a hearth indoors; fires throw flickering light that matters at night, and an indoor fire's light shows only while the player is inside. A map can rain (`"weather": "rain"`, optionally gated by `weather_flag`). Avaricum rains from the siege on and the ruins rain: Caesar records cold, constant rain through the whole siege (BG VII.24), and the ruins' arrival text already said so.
+
 ## 2026-11-18 (Avaricum)
 
 - **One world location, three maps by flag (`map_by_flag`).** The rich city and the siege share a map and change by phase texts and flag-gated actors, containers and exits; the ruins are their own map. The first matching flag wins, so the order is fallen, then siege.

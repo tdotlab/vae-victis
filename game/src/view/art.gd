@@ -191,6 +191,8 @@ static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: floa
 		"cloak": Color(look.get("cloak", "#5a4a3a")),
 		"cloak2": Color(look.get("cloak2", look.get("cloak", "#5a4a3a"))),
 		"hide": Color(look.get("hide", "#5a4a36")),
+		"hood": Color(look.get("hood", look.get("cloak", "#6a5a44"))),
+		"wrap": Color(look.get("wrap", "#8a7a5a")),
 		"shield": Color(look.get("shield", "#7a4a28")),
 	}
 	var layers := figure_layers(a, f.get("gear", {}), down)
@@ -211,10 +213,11 @@ static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: floa
 
 ## Which figure layers make up a person, bottom to top. The body comes from
 ## look.body ("f", "roman") or the actor's sex; hair from look.hair_style
-## ("long", "swept", "short", "knot", "braid", "bun", "bald"), defaulting by
-## body; look.face is "moustache" or "beard" (shaven without); look.torc is
-## "gold" or "bronze"; look.hide draws a hide cape instead of a cloak. The
-## fallen keep their body, hair, face and torc and lose the rest.
+## ("long", "swept", "short", "knot", "braid", "bun", "wrap", "bald"),
+## defaulting by body; look.face is "moustache" or "beard" (shaven without);
+## look.torc is "gold" or "bronze"; look.hide draws a hide cape and look.hood
+## a hooded cape (put back under a helmet) instead of a cloak. The fallen
+## keep their body, hair, face and torc and lose the rest.
 static func figure_layers(a: Actor, gear: Dictionary, down: bool) -> Array:
 	var look := a.look
 	if look.get("beast", false):
@@ -240,7 +243,9 @@ static func figure_layers(a: Actor, gear: Dictionary, down: bool) -> Array:
 	if armor != "":
 		layers.append(armor)
 	layers.append_array(head)
-	if look.has("hide"):
+	if look.has("hood") and helmet == "":
+		layers.append("hood")
+	elif look.has("hide"):
 		layers.append("hide")
 	elif look.has("cloak"):
 		layers.append("cloak")

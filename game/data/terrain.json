@@ -28,5 +28,15 @@
   "bed":         {"name": "Straw bed",    "color": "#9c8a55", "walk": true,  "cost": 2, "indoor": true},
   "altar":       {"name": "Altar stone",  "color": "#9a9686", "walk": false, "sight": true,  "height": 12},
   "crate":       {"name": "Stores",       "color": "#7d5d36", "walk": false, "sight": true,  "height": 14},
-  "bones":       {"name": "Bones",        "color": "#b8b09a", "walk": true,  "cost": 1}
+  "bones":       {"name": "Bones",        "color": "#b8b09a", "walk": true,  "cost": 1},
+  "stall":       {"name": "Market stall", "color": "#8e3a24", "walk": false, "sight": true,  "height": 20},
+  "amphorae":    {"name": "Wine jars",    "color": "#a8684a", "walk": false, "sight": true,  "height": 16},
+  "loom":        {"name": "Loom",         "color": "#c4b896", "walk": false, "sight": true,  "height": 20},
+  "granary":     {"name": "Granary",      "color": "#6e5a34", "walk": false, "sight": false, "height": 30},
+  "quern":       {"name": "Quern",        "color": "#5a5650", "walk": false, "sight": true,  "height": 6},
+  "woodpile":    {"name": "Woodpile",     "color": "#4e3a28", "walk": false, "sight": true,  "height": 10},
+  "cart":        {"name": "Cart",         "color": "#6b4a2a", "walk": false, "sight": true,  "height": 14},
+  "tent":        {"name": "Leather tent", "color": "#6e5236", "walk": false, "sight": false, "height": 22},
+  "rubble":      {"name": "Burnt rubble", "color": "#3a3430", "walk": true,  "cost": 2},
+  "smithy":      {"name": "Forge",        "color": "#7a5a40", "walk": false, "sight": true,  "height": 12, "glow": true}
 }

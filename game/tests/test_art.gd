@@ -8,7 +8,7 @@ func _gear() -> Dictionary:
 
 
 func test_women_get_the_dress_and_a_braid_by_default() -> void:
-	var a := Actor.from_template("refugee_woman")
+	var a := Actor.from_template("brig_villager_f")
 	var l := Art.figure_layers(a, _gear(), false)
 	eq(l[0], "body_f", "a woman's body")
 	check("hair_braid" in l, "braided by default")
@@ -41,6 +41,19 @@ func test_swept_hair_goes_under_a_helmet() -> void:
 	check("helmet_iron" in l and "hair_long" in l and not "hair_swept" in l, "%s" % [l])
 
 
+func test_a_hood_replaces_the_cloak_and_comes_down_under_a_helmet() -> void:
+	var l := Art.figure_layers(Actor.from_template("refugee"), _gear(), false)
+	check("hood" in l and not "cloak" in l, "the refugee is hooded: %s" % [l])
+	var s := Art.figure_layers(Actor.from_template("brigand_slinger"), _gear(), false)
+	check(not "hood" in s and "cap" in s, "the hood goes back under the cap: %s" % [s])
+	check(not "hood" in Art.figure_layers(Actor.from_template("refugee"), _gear(), true), "the fallen lose the hood")
+
+
+func test_older_women_wear_a_headwrap() -> void:
+	var l := Art.figure_layers(Actor.from_template("banna"), _gear(), false)
+	check("hair_wrap" in l and not "hair_bun" in l, "%s" % [l])
+
+
 func test_every_npc_layer_has_a_sprite() -> void:
 	var f: Dictionary = Art.manifest().get("figure", {})
 	if f.is_empty():
@@ -52,3 +65,11 @@ func test_every_npc_layer_has_a_sprite() -> void:
 		for down in [false, true]:
 			for l in Art.figure_layers(a, f["gear"], down):
 				check(f["layers"].has(l), "%s: layer %s is packed" % [t["id"], l])
+
+
+func test_avaricum_rains_from_the_siege_on() -> void:
+	var city: Dictionary = MapData.load_map("avaricum").def
+	check(not Atmos.rains(city, {}), "no rain in the rich city")
+	check(Atmos.rains(city, {"avaricum_siege": 1}), "rain once the siege starts")
+	check(Atmos.rains(MapData.load_map("avaricum_ruins").def, {}), "the ruins are wet")
+	check(not Atmos.rains(MapData.load_map("gergovia_lower").def, {"avaricum_siege": 1}), "dry elsewhere")

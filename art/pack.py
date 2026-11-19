@@ -28,7 +28,8 @@ GEAR = {"gallic_sword": "sword", "gladius": "gladius", "dagger": "dagger", "axe"
         "raven_helm": "helmet_bird", "mail_shirt": "mail", "chief_mail": "mail"}
 HAIR_TINT = [("hair", 2)]
 TINTS = {"body": [("tunic", 0), ("trousers", 1), ("hair", 2)], "body_f": [("tunic", 0)], "body_roman": [("tunic", 0)],
-         "cloak": [("cloak", 0), ("cloak2", 1)], "hide": [("hide", 0)],
+         "cloak": [("cloak", 0), ("cloak2", 1)], "hide": [("hide", 0)], "hood": [("hood", 0)],
+         "hair_wrap": [("wrap", 0)],
          "shield": [("shield", 0)], "small_shield": [("shield", 0)], "scutum": [("shield", 0)]}
 for _l in ("hair_long", "hair_swept", "hair_short", "hair_knot", "hair_braid", "hair_bun", "moustache", "beard"):
     TINTS[_l] = HAIR_TINT
@@ -44,7 +45,9 @@ WALLS = {
     "cave_wall": {"connect": ["cave_wall", "cliff"], "under": "cave"},
 }
 DOOR = {"connect": ["wall_wood", "wall_stone"]}
-PROPS = {"hearth": "floor_earth", "bed": "floor_earth", "table": "floor_earth", "crate": "floor_earth", "altar": None}
+PROPS = {"hearth": "floor_earth", "bed": "floor_earth", "table": "floor_earth", "crate": "floor_earth", "altar": None,
+         "stall": "dirt", "amphorae": "dirt", "loom": "floor_earth", "granary": None, "quern": "floor_earth",
+         "woodpile": "dirt", "cart": "dirt", "tent": "dirt", "rubble": "dirt", "smithy": "dirt"}
 
 # Ground: blend priority (higher spreads soft edges over lower) and aliases
 # for terrains that borrow another's texture.
