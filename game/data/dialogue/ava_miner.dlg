@@ -1,0 +1,9 @@
+// Biturigan miners in the countermines (Caesar BG VII.22).
+=== start
+[quest countermine active] -> help
+"We pull their hooks off the wall with nooses and winch them in. We dig out under their earth and it falls in. We go along their galleries at night with fire." He wipes clay out of his eyes. "Every day they build, and every night we undo a bit of it. We're losing slower than they're winning. That's what a siege is."
+* "Goodbye." -> END
+
+=== help
+"Andecamulos wants pitch, mostly. For the fire under the terrace." He thinks. "Sumelis in the forum has some. And there's a store under the first granary, the city's own, that nobody's guarding anymore because there's nothing in it worth guarding except pitch."
+* "Goodbye." -> END

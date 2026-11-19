@@ -1,0 +1,27 @@
+// The picked men Vercingetorix sent into Avaricum for the siege. Their runners
+// go out through the marsh to the king's camp every night.
+=== start
+[flag breakout_stopped] -> breakout
+"Ten thousand of us, picked from the whole army, and sent in here to hold a wall." He spits. "It's a good wall. I'll give the Bituriges that."
+-> hub
+
+=== hub
+* "What's the king doing out there?" -> king
+* [quest nertomara active, speech 50] "Your runners go out to the camp every night. Two children of the city go with them tonight. Nertomara's." -> runners
+* [quest nertomara active, renown 10] "You know who I am. Take two children out with the runners tonight, for me." -> runners
+* "Goodbye." -> END
+
+=== king
+"Burning. Every farm and every barn for twenty miles round the Romans, and picking off their foragers when they go out for more." He grins. "They're eating their cattle. They'll be eating their boots by spring. He wanted to burn this city too, you know. The Bituriges went down on their knees." He looks at the wall. "Now we're inside it."
+-> hub
+
+=== runners
+~ quest nertomara done_runners done
+He scratches his jaw. "Two? Small?" He thinks about it. "The runners go out at the second watch. Children are lighter than a message and quieter than most of the men who carry them. I'll tell them." He looks at you. "And if anyone asks, it was your idea."
+
+That night two small shapes go down to the marsh gate between three of the king's men. In the morning the runners are back, and one of them nods to you.
+-> hub
+
+=== breakout
+He's sitting with his back to the wall, sharpening a sword that doesn't need it. "We were all going last night. Through the marsh, to the camp. The king's orders." He keeps sharpening. "The women of the city came out and held on to us. They begged us not to leave them to the Romans. When we went anyway, they screamed, so the Romans would hear. So we didn't go." He tests the edge on his thumb. "I don't blame them. I'd have done the same."
+* "Goodbye." -> END

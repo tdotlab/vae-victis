@@ -2,6 +2,15 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-18 (Avaricum)
+
+- **One world location, three maps by flag (`map_by_flag`).** The rich city and the siege share a map and change by phase texts and flag-gated actors, containers and exits; the ruins are their own map. The first matching flag wins, so the order is fallen, then siege.
+- **Siege dates follow Caesar's count:** siege from day 108, the terrace fire on day 133, the breakout stopped on day 136, the fall on day 137. Calendar events only fire on arrival or world-map moves, so a map can now carry a `deadline` that fires its dialogue on the day while the player is on it. Waiting the siege out inside means the fall.
+- **Nobody saves Avaricum.** The quests save people out of it (children, a girl, the miners' pride), never the city. History is the clock; the player's choices are who gets out.
+- **Epomeduos and his letter are invented,** to carry the Vettius thread from Gergovia's tablets to Noviodunum. An Aeduan buying grain in Avaricum in 52 BC is plausible: the Aedui were still Roman allies until Bibracte.
+- **The ruins are held by a Roman sentry who can be passed four ways** (Latin as a sutler, a bribe, the Aeduan letter's horse seal, or posing as an Aeduan) or fought. A Gallic safe-conduct does nothing there.
+- **Screenshot runs can `reload` a map** so actors gated on flags set by the run respawn.
+
 ## 2026-11-18 (Gergovia)
 
 - **Gergovia is two maps, the lower town and the plateau,** joined by the gate in the wall. The real oppidum is a plateau with settlement below it; one map that size would be mostly empty walking.

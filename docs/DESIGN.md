@@ -244,6 +244,15 @@ Gergovia is the Hub: the first big place, and the first time the player sees the
 - **The Uncle's Man.** An old noble's son is condemned to burn. Routes: argue (Speech), stand surety (Honor), beg (and he loses his ears), bribe, sneak, betray. The clock is the king's march.
 - **The Greek.** Theron joins on terms; never if the clerk was betrayed.
 
+### Avaricum (built)
+
+Avaricum is the Necropolis: one location, three states. The world map picks the map and entry by flag (`map_by_flag`). Before day 108 it's the rich city: graveled lanes, carved door-posts, the ironworks, the murus gallicus at the south gate. From day 108 (the siege calendar event) it's full: refugees from the twenty burned towns, the king's picked men, the miners under the terrace; the player comes in at night through the marsh. On day 133 the terrace burns and on day 136 the breakout is stopped (Caesar BG VII.24-26). A map can end on a day (`deadline`): on day 137 a player still inside sees the fall (VII.27-28) and is put out on the world map, titled "One of the eight hundred". After that it's the ruins map, held by a Roman camp.
+
+- **The Empty Line** (main line). The tablets left a blank for Avaricum; Epomeduos fills it. Routes: expose him to Senodonnos, turn him, buy him, kill him, steal his letter. Each way, the trail points to Noviodunum.
+- **Under the Terrace.** The countermine, four ways: dig, listen, pitch, sortie.
+- **The Most Beautiful City.** Nertomara's children: early with a good word, by boat, by the adit, by the king's runners. The city itself can't be saved; the clock is history's.
+- **What the Soldiers Left.** A girl in the ruins: stealth, Latin, silver, the factor's word, or force.
+
 ## Items and economy
 
 - **Weapons:** daggers, swords (Gallic long swords and Roman short swords), axes, spears, javelins and pila, slings, bows, clubs. Quality tiers: crude, common, fine, masterwork.
@@ -297,7 +306,7 @@ Length, by Fallout 1's HowLongToBeat figures (T's reference): about 16 hours for
 
 ## Open questions for T
 
-- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina. Gergovia adds: Theron (the Greek), Paconius (the Vettius clerk), Ollognatos (hostage-master), Ategnatos and his son Eppillos, Senognatos (levy captain), Excingos (smith), Nammia (food seller) and Uxellos (potter).
+- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina. Gergovia adds: Theron (the Greek), Paconius (the Vettius clerk), Ollognatos (hostage-master), Ategnatos and his son Eppillos, Senognatos (levy captain), Excingos (smith), Nammia (food seller) and Uxellos (potter). Avaricum adds: Senodonnos (Biturigan magistrate), Epomeduos (the Aeduan factor), Nertomara (weaver), Andecamulos (master of the mines), Vindos (boatman), Sumelis (market woman) and Hermeros (Vettius's freedman).
 - The secret ahistorical path: yes or no. Default no.
 - Is the player character fixed (a named person) or player-made? Default: player-made name and sex, fixed origin in Brigodunon, like Fallout.
 - How dark the Avaricum and Alesia sequences may get. Default: shown plainly, never lingered on.

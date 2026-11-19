@@ -1,0 +1,10 @@
+// Read from the inventory: Epomeduos's list of Avaricum's households.
+@speaker Wax tablet of names
+=== start
+[quest factor none] ~ quest factor rumor
+One leaf of wax, written close in Greek letters. You can't make out every word, but you can read numbers, and you know some of the names: they're painted over doors in the forum.
+
+A household on each line. Beside it, heads: a man, a wife, two boys, a girl, an old woman. Beside that, a price in Roman coin. The house of Senodonnos the magistrate is near the top, and priced high. At the bottom, in the same patient hand, a total, if the city is taken entire.
+
+It's a list of everyone in Avaricum, and what they'd fetch.
+* Put it away. -> END

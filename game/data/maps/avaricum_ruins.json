@@ -1,0 +1,284 @@
+{
+ "id": "avaricum_ruins",
+ "name": "Avaricum, after",
+ "default": "grass",
+ "legend": {
+  ".": "grass",
+  ",": "field",
+  "_": "road",
+  "m": "mud",
+  "o": "dirt",
+  "~": "water",
+  "q": "shallows",
+  "T": "tree",
+  "b": "bush",
+  "r": "rock",
+  "R": "rampart",
+  "n": "fence",
+  "w": "wall_wood",
+  "f": "floor_earth",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "d": "door",
+  "A": "altar",
+  "z": "bones",
+  "c": {
+   "terrain": "crate",
+   "mark": "granary_store"
+  },
+  "H": {
+   "terrain": "cave",
+   "mark": "pit"
+  },
+  "p": "palisade",
+  "s": {
+   "terrain": "floor_earth",
+   "mark": "survivor"
+  },
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "W": {
+   "terrain": "road",
+   "mark": "world"
+  },
+  "Q": {
+   "terrain": "dirt",
+   "mark": "sentry"
+  },
+  "D": {
+   "terrain": "dirt",
+   "mark": "hermeros"
+  },
+  "E": {
+   "terrain": "dirt",
+   "mark": "epomeduos"
+  },
+  "k": {
+   "terrain": "dirt",
+   "mark": "pen_guard"
+  },
+  "5": {
+   "terrain": "dirt",
+   "mark": "c1"
+  },
+  "6": {
+   "terrain": "dirt",
+   "mark": "c2"
+  },
+  "7": {
+   "terrain": "dirt",
+   "mark": "c3"
+  },
+  "Y": {
+   "terrain": "grass",
+   "mark": "y_guard"
+  },
+  "1": {
+   "terrain": "road",
+   "mark": "l1"
+  },
+  "2": {
+   "terrain": "grass",
+   "mark": "l2"
+  },
+  "3": {
+   "terrain": "grass",
+   "mark": "l3"
+  },
+  "4": {
+   "terrain": "grass",
+   "mark": "l4"
+  },
+  "Z": {
+   "terrain": "shallows",
+   "mark": "marsh_exit"
+  },
+  "X": {
+   "terrain": "road",
+   "mark": "exit"
+  },
+  "e": {
+   "terrain": "field",
+   "mark": "exit"
+  },
+  "!": {
+   "terrain": "road",
+   "mark": "gate"
+  },
+  "%": {
+   "terrain": "road",
+   "mark": "forum"
+  },
+  "+": {
+   "terrain": "road",
+   "mark": "nert_house"
+  }
+ },
+ "rows": [
+  "~~~~~ZZZ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~qqq~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "qqqqqmmmmmmmmmmmmmmmmmmmmmmmmqqqqbqqqqqqbqqqqqqqqqqqqqqq",
+  "mqqqqqmqqqqqmqqbqqmqqqqqmqqmmzmqqqqqmqqqqqmqbqqqmqbqqqmq",
+  "qqqmqqqqqbqqqqqmqqbqqmqqqqzmmqqqqmqqqqqmqqqqqmqbqqqmqqqq",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRR__RRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRR__RRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RR..oworwoworwowor.oworwow.__...wwww.wwww.wwww.wwww...RR",
+  "RR..wooooohooooooo.wooooro.__z..wfcw.wffw.wffw.wfsw...RR",
+  "RR..rooooooooooocw.rohooow.__...wwdw.wwww.wwww.wwdw...RR",
+  "RR..ooooooooohoooo.oooooor.__.4T................Y.....RR",
+  "RR..worwoworwoworw.woroowo.__.......................T.RR",
+  "RR____+_______________________________________________RR",
+  "RR.rwooorwow.rwowo......1..__........oroow.rwowo.wooorRR",
+  "RR.ooooooooo.oooow.........__........woooo.oohow.rooooRR",
+  "RR.wooooooow.wohoo..ocoocoo__oocooco.oohow.woooo.oohowRR",
+  "RR.oohoooocr.oworw..ooooooo__onnnnno.wowor.oworw.worwoRR",
+  "RR.woworwowo.T......ooooooD__on5.6no.b.........T......RR",
+  "RR..................ooooooo%%on.7.noE.............b...RR",
+  "RR.orwow.rwowo.woworooooooo__onn.nno....wowor.oworw...RR",
+  "RR.woooo.oohow.rooooooooooo__ooookoo....roooo.wohor...RR",
+  "RR.oohow.woooo.oohowocoocoo__oocooco....oohow.roooo...RR",
+  "RR.wooor.oworw.worwo....T..__.......2...woowo.oroow.T.RR",
+  "RR.......b.................__........T................RR",
+  "RR____________________________________________________RR",
+  "RR.nnnnnnn..oworw.woowo..3.__...h...r...rwoworwow.....RR",
+  "RR.n.....n..wooor.oohow....__..z.n.n.r..oohoohooo.....RR",
+  "RR.n..A..n..rohoo.wooor..RR__RR...H.....oooooooow.....RR",
+  "RR.n.....n..orwow.rwowo..RR__RR.rn.n....oohoohoor.....RR",
+  "RR.nnn.nnn.....T......b.zRR__RR......h..woworwowo.....RR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRR__RRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRR!!RRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "mmmmmmmmmmmmmpooooooooooooo__ooooooooooooopmmmmmmmmmmmmm",
+  ",,,,,,,,,,,,,pooooooroooooo__oQooooroooooop,,,,,,,,,,,,,",
+  ",,,,,,,,,,,,,pooorooooroooo__ooooroooorooop,,,,,,,,,,,,,",
+  ",,,,,,,,,,,,,pooooooooooooo__ooooooooooooop,,,,,,,,,,,,,",
+  ",,,,,,,,,,,,,,nnnnnnnnnnnn____nnnnnnnnnnnn,,,,,,,,,,,,,,",
+  "eeeeeeeeeeeeeeeeeeeeeeeeeee@Weeeeeeeeeeeeeeeeeeeeeeeeeee"
+ ],
+ "arrive_text": "The terrace runs right up to the wall now, a road of trampled earth and charred timber with the Roman sheds still standing along its sides. Beyond it Avaricum is quiet. Most of the roofs are gone. The wall stands, because it was built well, and the granaries stand, because the Romans wanted what was in them. It is raining, the way it rained the whole siege.",
+ "actors": [
+  {
+   "uid": "sentry",
+   "template": "legionary",
+   "mark": "sentry",
+   "dialogue": "ava_sentry"
+  },
+  {
+   "uid": "hermeros",
+   "template": "hermeros",
+   "mark": "hermeros"
+  },
+  {
+   "uid": "epomeduos",
+   "template": "epomeduos",
+   "mark": "epomeduos",
+   "unless_flag": "factor_gone"
+  },
+  {
+   "uid": "pen_guard",
+   "template": "legionary",
+   "mark": "pen_guard",
+   "dialogue": "ava_legionary"
+  },
+  {
+   "uid": "ava_c1",
+   "template": "ava_captive",
+   "mark": "c1",
+   "unless_flag": "pen_freed"
+  },
+  {
+   "uid": "ava_c2",
+   "template": "ava_captive_f",
+   "mark": "c2",
+   "unless_flag": "pen_freed"
+  },
+  {
+   "uid": "ava_c3",
+   "template": "ava_captive",
+   "mark": "c3",
+   "unless_flag": "pen_freed"
+  },
+  {
+   "uid": "survivor",
+   "template": "ava_survivor",
+   "mark": "survivor",
+   "unless_flag": "survivor_out"
+  },
+  {
+   "uid": "ava_l1",
+   "template": "legionary",
+   "mark": "l1",
+   "dialogue": "ava_legionary"
+  },
+  {
+   "uid": "ava_l2",
+   "template": "legionary",
+   "mark": "l2",
+   "dialogue": "ava_legionary"
+  },
+  {
+   "uid": "ava_l3",
+   "template": "legionary",
+   "mark": "l3",
+   "dialogue": "ava_legionary"
+  },
+  {
+   "uid": "ava_l4",
+   "template": "legionary",
+   "mark": "l4",
+   "dialogue": "ava_legionary"
+  },
+  {
+   "uid": "ava_l5",
+   "template": "legionary",
+   "mark": "y_guard",
+   "dialogue": "ava_legionary"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "granary_store",
+   "name": "Granary",
+   "items": [
+    [
+     "bread",
+     10
+    ]
+   ],
+   "silver": 0
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "Back down the terrace road"
+  },
+  {
+   "mark": "marsh_exit",
+   "to": "world",
+   "label": "Through the marsh"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "gate",
+   "id": "sentry_stop",
+   "once": false,
+   "unless_flag": "ruins_passed",
+   "dialogue": "ava_sentry"
+  },
+  {
+   "mark": "forum",
+   "id": "forum_after",
+   "say": "The forum, where the Bituriges made their last stand in wedges, the way Caesar will tell it, until they saw the legionaries going round them along the top of the wall and threw down their arms and ran. They ran for the gates. The Romans had the gates. The rain has washed most of it away, and soldiers have carried off the rest, and the pen in the middle is new."
+  },
+  {
+   "mark": "nert_house",
+   "id": "nert_house",
+   "dialogue": "ava_nert_house"
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+// Gate wardens of Avaricum: the south gate and the marsh postern.
+=== start
+[flag avaricum_siege] -> siege
+"Welcome to Avaricum." He slaps the wall beside the gate, the way you'd slap a good horse. "Have a look at that. Beams laid crossways into the bank every two feet, pinned together, and the gaps faced with stone. The stone means fire can't touch it. The timber means a ram can't break it. The Romans can bang on that till their arms fall off."
+* "What's the toll?" -> toll
+* "Goodbye." -> END
+
+=== toll
+"For you? Nothing. For a cart, a silver. For a Roman, everything he has." He grins. "We haven't had a Roman in since the winter. They've stopped coming, for some reason."
+* "Goodbye." -> END
+
+=== siege
+[flag breakout_stopped] -> breakout
+"Nobody goes out the south gate. Nobody comes in, either, except you, through the marsh, apparently." He looks at you hard, then lets it go. "The wall's holding. Rams can't break it and fire can't burn it. They'll have to climb it, and they'll have to build the hill to climb it from first."
+[flag terrace_fire] "They nearly have."
+* "Goodbye." -> END
+
+=== breakout
+He doesn't look at you. "We were all going out last night, through the marsh, to the king's camp. The king sent word: get out while you can." He's quiet for a while. "The women came out of the houses and threw themselves down in front of us. They held on to us and begged us not to leave them and the children to the Romans. And when we wouldn't listen they started shouting, so the Romans would hear. So we stayed."
+* "Goodbye." -> END

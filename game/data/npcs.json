@@ -1650,6 +1650,511 @@
     "hair_style": "long",
     "face": "moustache"
    }
+  },
+  {
+   "id": "senodonnos",
+   "name": "Senodonnos",
+   "faction": "bituriges",
+   "ai": "idle",
+   "dialogue": "ava_senodonnos",
+   "attrs": {
+    "STR": 5,
+    "END": 5,
+    "WIT": 8,
+    "PRE": 8
+   },
+   "level": 4,
+   "skills": {
+    "lore": 50,
+    "speech": 45
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "gallic_sword"
+   ],
+   "silver": 40,
+   "desc": "One of the magistrates of Avaricum: a big, soft-spoken man with black eyebrows and a gold torque he keeps touching, as if to make sure the city is still there.",
+   "look": {
+    "tunic": "#3a4a6a",
+    "cloak": "#6a2a2a",
+    "cloak2": "#c8a040",
+    "hair": "#4a4a44",
+    "hair_style": "long",
+    "face": "moustache",
+    "torc": "gold"
+   }
+  },
+  {
+   "id": "epomeduos",
+   "name": "Epomeduos",
+   "faction": "aedui",
+   "ai": "idle",
+   "dialogue": "ava_epomeduos",
+   "kill_flag": "factor_gone",
+   "attrs": {
+    "STR": 5,
+    "AGI": 6,
+    "WIT": 8,
+    "PRE": 7
+   },
+   "level": 3,
+   "skills": {
+    "barter": 55,
+    "speech": 45,
+    "latin": 50
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "dagger",
+    "padded_linen"
+   ],
+   "items": [
+    [
+     "aeduan_letter",
+     1
+    ]
+   ],
+   "silver": 45,
+   "xp": 60,
+   "desc": "An Aeduan in a good cloak with a stylus behind his ear. He has the clean hands and patient smile of a man who is paid by the line.",
+   "look": {
+    "tunic": "#7a6a4a",
+    "cloak": "#3a5a4a",
+    "cloak2": "#b8a060",
+    "hair": "#6a4a2a",
+    "hair_style": "short",
+    "face": "moustache",
+    "torc": "bronze"
+   }
+  },
+  {
+   "id": "nertomara",
+   "name": "Nertomara",
+   "sex": "f",
+   "faction": "bituriges",
+   "ai": "idle",
+   "dialogue": "ava_nertomara",
+   "attrs": {
+    "WIT": 7,
+    "PRE": 6
+   },
+   "silver": 10,
+   "desc": "A widow of good family in a house too big for three. Her hands never stop: spinning, mending, counting the children.",
+   "look": {
+    "tunic": "#5a3a4a",
+    "cloak": "#3a3a4a",
+    "hair": "#2a1a10",
+    "torc": "bronze"
+   }
+  },
+  {
+   "id": "andecamulos",
+   "name": "Andecamulos the ironmaster",
+   "faction": "bituriges",
+   "ai": "idle",
+   "dialogue": "ava_andecamulos",
+   "attrs": {
+    "STR": 8,
+    "END": 8,
+    "PER": 6
+   },
+   "level": 3,
+   "skills": {
+    "barter": 30,
+    "lore": 35
+   },
+   "items": [
+    [
+     "spear",
+     6
+    ],
+    [
+     "war_spear",
+     2
+    ],
+    [
+     "javelin",
+     12
+    ],
+    [
+     "gallic_sword",
+     2
+    ],
+    [
+     "axe",
+     3
+    ],
+    [
+     "dagger",
+     4
+    ],
+    [
+     "gallic_shield",
+     2
+    ],
+    [
+     "iron_helmet",
+     2
+    ],
+    [
+     "mail_shirt",
+     1
+    ],
+    [
+     "leather_jerkin",
+     2
+    ]
+   ],
+   "silver": 220,
+   "desc": "Master of the city's furnaces. Burn scars to the elbow, a voice that carries over a forge, and the calm of a man who knows exactly how hot everything is.",
+   "look": {
+    "tunic": "#4a3a2a",
+    "hair": "#6a3a1a",
+    "hair_style": "knot",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "vindos",
+   "name": "Vindos the boatman",
+   "faction": "bituriges",
+   "ai": "idle",
+   "dialogue": "ava_vindos",
+   "attrs": {
+    "STR": 6,
+    "AGI": 7,
+    "PER": 7
+   },
+   "skills": {
+    "sneak": 50
+   },
+   "silver": 15,
+   "desc": "A lean, weathered man who has spent his life poling a flat boat through the reeds north of the city. He knows every channel, and every channel's price.",
+   "look": {
+    "tunic": "#5a6a4a",
+    "hair": "#8a6a3a",
+    "hair_style": "long",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "ava_market",
+   "name": "Sumelis",
+   "sex": "f",
+   "faction": "bituriges",
+   "ai": "idle",
+   "dialogue": "ava_market",
+   "attrs": {
+    "PRE": 6,
+    "WIT": 7
+   },
+   "skills": {
+    "barter": 40
+   },
+   "items": [
+    [
+     "bread",
+     14
+    ],
+    [
+     "mead",
+     6
+    ],
+    [
+     "roman_wine",
+     3
+    ],
+    [
+     "salt",
+     4
+    ],
+    [
+     "herbs",
+     5
+    ],
+    [
+     "poultice",
+     3
+    ],
+    [
+     "bandage",
+     6
+    ],
+    [
+     "pitch",
+     4
+    ],
+    [
+     "sling_stone",
+     40
+    ]
+   ],
+   "silver": 180,
+   "desc": "Sells everything from a stall in the forum and hears everything from behind it. She has the best memory for faces in Avaricum and charges for it.",
+   "look": {
+    "tunic": "#7a5a2a",
+    "cloak": "#4a3a5a",
+    "hair": "#a06a2a"
+   }
+  },
+  {
+   "id": "ava_gate",
+   "name": "Gate warden",
+   "faction": "bituriges",
+   "ai": "guard",
+   "dialogue": "ava_gate",
+   "attrs": {
+    "STR": 6,
+    "END": 6,
+    "PER": 6
+   },
+   "level": 2,
+   "tags": [
+    "spears",
+    "shield"
+   ],
+   "equip": [
+    "spear",
+    "gallic_shield",
+    "leather_jerkin"
+   ],
+   "silver": 6,
+   "desc": "A spearman of the Bituriges on the gate, wet through and proud of his wall.",
+   "look": {
+    "tunic": "#3a4a5a",
+    "shield": "#3a5a7a",
+    "hair": "#5a3a1a",
+    "hair_style": "long",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "ava_townsman",
+   "name": "Townsman",
+   "faction": "bituriges",
+   "ai": "wander",
+   "dialogue": "ava_townsfolk",
+   "attrs": {},
+   "desc": "A Biturigan of Avaricum.",
+   "look": {
+    "tunic": "#5a5a6a",
+    "hair": "#4a3a2a",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "ava_townswoman",
+   "name": "Townswoman",
+   "sex": "f",
+   "faction": "bituriges",
+   "ai": "wander",
+   "dialogue": "ava_townsfolk",
+   "attrs": {},
+   "desc": "A Biturigan of Avaricum.",
+   "look": {
+    "tunic": "#6a4a5a",
+    "hair": "#6a3a1a"
+   }
+  },
+  {
+   "id": "ava_picked",
+   "name": "Picked man",
+   "faction": "arverni",
+   "ai": "guard",
+   "dialogue": "ava_picked",
+   "attrs": {
+    "STR": 7,
+    "END": 7,
+    "AGI": 6
+   },
+   "level": 4,
+   "tags": [
+    "blades",
+    "shield"
+   ],
+   "equip": [
+    "gallic_sword",
+    "gallic_shield",
+    "leather_jerkin",
+    "iron_helmet"
+   ],
+   "silver": 8,
+   "desc": "One of the ten thousand the king sent into the city: hard, muddy, and sure of nothing except the man beside him.",
+   "look": {
+    "tunic": "#6a3a2a",
+    "shield": "#8a5a2a",
+    "hair": "#7a5a2a",
+    "hair_style": "long",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "ava_miner",
+   "name": "Miner",
+   "faction": "bituriges",
+   "ai": "idle",
+   "dialogue": "ava_miner",
+   "attrs": {
+    "STR": 7,
+    "END": 7
+   },
+   "equip": [
+    "axe"
+   ],
+   "desc": "Clay to the eyebrows. The Bituriges have dug iron for longer than anyone remembers; now they dig for their lives.",
+   "look": {
+    "tunic": "#6a5a4a",
+    "hair": "#3a2a1a",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "legionary",
+   "name": "Legionary",
+   "faction": "rome_camp",
+   "ai": "guard",
+   "dialogue": "ava_legionary",
+   "attrs": {
+    "STR": 7,
+    "END": 7,
+    "AGI": 6
+   },
+   "level": 4,
+   "tags": [
+    "blades",
+    "shield"
+   ],
+   "equip": [
+    "gladius",
+    "scutum",
+    "bronze_helmet"
+   ],
+   "items": [
+    [
+     "bread",
+     1
+    ]
+   ],
+   "silver": 12,
+   "xp": 90,
+   "desc": "A legionary in a soaked red tunic, leaning on his shield. He has been digging and fighting in the rain for a month, and it shows.",
+   "look": {
+    "tunic": "#8e3424",
+    "shield": "#8a2a20",
+    "hair": "#2a2018",
+    "body": "roman"
+   }
+  },
+  {
+   "id": "hermeros",
+   "name": "Hermeros",
+   "faction": "vettius",
+   "ai": "idle",
+   "dialogue": "ava_hermeros",
+   "attrs": {
+    "STR": 4,
+    "WIT": 8,
+    "PRE": 6
+   },
+   "skills": {
+    "barter": 60,
+    "latin": 70
+   },
+   "items": [
+    [
+     "roman_wine",
+     6
+    ],
+    [
+     "bread",
+     8
+    ],
+    [
+     "salt",
+     4
+    ],
+    [
+     "bandage",
+     6
+    ],
+    [
+     "poultice",
+     3
+    ],
+    [
+     "gold_torque",
+     1
+    ],
+    [
+     "bronze_torque",
+     2
+    ],
+    [
+     "gallic_sword",
+     1
+    ],
+    [
+     "mail_shirt",
+     1
+    ]
+   ],
+   "silver": 400,
+   "desc": "A freedman of the house of Vettius, Greek by name and Roman by trade. A sun hat, a folding stool, and a day book open on his knee.",
+   "look": {
+    "body": "roman",
+    "tunic": "#c8bfa8",
+    "cloak": "#6a5a3a",
+    "hair": "#3a2a1a",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "ava_captive",
+   "name": "Captive",
+   "faction": "captives",
+   "ai": "idle",
+   "dialogue": "ava_captive",
+   "attrs": {},
+   "desc": "A man of Avaricum with a rope on his wrists and a number in the Roman's book.",
+   "look": {
+    "tunic": "#5a5048",
+    "hair": "#4a3a2a",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "ava_captive_f",
+   "name": "Captive",
+   "sex": "f",
+   "faction": "captives",
+   "ai": "idle",
+   "dialogue": "ava_captive",
+   "attrs": {},
+   "desc": "A woman of Avaricum with a rope on her wrists and a number in the Roman's book.",
+   "look": {
+    "tunic": "#5a4a48",
+    "hair": "#5a3a1a"
+   }
+  },
+  {
+   "id": "ava_survivor",
+   "name": "Girl",
+   "sex": "f",
+   "faction": "survivor",
+   "ai": "idle",
+   "dialogue": "ava_survivor",
+   "attrs": {
+    "AGI": 7
+   },
+   "desc": "A girl of ten or eleven, folded small behind the grain jars, with flour in her hair and her eyes on the door.",
+   "look": {
+    "tunic": "#7a6a5a",
+    "hair": "#6a4020"
+   }
   }
  ]
 }

@@ -33,6 +33,12 @@ func test_npc_templates_reference_real_things() -> void:
 			check(_dlg_exists(t["dialogue"]), "%s has missing dialogue %s" % [t["id"], t["dialogue"]])
 
 
+func test_readable_items_have_dialogues() -> void:
+	for it in DB.load_json("items.json")["items"]:
+		if it.has("read"):
+			check(_dlg_exists(it["read"]), "%s reads missing dialogue %s" % [it["id"], it["read"]])
+
+
 func test_maps_reference_real_things() -> void:
 	for id in _files("maps", ".json"):
 		var def := DB.map_def(id)
@@ -61,6 +67,8 @@ func test_maps_reference_real_things() -> void:
 				check(_dlg_exists(t["dialogue"]), "%s: trigger dialogue %s missing" % [id, t["dialogue"]])
 		if def.has("arrive_dialogue"):
 			check(_dlg_exists(def["arrive_dialogue"]), "%s: arrive dialogue missing" % id)
+		if def.has("deadline"):
+			check(_dlg_exists(def["deadline"]["dialogue"]), "%s: deadline dialogue missing" % id)
 		if not def.get("encounter", false):
 			check(m.has_mark("start"), "%s has a start mark" % id)
 
@@ -70,6 +78,11 @@ func test_world_locations_enter_at_real_marks() -> void:
 		if l.has("map"):
 			var m := MapData.from_def(DB.map_def(l["map"]))
 			check(m.has_mark(l.get("entry", "start")), "%s: entry %s missing" % [l["id"], l.get("entry", "start")])
+		for v in l.get("map_by_flag", []):
+			var vm: String = v.get("map", l.get("map", ""))
+			check(not DB.map_def(vm).is_empty(), "%s: map %s for flag %s exists" % [l["id"], vm, v["flag"]])
+			var m2 := MapData.from_def(DB.map_def(vm))
+			check(m2.has_mark(v.get("entry", l.get("entry", "start"))), "%s: %s entry for flag %s missing" % [l["id"], vm, v["flag"]])
 
 
 func test_story_start_is_complete() -> void:

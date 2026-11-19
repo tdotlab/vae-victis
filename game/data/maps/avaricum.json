@@ -1,0 +1,475 @@
+{
+ "id": "avaricum",
+ "name": "Avaricum",
+ "default": "grass",
+ "legend": {
+  ".": "grass",
+  ",": "field",
+  "_": "road",
+  "m": "mud",
+  "o": "dirt",
+  "~": "water",
+  "q": "shallows",
+  "T": "tree",
+  "b": "bush",
+  "r": "rock",
+  "R": "rampart",
+  "n": "fence",
+  "w": "wall_wood",
+  "f": "floor_earth",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "d": "door",
+  "A": "altar",
+  "z": "bones",
+  "c": {
+   "terrain": "crate",
+   "mark": "granary_store"
+  },
+  "H": {
+   "terrain": "cave",
+   "mark": "pit"
+  },
+  "p": "palisade",
+  "S": {
+   "terrain": "floor_earth",
+   "mark": "senodonnos"
+  },
+  "k": {
+   "terrain": "crate",
+   "mark": "hall_chest"
+  },
+  "x": {
+   "terrain": "crate",
+   "mark": "factor_box"
+  },
+  "E": {
+   "terrain": "floor_earth",
+   "mark": "epomeduos"
+  },
+  "N": {
+   "terrain": "floor_earth",
+   "mark": "nertomara"
+  },
+  "J": {
+   "terrain": "floor_earth",
+   "mark": "andecamulos"
+  },
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "W": {
+   "terrain": "road",
+   "mark": "world"
+  },
+  "M": {
+   "terrain": "road",
+   "mark": "marsh"
+  },
+  "V": {
+   "terrain": "mud",
+   "mark": "vindos"
+  },
+  "K": {
+   "terrain": "dirt",
+   "mark": "market"
+  },
+  "g": {
+   "terrain": "grass",
+   "mark": "gate1"
+  },
+  "G": {
+   "terrain": "grass",
+   "mark": "gate2"
+  },
+  "u": {
+   "terrain": "grass",
+   "mark": "postern"
+  },
+  "1": {
+   "terrain": "grass",
+   "mark": "t1"
+  },
+  "2": {
+   "terrain": "grass",
+   "mark": "t2"
+  },
+  "3": {
+   "terrain": "grass",
+   "mark": "t3"
+  },
+  "4": {
+   "terrain": "grass",
+   "mark": "t4"
+  },
+  "5": {
+   "terrain": "dirt",
+   "mark": "r1"
+  },
+  "6": {
+   "terrain": "dirt",
+   "mark": "r2"
+  },
+  "7": {
+   "terrain": "dirt",
+   "mark": "r3"
+  },
+  "8": {
+   "terrain": "dirt",
+   "mark": "r4"
+  },
+  "P": {
+   "terrain": "grass",
+   "mark": "w1"
+  },
+  "O": {
+   "terrain": "grass",
+   "mark": "w2"
+  },
+  "Y": {
+   "terrain": "grass",
+   "mark": "w3"
+  },
+  "i": {
+   "terrain": "grass",
+   "mark": "m1"
+  },
+  "j": {
+   "terrain": "grass",
+   "mark": "m2"
+  },
+  "Z": {
+   "terrain": "shallows",
+   "mark": "marsh_exit"
+  },
+  "X": {
+   "terrain": "road",
+   "mark": "exit"
+  },
+  "e": {
+   "terrain": "field",
+   "mark": "exit"
+  },
+  "!": {
+   "terrain": "road",
+   "mark": "gate_towers"
+  },
+  "?": {
+   "terrain": "road",
+   "mark": "postern_view"
+  },
+  "%": {
+   "terrain": "road",
+   "mark": "forum"
+  }
+ },
+ "rows": [
+  "~~~~~ZZZ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~qqq~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "qqqqqmmmmmmmmmmmmmmmmmmmmmmmmqqqqbqqqqqqbqqqqqqqqqqqqqqq",
+  "mqqqqqmqqqqqmqqbqqmqqqqqmqqmmqVqqqqqmqqqqqmqbqqqmqbqqqmq",
+  "qqqmqqqqqbqqqqqmqqbqqmqqqqqmmqqqqmqqqqqmqqqqqmqbqqqmqqqq",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRR??RRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRR__RRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RR..wwwwwwwwwwwwww.wwwwwwwuM_...wwww.wwww.wwww.wwww...RR",
+  "RR..wfBfffhfffffBw.wfBffxw.__...wfcw.wffw.wffw.wffw...RR",
+  "RR..wfffffSffffftw.wfhfEfw.__...wwdw.wwww.wwww.wwww...RR",
+  "RR..wfkffffffhfffw.wfffffw.__..T......................RR",
+  "RR..wwwwwwdwwwwwww.wwwdwww.__.....1.................T.RR",
+  "RR____________________________________________________RR",
+  "RR.wwwdwwwww.wwdww.........__...4....wwdww.wwdww.wwdwwRR",
+  "RR.wfBfffBfw.wfBfw.........__........wfBfw.wfhfw.wfBfwRR",
+  "RR.wfffNfffw.wfhfw..otootoo__ootooto.wfhfw.wfBfw.wfhfwRR",
+  "RR.wfhfffftw.wwwww..oo5oooo__ooKoooo.wwwww.wwwww.wwwwwRR",
+  "RR.wwwwwwwww.T......ooooooo__ooooo8o.b.........T......RR",
+  "RR..................ooooooo%%ooooooo..............b...RR",
+  "RR.wwwww.wwwww.wwwwwooo6ooo__ooooooo....wwwww.wwwww...RR",
+  "RR.wfBfw.wfhfw.wfBfwooooooo__oooo7oo....wfBfw.wfhfw...RR",
+  "RR.wfhfw.wfBfw.dfhfwotootoo__ootooto....wfhfw.wfBfw...RR",
+  "RR.wwdww.wwdww.wwwww....T..__...........wwdww.wwdww.T.RR",
+  "RR.......b...........2.....__........T.......3........RR",
+  "RR____________________________________________________RR",
+  "RR.nnnnnnn..wwdww.wwdww....__...h...r...wwwwwwwww.....RR",
+  "RR.n.....n..wfBfw.wfhfwY..g__G...n.n.r..wfhffhffw.....RR",
+  "RR.n..A..n..wfhfw.wfBfw..RR__RR.i.H.j...dffJfffkw.....RR",
+  "RR.n.....n..wwwww.wwwww..RR@WRR.rn.n....wfhffhffw.....RR",
+  "RR.nnn.nnn.....T......bP.RR__RR.O....h..wwwwwwwww.....RR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRR!!RRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRR__RRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "eeeeeeeeeeeeeeeeeeeeeeeeeeeXXeeeeeeeeeeeeeeeeeeeeeeeeeee"
+ ],
+ "deadline": {
+  "day": 137,
+  "dialogue": "ava_fall"
+ },
+ "phase_texts": [
+  {
+   "id": "siege",
+   "flag": "avaricum_siege",
+   "covers": [
+    "refugees",
+    "rich"
+   ],
+   "text": "You come in at night through the marsh, wading behind one of Vercingetorix's runners along a path only the Bituriges know. On the south side of the city, the one side not wrapped in river and marsh, Caesar's legions have dug in, and every day the terrace of earth and timber they are building creeps closer to the wall. Inside, Avaricum is full: its own people, the families from the twenty burned towns sleeping in the forum and the lanes, and the picked men the king sent in to hold it. Everyone tells you the council begged to spare the city and the king let them, as if it were a promise somebody made."
+  },
+  {
+   "id": "refugees",
+   "flag": "scorched_earth",
+   "covers": [
+    "rich"
+   ],
+   "text": "The road into Avaricum is a line of carts and people walking, all going the same way. The Bituriges burned more than twenty of their own towns in a single day, on the council's orders, so Caesar's army would find nothing to eat, and everyone who lived in them has come here with whatever they could carry. They sleep in the forum and in the lanes and against the wall. The council begged to spare Avaricum, the most beautiful city in Gaul, and the king let them. Everyone you meet tells you so, as if it were a promise somebody made."
+  },
+  {
+   "id": "rich",
+   "text": "Avaricum stands on its rise with the river and the marshes wrapped around it on every side but one, and on that side, the south, the wall is highest. Inside it the lanes are graveled and the houses are big, with carved door-posts and good thatch, and the smoke that hangs over the east quarter comes from the ironworks. The Bituriges call it the most beautiful city in Gaul. Nobody who has walked in through the south gate argues."
+  },
+  {
+   "id": "terrace",
+   "flag": "terrace_fire",
+   "text": "The night after the terrace reached the wall, the miners fired its timbers from below and the men sallied from two gates at once. You can still see the black scar on the terrace from the towers. In front of the gate, where the fire was, one man stood throwing lumps of tallow and pitch into it until a bolt from a Roman engine took him. Another stepped into his place and was hit the same way, and then another, and another. They didn't stop until the fire was out."
+  },
+  {
+   "id": "breakout",
+   "flag": "breakout_stopped",
+   "text": "Last night the fighting men were going to leave. The word went round at dusk: out through the marsh in the dark, to Vercingetorix's camp, and the city left to whoever stayed. Then the women came out into the lanes. They begged the men not to go, not to leave them and their children for the Romans, and when the men started out anyway they began to shout, loud enough for the Roman lines to hear. The men stayed. Everyone in Avaricum knows about it by now, and nobody talks about it."
+  }
+ ],
+ "actors": [
+  {
+   "uid": "senodonnos",
+   "template": "senodonnos",
+   "mark": "senodonnos"
+  },
+  {
+   "uid": "epomeduos",
+   "template": "epomeduos",
+   "mark": "epomeduos",
+   "unless_flag": [
+    "avaricum_siege",
+    "factor_gone"
+   ]
+  },
+  {
+   "uid": "nertomara",
+   "template": "nertomara",
+   "mark": "nertomara"
+  },
+  {
+   "uid": "andecamulos",
+   "template": "andecamulos",
+   "mark": "andecamulos"
+  },
+  {
+   "uid": "vindos",
+   "template": "vindos",
+   "mark": "vindos"
+  },
+  {
+   "uid": "ava_market",
+   "template": "ava_market",
+   "mark": "market"
+  },
+  {
+   "uid": "ava_g1",
+   "template": "ava_gate",
+   "mark": "gate1"
+  },
+  {
+   "uid": "ava_g2",
+   "template": "ava_gate",
+   "mark": "gate2"
+  },
+  {
+   "uid": "ava_g3",
+   "template": "ava_gate",
+   "mark": "postern"
+  },
+  {
+   "uid": "ava_t1",
+   "template": "ava_townsman",
+   "mark": "t1"
+  },
+  {
+   "uid": "ava_t2",
+   "template": "ava_townswoman",
+   "mark": "t2"
+  },
+  {
+   "uid": "ava_t3",
+   "template": "ava_townsman",
+   "mark": "t3"
+  },
+  {
+   "uid": "ava_t4",
+   "template": "ava_townswoman",
+   "mark": "t4"
+  },
+  {
+   "uid": "ava_r1",
+   "template": "refugee",
+   "mark": "r1",
+   "dialogue": "ava_refugee",
+   "if_flag": "scorched_earth"
+  },
+  {
+   "uid": "ava_r2",
+   "template": "refugee_woman",
+   "mark": "r2",
+   "dialogue": "ava_refugee",
+   "if_flag": "scorched_earth"
+  },
+  {
+   "uid": "ava_r3",
+   "template": "refugee_elder",
+   "mark": "r3",
+   "dialogue": "ava_refugee",
+   "if_flag": "scorched_earth"
+  },
+  {
+   "uid": "ava_r4",
+   "template": "refugee_woman",
+   "mark": "r4",
+   "dialogue": "ava_refugee",
+   "if_flag": "scorched_earth"
+  },
+  {
+   "uid": "ava_w1",
+   "template": "ava_picked",
+   "mark": "w1",
+   "if_flag": "avaricum_siege"
+  },
+  {
+   "uid": "ava_w2",
+   "template": "ava_picked",
+   "mark": "w2",
+   "if_flag": "avaricum_siege"
+  },
+  {
+   "uid": "ava_w3",
+   "template": "ava_picked",
+   "mark": "w3",
+   "if_flag": "avaricum_siege"
+  },
+  {
+   "uid": "ava_m1",
+   "template": "ava_miner",
+   "mark": "m1",
+   "if_flag": "avaricum_siege"
+  },
+  {
+   "uid": "ava_m2",
+   "template": "ava_miner",
+   "mark": "m2",
+   "if_flag": "avaricum_siege"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "factor_box",
+   "name": "The Aeduan's strongbox",
+   "items": [
+    [
+     "factor_list",
+     1
+    ]
+   ],
+   "silver": 60,
+   "lock": 40,
+   "owner": "epomeduos",
+   "unless_flag": "avaricum_siege",
+   "gone_text": "The box is gone. Whoever had this room cleared it."
+  },
+  {
+   "mark": "hall_chest",
+   "name": "Senodonnos's chest",
+   "items": [
+    [
+     "gold_torque",
+     1
+    ],
+    [
+     "mead",
+     3
+    ]
+   ],
+   "silver": 120,
+   "lock": 60,
+   "owner": "senodonnos"
+  },
+  {
+   "mark": "granary_store",
+   "name": "The city's store",
+   "items": [
+    [
+     "bread",
+     6
+    ],
+    [
+     "pitch",
+     2
+    ]
+   ],
+   "silver": 0
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The road south out of Avaricum",
+   "unless_flag": "avaricum_siege",
+   "blocked_text": "The south gate is shut and propped with beams, and beyond it, a long bowshot off, are the Roman lines. The only way out now is the marsh."
+  },
+  {
+   "mark": "marsh_exit",
+   "to": "world",
+   "label": "Through the marsh"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "gate_towers",
+   "id": "wall_view",
+   "unless_flag": "avaricum_siege",
+   "say": "The gate towers stand on the wall like two men with their arms folded. The wall itself is the kind Caesar will describe from here, with admiration he doesn't usually waste on Gauls: beams laid crosswise into the rampart two feet apart, the gaps on the face filled with big stones, course on course, so that fire can't take the timber and a ram can't shake the stone. From up here you can see the whole city, and the marsh around it, and the one dry road coming in from the south."
+  },
+  {
+   "mark": "gate_towers",
+   "id": "terrace_view",
+   "if_flag": "avaricum_siege",
+   "say": "From the gate towers you can see the Roman works. Two long lines of sheds on wheels come up toward the wall, and between them the terrace: earth and timber, wider than the forum, higher every morning, with towers being built at the back of it. The legionaries work under the sheds in the cold rain without stopping. Every so often something comes whirring off a Roman engine and a man on the wall falls down. The terrace is close enough to throw a stone onto."
+  },
+  {
+   "mark": "postern_view",
+   "id": "marsh_view",
+   "say": "The marsh gate is small and low, and the causeway beyond it is just a line of mud between the reeds. The river curls round the north of the city, and the marsh fills everything else. An army can't come at Avaricum from this side. That is why it has to come from the other one."
+  },
+  {
+   "mark": "forum",
+   "id": "forum_rich",
+   "unless_flag": "scorched_earth",
+   "say": "The forum is crowded with stalls: cloth, salt, bronze, iron from the city's own furnaces, wine from the south in clay jars. A man is selling a hunting dog with a collar finer than your cloak. Nobody is in a hurry. Avaricum hasn't been in a hurry for a hundred years."
+  },
+  {
+   "mark": "forum",
+   "id": "forum_full",
+   "if_flag": "scorched_earth",
+   "say": "The forum is a camp now. Families sit on their bundles where the stalls used to be, around fires made of furniture. The grain ration is handed out at the granaries once a day, and the line for it reaches the gate."
+  },
+  {
+   "mark": "pit",
+   "id": "clay_pit",
+   "unless_flag": "avaricum_siege",
+   "say": "A pit in the ironworks yard where they dig clay to line the furnaces. It goes down further than it needs to. The Bituriges have iron mines all over their country, and the ironworkers dig because they can't help it."
+  },
+  {
+   "mark": "pit",
+   "id": "countermine",
+   "if_flag": "avaricum_siege",
+   "say": "The clay pit is a mine shaft now. A windlass creaks over it, and baskets of earth come up all day and night. Below, the miners have driven a gallery out under the wall, toward the Roman terrace. You can hear them down there, and sometimes, under them, the faint knock of other picks."
+  }
+ ]
+}

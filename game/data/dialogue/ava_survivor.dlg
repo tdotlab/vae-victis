@@ -1,0 +1,40 @@
+// A girl hiding in the last granary in the ruins of Avaricum. "What the
+// Soldiers Left": out by stealth, by a Latin lie at the gate, by paying a
+// legionary (ava_legionary), by Epomeduos's word (ava_epomeduos), or by force.
+=== start
+[quest survivor none] ~ quest survivor start
+Behind the big grain jars, in the dark at the back, something moves and goes still. A girl of ten or eleven, folded up small, with flour in her hair and a bit of broken sickle held in both hands. She doesn't make a sound.
+[flag survivor_seen] She's further back than before, and she doesn't trust you at all now.
+* [night, !flag survivor_seen, roll sneak -10] "Come with me. Stay behind me, and do exactly what I do." -> sneak_win | sneak_lose
+* [latin 40] "Walk behind me and keep your eyes down. If a soldier asks, you're mine, and I'll do the talking." -> latin
+* [!night, !flag survivor_seen] "Wait for dark. I'll come back." -> END
+* "Hold on to me. We're going out, and nobody's stopping us." -> fought
+* "Stay hidden." -> END
+
+=== sneak_win
+~ set survivor_out; quest survivor done_sneak done
+You wait for the legionary at the door to turn his back to piss, and you go. Along the back of the granaries in the dark, over the rubble where the north wall came down, down into the reeds. She holds your belt the whole way and doesn't make a sound.
+
+At the edge of the marsh she lets go. You point toward where the king's fires were. She looks at you once, and then she's gone into the reeds.
+* Go back. -> END ~ leave
+
+=== sneak_lose
+~ set survivor_seen
+You're three steps out of the door when the legionary turns round. You freeze. She doesn't: she's back behind the jars before he's finished turning. He looks at you for a long moment, then shrugs and turns away. "Rats," he says in Latin, loudly, to nobody.
+
+She won't come out again. Not that way.
+* "I'll find another way." -> END
+
+=== latin
+~ set survivor_out; quest survivor done_latin done
+You walk down the terrace road with her behind you, eyes down, the way you've seen slaves walk behind their masters in every market in Gaul. At the gate the sentry puts his spear across.
+
+"Mine," you tell him, in Latin. "Bought her off a soldier for a jar of wine. She can carry." He looks at her. He looks at you. He doesn't really see either of you. He waves you through.
+
+Past the terrace, where the road bends into the marsh, she breaks away and runs. You let her.
+* Go back. -> END ~ leave
+
+=== fought
+~ set survivor_out; quest survivor done_fought done; fight_all rome_camp
+She looks at you, and at the door, and takes hold of your belt. The legionary at the door sees you come out, and shouts, and from all over the ruins men stop what they're doing and pick up their shields.
+* "Run for the marsh. Don't stop." -> END ~ leave

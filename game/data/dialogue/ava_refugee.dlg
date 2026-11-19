@@ -1,0 +1,17 @@
+// Families from the Biturigan towns burned in a single day (Caesar BG VII.15),
+// camped in the forum of Avaricum.
+=== start
+[flag avaricum_siege] -> siege
+"We burned it ourselves." They say it before you ask. "My father's house, the granary, the shrine. The council said so, and the king said so. Better ashes than Roman bread." They pull the blanket tighter. "They let Avaricum stand. We're lucky. Everyone says we're lucky."
+* [item bread 1] Give them some bread. -> bread ~ take bread 1
+* "Goodbye." -> END
+
+=== siege
+"There's no more room. There's no more anything." They don't look up. "When the Romans go, we'll go home and build again. Somebody said the Romans are eating their mules."
+* [item bread 1] Give them some bread. -> bread ~ take bread 1
+* "Goodbye." -> END
+
+=== bread
+~ honor 1
+They take it without a word and break it in pieces for the children, and keep the smallest piece for themselves.
+* "Goodbye." -> END

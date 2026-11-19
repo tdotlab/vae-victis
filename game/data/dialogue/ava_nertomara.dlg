@@ -1,0 +1,62 @@
+// Nertomara, a widow of Avaricum, and her two children. "The Most Beautiful
+// City" (Caesar BG VII.15) opens once the Bituriges burn their towns, and
+// fails on the day the city falls.
+=== start
+[quest nertomara done, !flag nert_paid] -> thanks
+[quest nertomara done] -> after
+[quest nertomara active] -> waiting
+[flag scorched_earth] -> ask
+[flag nert_met] -> again
+~ set nert_met
+A tall house off the forum, with painted posts and a loom by the door. A woman in dark wool is weaving fast and badly, the way you weave when you're thinking about something else. Two children watch you from behind the loom.
+
+"Nertomara. My husband built this house. He died in the autumn, the fever." The shuttle doesn't stop. "We're well. Everyone in Avaricum is well. We're the richest city in Gaul. Didn't anybody tell you?"
+* "Goodbye." -> END
+
+=== again
+"Still in Avaricum? Good. Everyone should see it once." The children giggle behind the loom.
+* "Goodbye." -> END
+
+=== ask
+~ quest nertomara start; set nert_met
+[!flag avaricum_siege] Nertomara is at the door, watching the carts come in from the burned towns. She doesn't look round. "You came in on that road. You've seen them." Two children are pressed against her skirts.
+[flag avaricum_siege] Nertomara is at the loom, but she isn't weaving. "You came in through the marsh." Two children are asleep in the corner. "So there is a way out."
+"Twenty towns burned and this one spared. My husband would have said that's a promise, and that a promise from a city is worth exactly what the city can hold." She looks at the children. "My sister is at Argentomagus, south, on the Creuse. I want them there. I'm not going. His people are buried by the wall, and somebody has to keep the house."
+-> waiting
+
+=== waiting
+[quest nertomara=boat_paid] "Vindos is waiting for dark, he says. So am I."
+[!quest nertomara=boat_paid] "Well?"
+* [!flag avaricum_siege, speech 40] "Send them now, while the road is open. A wall is a promise too, and nobody's tested this one yet." -> early
+* [!flag avaricum_siege, honor >= 10] "Send them, and I give you my word: if the wall holds, I'll bring them back myself." -> early
+* [!flag avaricum_siege] "Why not send them yourself?" -> why_not
+* [flag avaricum_siege] "How do I get them out?" -> ways
+* "I'll think of something." -> END
+
+=== why_not
+"Because everyone says the city will hold. Senodonnos says so. The king's men say so. The gate wardens say so, every morning, looking at the wall." She pulls the thread tight. "If I send them away, I'm saying I don't believe it. The whole street will know by dark, and the whole street will be right." She looks at you. "Tell me I'm a fool. Make me believe it."
+-> waiting
+
+=== ways
+"I don't know. That's why I asked you." She counts on her fingers, the way you'd count debts. "Vindos the boatman knows the marsh, and he'll do anything for silver, and then he'll ask for more. Andecamulos's miners dig under the wall; they might know a way. And the king's runners go out through the marsh every night to the camp. Everybody knows. Nobody says."
+-> waiting
+
+=== early
+~ quest nertomara done_early done
+She's quiet for a long moment. Then she puts down the shuttle and calls the children, and before the afternoon's out there's a bundle for each of them and a place on a carter's wagon going south, paid for with a cloak pin. She doesn't cry until the wagon has turned the corner.
+-> thanks
+
+=== thanks
+~ set nert_paid; give gold_torque; honor 5; title Who got the children out of Avaricum
+She takes a gold torque out of a chest by the hearth: a man's torque, heavy and old. "His. It was for the gods, or for his grave. The gods have had enough from this city, and his grave can wait." She puts it in your hands and closes your fingers over it. "Thank you."
+* "Come with them." -> stay
+* "Goodbye." -> END
+
+=== stay
+"No." She doesn't even think about it. "Somebody has to keep the house."
+* "Goodbye." -> END
+
+=== after
+[flag avaricum_siege] "They're out. That's all I wanted." She's weaving again, slowly, properly this time. "Now I can find out whether I was a fool."
+[!flag avaricum_siege] "They'll be at my sister's by now, eating her bread and complaining about it." She almost smiles. "The house is very quiet."
+* "Goodbye." -> END

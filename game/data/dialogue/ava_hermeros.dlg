@@ -1,0 +1,69 @@
+// Hermeros, freedman of the house of Vettius, in the ruins of Avaricum. Trades;
+// his day book has a number in the Avaricum line now; buys and sells the pen.
+=== start
+[flag herm_met] -> again
+~ set herm_met
+Under an awning rigged from a wagon cover, on a folding stool, a man in a Roman tunic and a broad sun hat is writing in a day book on his knee. Wine jars, sacks of bread, a strongbox. Behind him, a pen of hurdles with people in it.
+
+"Hermeros, freedman of Aulus Vettius Calvus." His Gallic is good. "Wine, bread, bandages, small necessities." He nods over his shoulder at the pen without turning round. "And the other thing."
+-> hub
+
+=== again
+"Back." He makes a note of it. "Buying?"
+-> hub
+
+=== hub
+* "Let's trade." -> trade
+* [flag tablets_read] "I've read your master's day book. The one Paconius kept at Gergovia." -> daybook
+* [!flag tablets_read] "What's in the book?" -> book
+* [!flag pen_freed] "The people in the pen. What do you want for them?" -> pen
+* [item aeduan_letter, !flag letter_read] "Can you read this?" -> letter
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Everything's for sale. That's not a philosophy. It's just true."
+* "Thanks." -> hub
+
+=== daybook
+~ known noviodunum
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+He looks up properly for the first time. "Paconius. Is he alive?" He doesn't wait for the answer. "Then you know how the house works. We pay on time and we write everything down." He turns back a leaf. "Brigodunon: three persons, at Noviodunum, for delivery after the season's fighting, on Dannotalos's account. Still there. Still on the books."
+
+He turns forward again and shows you. The line that was empty at Gergovia has a number in it now. "Avaricum. Forty-one." He closes the book. "There were going to be thousands. The soldiers didn't wait."
+-> hub
+
+=== book
+"Debts. Deliveries. Prices." He doesn't show you. Then he does, the last page, because he wants someone to see it. "Avaricum. Forty-one. There were going to be thousands, but the soldiers didn't wait for anyone to count." He closes it. "The house will be disappointed."
+-> hub
+
+=== pen
+"For the lot?" He looks at them for the first time, as if checking the count. "Two hundred and fifty. They're local, they'll run the first chance they get, and I'd have to feed them all the way to Cabillonum. You'd be doing me a favor." He means it.
+* [silver 250] Pay him. -> freed ~ silver -250
+* [barter 60, silver 180] "One eighty. They'll eat more than that before Cabillonum, and half of them won't get there." -> freed ~ silver -180
+* "Too much." -> hub
+
+=== freed
+~ set pen_freed; honor 5; renown 2; xp 50; leave_all captives
+He writes something in the book, a short line, and draws a stroke through it. Then he unties the hurdle himself. The people in the pen don't move at first. Then they do, all at once, without a sound, toward the marsh. Nobody looks back at you, and you don't blame them.
+
+"Bought and released," Hermeros says, blowing on the wax. "Very Roman of you. It's what my old master did with me, in the end. It took him twenty years."
+-> hub
+
+=== letter
+"Ten silver. I read for money. Everything's for money."
+* [silver 10] Pay him. -> letter_read ~ silver -10
+* "Never mind." -> hub
+
+=== letter_read
+~ set letter_read; known noviodunum; xp 50
+[quest factor active, flag factor_gone] ~ quest factor done_killed done
+[quest factor active] ~ quest factor done_stolen done
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+He breaks the seal with a thumbnail and reads it to you in a flat voice. "Dannotalos of the Aedui, to the keeper of the gate at Noviodunum: the bearer is his. Let him in and out, show him the pens, and don't trouble the Roman quartermaster." He hands it back. "Dannotalos has very good manners for a man in his line of work. So do I. It's the line of work."
+[flag factor_turned] "There's a second hand at the bottom. 'And the bearer's partner, likewise.'" He raises his eyebrows. "Congratulations."
+-> hub

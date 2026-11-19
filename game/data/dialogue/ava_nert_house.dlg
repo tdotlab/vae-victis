@@ -1,0 +1,19 @@
+// Map trigger at Nertomara's house in the ruins. Fails "The Most Beautiful
+// City" if her children were still in Avaricum when it fell.
+@speaker Nertomara's house
+=== start
+[quest nertomara active] -> failed
+[quest nertomara done] -> saved
+A tall house off the forum with painted posts. The door is off, the roof is gone, and the loom inside is still standing with half a cloth on it. Nobody is here.
+* Walk on. -> END
+
+=== failed
+~ quest nertomara failed failed
+Nertomara's house. The door is off and the roof is gone. The loom is still standing by the hearth, with half a cloth on it. Nobody is here, and there's nothing to say where they went, and you know where they went.
+* Walk on. -> END
+
+=== saved
+Nertomara's house. The door is off and the roof is gone. The loom is still standing by the hearth, with half a cloth on it, and nobody is here.
+
+Her children aren't here. They're at Argentomagus, complaining about their aunt's bread.
+* Walk on. -> END

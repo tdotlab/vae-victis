@@ -551,6 +551,47 @@
       "weight": 20,
       "value": 180,
       "desc": "A full Italian amphora, its stopper sealed with pitch and stamped by a Campanian potter. In Gaul, the price of a slave. Traders say it the other way round."
+    },
+    {
+      "id": "factor_list",
+      "name": "Wax tablet of names",
+      "type": "quest",
+      "weight": 0.5,
+      "value": 0,
+      "read": "item_factor_list",
+      "desc": "A single leaf of wax, written close in Greek letters. Names of households, and beside each a number of heads, and beside that a price."
+    },
+    {
+      "id": "pitch",
+      "name": "Pitch",
+      "type": "trade",
+      "weight": 1,
+      "value": 4,
+      "desc": "A pot of pine pitch, black and sticky. For boats, torches, and setting things on fire that should not be on fire."
+    },
+    {
+      "id": "aeduan_letter",
+      "name": "Sealed tablet",
+      "type": "quest",
+      "weight": 0.5,
+      "value": 0,
+      "read": "item_letter",
+      "desc": "A small wax tablet, tied and sealed with a horse stamped in the wax. Aeduan work, and expensive."
+    },
+    {
+      "id": "biturigan_sword",
+      "name": "Biturigan sword",
+      "type": "weapon",
+      "skill": "blades",
+      "dmg": [
+        5,
+        11
+      ],
+      "ap": 4,
+      "range": 1,
+      "weight": 3,
+      "value": 150,
+      "desc": "A long sword from the furnaces of Avaricum, hammered from good Biturigan iron and quenched in the river. It does not bend."
     }
   ]
 }

@@ -1,0 +1,109 @@
+// Andecamulos, ironmaster of Avaricum. Sells iron; in the siege he runs the
+// countermines under the Roman terrace (Caesar BG VII.22: the Bituriges are
+// skilled miners because of their iron mines). "Under the Terrace" lives here.
+=== start
+[flag avaricum_siege] -> siege
+[flag ande_met] "Back. Buying?"
+[flag ande_met] -> hub
+~ set ande_met
+The ironworks yard is hot even in the rain. Three furnaces like clay beehives, a heap of red ore, a heap of black slag, and in the middle of it a big man with burn scars to the elbow, shouting over the bellows.
+
+"Andecamulos. These are mine." He means the furnaces. "Biturigan iron. The best in Gaul, and the Greeks say the best they've seen, and the Greeks have seen everything. You want a blade, I've got blades."
+-> hub
+
+=== hub
+* "Let's trade." -> trade
+* "Tell me about the iron." -> iron
+* [flag avaricum_siege, quest countermine active] "About the mine." -> mine
+* [quest nertomara active, flag miner_friend] "Your drift runs under the north wall, doesn't it?" -> adit
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Iron's dear this year. Everyone suddenly wants some."
+* "Thanks." -> hub
+
+=== iron
+"We dig it out of the ground all round the city, red earth, and burn it with charcoal until it gives up. My grandfather's grandfather did the same. The pits go down further than you'd think." He jerks his chin at the clay pit in the yard. "That's how you learn to dig. And once you know how to dig, you know how to dig under things."
+-> hub
+
+=== siege
+[quest countermine done] -> siege_after
+[quest countermine active] -> mine
+~ quest countermine start
+Andecamulos is at the clay pit with a windlass and a dozen miners, black with mud to the eyebrows. He hardly looks up.
+
+"See that?" He points south, at the Roman works you can't see from here. "They're building a road up to my wall. Earth and timber, eighty feet high when it's done, with sheds on wheels down both sides so we can't shoot them. So we go under it. We dig out the earth from below until it slumps, or we get in among the timber and set it on fire." He wipes his face and makes it worse. "Their engineers are good. So are we. I need hands, I need ears, I need pitch, and some nights I need lunatics with torches. Which are you?"
+-> mine
+
+=== mine
+"Well? Hands, ears, pitch or fire."
+* [STR 6] "Give me a shovel." -> dig
+* [END 6] "I can dig all night." -> dig
+* [PER 7] "Let me listen at the face." -> listen
+* [lore 40] "I know how sappers think. Let me find them for you." -> listen
+* [item pitch 3] "Three pots of pitch." -> pitch
+* [night] "Tonight. Over the wall, to the sheds, with a torch." -> sortie_ask
+* [!night] "Fire. When?" -> sortie_day
+* "Let's trade." -> trade
+* "Later." -> END
+
+=== dig
+~ time 600; quest countermine done_dug done
+They give you a short-handled spade and a lamp, and you go down the shaft on the rope and along a drift so low you dig on your knees. Behind you men pass the baskets back hand to hand. Somewhere ahead, through the clay, you can hear the terrace settling, a long slow groan of timber.
+
+You dig until the lamp gutters and your hands won't close. When they bring you up it's dark, and the drift is under the terrace.
+-> reward
+
+=== listen
+~ quest countermine done_heard done
+You lie at the face of the drift with your ear on the clay for a long time. Then you hear it: a tap, a scrape, a pause. Another tap, off to the left and lower down. Roman sappers, digging toward the wall.
+
+You show the miners where. They break in on the Roman gallery the next night, and there's a short, ugly fight in the dark, and then a fire, and the Romans don't dig that way again.
+-> reward
+
+=== pitch
+~ take pitch 3; quest countermine done_pitch done
+Andecamulos takes the pots and weighs them in his hands like a man weighing gold. "Pitch. Good." He sends them down the shaft. That night the drift under the terrace is packed with pitch and dry wood and lit, and smoke comes up through the Roman earthwork in a dozen places, and the Romans spend until dawn carrying water.
+-> reward
+
+=== sortie_day
+"At night, idiot. In daylight their engines pick you off the wall like crows." He nods at the sky. "Come back after dark."
+-> mine
+
+=== sortie_ask
+He looks at you, and then nods at a group of the king's picked men crouched by the gate tower with pots of fire and bundles of pitch-soaked kindling. "They go in an hour. Two gates, and over the wall, all together. Run for the sheds, throw everything, run back. Don't stop for anything and don't stop for anyone."
+* [roll blades -10] Go with them. -> sortie_win | sortie_lose
+* "Not tonight." -> mine
+
+=== sortie_win
+~ quest countermine done_fired done; renown 2
+You go over the wall in the rain with the picked men, run for the sheds, and throw. A Roman comes out of the dark with a shield and you put him down, and then the pitch catches, and the whole length of the shed goes up like a beacon. You run back with the light behind you and arrows thudding into the mud.
+
+From the wall you watch the Romans put it out. It takes them until dawn.
+-> reward
+
+=== sortie_lose
+~ time 1440
+You don't get halfway. A Roman engine on the terrace finds the range, and the man beside you is gone, and then you're in the mud with your ears ringing. Somebody drags you back to the gate by the collar.
+
+You sleep through the next day. Andecamulos looks at you when you come back and says nothing, which is kind of him.
+* "I'll try again." -> mine
+* "Later." -> END
+
+=== reward
+~ give biturigan_sword; set miner_friend; standing bituriges 10; renown 2
+Andecamulos comes up from the shaft and grips your arm with a hand like a vice. "You'll do." He goes into the forge and comes out with a long sword, plain hilt, blade dark and good. "Biturigan iron. I made it for a man who went out to the sheds a week ago and didn't come back. It's no use to him."
+-> siege_after
+
+=== siege_after
+[!flag miner_friend] ~ set miner_friend
+"The terrace still creeps closer every day. We dig, they build. We burn, they put it out." He shrugs. "It's not going to stop them. It's going to cost them. That's what we've got."
+-> hub
+
+=== adit
+~ quest nertomara done_adit done
+"The drift? It goes out under the north wall, toward the marsh. We dug it to get rid of the spoil without the Romans seeing." He frowns, then understands. "Nertomara's children? Yes. We take the spoil out at night. Two children are lighter than a basket of clay."
+
+They go out that night between two miners, down the shaft and along the drift and up through the reeds. One of the miners comes back at dawn, alone, and nods to you.
+-> hub

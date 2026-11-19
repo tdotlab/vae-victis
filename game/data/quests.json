@@ -101,6 +101,61 @@
         "start": "Theron of Massilia wants out of Gergovia. A Greek isn't a Roman, but the men hunting Romans aren't good at telling the difference, and he has started to notice them looking. He would travel with someone who can use a spear, if the price were right.",
         "done": "Theron travels with me. He reads Latin and Greek, keeps accounts, haggles like a man possessed, and will run at the first sign of a fight. He says this is a sign of intelligence."
       }
+    },
+    {
+      "id": "factor",
+      "name": "The Empty Line",
+      "main": true,
+      "xp": 200,
+      "stages": {
+        "rumor": "Sumelis in the forum says there is an Aeduan in Avaricum who buys grain and never takes any away. He writes a great deal, she says. The line for Avaricum in the Vettius day book was empty.",
+        "found": "The Aeduan is Epomeduos, an agent of Dannotalos. He is listing Avaricum's households, and what each would fetch, for when the city falls. He also knows where Brigodunon's three are: at Noviodunum, until the autumn.",
+        "done_exposed": "I showed Senodonnos what Epomeduos was writing. They took him to the wall. Senodonnos gave me the letter they found on him, Dannotalos's own, for the gate at Noviodunum.",
+        "done_turned": "Epomeduos works for me now, or says he does. He wrote me into Dannotalos's letter for the gate at Noviodunum as his partner.",
+        "done_bought": "I bought Dannotalos's letter for the gate at Noviodunum from Epomeduos. He sold it the way he sells everything, without a flicker.",
+        "done_killed": "Epomeduos is dead. Dannotalos's letter for the gate at Noviodunum was on him.",
+        "done_stolen": "I have Dannotalos's letter for the gate at Noviodunum, and Epomeduos doesn't."
+      }
+    },
+    {
+      "id": "countermine",
+      "name": "Under the Terrace",
+      "xp": 150,
+      "stages": {
+        "start": "Andecamulos the ironmaster runs the countermines under Avaricum's wall. The Romans are building a terrace against the south wall, and his miners dig under it to bring it down or burn it. He needs hands, ears, pitch, or someone mad enough to go out at night with a torch.",
+        "done_dug": "I dug in Andecamulos's countermine until I couldn't stand. The drift reached under the terrace.",
+        "done_heard": "I heard the Roman sappers through the clay and showed the miners where to break in on them.",
+        "done_pitch": "I brought Andecamulos the pitch for the fire under the terrace.",
+        "done_fired": "I went out over the wall at night with the picked men and set fire to the Roman sheds. They put it out by morning. They always do.",
+        "failed": "Avaricum fell before I did anything for the countermine. Nobody is left to ask."
+      }
+    },
+    {
+      "id": "nertomara",
+      "name": "The Most Beautiful City",
+      "xp": 150,
+      "stages": {
+        "start": "Nertomara, a widow of Avaricum, wants her two children taken to her sister at Argentomagus before the Romans close the roads. She won't leave herself: the house was her husband's, and his people are buried by the wall.",
+        "boat_paid": "Vindos the boatman will take Nertomara's children through the marsh at night. I need to go to him after dark.",
+        "done_early": "Nertomara's children went south to Argentomagus with a carter, while the road was still open.",
+        "done_boat": "Vindos poled Nertomara's children through the marsh in the dark, past the Roman pickets. They are on their way to Argentomagus.",
+        "done_adit": "The miners took Nertomara's children out through their drift under the north wall. They came up in the reeds, and away.",
+        "done_runners": "The king's runners took Nertomara's children out through the marsh to the camp, and on to Argentomagus.",
+        "failed": "Avaricum fell, and Nertomara's children were still in it."
+      }
+    },
+    {
+      "id": "survivor",
+      "name": "What the Soldiers Left",
+      "xp": 100,
+      "stages": {
+        "start": "A girl is hiding in the last granary in the ruins of Avaricum. There is a legionary near the door, and a sentry on the only road out.",
+        "done_sneak": "I got the girl out of the granary in the dark and through the marsh. She ran toward the king's camp and didn't look back.",
+        "done_latin": "I told the sentry in Latin that the girl was mine, bought fair, and he waved us through without looking at her. She ran for the marsh as soon as we were past.",
+        "done_paid": "Thirty silver bought a legionary's back for long enough. The girl is out.",
+        "done_vouched": "Epomeduos wrote the girl into his book as Aeduan property and walked her past the sentry himself. He sent her toward the marsh. I didn't ask what he wanted for it.",
+        "done_fought": "I took the girl out of the granary and cut a way through. She's out. I may not be."
+      }
     }
   ]
 }

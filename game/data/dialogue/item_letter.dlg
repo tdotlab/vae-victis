@@ -1,0 +1,34 @@
+// Read from the inventory: Dannotalos's letter for the gate at Noviodunum.
+// Senodonnos and Hermeros can also read it (their own dialogues).
+@speaker Sealed tablet
+=== start
+[flag letter_read] -> again
+A small tablet of wax in a wooden case, tied with a cord, the knot sealed with a horse pressed into the wax. Gauls write in Greek letters when they write at all, and the Aedui write more than most.
+* [WIT 7] Break the seal and puzzle out the Greek letters. -> read
+* [lore 35] Break the seal and read it. You know the letters. -> read
+* [companion theron] Hand it to Theron. -> theron
+* Put it away. -> END
+
+=== again
+Dannotalos of the Aedui, to the keeper of the gate at Noviodunum: the bearer is his, to be let in and out and shown the pens.
+[flag factor_turned] And at the bottom, crowded in: the bearer's partner, likewise.
+* Put it away. -> END
+
+=== theron
+Theron breaks the seal with his thumbnail. "Greek letters, Gallic words, Aeduan spelling, which is to say, creative." He reads it out, and when he's finished he doesn't make a joke.
+-> read
+
+=== read
+~ set letter_read; known noviodunum; xp 50
+[quest factor active, flag factor_gone] ~ quest factor done_killed done
+[quest factor active] ~ quest factor done_stolen done
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+Dannotalos son of a good house of the Aedui, to the keeper of the gate at Noviodunum: greetings.
+
+The bearer is mine. Let him in and out as you would let me, show him the pens and whatever is in them that is on my account, and do not trouble the Roman quartermaster about it. He has enough to count.
+[flag factor_turned] At the bottom, in a different, careful hand, crowded in: and the bearer's partner, likewise.
+
+A letter to walk through the gate where your sister is kept, written by the man who bought her.
+* Put it away. -> END

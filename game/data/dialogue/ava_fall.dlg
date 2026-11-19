@@ -1,0 +1,18 @@
+// The map deadline for Avaricum: a player still inside the city on the day it
+// falls lives through the assault (Caesar BG VII.27-28) and gets out with the
+// few who escaped. Shown plainly and briefly.
+@speaker Avaricum
+=== start
+[quest nertomara active] ~ quest nertomara failed failed
+[quest countermine active] ~ quest countermine failed failed
+~ set fall_survived; title One of the eight hundred
+It rains all night, harder than it has rained all month. In the morning the guards on the wall are huddled under their cloaks, and the Romans on the terrace seem to be working slowly, as if they had all the time in the world.
+
+Then a trumpet, and the legionaries come over the wall all at once.
+
+The Bituriges form up in wedges in the forum and the open places, ready to fight in the streets. Then they see the Romans not coming down but going round, along the top of the wall, to close them in, and the wedges break, and everybody runs for the far gates at once.
+
+You don't remember all of it. You remember the crush at the marsh gate, and going over the wall where it's low by the river, and the cold of the water. You remember the reeds, all that day, and voices calling in Latin, and the ones who didn't keep up. At dusk there are fires ahead, and Gaulish voices, and someone wraps you in a cloak.
+
+Of the forty thousand people in Avaricum, about eight hundred reached the king's camp. You are one of them.
+* Go on. -> END ~ travel world

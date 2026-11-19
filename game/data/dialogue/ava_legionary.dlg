@@ -1,0 +1,24 @@
+// Legionaries in the ruins of Avaricum. Caesar says they spared no one,
+// angry at the Cenabum massacre and the work of the siege (BG VII.28).
+=== start
+He's sitting on a broken quern out of the rain, with his shield beside him and his helmet off. He looks at you without much interest. "What?"
+-> hub
+
+=== hub
+* "Why?" -> why
+* "The people in the pen." -> pen
+* [quest survivor active, silver 30] "There's a girl in the last granary. Thirty silver, and you walk her past the sentry and look the other way." -> paid ~ silver -30
+* "Goodbye." -> END
+
+=== why
+He thinks you mean something else, and then he understands. "Cenabum," he says. "Your lot killed every Roman trader in Cenabum. Every one. A man in my tent had a brother there." He looks at the city. "And twenty-five days of digging in the rain, eating cattle. Nobody had to give an order." He puts his helmet back on. "Nobody gave one to stop, either."
+-> hub
+
+=== pen
+"Them? Found them hiding after. Down wells, under floors." He shrugs. "The Greek bought them off the quaestor. They're his business now. Talk to the Greek."
+-> hub
+
+=== paid
+~ set survivor_out; quest survivor done_paid done; leave_all survivor
+He weighs the silver, and then looks round to see who's watching. Nobody is. "Last granary." He gets up with a grunt and goes. A little later you see him walk down the terrace road with a small figure in front of him, and come back alone, and sit down on his quern again as if nothing has happened.
+* "Thank you." -> END

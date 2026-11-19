@@ -1,0 +1,39 @@
+// The sentry on the terrace road into the ruins of Avaricum. Opened by a map
+// trigger at the gate (until the player is through) and by the sentry himself.
+@speaker Sentry
+=== start
+[quest countermine active] ~ quest countermine failed failed
+[flag ruins_passed] -> passed
+A legionary steps out of the gate arch with his shield up and his sword low. "Halt." Then, in bad Gallic, jerking his head at the city behind him: "No. Go back. Nobody in. Finished. All finished."
+
+Behind him, through the gate, there are no roofs.
+* [latin 30] (In Latin) "Sutler, for the century's mess. There's wine coming up the road behind me, and the centurion wants to know what's left in the granaries before the tribunes count it." -> pass_latin
+* [silver 20] Hold out twenty silver. -> pass_paid ~ silver -20
+* [item aeduan_letter] Show him the horse seal on the Aeduan tablet. -> pass_letter
+* [speech 45] "Aeduan. Friend of Rome. I've come to buy, like the Greek." -> pass_speech
+* "I'll go back." -> END ~ travel world
+* "Then I'll go through you." -> END ~ set ruins_passed; fight_all rome_camp
+
+=== pass_latin
+~ set ruins_passed; xp 25
+He looks surprised to hear it, and then relieved, the way soldiers are when someone else is going to have to count something. "Granaries are at the back. The Greek's in the forum, if you want to buy. Don't take anything with a stamp on it."
+* Go in. -> END
+
+=== pass_paid
+~ set ruins_passed
+He takes the silver without looking at it, and without looking at you. "Didn't see you," he says, in Gallic, and then in Latin, to himself, something that makes him laugh.
+* Go in. -> END
+
+=== pass_letter
+~ set ruins_passed; xp 25
+He can't read it, but he knows the seal, or knows that it's a seal. "Aeduan." He steps aside. "The other one's in the forum with the Greek. Friends of Rome." He doesn't say it nicely.
+* Go in. -> END
+
+=== pass_speech
+~ set ruins_passed; xp 25
+He looks you up and down for long enough that your hand starts to itch for something. Then he shrugs. "Aeduan. Fine. The Greek's in the forum. Buy what you like. There's not much left."
+* Go in. -> END
+
+=== passed
+He looks at you and looks away. "Don't take anything with a stamp on it."
+* "Goodbye." -> END

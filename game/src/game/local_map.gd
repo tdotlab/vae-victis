@@ -90,19 +90,51 @@ func _ready() -> void:
 	_camera.reset_smoothing()
 	var first_visit: bool = not gs.map_states.has(map.id) or not gs.map_states[map.id].get("visited", false)
 	_remember_visit()
+	var news := Game.check_calendar()
+	var phases := _phase_texts()
 	if map.def.get("encounter", false):
 		if gs.encounter.has("text"):
 			Game.say(gs.encounter["text"], "story")
 	elif first_visit and map.def.has("arrive_text"):
 		Game.say(map.def["arrive_text"], "story")
-	else:
+	elif phases.is_empty():
 		Game.say("You are in %s." % map.name)
-	for ev in Game.check_calendar():
+	for ev in news:
 		Game.say("%s. %s" % [ev.get("title", ""), ev.get("text", "")], "story")
+	for t in phases:
+		Game.say(t, "story")
 	_fired_triggers = gs.map_states.get(map.id, {}).get("triggers", {}).duplicate()
 	if first_visit and map.def.has("arrive_dialogue"):
 		await get_tree().process_frame
 		open_dialogue(map.def["arrive_dialogue"], null)
+
+
+## A map can change with the calendar. Each phase text is said once, the
+## first time the player is on the map with its flag set (no flag: always),
+## in list order; "covers" marks other phases as seen without saying them,
+## so a later phase can stand in for the ones the player missed.
+func _phase_texts() -> Array:
+	var gs := Game.state
+	var seen: Dictionary = gs.map_states[map.id].get("phases", {})
+	var out: Array = []
+	for p in map.def.get("phase_texts", []):
+		var id: String = p["id"]
+		if seen.has(id) or (p.has("flag") and gs.flag(p["flag"]) == 0):
+			continue
+		seen[id] = 1
+		for other in p.get("covers", []):
+			seen[other] = 1
+		out.append(p["text"])
+	gs.map_states[map.id]["phases"] = seen
+	return out
+
+
+## True if a flag is set: `v` is one flag name or a list of them (any counts).
+func _any_flag(v) -> bool:
+	for f in (v if v is Array else [v]):
+		if Game.state.flag(String(f)) != 0:
+			return true
+	return false
 
 
 func _remember_visit() -> void:
@@ -137,7 +169,7 @@ func _spawn_actors() -> void:
 			continue
 		if e.has("if_flag") and gs.flag(e["if_flag"]) == 0:
 			continue
-		if e.has("unless_flag") and gs.flag(e["unless_flag"]) != 0:
+		if _any_flag(e.get("unless_flag", [])):
 			continue
 		var a := Actor.from_template(e["template"], uid)
 		if e.has("mark"):
@@ -560,6 +592,17 @@ func _process(delta: float) -> void:
 		_npc_idle_moves()
 		_check_detection()
 		_update_night()
+		_check_deadline()
+
+
+## A map can end on a day ("deadline": {"day", "dialogue"}): a player still
+## on it when that day comes is shown the dialogue, which should take them off
+## the map. Avaricum uses it, so waiting out the siege inside means the fall.
+func _check_deadline() -> void:
+	var d: Dictionary = map.def.get("deadline", {})
+	if d.is_empty() or busy or Game.state.day() < int(d["day"]):
+		return
+	open_dialogue(d["dialogue"], null)
 
 
 func _update_camera(delta: float) -> void:
@@ -655,7 +698,7 @@ func _check_triggers(c: Vector2i) -> void:
 			continue
 		if t.has("if_flag") and Game.state.flag(t["if_flag"]) == 0:
 			continue
-		if t.has("unless_flag") and Game.state.flag(t["unless_flag"]) != 0:
+		if _any_flag(t.get("unless_flag", [])):
 			continue
 		_fired_triggers[key] = 1
 		if t.has("say"):
@@ -694,7 +737,7 @@ func open_dialogue(dlg_id: String, speaker: Actor) -> void:
 func open_container(mark: String) -> void:
 	var c: Dictionary = containers[mark]
 	var st: Dictionary = c["state"]
-	if c["def"].has("unless_flag") and Game.state.flag(c["def"]["unless_flag"]) != 0:
+	if _any_flag(c["def"].get("unless_flag", [])):
 		Game.say(c["def"].get("gone_text", "There's nothing left in it."))
 		return
 	if not st.get("unlocked", true):
@@ -746,6 +789,9 @@ func take_exit(e: Dictionary) -> void:
 	var to: String = e.get("to", "world")
 	if e.has("require_flag") and Game.state.flag(e["require_flag"]) == 0:
 		Game.say(e.get("blocked_text", "You can't leave that way yet."))
+		return
+	if e.has("unless_flag") and Game.state.flag(e["unless_flag"]) != 0:
+		Game.say(e.get("blocked_text", "You can't leave that way now."))
 		return
 	leave_to(to, e.get("entry", "start"))
 

@@ -1,0 +1,65 @@
+// Vindos the boatman, at the water steps on the north side of Avaricum. In the
+// siege he can take Nertomara's children through the marsh at night, once.
+=== start
+[quest nertomara=boat_paid] -> paid
+[flag vindos_met] -> again
+~ set vindos_met
+[!flag avaricum_siege] A flat-bottomed boat tied at the water steps, and a lean man in it mending a net with his toes as well as his fingers. "Vindos. I take people across. Fish, eels, a druid once. He didn't pay either."
+[flag avaricum_siege] A flat-bottomed boat pulled up under the wall, and a lean man beside it who puts a finger to his lips before you've opened your mouth. "Quiet. Sound carries on water, and there are Romans on the far bank listening for it. Vindos. What do you want?"
+-> hub
+
+=== again
+[flag avaricum_siege] "Quietly," Vindos says. "What?"
+[!flag avaricum_siege] "Crossing?" Vindos says.
+-> hub
+
+=== hub
+* [quest nertomara active, flag avaricum_siege, !flag boat_lost, !quest nertomara=boat_paid] "Could you take two children through the marsh at night?" -> boat_ask
+* [quest nertomara active, flag boat_lost] "Will you try again?" -> no_again
+* "Tell me about the marsh." -> marsh
+* "Goodbye." -> END
+
+=== marsh
+"The river goes round the north side, and the marsh goes round everything else except the road from the south. There are channels through it, if you know them. I know them." He looks out at the reeds.
+[flag avaricum_siege] "The king's men use the same ones every night. The Romans know by now. They've got pickets on the far bank, and slingers, and they've learned to listen."
+[!flag avaricum_siege] "Nobody's ever taken Avaricum. That's why. You'd have to bring an army through the one road, and the one road has a wall across it."
+-> hub
+
+=== boat_ask
+"Nertomara's two?" He doesn't seem surprised. "Through the marsh to the king's camp, and somebody there takes them south. Yes. Forty silver, because if the Romans catch us they'll kill me, and I'm worth forty."
+* [silver 40] Pay him. -> boat_deal ~ silver -40
+* [barter 45, silver 20] "Twenty. They're two children. They weigh nothing and they can lie flat." -> boat_deal ~ silver -20
+* "I'll think about it." -> hub
+
+=== boat_deal
+~ quest nertomara boat_paid
+He pockets the silver. "After dark. Bring them to the steps, and tell them not to talk, and not to cry, and not to be afraid of the water. And come yourself. If something goes wrong I'll need somebody to pole while I swim."
+* "After dark." -> END
+
+=== paid
+[!night] -> paid_day
+Vindos is waiting at the steps with the boat, a darker shape on dark water. The children are behind you, holding hands, very quiet.
+* [night, roll sneak -10] Get in and keep low. -> boat_win | boat_lose
+* "Not tonight." -> END
+
+=== paid_day
+"After dark, I said. In daylight the Romans count the reeds."
+* "After dark." -> END
+
+=== boat_win
+~ quest nertomara done_boat done
+You lie flat in the bottom of the boat with a child under each arm while Vindos poles, slow and silent, along channels you can't see. Once a voice speaks in Latin, very close, and Vindos stops and lets the boat drift. Once a sling stone hisses into the reeds a long way off. Then there's firelight ahead, and a Gaulish voice asking who you are.
+
+The king's men take the children. Somebody will take them south. You and Vindos are back at the steps before dawn, wet to the bone.
+* "Thank you, Vindos." -> END
+
+=== boat_lose
+~ set boat_lost; quest nertomara start
+You're halfway across when one of the children sneezes. On the far bank a voice calls out in Latin, and another answers, and then the sling stones come, cracking into the reeds and the water around you. Vindos turns the boat without a word. You come back to the steps soaked, with both children crying and nobody hurt, which is luck.
+
+"No," Vindos says, tying up. "Not again. They know the channel now, and they know my boat."
+* "I understand." -> END
+
+=== no_again
+"No. They know the channel and they know the boat. Find another way, or find another fool."
+-> hub

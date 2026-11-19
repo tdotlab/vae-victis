@@ -1,0 +1,5 @@
+// Captives in Hermeros's pen in the ruins of Avaricum.
+=== start
+They look at you, and then at the ground. When you speak again they answer, very quietly, without looking up. "They came over the wall in the rain. We were in the well. Two days." That's all.
+* "I'm sorry." -> END
+* "Goodbye." -> END

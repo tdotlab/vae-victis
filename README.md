@@ -2,7 +2,7 @@
 
 A turn-based, isometric, open-world role-playing game in the mold of Fallout 1, set in Gaul during the Great Revolt of 52 BC. You can't change who wins. You can change who's left.
 
-Status: a playable demo, "Leaving home": the first village, a cave, a neighboring village and a held river ford, with every quest solvable several ways. Gergovia, the first location of Phase 3, is built on top of it. See [docs/STATUS.md](docs/STATUS.md).
+Status: a playable demo, "Leaving home": the first village, a cave, a neighboring village and a held river ford, with every quest solvable several ways. Gergovia and Avaricum, the first locations of Phase 3, are built on top of it. See [docs/STATUS.md](docs/STATUS.md).
 
 ## Docs
 

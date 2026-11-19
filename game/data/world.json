@@ -203,7 +203,12 @@
     11
    ],
    "desc": "The richest city in Gaul, behind walls of stone and timber.",
-   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "map": "avaricum",
+   "entry": "world",
+   "map_by_flag": [
+    {"flag": "avaricum_fallen", "map": "avaricum_ruins", "entry": "world"},
+    {"flag": "avaricum_siege", "entry": "marsh"}
+   ],
    "size": 3
   },
   {

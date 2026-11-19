@@ -1,0 +1,24 @@
+// Townsfolk of Avaricum, by the city's phase.
+=== start
+[flag breakout_stopped] -> breakout
+[flag terrace_fire] -> terrace
+[flag avaricum_siege] -> siege
+[flag scorched_earth] -> refugees
+"Have you seen the wall? Have you seen the forum? Nobody's ever taken Avaricum." They say it like a greeting.
+* "Goodbye." -> END
+
+=== refugees
+"My cousins are sleeping in our yard. From a village up the river. There isn't a village up the river anymore." They shrug. "The council saved the city. Everyone keeps saying it."
+* "Goodbye." -> END
+
+=== siege
+"Bread's a silver a loaf and there's none to be had at that. The Romans are worse off. Everyone says the Romans are worse off." They look south anyway.
+* "Goodbye." -> END
+
+=== terrace
+"They're at the wall. You can see their faces from the gate towers. Somebody said one of them waved." They laugh, badly.
+* "Goodbye." -> END
+
+=== breakout
+"Don't. Please. Not today." They walk on.
+* "Goodbye." -> END

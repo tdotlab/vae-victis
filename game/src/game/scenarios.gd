@@ -47,7 +47,7 @@ static func start(name: String) -> void:
 
 ## Scripted actions for screenshot runs: walk:x:y, fight, talk:<uid>,
 ## open:<panel>, wait:<frames>, attack:<uid>, endturn, key:<choice number>,
-## flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, known:<location>.
+## flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, known:<location>, reload.
 static func act(main: Node, a: String) -> void:
 	var parts := a.split(":")
 	var tree := main.get_tree()
@@ -127,6 +127,11 @@ static func act(main: Node, a: String) -> void:
 		"hover":
 			if map:
 				map.hover = Hex.offset_to_axial(int(parts[1]), int(parts[2]))
+		"reload":
+			# Re-enter the current map, so actors gated on flags set above respawn.
+			Game.goto("map", {})
+			for i in range(10):
+				await tree.process_frame
 		"time":
 			Game.state.advance(int(parts[1]) * 60)
 		"click":

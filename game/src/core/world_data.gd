@@ -11,7 +11,10 @@ extends RefCounted
 ##                pass false = can't be entered (deep rivers)
 ##   "seasons":   season -> {terrain id or "*": multiplier}
 ##   "rows":      strings, one char per cell
-##   "locations": [{id, name, cell [x, y], map, entry, desc, size, closed_text}]
+##   "locations": [{id, name, cell [x, y], map, entry, desc, size, closed_text,
+##                  open_flag, shut_text, map_by_flag [{flag, map, entry}]}]
+##                map_by_flag: the first entry whose flag is set replaces the
+##                map and/or the entry mark (a place that changes on the clock)
 ##   "encounters":[{id, weight, terrain [...], days [from, to], map, actors [...], text}]
 
 const DIRS := [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1),
@@ -151,6 +154,17 @@ func location(id: String) -> Dictionary:
 
 func location_cell(l: Dictionary) -> Vector2i:
 	return Vector2i(int(l["cell"][0]), int(l["cell"][1]))
+
+
+## The map and entry mark a location opens on, given the game's flags.
+static func map_entry(l: Dictionary, flags: Dictionary) -> Dictionary:
+	var out := {"map": l.get("map", ""), "entry": l.get("entry", "start")}
+	for v in l.get("map_by_flag", []):
+		if int(flags.get(String(v["flag"]), 0)) != 0:
+			out["map"] = v.get("map", out["map"])
+			out["entry"] = v.get("entry", out["entry"])
+			break
+	return out
 
 
 func location_at(c: Vector2i) -> Dictionary:

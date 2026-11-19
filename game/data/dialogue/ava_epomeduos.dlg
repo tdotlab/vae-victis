@@ -1,0 +1,130 @@
+// Epomeduos, Dannotalos's agent, posing as a grain buyer. In the city until the
+// siege; after the fall he is in the ruins beside Hermeros. He has Dannotalos's
+// letter for the gate at Noviodunum on him (the item drops if he is killed).
+=== start
+[flag avaricum_fallen] -> ruins
+[flag factor_turned] -> partner
+[flag factor_paid] -> paid
+[flag factor_met] -> again
+~ set factor_met
+A neat man at a neat table, with a stylus behind his ear and a wax tablet face down under his hand. His cloak is Aeduan and expensive, and he has the patient smile of a man who is paid by the line.
+
+"Epomeduos, of Bibracte. I buy grain." He turns the tablet over a little further. "Not much grain, this year. Everyone's keeping theirs. Very sensible. Can I help you?"
+-> hub
+
+=== again
+"Back again." The tablet is face down. It always is. "Selling?"
+-> hub
+
+=== hub
+* [!flag factor_unmasked, flag tablets_read] "Dannotalos sends his regards." -> unmask_tablets
+* [!flag factor_unmasked, lore 40] "The Bituriges don't sell grain to the Aedui. They buy it from them. Every child in the forum knows that." -> unmask
+* [!flag factor_unmasked, PER 7] "Grain buyers write down measures. You write down names." -> unmask
+* [!flag factor_unmasked, item factor_list] "I've read your other tablet. The one with the prices." -> unmask_list
+* [flag factor_unmasked, quest factor active] "About your list." -> deal
+* [!flag factor_unmasked] "Buying anything besides grain?" -> buying
+* "Goodbye." -> END
+
+=== buying
+"Hides, sometimes. Iron, when the ironmaster will sell, which he won't." He smiles. "I'm a disappointment to my employer. Write that down, if you like. Everyone else in this city seems to be writing something down."
+-> hub
+
+=== unmask_tablets
+He doesn't move. Then he puts the stylus down, carefully, the way you'd put down something that might go off. "You've been reading other people's accounts."
+-> unmask
+
+=== unmask_list
+He looks at the tablet in your hand, and at his strongbox, and back at you, and for a moment the smile is gone entirely.
+-> unmask
+
+=== unmask
+~ set factor_unmasked; quest factor found; known noviodunum; xp 50
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+"Sit down. Please." He does, so you do. "Dannotalos of the Aedui is a careful man. He knows how this war ends, because he has read how the others ended. When it's over there will be a great many people with no one to own them, and somebody will sell them. Dannotalos would like to know in advance what's for sale, and where, and for how much." He taps the tablet. "Avaricum. Households, heads, prices. Nobody has been sold. It's a list."
+
+"Everyone in Gaul is on a list somewhere this year. I'm only the one who can spell." He studies your face. "You're Cadurci. Dannotalos has three Cadurci on his books already, hostages of a hill fort called Brigodunon, bought forward from the quartermaster at Noviodunum." He sees something in your face, and nods. "They're in the pens at Noviodunum. They'll stay there till the autumn, when the fighting stops and the roads are safe to sell on. Dannotalos's letter would get you through the gate there. I have it on me. I'm sure we can come to an arrangement."
+-> deal
+
+=== deal
+[flag avaricum_fallen] He folds his hands on the tablet. "Well? I'm a busy man today."
+[!flag avaricum_fallen] "Well?" He folds his hands on the tablet.
+* "What do you want for the letter?" -> buy
+* [PRE 7] "You'll write me into that letter as your partner, and you'll go on living. That's the arrangement." -> turned
+* [speech 45] "If this city falls, Dannotalos gets his list. If it doesn't, you'll need a friend who isn't Aeduan. Write me into the letter." -> turned
+* [!flag avaricum_fallen, item factor_list] "Write me into the letter, or this tablet goes to the council." -> turned_list
+* [quest survivor active, flag avaricum_fallen] "There's a girl hiding in the last granary." -> girl_no
+* "Then you can explain your list to the gods." -> END ~ fight
+* "Not now." -> END
+
+=== buy
+"A hundred and fifty. It's a very good letter. Dannotalos's own seal." He says it the way he'd quote the price of hides.
+* [silver 150] Pay him. -> bought ~ silver -150
+* [barter 50, silver 90] "Ninety. You can't sell it to anyone else in Avaricum without hanging." -> bought ~ silver -90
+* "Too much." -> deal
+
+=== bought
+~ give aeduan_letter; set factor_paid; quest factor done_bought done
+He counts the silver twice, and hands over a small tablet tied with cord, sealed with a horse pressed into the wax. "A pleasure. Dannotalos will write me another. He has a great many."
+* "I'm sure he does." -> END
+
+=== turned_list
+~ take factor_list
+He holds out his hand for the list before he answers, and you let him have it. It doesn't matter. You've read it.
+-> turned
+
+=== turned
+~ give aeduan_letter; set factor_turned; quest factor done_turned done; honor -5
+He looks at you for a long moment, working out what you cost. Then he breaks his own seal, smooths the wax, and adds a line at the bottom in a careful, crowded hand, and seals it again with the horse.
+
+"There. The bearer, and the bearer's partner, are both mine." He hands it over. "Partner. It's not a bad word. Dannotalos has a great many partners, and he outlives all of them."
+* "Then we understand each other." -> END
+
+=== partner
+"Partner." He doesn't get up. "Things are quiet. That's how I like them."
+* "Goodbye." -> END
+
+=== paid
+"We're done, you and I," he says pleasantly. "Unless you're buying something else."
+* "Goodbye." -> END
+
+=== ruins
+[flag factor_turned] -> ruins_partner
+[flag factor_paid] -> ruins_paid
+~ set factor_met
+Epomeduos sits on a folding stool next to the Greek, with a tablet on his knee. He is the only Gaul in Avaricum holding a stylus. He nods to you as if you'd met at a fair.
+
+"Terrible business. They were very brave." He makes a note. "There were going to be thousands. The soldiers didn't wait for anyone to do the counting." He looks up. "Buying or selling?"
+[!flag factor_unmasked] -> ruins_unmask
+-> deal
+
+=== ruins_unmask
+~ set factor_unmasked; quest factor found; known noviodunum; xp 50
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+"You've worked it out. Everyone does, eventually. I buy for Dannotalos of the Aedui, and Dannotalos buys people, ahead of time, the way a careful man buys grain." He studies you. "You're Cadurci. Dannotalos has three Cadurci on his books already, hostages of a hill fort called Brigodunon, bought forward from the quartermaster at Noviodunum. They're in the pens there till the autumn, when the fighting stops and the roads are safe to sell on."
+
+"His letter would get you through the gate at Noviodunum. I have it on me."
+-> deal
+
+=== ruins_partner
+"Partner. You lived." He seems pleased, and possibly is. "I'm adding up what's left."
+* [quest survivor active] "There's a girl hiding in the last granary. Vouch for her." -> vouched
+* "Goodbye." -> END
+
+=== ruins_paid
+"You again. Still alive. Good for you." He goes back to his tablet.
+* "Goodbye." -> END
+
+=== girl_no
+"I'm sure there is." He doesn't look up. "Buy the letter or don't. I don't do favors for people I've just met in a dead city."
+-> deal
+
+=== vouched
+~ set survivor_out; quest survivor done_vouched done; leave_all survivor
+He sighs, puts away the tablet, and walks across to the granary with you. The legionary at the door doesn't stop him. Nobody stops a man with a stylus.
+
+He comes back alone a little later. "I've written her down as Aeduan, property of the house of Dannotalos, lost in transit. The friends of Rome keep their property. She went into the reeds like a hare." He opens his tablet again. "Dannotalos is used to losses in transit. Don't make it a habit."
+* "Thank you." -> END

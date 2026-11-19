@@ -1,0 +1,37 @@
+// Sumelis, who sells everything in the forum at Avaricum and hears everything.
+// Starts "The Empty Line" with her gossip about the Aeduan; sells pitch.
+=== start
+[flag avaricum_siege] "Bread's a silver a loaf. It was a silver for ten, before the Romans. I know. Buy now, it'll be two tomorrow."
+[!flag avaricum_siege, flag scorched_earth] "Half the Bituriges are sleeping in my forum and none of them has any money." She doesn't sound sorry for herself, quite. "What do you want?"
+[!flag scorched_earth] "Salt from the south, wine from the Greeks, bread from my own oven. The gossip's free, because it's worth nothing." She smiles. "Mostly."
+-> hub
+
+=== hub
+* "Let's trade." -> trade
+* "What's the gossip?" -> gossip
+* [quest countermine active] "Do you have any pitch?" -> pitch
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Look all you like. Touch it and you've bought it."
+* "Thanks." -> hub
+
+=== gossip
+[flag avaricum_siege] -> gossip_siege
+[!flag factor_gone, quest factor none] ~ quest factor rumor
+[!flag factor_gone] "There's an Aeduan in the lodging behind the forum, Epomeduos, who says he buys grain. He's been here since the frost and he hasn't bought a sack. He walks round the city with a tablet, and he writes." She taps the side of her nose. "Nobody buys that much nothing. Whatever he's buying, it isn't grain."
+[flag factor_gone] "They took the Aeduan to the wall. Everyone's very pleased about it, and now everyone's looking at who else is a stranger." She looks at you a moment longer than she needs to.
+[flag scorched_earth] "And the council has twenty towns' worth of people inside the wall and grain for one winter. You can count as well as I can."
+-> hub
+
+=== gossip_siege
+[!flag factor_gone, quest factor none] ~ quest factor rumor
+[!flag factor_gone] "The Aeduan who bought grain and never took any away? He went out of the south gate the day before the Romans came, with his tablets and his mule. Somebody always knows first."
+[flag factor_gone] "Nobody's talking about anything but the terrace. They say you can hear the Romans singing while they build it."
+"Andecamulos wants pitch for the mines. I've got a little. So has the city store under the first granary, if you know who keeps the key. Nobody keeps the key anymore."
+-> hub
+
+=== pitch
+"Four pots. Pine pitch from the south, for caulking boats." She snorts. "Nobody's caulking boats. Four silver each, on the trestle with everything else."
+-> hub
