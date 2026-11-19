@@ -8,7 +8,7 @@ extends Node2D
 const CELL := 26.0
 const STEP_TIME := 0.16          # seconds of animation per cell
 const PANEL_W := 270.0
-const BAR_H := 152.0
+const BAR_H := HUD.BAR_H
 
 var world: WorldData
 var hud: HUD

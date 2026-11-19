@@ -1,6 +1,7 @@
 class_name UITheme
 extends RefCounted
-## The interface look: charcoal iron panels, iron edges, brass accents, bone text.
+## The interface look: hammered iron panels, iron edges, brass accents, bone text.
+## The iron and bronze pieces are rendered by art/ui.py into assets/ui/.
 ## T hates brown; keep it out of the interface.
 
 const BG := Color("#121417")
@@ -15,6 +16,7 @@ const BAD := Color("#d8705a")
 const WARN := Color("#e0b050")
 
 static var _theme: Theme
+static var _caps: FontVariation
 
 
 static func get_theme() -> Theme:
@@ -22,14 +24,20 @@ static func get_theme() -> Theme:
 		return _theme
 	var t := Theme.new()
 	t.default_font_size = 15
-	var panel := _box(PANEL, EDGE, 2)
+	var panel := tex_box("panel", 20, 16)
+	panel.axis_stretch_horizontal = StyleBoxTexture.AXIS_STRETCH_MODE_TILE_FIT
+	panel.axis_stretch_vertical = StyleBoxTexture.AXIS_STRETCH_MODE_TILE_FIT
 	t.set_stylebox("panel", "PanelContainer", panel)
 	t.set_stylebox("panel", "Panel", panel)
-	t.set_stylebox("normal", "Button", _box(PANEL_LIGHT, EDGE, 1, 6))
-	t.set_stylebox("hover", "Button", _box(Color("#323841"), BRONZE, 1, 6))
-	t.set_stylebox("pressed", "Button", _box(Color("#3c434d"), BRONZE, 2, 6))
-	t.set_stylebox("disabled", "Button", _box(Color("#17191c"), Color("#33383e"), 1, 6))
-	t.set_stylebox("focus", "Button", _box(Color(0, 0, 0, 0), BRONZE, 1, 6))
+	t.set_stylebox("normal", "Button", button_box("btn_normal"))
+	t.set_stylebox("hover", "Button", button_box("btn_hover"))
+	t.set_stylebox("pressed", "Button", button_box("btn_pressed"))
+	t.set_stylebox("disabled", "Button", button_box("btn_off"))
+	t.set_stylebox("focus", "Button", StyleBoxEmpty.new())
+	t.set_constant("outline_size", "Button", 0)
+	t.set_color("font_shadow_color", "Button", Color(0, 0, 0, 0.7))
+	t.set_constant("shadow_offset_y", "Button", 1)
+	t.set_constant("shadow_offset_x", "Button", 0)
 	t.set_color("font_color", "Button", TEXT)
 	t.set_color("font_hover_color", "Button", Color("#ffffff"))
 	t.set_color("font_pressed_color", "Button", Color("#ffffff"))
@@ -52,6 +60,42 @@ static func get_theme() -> Theme:
 	t.set_stylebox("grabber_pressed", "VScrollBar", grab)
 	_theme = t
 	return t
+
+
+## A 9-patch from one of the rendered interface pieces.
+static func tex_box(name: String, margin: int, pad: int) -> StyleBoxTexture:
+	var s := StyleBoxTexture.new()
+	s.texture = load("res://assets/ui/%s.png" % name)
+	s.set_texture_margin_all(margin)
+	s.set_content_margin_all(pad)
+	return s
+
+
+static func button_box(name: String) -> StyleBoxTexture:
+	var s := tex_box(name, 9, 10)
+	s.content_margin_top = 4
+	s.content_margin_bottom = 5
+	return s
+
+
+## Small capitals with a little air between them, for labels cut into the
+## iron ("HEALTH", "GEAR").
+static func caps_font() -> FontVariation:
+	if _caps == null:
+		_caps = FontVariation.new()
+		_caps.base_font = ThemeDB.fallback_font
+		_caps.spacing_glyph = 2
+		_caps.variation_embolden = 0.4
+	return _caps
+
+
+static func caps(text: String, size: int = 11, color: Color = BRONZE) -> Label:
+	var l := label(text.to_upper(), size, color)
+	l.add_theme_font_override("font", caps_font())
+	l.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
+	l.add_theme_constant_override("shadow_offset_y", 1)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	return l
 
 
 static func _box(bg: Color, edge: Color, border: int, pad: int = 8) -> StyleBoxFlat:
@@ -101,6 +145,7 @@ static func modal(parent: Node, title: String, size: Vector2) -> Array:
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = size
 	center.add_child(panel)
+	keep_above_bar(center, panel)
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 8)
 	panel.add_child(vb)
@@ -110,3 +155,14 @@ static func modal(parent: Node, title: String, size: Vector2) -> Array:
 		vb.add_child(t)
 	parent.add_child(root)
 	return [root, vb]
+
+
+## Windows sit in the view above the interface bar, as they did in Fallout,
+## unless one is too tall for that space; then it centres on the whole
+## screen and covers the bar. `center` is the CenterContainer that holds
+## `panel` and fills the screen.
+static func keep_above_bar(center: Control, panel: Control) -> void:
+	var fit := func() -> void:
+		var room := center.get_parent_area_size().y - HUD.BAR_H
+		center.offset_bottom = -HUD.BAR_H if panel.size.y <= room - 8.0 else 0.0
+	panel.resized.connect(fit)

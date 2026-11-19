@@ -17,7 +17,7 @@ func _ready() -> void:
 	if deadline > 0 and gs.quest_status("hostages") == "active":
 		vb.add_child(UITheme.label("Days until the spring assembly: %d" % maxi(0, deadline - gs.day()), 14, UITheme.WARN))
 	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(740, 420)
+	scroll.custom_minimum_size = Vector2(740, 380)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	vb.add_child(scroll)
 	var list := VBoxContainer.new()

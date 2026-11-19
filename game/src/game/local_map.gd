@@ -30,7 +30,7 @@ var _wander_timer := 0.0
 var _camera: Camera2D
 var _cam_offset := Vector2.ZERO
 var _map_rect := Rect2()
-const HUD_BAR_H := 152.0
+const HUD_BAR_H := HUD.BAR_H
 var _floor: _Layer
 var _things: _Layer
 var _over: _Layer

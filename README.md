@@ -23,7 +23,7 @@ Status: a playable demo, "Leaving home": the first village, a cave, a neighborin
   - `assets/art/`: generated sprite sheets, ground textures and their manifest `art.json`. Don't edit by hand; rebuild with `tools/build-art.sh`.
   - `data/`: all game content. JSON for rules, items, NPCs, quests, local maps, the world map (`world.json`), the historical calendar (`calendar.json`) and story; `.dlg` files for dialogue (format documented at the top of `src/core/dialogue.gd`); `.txt` for longer text.
   - `tests/`: headless test suite. Rule tests, content validation (`test_content.gd`: every reference in dialogue, maps and NPCs resolves, everything is reachable) and scripted playthroughs of the quest routes (`test_playthrough.gd`).
-- `art/`: the art pipeline. `sprites.py` models and renders everything in Blender, headless, from the game's own camera angle; `pack.py` packs the renders into sheets and generates the ground textures.
+- `art/`: the art pipeline. `sprites.py` models and renders everything in Blender, headless, from the game's own camera angle; `pack.py` packs the renders into sheets and generates the ground textures; `ui.py` generates the interface art (the bar, wells, buttons, studs, the END TURN boss, window panels) into `game/assets/ui/`. Run `python art/ui.py`, then open the project once (or run Godot with `--headless --import`) so the new PNGs are imported.
 - `tools/`: shell scripts (Git Bash) for testing, screenshots, the web build and the art build.
 - `build/`: export output, not in Git.
 

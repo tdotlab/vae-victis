@@ -1,20 +1,33 @@
 class_name HUD
 extends Control
-## The interface over a local map: the bottom bar (message log, health,
-## action points, weapon, buttons) and the windows opened from it.
+## The interface over a local map: the bottom bar and the windows opened from
+## it. The bar is a hammered iron plate under a bronze strip (art/ui.py):
+## the message log in a recessed well, health, the action-point studs over
+## the weapon slot, the shield boss that ends a turn, and the buttons.
+
+const BAR_H := 162.0     # the opaque part of the bar; the texture adds 6 px of shadow above
+const TEX_H := 168.0
 
 var map: LocalMap        # set on a local map
 var world: Node          # set on the world map (WorldMap); exactly one of the two
 var _log: RichTextLabel
 var _hp: Label
-var _ap: Label
+var _hp_max: Label
 var _date: Label
+var _studs: HBoxContainer
 var _weapon_btn: Button
+var _weapon_name: Label
+var _weapon_info: Label
 var _hover: Label
-var _end_turn: Button
+var _end_turn: TextureButton
+var _end_turn_label: Label
 var _end_combat: Button
 var _sneak_btn: Button
 var _modals: Array = []   # open windows, top last
+var _stud_on: Texture2D = preload("res://assets/ui/stud_on.png")
+var _stud_off: Texture2D = preload("res://assets/ui/stud_off.png")
+var _boss_ready: Texture2D = preload("res://assets/ui/boss_ready.png")
+var _boss_idle: Texture2D = preload("res://assets/ui/boss_idle.png")
 
 
 func _ready() -> void:
@@ -35,65 +48,166 @@ func _ready() -> void:
 
 
 func _build_bar() -> void:
-	var bar := PanelContainer.new()
-	bar.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	bar.offset_top = -152
-	bar.mouse_filter = Control.MOUSE_FILTER_STOP
-	add_child(bar)
+	var plate := NinePatchRect.new()
+	plate.texture = preload("res://assets/ui/bar.png")
+	plate.patch_margin_left = 48
+	plate.patch_margin_right = 48
+	plate.axis_stretch_horizontal = NinePatchRect.AXIS_STRETCH_MODE_TILE_FIT
+	plate.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	plate.offset_top = -TEX_H
+	plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(plate)
+	# Swallow clicks on the opaque part only, not the shadow above it.
+	var catcher := Control.new()
+	catcher.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	catcher.offset_top = -BAR_H
+	catcher.mouse_filter = Control.MOUSE_FILTER_STOP
+	add_child(catcher)
 	var hb := HBoxContainer.new()
-	hb.add_theme_constant_override("separation", 10)
-	bar.add_child(hb)
+	hb.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	hb.offset_top = -BAR_H + 30
+	hb.offset_bottom = -10
+	hb.offset_left = 32
+	hb.offset_right = -32
+	hb.add_theme_constant_override("separation", 12)
+	add_child(hb)
+
+	# The log, in a dark well.
+	var well := PanelContainer.new()
+	well.add_theme_stylebox_override("panel", UITheme.tex_box("well", 12, 10))
+	well.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hb.add_child(well)
 	_log = RichTextLabel.new()
 	_log.bbcode_enabled = true
 	_log.scroll_following = true
-	_log.custom_minimum_size = Vector2(520, 130)
-	_log.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_log.custom_minimum_size = Vector2(440, 0)
 	_log.add_theme_font_size_override("normal_font_size", 14)
-	var log_bg := StyleBoxFlat.new()
-	log_bg.bg_color = Color("#0e1012")
-	log_bg.set_content_margin_all(6)
-	_log.add_theme_stylebox_override("normal", log_bg)
-	hb.add_child(_log)
-	var stats := VBoxContainer.new()
-	stats.custom_minimum_size.x = 170
-	hb.add_child(stats)
-	_hp = UITheme.label("", 18, UITheme.GOOD)
-	stats.add_child(_hp)
-	_ap = UITheme.label("", 16, UITheme.WARN)
-	stats.add_child(_ap)
-	_date = UITheme.label("", 13, UITheme.DIM)
-	_date.autowrap_mode = TextServer.AUTOWRAP_WORD
-	stats.add_child(_date)
-	_weapon_btn = UITheme.button("", _cycle_weapon, 170)
-	_weapon_btn.custom_minimum_size.y = 34
+	_log.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
+	well.add_child(_log)
+
+	# Health, with the date under it.
+	var hcol := VBoxContainer.new()
+	hcol.custom_minimum_size.x = 112
+	hcol.add_theme_constant_override("separation", 4)
+	hb.add_child(hcol)
+	var hwell := PanelContainer.new()
+	hwell.add_theme_stylebox_override("panel", UITheme.tex_box("well", 12, 6))
+	hwell.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	hcol.add_child(hwell)
+	var hv := VBoxContainer.new()
+	hv.alignment = BoxContainer.ALIGNMENT_CENTER
+	hv.add_theme_constant_override("separation", -2)
+	hwell.add_child(hv)
+	hv.add_child(UITheme.caps("Health", 10))
+	_hp = UITheme.label("", 30, UITheme.TEXT)
+	_hp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hv.add_child(_hp)
+	_hp_max = UITheme.label("", 12, UITheme.DIM)
+	_hp_max.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hv.add_child(_hp_max)
+	_date = UITheme.label("", 12, UITheme.DIM)
+	_date.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_date.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
+	_date.add_theme_constant_override("shadow_offset_y", 1)
+	hcol.add_child(_date)
+
+	# Action studs over the weapon slot.
+	var wcol := VBoxContainer.new()
+	wcol.custom_minimum_size.x = 214
+	wcol.add_theme_constant_override("separation", 5)
+	hb.add_child(wcol)
+	_studs = HBoxContainer.new()
+	_studs.alignment = BoxContainer.ALIGNMENT_CENTER
+	_studs.add_theme_constant_override("separation", 2)
+	_studs.custom_minimum_size.y = 18
+	_studs.tooltip_text = "Action points. Lit in a fight while they last."
+	_studs.mouse_filter = Control.MOUSE_FILTER_STOP
+	wcol.add_child(_studs)
+	_weapon_btn = Button.new()
+	_weapon_btn.focus_mode = Control.FOCUS_NONE
+	_weapon_btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_weapon_btn.tooltip_text = "Your weapon. Click to switch to another one you carry."
-	stats.add_child(_weapon_btn)
+	_weapon_btn.add_theme_stylebox_override("normal", UITheme.tex_box("well", 12, 8))
+	_weapon_btn.add_theme_stylebox_override("hover", UITheme.tex_box("well_hover", 12, 8))
+	_weapon_btn.add_theme_stylebox_override("pressed", UITheme.tex_box("well_hover", 12, 8))
+	_weapon_btn.pressed.connect(_cycle_weapon)
+	wcol.add_child(_weapon_btn)
+	var wv := VBoxContainer.new()
+	wv.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	wv.alignment = BoxContainer.ALIGNMENT_CENTER
+	wv.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	wv.add_theme_constant_override("separation", 2)
+	_weapon_btn.add_child(wv)
+	var wcap := UITheme.caps("Weapon", 10)
+	wcap.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	wv.add_child(wcap)
+	_weapon_name = UITheme.label("", 17, UITheme.TEXT)
+	_weapon_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_weapon_name.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	wv.add_child(_weapon_name)
+	_weapon_info = UITheme.label("", 13, UITheme.WARN)
+	_weapon_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_weapon_info.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	wv.add_child(_weapon_info)
+
+	# The shield boss ends a turn; End fight under it.
+	var bcol := VBoxContainer.new()
+	bcol.custom_minimum_size.x = 92
+	bcol.add_theme_constant_override("separation", 0)
+	hb.add_child(bcol)
+	_end_turn = TextureButton.new()
+	_end_turn.texture_normal = _boss_idle
+	_end_turn.texture_hover = preload("res://assets/ui/boss_hover.png")
+	_end_turn.texture_pressed = preload("res://assets/ui/boss_pressed.png")
+	_end_turn.texture_disabled = _boss_idle
+	_end_turn.focus_mode = Control.FOCUS_NONE
+	_end_turn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_end_turn.tooltip_text = "End your turn (Space)."
+	if map:
+		_end_turn.pressed.connect(func(): map.combat.player_end_turn())
+	bcol.add_child(_end_turn)
+	_end_turn_label = UITheme.caps("End turn", 9)
+	_end_turn_label.position = Vector2(0, 36)
+	_end_turn_label.size = Vector2(88, 16)
+	_end_turn_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_end_turn.add_child(_end_turn_label)
+	_end_combat = _tb("End fight", "End the fight when no enemy is left in sight (Enter).", func():
+		if map:
+			map.combat.request_end())
+	_end_combat.custom_minimum_size = Vector2(92, 26)
+	bcol.add_child(_end_combat)
+	# Turns and action points mean nothing on the road.
+	bcol.visible = map != null
+	_studs.visible = map != null
+
+	# The buttons.
 	var grid := GridContainer.new()
 	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 6)
 	grid.add_theme_constant_override("v_separation", 6)
+	grid.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	hb.add_child(grid)
-	grid.add_child(_tb("Gear (I)", open_inventory))
-	grid.add_child(_tb("Self (C)", open_character))
-	grid.add_child(_tb("Journal (J)", open_journal))
+	grid.add_child(_tb("Gear", "Your gear and what you carry (I).", open_inventory))
+	grid.add_child(_tb("Self", "Your character (C).", open_character))
+	grid.add_child(_tb("Journal", "Quests and notes (J).", open_journal))
 	if map == null:
-		grid.add_child(_tb("Rest (R)", func(): world.rest()))
-		grid.add_child(_tb("Menu (Esc)", open_menu))
+		grid.add_child(_tb("Rest", "Rest a while (R).", func(): world.rest()))
+		grid.add_child(_tb("Menu", "Save, load, help, quit (Esc).", open_menu))
 		return
-	grid.add_child(_tb("Travel (M)", func(): map.try_world_map()))
-	_sneak_btn = _tb("Sneak (S)", func(): map.toggle_sneak())
+	grid.add_child(_tb("Travel", "The map of Gaul (M).", func(): map.try_world_map()))
+	_sneak_btn = _tb("Sneak", "Move quietly (S).", func(): map.toggle_sneak())
 	grid.add_child(_sneak_btn)
-	grid.add_child(_tb("Menu (Esc)", open_menu))
-	_end_turn = _tb("End turn (Space)", func(): map.combat.player_end_turn())
-	grid.add_child(_end_turn)
-	_end_combat = _tb("End fight (Enter)", func(): map.combat.request_end())
-	grid.add_child(_end_combat)
+	grid.add_child(_tb("Menu", "Save, load, help, quit (Esc).", open_menu))
 
 
-func _tb(text: String, cb: Callable) -> Button:
-	var b := UITheme.button(text, cb, 140)
-	b.custom_minimum_size.y = 28
-	b.add_theme_font_size_override("font_size", 13)
+func _tb(text: String, tip: String, cb: Callable) -> Button:
+	var b := UITheme.button(text.to_upper(), cb, 96)
+	b.custom_minimum_size.y = 32
+	b.tooltip_text = tip
+	b.add_theme_font_override("font", UITheme.caps_font())
+	b.add_theme_font_size_override("font_size", 11)
+	b.add_theme_color_override("font_color", UITheme.TEXT.darkened(0.08))
+	b.add_theme_color_override("font_hover_color", UITheme.BRONZE)
 	return b
 
 
@@ -121,28 +235,43 @@ func refresh() -> void:
 	if map and map.player == null:
 		return
 	var p := Game.state.player
-	_hp.text = "Health %d / %d" % [p.hp, p.max_hp()]
-	_hp.add_theme_color_override("font_color", UITheme.GOOD if p.hp * 2 > p.max_hp() else UITheme.BAD)
-	var in_fight := in_fight()
-	if in_fight:
-		var a := map.player.ap if map.combat.current == map.player else 0
-		_ap.text = "Action %s" % ("●".repeat(a) + "○".repeat(maxi(0, p.max_ap() - a)))
-	elif map:
-		_ap.text = "Sneaking" if map.player.get_meta("sneaking", false) else ""
-	else:
-		_ap.text = ""
+	_hp.text = str(p.hp)
+	_hp.add_theme_color_override("font_color", UITheme.TEXT if p.hp * 2 > p.max_hp() else UITheme.BAD)
+	_hp_max.text = "of %d" % p.max_hp()
+	var fighting := in_fight()
+	var mine := fighting and map.combat.current == map.player
+	var lit: int = map.player.ap if mine else 0
+	var n := p.max_ap()
+	while _studs.get_child_count() < n:
+		var t := TextureRect.new()
+		t.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_studs.add_child(t)
+	for i in _studs.get_child_count():
+		var t: TextureRect = _studs.get_child(i)
+		t.visible = i < n
+		t.texture = _stud_on if i < lit else _stud_off
 	_date.text = Game.state.date_text()
 	var w := p.weapon_def()
-	var ammo := ""
+	var info := "%d AP" % int(w.get("ap", 3))
 	if w.has("ammo"):
-		ammo = " (%d)" % p.inventory.count(w["ammo"])
+		info += "   %d %s" % [p.inventory.count(w["ammo"]), DB.item_name_lc(w["ammo"])]
 	elif w.get("thrown", false):
-		ammo = " (%d)" % (p.inventory.count(w["id"]) + 1)
-	_weapon_btn.text = "%s%s  %d AP" % [w.get("name", "Fists"), ammo, int(w.get("ap", 3))]
+		info += "   %d left" % (p.inventory.count(w["id"]) + 1)
+	_weapon_name.text = w.get("name", "Fists")
+	_weapon_info.text = info
+	_end_turn.disabled = not mine
+	_end_turn.texture_normal = _boss_ready if mine else _boss_idle
+	_end_turn_label.add_theme_color_override("font_color", UITheme.BRONZE if mine else UITheme.DIM.darkened(0.3))
+	_end_combat.disabled = not fighting
 	if map:
-		_end_turn.disabled = not in_fight
-		_end_combat.disabled = not in_fight
-		_sneak_btn.disabled = in_fight
+		_sneak_btn.disabled = fighting
+		var sneaking: bool = map.player.get_meta("sneaking", false)
+		if sneaking:
+			_sneak_btn.add_theme_stylebox_override("normal", UITheme.button_box("btn_on"))
+			_sneak_btn.add_theme_color_override("font_color", UITheme.BRONZE)
+		else:
+			_sneak_btn.remove_theme_stylebox_override("normal")
+			_sneak_btn.add_theme_color_override("font_color", UITheme.TEXT.darkened(0.08))
 
 
 func in_fight() -> bool:

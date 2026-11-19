@@ -2,6 +2,14 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-19 (interface)
+
+- **The interface bar is an object in the world, not a debug strip.** A hammered iron plate under a bronze rim cut with a La Tène wave tendril, riveted end caps, sunk wax-dark wells for the log, health and weapon, a row of bronze studs for action points, and END TURN on a round shield boss modelled on the Vachères boss (ten rivets; see research/dress-and-arms.md). Fallout's bar did the same job in its own world's materials. Iron, bronze and verdigris only: T hates brown, so no leather.
+- **The UI art is procedural, from `art/ui.py`,** not painted or downloaded: height fields (hammer dents, blurred noise) lit from the upper left, supersampled. Every piece regenerates from one script, and nine-patch centers tile, so the bar fits any window width.
+- **Windows sit above the bar when they fit** (barter, gear, journal, loot, dialogue), as in Fallout; a window too tall for that space (the character sheet) covers the whole screen.
+- **The world map hides the turn controls.** Action points and END TURN mean nothing on the road.
+- **The interface font is still Godot's default sans.** A display face for the caps labels would help most of all, but only sans and mono fonts are on disk, and downloading one is T's call.
+
 ## 2026-11-18 (art pass: people, props, weather)
 
 - **Hoods and headwraps are their own layers.** Commoners, refugees, carters, miners and slingers wear a hooded cape (`look.hood`, which comes down under a helmet or cap); older women wear a headwrap (`hair_style: "wrap"`). Bare heads everywhere made every crowd look like a war band. The hood replaces the cloak, so a hooded NPC takes the hood's color.
