@@ -14,3 +14,4 @@ A visual history of the game, oldest first. Each shot is taken with `tools/shot.
 | [08](2026-11-18-08-avaricum-day.webp) | Avaricum by day after the art pass: props, smoke, 48 degree roofs. | f7efc54 |
 | [09](2026-11-18-09-people-closeups.webp) | People at 3x: hoods, headwraps, cloaks. | 2f7388d |
 | [10](2026-11-18-10-dialogue-figure.webp) | The speaker's own figure in the dialogue window. | f7efc54 |
+| [11](2026-11-19-11-iron-and-bronze-bar.webp) | The interface rebuilt: iron and bronze bar, AP studs, the END TURN boss. | cdafbc2 |
