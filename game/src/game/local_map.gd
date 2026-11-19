@@ -107,6 +107,7 @@ func _ready() -> void:
 		Game.say("%s. %s" % [ev.get("title", ""), ev.get("text", "")], "story")
 	for t in phases:
 		Game.say(t, "story")
+	Game.hint("hint_start")
 	_fired_triggers = gs.map_states.get(map.id, {}).get("triggers", {}).duplicate()
 	if first_visit and map.def.has("arrive_dialogue"):
 		await get_tree().process_frame

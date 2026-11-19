@@ -51,6 +51,14 @@ func say(text: String, kind: String = "info") -> void:
 	message.emit(text, kind)
 
 
+## Shows a how-to-play line from data/text/<id>.txt once per game.
+func hint(id: String) -> void:
+	if state == null or state.flag(id) != 0:
+		return
+	state.set_flag(id)
+	say(DB.text_file("text/%s.txt" % id).strip_edges(), "hint")
+
+
 func goto(screen: String, args: Dictionary = {}) -> void:
 	screen_requested.emit(screen, args)
 

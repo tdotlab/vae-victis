@@ -1,0 +1,1 @@
+Fights go in turns. Click an enemy to attack, the ground to move; right-click an enemy to aim at a body part. Each action costs action points, the studs on the bar. Space ends your turn.

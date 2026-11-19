@@ -49,6 +49,7 @@ func start_combat(initiator: Actor, target: Actor = null) -> void:
 	order.erase(initiator)
 	order.push_front(initiator)
 	Game.say("Combat!", "bad")
+	Game.hint("hint_fight")
 	map.hud.refresh()
 	_run.call_deferred()
 

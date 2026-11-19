@@ -226,6 +226,8 @@ func _append(text: String, kind: String) -> void:
 			col = Color("#e8c890")
 		"warn":
 			col = UITheme.WARN
+		"hint":
+			col = UITheme.BRONZE
 	_log.append_text("[color=#%s]%s[/color]\n" % [col.to_html(false), text.replace("[", "[lb]")])
 
 
