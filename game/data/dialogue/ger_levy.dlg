@@ -1,0 +1,14 @@
+// Men of the king's levy.
+=== start
+[flag verc_north] -> marching
+"The king gave me this." He shows you the spear, as if you might not have noticed it. "Before this I had a goat. The goat was my lord's, really. This is mine."
+* "Good luck with it." -> END
+* "Have you ever fought?" -> fought
+
+=== fought
+"Wolves." He considers. "A man, once, over the goat." He looks at the spear. "Romans can't be much worse than wolves."
+* "I hope you're right." -> END
+
+=== marching
+"Most of us went north with the king. They left the slow ones." He grins anyway. "Garrison, they call it."
+* "Goodbye." -> END

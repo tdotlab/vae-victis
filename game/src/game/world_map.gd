@@ -356,6 +356,9 @@ func _enter(l: Dictionary) -> void:
 		_popup(l["name"], "%s\n\n%s" % [l.get("desc", ""), l.get("closed_text", "")], [["Back", func(): pass]])
 		return
 	var gs := Game.state
+	if l.has("open_flag") and gs.flag(l["open_flag"]) == 0:
+		_popup(l["name"], "%s\n\n%s" % [l.get("desc", ""), l.get("shut_text", "")], [["Back", func(): pass]])
+		return
 	gs.map_id = l["map"]
 	gs.entry = l.get("entry", "start")
 	Game.goto("map", {})

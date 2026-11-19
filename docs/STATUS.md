@@ -2,7 +2,7 @@
 
 Updated 2026-11-18.
 
-**Phase:** T has played the demo ("a damn solid foundation"). The cleanup pass is done (the clock follows Caesar, the research's text fixes, three bugs). The figure rework and grit pass are done: women, Roman kit, optional torcs, moustaches and beards, seven hairstyles, hide capes, checked cloaks, an iron Gallic helmet and a bird helm; harder light, outlines, a darker winter ground and a color grade. Next: Phase 3, starting at Gergovia. Not yet applied from [research/](research/README.md): the rampart redraw, interiors and props. Gear swaps the research suggests but that change balance are left for T: rider archers with javelins, the German riders' leather jerkins for hide cloaks, padded linen for Vellaunos, and a sword worn on the right hip (the sword layer has no scabbard).
+**Phase:** T has played the demo ("a damn solid foundation"). The cleanup pass is done (the clock follows Caesar, the research's text fixes, three bugs). The figure rework and grit pass are done: women, Roman kit, optional torcs, moustaches and beards, seven hairstyles, hide capes, checked cloaks, an iron Gallic helmet and a bird helm; harder light, outlines, a darker winter ground and a color grade. Phase 3 has started: Gergovia is built (local commit, not pushed or deployed). Next: play it, then Avaricum. Not yet applied from [research/](research/README.md): the rampart redraw, interiors and props. Gear swaps the research suggests but that change balance are left for T: rider archers with javelins, the German riders' leather jerkins for hide cloaks, padded linen for Vellaunos, and a sword worn on the right hip (the sword layer has no scabbard).
 
 **Working:**
 - M0 Foundation: hex map in isometric view, click-to-walk with A* pathfinding, camera pan and zoom, data loading, headless test runner (fails on any script error), web export that runs in a browser.
@@ -15,14 +15,20 @@ Updated 2026-11-18.
   - The Three Hostages: find the tally, get it read (Lugurix, Haldo, or your own Latin), report.
   - The Grotto: fight, buy, barter, pardon through Vellaunos, lie with the elder's ring, scare with the idol or with Lore, or pick the chest.
   - The Ford: fight, toll (or haggle), the Arverni lie, Sulicena's forged recall order, recruit, threaten, steal the horses at night.
+- Phase 3, Gergovia: two maps (the lower town with the levy camp, and the plateau inside the wall), shut on the world map until day 7, when Vercingetorix takes it. Vercingetorix is there until he marches north on day 24. 17 new NPCs, four quests, Theron as the first companion.
+  - A Roman in Gergovia (main): find Paconius, the Vettius clerk hiding as Theron's bookkeeper (Latin, Perception, the potter's hint, Theron's confession), then get his tablets: smuggle him out (sneak, bribe, Speech), buy them, frighten him, betray him to Ollognatos, pick his satchel, or kill him. Read them with Latin, Theron, Paconius or Lugurix. They name Dannotalos and also reveal Noviodunum, so they can stand in for the tally.
+  - The King's Levy: pledge two children, give yourself as the pledge (Honor or Presence), send it to Lucterius (Lore), pay in iron, sell out Vindomagos (Sulicena remembers), or refuse. Vellaunos reacts to each.
+  - The Uncle's Man: plead with the king (Speech spares him, Honor stands surety, a plain plea costs his ears), bribe the pit guard, free him at night by stealth, or betray his father. He burns if the king marches first.
+  - The Greek: Theron joins if Paconius was saved, by Speech, by a blades check, or as a paid escort; never if Paconius was betrayed.
 
-**Tests:** 71 headless tests, including content validation (every dialogue, map, NPC and quest reference resolves; everything on a map is reachable; the ford barrier can't be walked around) and scripted playthroughs of every quest route through the real dialogue files.
+**Tests:** 88 headless tests, including content validation (every dialogue, map, NPC and quest reference resolves; everything on a map is reachable; the ford barrier can't be walked around) and scripted playthroughs of every quest route through the real dialogue files.
 
 **Partial:** save and load (quick slot and title-screen Continue; no slot browser yet).
 
 **Known rough edges:**
 - Art: water is a plain texture, skin tone is not recolored, hair can show under a cloak in back views, and gear cut by the body holdout gets a thin outline on the body edge, only the wolf has a beast sprite (other beasts fall back to the placeholder), and the world map and title screen are unchanged.
-- Consequences that pay off later (hired riders in Act III, the discovered lie, the pardoned exile) are recorded as flags; the content that uses them doesn't exist yet.
+- Consequences that pay off later (hired riders in Act III, the discovered lie, the pardoned exile, Brigodunon's levy, the king's surety, the betrayed clerk) are recorded as flags; the content that uses them doesn't exist yet.
+- Theron has no personal quest beyond joining, no way to part ways, and no ending slide yet.
 - Balance is untested by a human: check odds, enemy strength, prices.
 
 **Waiting on T:** the open questions at the end of [DESIGN.md](DESIGN.md), including real names for the placeholders.

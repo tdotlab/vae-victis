@@ -1,0 +1,84 @@
+// Ategnatos, old noble of the uncle's party. Gives the pit quest; pays for his son.
+=== start
+[flag verc_north, quest pit active] -> too_late
+[quest pit done] -> after
+[quest pit failed] -> mourning
+[flag ateg_met] -> again
+~ set ateg_met
+An old man sits in a dark house that is too big for him. The hangings are good, the hearth is cold, and there's dust on the wine jar. He looks at you as if he's been expecting someone else, and you'll do.
+
+"You're not Arvernian, and you're not one of the king's young men. Good." He gestures at a stool. "Sit. I'm Ategnatos. I was a friend of Gobannitio's. You'll have heard what happened to his friends."
+-> hub
+
+=== again
+"You came back." Ategnatos doesn't get up. "Sit, if you're staying."
+-> hub
+
+=== hub
+* [quest pit none] "What happened to his friends?" -> story
+* [quest pit active] "About your son." -> son
+* "Goodbye." -> END
+
+=== story
+~ quest pit start; set pit_plan
+"The king threw them out of Gergovia. The lucky ones." He looks at his hands. "He didn't throw me out. I've been wondering why ever since. Then my son told me why. My son is a fool and brave, which is the worst kind, and he sent a rider to Gobannitio after the king came back. The rider was taken. The king knows what he carried."
+
+"Eppillos is in the pit on the west side of the plateau, past the granaries. The king carries out his sentences before he marches, and he marches soon. When he does, they'll burn my son." His voice doesn't change at all. "I want him alive. I don't much care how. I have silver, and my father's torc, and nothing else left that anyone would want."
+-> hub
+
+=== son
+"Still in the pit. Still alive. The king hasn't marched." He watches you. "What do you mean to do?"
+* "I'll ask the king to spare him." -> plan_king
+* "I'll get him out of there." -> plan_pit
+* "I don't know yet." -> hub
+
+=== plan_king
+"Ask Vercingetorix." He almost laughs. "He listens to everyone once. Don't ask for mercy. He gives mercy like a farmer gives a ewe a brand. Give him a reason."
+-> hub
+
+=== plan_pit
+"At night. One guard, and they change him at moonrise. Get the guard on your side, or past him. Eppillos can climb if somebody drops a rope." He takes a breath. "And if they catch you, I've never met you."
+-> hub
+
+=== after
+[quest pit=done_freed] -> paid_freed
+[quest pit=done_spared] -> paid_spared
+[quest pit=done_ears] -> paid_ears
+
+=== paid_freed
+[flag ateg_paid] "He's in the hills with my uncle's people. Alive." The old man has slept, finally; it shows. "That's all a father gets to want."
+[flag ateg_paid] -> END
+~ set ateg_paid; give gold_torque; silver 80; honor 5; xp 25
+Ategnatos takes the gold torc from his own neck and puts it in your hands. "My father's. Take it. Don't argue, you'll offend me." Then he puts a purse on top of it.
+
+"And something you can't buy. The Roman wine house, Vettius's people. Before the winter their agents were buying slaves from Arvernian nobles, quietly, and not only slaves. Children of the poorer clans. Hostages from the north, sold on." He closes your fingers over the torc. "If that's any use to you. You look like someone who's looking for something."
+[quest vettius none] ~ quest vettius rumor
+* "Thank you." -> END
+
+=== paid_spared
+[flag ateg_paid] "Front rank." He says it twice. "But alive. Alive is a beginning."
+[flag ateg_paid] -> END
+~ set ateg_paid; silver 120; honor 3; xp 25
+"Front rank, with the levy." He sits down heavily. "It's not the fire. It's better than I had any right to." He gives you a purse, heavy. "I would have given you the torc, if you'd brought him home. You understand."
+
+"One more thing, for nothing. The Roman wine house, Vettius's people. Their agents were buying slaves from Arvernian nobles before the winter, and not only slaves. Hostages from the north, sold on." He shrugs. "You look like someone who's looking for something."
+[quest vettius none] ~ quest vettius rumor
+* "Thank you." -> END
+
+=== paid_ears
+[flag ateg_paid] "He doesn't come out of his room." That's all he says.
+[flag ateg_paid] -> END
+~ set ateg_paid; silver 50; xp 10
+"He's alive." Ategnatos says it to the wall. "He'll wear his hair long for the rest of his life, and everyone will know why anyway. But he's alive." He gives you a purse without looking at it. "It's what I asked for. I should have asked better."
+* "I'm sorry." -> END
+
+=== too_late
+~ quest pit failed failed; set pit_closed
+Ategnatos is sitting where he always sits. He doesn't look at you.
+
+"The king marched yesterday. Before he went, he carried out his sentences." He picks at a thread in his cloak. "Go away."
+* "I'm sorry." -> END
+
+=== mourning
+"Go away," Ategnatos says, without looking up. "Please."
+* Leave him. -> END

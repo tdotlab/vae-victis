@@ -334,6 +334,13 @@ func attack(att: Actor, def: Actor, w: Dictionary, aim: String = "torso") -> voi
 	if crit:
 		line = "A critical hit! " + line
 	Game.say(line, "bad" if def.is_player else ("good" if att.is_player else "info"))
+	if def.sheet.hp <= 0 and DB.npc_template(def.template).get("essential", false):
+		# History needs some people alive. They go down hard and stay down.
+		def.sheet.hp = 1
+		def.unconscious = true
+		def.set_meta("wake_round", round_no + 1000)
+		Game.say("%s goes down and doesn't get up." % whom)
+		return
 	if def.sheet.hp <= 0:
 		_kill(def, att)
 		return

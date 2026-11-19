@@ -1,0 +1,123 @@
+// Theron of Massilia, Greek trader in the lower town of Gergovia. Trades; reads
+// Latin and Greek; hides Paconius; joins the player on the right terms.
+=== start
+[companion theron] -> comp
+[flag clerk_betrayed] -> cold
+[flag theron_met] -> again
+~ set theron_met
+[quest vettius none] ~ quest vettius rumor
+The Greek's stall is the only one in the lower town with a roof that doesn't leak. Amphorae in straw, salt in bags, a scale with its own little bronze weights. He looks up from a wax tablet and smiles at you with every tooth he has.
+
+"Theron, of Massilia. Wine, salt, bandages, small necessities." He lowers his voice, though nobody is listening. "You're not Arvernian. Good. The Arverni have started hunting Romans, and they're not careful about who they decide is one. I'd keep a Greek accent quiet this month, if I had one to keep quiet."
+-> hub
+
+=== again
+"Back again. Good." He means it, or he's very good. "What do you need?"
+-> hub
+
+=== cold
+He looks at you the way a man looks at a dog that has bitten someone. "I have nothing you want. Buy something or go."
+* "Let's trade." -> trade
+* "Goodbye." -> END
+
+=== hub
+* "Let's trade." -> trade
+* [quest vettius=rumor] "They say a Roman is hiding in the lower town." -> roman
+* [quest vettius active, !flag clerk_unmasked, !flag theron_confessed] "Your bookkeeper. Where's he from?" -> clerk
+* [quest theron none] "You look like a man who'd rather be somewhere else." -> want_out
+* [quest theron active] "About getting you out of Gergovia." -> deal
+* [item vettius_tablets, !flag tablets_read] "Can you read these?" -> tablets
+* [item hostage_tally, !flag tally_read] "Can you read this Roman mark?" -> tally
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Prices are high. There's a war. Everyone says so, so it must be true."
+* "Thanks." -> hub
+
+=== roman
+"Are they." He weighs a bag of salt that doesn't need weighing. "There were a dozen Romans in Gergovia before the winter. Wine men, mostly, and a couple of moneylenders. When the news came from Cenabum, some ran and some didn't run fast enough. Vercingetorix's men are still looking for the last of them." He looks up. "I'd stay out of it. People who help with that kind of hunt end up being asked to help with the next one."
+-> hub
+
+=== clerk
+"Paconius? Greek." It comes out a little too fast. "From Neapolis. Well, near Neapolis. He keeps my accounts. He doesn't talk much."
+* [speech 40] "Theron. I'm not with the king's men, and I can count. A Greek bookkeeper with a Roman name." -> confess
+* [PER 6] "He has ink on his fingers and a Roman haircut growing out. And you're sweating." -> confess
+* "My mistake." -> hub
+
+=== confess
+~ set theron_confessed; xp 25
+Theron puts the salt down. For a moment he looks old.
+
+"He was a slave in the house of Vettius, the wine people, and then a freedman, and then their clerk here. When Cenabum went up, his master's agents left him behind to pack the books, and the books were the last thing anyone came for." He spreads his hands. "I've known him six years. He owes me money. I don't let my debtors get burned. It's bad for business."
+
+"He has his master's tablets in a satchel he sleeps on. That's all I know about them, and all I want to know."
+[quest vettius=rumor] ~ quest vettius found
+-> hub
+
+=== want_out
+~ quest theron start
+"Is it that obvious?" He laughs, not much. "Gergovia has been good to me for eight years. But every week there are more men with spears and fewer men with silver, and every day somebody looks at me a little longer than he used to. A Greek isn't a Roman. The men doing the looking aren't always good at the difference."
+
+"I'd go north, or south, anywhere with a road and a market. With someone who can use a spear. I'd make it worth their while."
+-> hub
+
+=== deal
+[flag clerk_saved] "You got Paconius out. I heard." He clasps your arm. "That's two of us you'd be carrying, near enough. All right. When do we leave?"
+[!flag clerk_saved] "Well?"
+* [flag clerk_saved] "Now. Pack what you can carry." -> join ~ silver 50
+* [!flag clerk_saved, speech 50] "You'll pay me in Latin and in prices, and I'll keep the spears off you. Fair?" -> join
+* [!flag clerk_saved, blades 45] "I've killed men for less money than you have in that strongbox. Come on." -> join
+* [!flag clerk_saved] "You said you'd make it worth my while. Twenty-five silver and you can come." -> join ~ silver 25
+* "Not yet." -> hub
+
+=== join
+~ set theron_joined; quest theron done done
+[!flag clerk_saved] "Done." He's already rolling up the scale. "I can read anything, haggle with anyone, and I run very fast. Those are three of the four useful things a man can do in a war."
+[flag clerk_saved] He's already rolling up the scale. "And whatever he's told you, the bookkeeping was mine. He just held the stylus."
+* "Let's go." -> END ~ join
+
+=== tablets
+[companion theron] -> tablets_read
+He takes them, opens them, reads three lines, and closes them again very quickly. "Where did you get these? No. Don't tell me." He holds them out. "Twenty silver, and I read them to you somewhere with a door."
+* [silver 20] Pay him. -> tablets_read ~ silver -20
+* [speech 45] "You've already read them. You can read them out loud for free." -> tablets_read
+* "Never mind." -> hub
+
+=== tablets_read
+~ set tablets_read; quest vettius read done; known noviodunum
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+He reads slowly, translating as he goes, and his voice gets flatter the further he goes.
+
+"Day book of the house of Aulus Vettius Calvus, at Gergovia and Cabillonum. Wine received, wine sold, the usual. Then this." He taps the wax. "Bought forward, from the quartermaster at Noviodunum: three persons, Cadurci, hostages of the hill fort called Brigodunon, to be delivered when the season's fighting ends. On account of Dannotalos, Aeduan. Price agreed, half paid."
+
+"And here, a line for Avaricum. No number yet. Just Avaricum, and a space." He closes the tablets. "Nobody has besieged Avaricum. These people buy the harvest before it's planted."
+-> hub
+
+=== tally
+[companion theron] -> tally_read
+"A soldier's tally. Ten silver and I'll tell you what it says."
+* [silver 10] Pay him. -> tally_read ~ silver -10
+* "Never mind." -> hub
+
+=== tally_read
+~ set tally_read; known noviodunum; xp 50
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+"DEP NOVIOD. The depot at Noviodunum, on the Liger. Caesar keeps his baggage there." He hands it back. "Hostages, mostly. Horses. Money. The things he can't afford to lose."
+-> hub
+
+=== comp
+"I'm still here," Theron says. "Mostly from cowardice. What is it?"
+* [item vettius_tablets, !flag tablets_read] "Read me these tablets." -> tablets_read
+* [item hostage_tally, !flag tally_read] "Read me this tally." -> tally_read
+* "Let's trade." -> trade
+* "How are you holding up?" -> holding
+* "Nothing." -> END
+
+=== holding
+[day < 30] "My feet hurt. In Massilia we have carts for this." He looks at the hills. "It's very beautiful. I'd like it better from a window."
+[day >= 30] "I'm alive and so is my purse. In this country that's a good year."
+-> comp

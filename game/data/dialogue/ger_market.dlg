@@ -1,0 +1,16 @@
+// Nammia, food seller in the lower town.
+=== start
+"Bread, mead, salt when I can get it. Herbs for the cough." Nammia looks you up and down. "And for you, the price for strangers. Everyone's a stranger this month."
+* "Let's trade." -> trade
+* "What's the gossip?" -> gossip
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Prices go up every time a rider comes in from the north."
+* "Thanks." -> start
+
+=== gossip
+[flag verc_north] "The king's gone north. Bread's gone down a little. It'll go up again when the army comes back hungry."
+[!flag verc_north] "The Greek's bookkeeper buys bread for two and eats like one. The potter's dog barks at him. And a boy of the old families is in the pit on the plateau, and they say he'll burn when the king marches."
+* "Goodbye." -> END

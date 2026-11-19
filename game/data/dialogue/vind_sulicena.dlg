@@ -9,6 +9,7 @@ The headwoman of Vindomagos is counting sacks in her own storeroom, and makes yo
 -> hub
 
 === again
+[flag levy_vindomagos, !flag sul_levy] -> levy_angry
 "Back again." She doesn't stop counting. "Go on."
 -> hub
 
@@ -98,3 +99,10 @@ She looks at you a little differently, as if she's revised a price. Then she fet
 ~ rest
 "There's straw in the loft. Guests eat what we eat and leave before it gets awkward."
 * "Thank you." -> END
+
+=== levy_angry
+~ set sul_levy; standing vindomagos -10
+Sulicena isn't counting anything today. She's sitting with her hands flat on the table, and she doesn't get up.
+
+"Riders came from Gergovia. Arverni. They wanted two of our children and ten spears, for the king." She looks at you. "They knew our name. They knew about the salt. Somebody told them Vindomagos was rich and close to the road. I wonder who." She lets that sit. "We gave them the spears. We gave them Banna's youngest and the miller's girl. Go on, then. What do you want?"
+-> hub

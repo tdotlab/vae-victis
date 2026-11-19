@@ -1,0 +1,15 @@
+// People of the lower town.
+=== start
+[flag verc_north] -> after
+"Mind the mud." They step round you, then stop. "You've come to see the king? Everyone comes to see the king. The prices have tripled."
+[quest vettius none] ~ quest vettius rumor
+* "What's the news?" -> news
+* "Goodbye." -> END
+
+=== news
+"The king's men are pulling Romans out of the lower town. There were wine men here, and moneylenders. They got the most of them in the winter. They say there's still one somewhere." They lower their voice. "And they burn men on the plateau, men of the old families. Not Romans. Ours."
+* "Goodbye." -> END
+
+=== after
+"The king's gone north. Half the army with him, and all the noise." They sound relieved and ashamed of it. "There are stakes on the plateau, black ones. Don't look at them."
+* "Goodbye." -> END

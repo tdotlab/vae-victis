@@ -1,0 +1,14 @@
+// Guards at the gate in the Gergovia wall and on the road in.
+=== start
+[flag verc_north] -> after
+"Business?" He looks at your weapons, your clothes, your face. "Cadurci. Lucterius's people. Go on up, if you like. The king's on the plateau, and the king sees everyone once." He leans on the spear. "Once."
+* "What's that wall made of?" -> wall
+* "Goodbye." -> END
+
+=== wall
+"Timber and stone and earth. Beams laid crossways in the stone, pinned with iron, so a ram can't knock it down and fire can't burn it." He pats it like a horse. "Let the Romans try."
+* "Goodbye." -> END
+
+=== after
+"The king's gone north. We hold the gate for him." He looks past you at the road. "Go on up."
+* "Goodbye." -> END

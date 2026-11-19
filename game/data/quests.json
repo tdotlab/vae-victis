@@ -52,6 +52,55 @@
       "stages": {
         "get_spear": "Get Old Cottos's grandson's spear back from the bandits by the river."
       }
+    },
+    {
+      "id": "vettius",
+      "name": "A Roman in Gergovia",
+      "main": true,
+      "xp": 200,
+      "stages": {
+        "rumor": "Vercingetorix's men are hunting a Roman who kept accounts for a trading house in Gergovia and didn't get out when the news came from Cenabum. Somebody in the lower town is hiding him.",
+        "found": "The Roman is Paconius, a freedman clerk, passing as Theron's Greek bookkeeper in the lower town. He has his master's tablets and won't let them out of his sight.",
+        "tablets": "I have the clerk's tablets: Roman accounts, written small and close in Latin. I need someone who can read them, or enough Latin of my own.",
+        "read": "The tablets are the accounts of the house of Aulus Vettius Calvus, who trades in wine and in people. Brigodunon's three hostages are entered as sold forward: bought from the depot at Noviodunum, to be handed over when the fighting season ends, on account of an Aeduan noble called Dannotalos. Avaricum is in there too, as a line with no number in it yet. Nobody has besieged Avaricum."
+      }
+    },
+    {
+      "id": "levy",
+      "name": "The King's Levy",
+      "xp": 150,
+      "stages": {
+        "start": "Ollognatos, the king's hostage-master, wants Brigodunon to send two children of its leading families to Gergovia as hostages, and ten spearmen with them. Rome already has three of ours.",
+        "done_pledged": "I promised Ollognatos that Brigodunon would send two children and ten spears. Vellaunos doesn't know yet.",
+        "done_self": "I gave Ollognatos myself as Brigodunon's pledge: my oath to the king in place of two children. If Brigodunon goes back on the revolt, I'm the one who pays.",
+        "done_lucterius": "I convinced Ollognatos that the Cadurci give hostages as a people, through Lucterius, not hill fort by hill fort. The demand goes to Lucterius. It will come back, but not this month.",
+        "done_iron": "I paid Brigodunon's levy in silver for iron, and Ollognatos wrote it down as spears. No children this time.",
+        "done_vindomagos": "I told Ollognatos that Vindomagos is richer than Brigodunon and closer to the road. He sent riders there instead.",
+        "done_refused": "I told Ollognatos that Brigodunon would give nothing. He cut a notch in a stick and put it behind his ear."
+      }
+    },
+    {
+      "id": "pit",
+      "name": "The Uncle's Man",
+      "xp": 150,
+      "stages": {
+        "start": "Ategnatos, an old noble of the uncle's party, says his son Eppillos is in the pit on the plateau, condemned to burn for sending word to Gobannitio. The king carries out his sentences before he marches. Ategnatos wants his son alive, whatever it costs.",
+        "guard_paid": "The pit guard will look the other way tonight. I need to be at the pit after dark.",
+        "done_spared": "The king spared Eppillos the fire. He serves in the front rank now, which may come to the same thing, slower.",
+        "done_ears": "Eppillos won't burn. He loses his ears instead, and lives, and everyone who sees him will know why.",
+        "done_freed": "I got Eppillos out of the pit at night. He ran for the hills and his great-uncle. Ategnatos owes me for the rest of his life, if the king doesn't find out how short that is.",
+        "done_betrayed": "I told Ollognatos that Ategnatos meant to get his son out of the pit. Now there are two of them in it.",
+        "failed": "The king marched north, and before he went he carried out his sentences. Eppillos burned."
+      }
+    },
+    {
+      "id": "theron",
+      "name": "The Greek",
+      "xp": 75,
+      "stages": {
+        "start": "Theron of Massilia wants out of Gergovia. A Greek isn't a Roman, but the men hunting Romans aren't good at telling the difference, and he has started to notice them looking. He would travel with someone who can use a spear, if the price were right.",
+        "done": "Theron travels with me. He reads Latin and Greek, keeps accounts, haggles like a man possessed, and will run at the first sign of a fight. He says this is a sign of intelligence."
+      }
     }
   ]
 }

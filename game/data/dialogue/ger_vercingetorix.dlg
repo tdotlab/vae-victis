@@ -1,0 +1,67 @@
+// Vercingetorix, in his hall on the plateau, until he marches north (day 24).
+// Pleas for Eppillos; what he makes of the Vettius tablets.
+=== start
+[flag verc_met] -> again
+~ set verc_met
+The hall is full of men talking, and then it isn't. They step aside without being told. At the far end, by the fire, a man not much older than you is reading a tally stick with his thumb, the way a blind man reads a face.
+
+"A Cadurcan." Vercingetorix looks up. His voice is quiet; the room is quieter. "Lucterius said there'd be more of you. He didn't say you'd come one at a time." Something close to a smile. "Speak. I listen to everyone once."
+-> hub
+
+=== again
+The king glances up from whatever he's doing. "The Cadurcan. Again."
+-> hub
+
+=== hub
+* "What does the king want from the Cadurci?" -> want
+* "Why burn men who only said wait?" -> stakes
+* [quest pit active, !flag pit_closed, !flag verc_pleaded] "Ategnatos's son is in your pit. I'm asking you to spare him." -> plea
+* [flag tablets_read, !flag verc_tablets] "Rome is selling Gallic hostages out of its own depot. I have the accounts." -> tablets
+* "I'll go." -> END
+
+=== want
+"Everything. Spears. Horses. Grain, and when the time comes, no grain at all." He doesn't explain that. "Hostages, so I know where everyone stands. And the Cadurci on my southern flank, holding the Province's attention while I deal with Caesar."
+
+"Caesar is a man with ten legions and no cavalry he can trust. I don't need to beat him in a field. I need him hungry." He goes back to the tally stick. "Tell that to your people. Nobody else will tell them the truth."
+-> hub
+
+=== stakes
+"Because 'wait' is what my uncle said, and the elders with him, when every year Rome took a little more. Wait was the policy of the Arverni for a generation. It's how we got here." His voice doesn't rise. "Lesser faults, I take an ear. An eye. And send them home, so everyone who sees them understands. Greater faults, the fire. I don't enjoy it. I don't have to."
+-> hub
+
+=== plea
+~ set verc_pleaded
+"Eppillos." He knows the name at once. "Who carried word to my uncle's people while my uncle's people were still deciding whether to kill me. Why should I spare him?"
+* [speech 55] "A dead boy teaches the old families to fear you. A living one in your front rank teaches them you're right. You need them more than you need the smoke." -> spared
+* [honor >= 15] "I'll stand surety for him. If he betrays you again, I answer for it." -> surety
+* "He's young. Show mercy." -> ears
+
+=== spared
+~ set pit_closed; quest pit done_spared done; standing arverni 5; renown 2; xp 50
+The king is quiet so long that the men by the door shift their feet.
+
+"Front rank," he says at last. "With the levy, not the horse. If he lives through the summer, his father can have him back." He turns to the man at his shoulder. "Get him out. Feed him first." To you: "That was well argued. Don't do it again."
+-> hub
+
+=== surety
+~ set pit_closed; set verc_surety; quest pit done_spared done; standing arverni 10; honor 5; renown 3; xp 50
+He looks at you differently. "You'd put your own name on another man's treachery. For nothing?" He nods, slowly. "Then it's done. Eppillos goes to the front rank, and you answer for him. I'll remember you."
+
+Everyone in the hall heard that. By tonight everyone in Gergovia will have heard it.
+-> hub
+
+=== ears
+~ set pit_closed; quest pit done_ears done; xp 25
+"Mercy." He turns the word over. "Very well. Not the fire." He makes a small gesture with two fingers, at the sides of his own head, and the man at his shoulder goes out.
+
+You don't stay to watch. You hear it from the yard.
+-> hub
+
+=== tablets
+~ set verc_tablets; standing arverni 10; renown 3; xp 75
+He holds out his hand for them, and listens while you tell him what they say, and doesn't touch them. Nobody in this hall reads Latin; nobody needs to.
+
+"Of course they do." He sounds almost pleased, the way a man is pleased to be proved right about a bad dog. "They take our children as a guarantee, and sell the guarantee. And the Aedui buy it, because the Aedui are Rome's brothers and it's cheaper than war." He gives the tablets back. "Noviodunum. Keep those. When the time comes, I may want to read them aloud to an assembly."
+
+"Go north, Cadurcan. You'll get there before me."
+-> hub

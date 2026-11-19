@@ -235,6 +235,15 @@ A band of Germanic horsemen, deserters from Caesar's cavalry, holds the ford bel
 - **Barter:** Pay their toll for Brigodunon's grain for the season. Cheap now; they're richer and stronger later.
 - **Recruit:** With high renown or Presence, hire them. They show up in Act III, for better or worse.
 
+### Gergovia (built)
+
+Gergovia is the Hub: the first big place, and the first time the player sees the revolt from inside. Two maps: the lower town below the wall (Theron's stall, the market, the smith, the levy camp) and the plateau (the king's hall, the hostage-master, the hostage yard, the pit, the granaries). It is shut until day 7, when Vercingetorix has taken it from his uncle; he is there until day 24, when he marches north into the Bituriges and carries out his sentences first (Caesar BG VII.4: fire for great faults, ears or an eye for lesser ones).
+
+- **A Roman in Gergovia** (main line). The clerk of the house of Vettius hides as Theron's bookkeeper with his master's tablets. They show Brigodunon's hostages sold forward from Noviodunum to Dannotalos, and a blank line for Avaricum: the Act I reveal, early and on paper. Routes: unmask him (Latin, Perception, the potter, Theron), then smuggle him out, buy, threaten, betray to the king's men, steal, or kill. Reading needs Latin or a reader, each with a price.
+- **The King's Levy.** The king wants two children and ten spears from Brigodunon. Routes: pledge, give yourself, Lore (Lucterius gives for the Cadurci), pay, sell out Vindomagos, refuse. Home remembers.
+- **The Uncle's Man.** An old noble's son is condemned to burn. Routes: argue (Speech), stand surety (Honor), beg (and he loses his ears), bribe, sneak, betray. The clock is the king's march.
+- **The Greek.** Theron joins on terms; never if the clerk was betrayed.
+
 ## Items and economy
 
 - **Weapons:** daggers, swords (Gallic long swords and Roman short swords), axes, spears, javelins and pila, slings, bows, clubs. Quality tiers: crude, common, fine, masterwork.
@@ -284,9 +293,11 @@ The architecture will get its own document when the code exists. The commitments
 
 Roughly Fallout 1's size: about a dozen locations, 60 or more named characters with real dialogue, 60 to 80 quests, a hundred-odd items, five companions, and complete ending slides. Built in milestones, each one playable.
 
+Length, by Fallout 1's HowLongToBeat figures (T's reference): about 16 hours for the main line, 23 with side quests, 32 for everything.
+
 ## Open questions for T
 
-- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina.
+- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina. Gergovia adds: Theron (the Greek), Paconius (the Vettius clerk), Ollognatos (hostage-master), Ategnatos and his son Eppillos, Senognatos (levy captain), Excingos (smith), Nammia (food seller) and Uxellos (potter).
 - The secret ahistorical path: yes or no. Default no.
 - Is the player character fixed (a named person) or player-made? Default: player-made name and sex, fixed origin in Brigodunon, like Fallout.
 - How dark the Avaricum and Alesia sequences may get. Default: shown plainly, never lingered on.

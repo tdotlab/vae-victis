@@ -1,0 +1,14 @@
+// The king's guard on the plateau.
+=== start
+[flag verc_north] -> gone
+"The king sees whoever he wants to see." He looks you up and down. "You're armed. Keep it that way, and keep it in its sheath, and we'll be friends."
+* "Who are you?" -> who
+* "Goodbye." -> END
+
+=== who
+"I rode with him when he had twelve men and his uncle's dogs after him." He says it without boasting; it's a fact, like the weather. "Now he has the whole of Gaul. Most of it. He'll have the rest."
+* "Goodbye." -> END
+
+=== gone
+"The king's gone north, into the Bituriges." He doesn't sound happy to be left behind. "Somebody has to hold the plateau. They say it's an honor."
+* "Goodbye." -> END

@@ -1,0 +1,15 @@
+// Excingos the smith. Sells arms.
+=== start
+He doesn't stop hammering. "Spears, the king's. Swords, the nobles'. Anything left over is for sale." The hammer comes down. "Not much left over."
+* "Let's trade." -> trade
+* "Busy?" -> busy
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Pay in silver. I've been paid in promises all winter."
+* "Thanks." -> start
+
+=== busy
+"Six hundred spearheads by the new moon." He wipes his face and leaves a black stripe. "My apprentice went for a soldier. My wife does the bellows. The king's man comes every evening to count." He laughs. "I've never been so rich or so tired."
+* "Goodbye." -> END

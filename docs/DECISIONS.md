@@ -2,6 +2,16 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-18 (Gergovia)
+
+- **Gergovia is two maps, the lower town and the plateau,** joined by the gate in the wall. The real oppidum is a plateau with settlement below it; one map that size would be mostly empty walking.
+- **A world location can be shut until a flag is set (`open_flag`, `shut_text`).** Gergovia opens on day 7, when Vercingetorix holds it. Before that the uncle's party has the gates shut, which is history, and it keeps the first week at home.
+- **The king marches north on day 24 (`verc_north`),** inside the research's window for his move into the Bituriges, and the pit sentence is carried out as he goes. A quest with a clock tied to the calendar, like Avaricum will be.
+- **NPCs can be `essential`: at zero health they go down unconscious instead of dying.** Vercingetorix and Ollognatos have to survive the player, because history and the quest web need them. Everyone else can die.
+- **An item can be read (`read` names a dialogue).** The Vettius tablets open their own talk from the inventory, so reading them with your own Latin needs no NPC.
+- **The tablets bring part of the Act I reveal forward,** from Noviodunum to Gergovia: the hostages are already sold, on paper, to Dannotalos. The player gets the stakes of Act II as a document at the Hub, while there is still most of the game to act on it. They also reveal Noviodunum, so a player who skipped the tally isn't stuck.
+- **A map actor who travels with the player isn't spawned twice.** Companions now arrive on maps that also list them.
+
 ## 2026-11-18 (figure rework and grit pass)
 
 - **Bodies, heads and ornaments are layers too.** Three bodies (man in trousers, woman in an ankle-length dress, bare-legged Roman), seven hairstyles, moustache or beard, gold or bronze torc, each its own render; the game builds the stack from the NPC's `look` (`body`, `hair_style`, `face`, `torc`, `hide`, `cloak2`) in `Art.figure_layers`. Torcs and moustaches were baked into every figure; the research says they belong to nobles. Hair does more for telling people apart than gear does.

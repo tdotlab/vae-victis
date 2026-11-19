@@ -1,0 +1,261 @@
+{
+ "id": "gergovia_plateau",
+ "name": "Gergovia, the plateau",
+ "default": "grass",
+ "legend": {
+  ".": "grass",
+  ",": "field",
+  ";": "meadow",
+  "_": "road",
+  "m": "mud",
+  "T": "tree",
+  "P": "pine",
+  "b": "bush",
+  "r": "rock",
+  "C": "cliff",
+  "R": "rampart",
+  "p": "palisade",
+  "n": "fence",
+  "w": "wall_wood",
+  "s": "wall_stone",
+  "f": "floor_earth",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "d": "door",
+  "A": "altar",
+  "z": "bones",
+  "F": {
+   "terrain": "road",
+   "mark": "down"
+  },
+  "Y": {
+   "terrain": "road",
+   "mark": "gate"
+  },
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "V": {
+   "terrain": "floor_earth",
+   "mark": "king"
+  },
+  "8": {
+   "terrain": "floor_earth",
+   "mark": "guard1"
+  },
+  "9": {
+   "terrain": "floor_earth",
+   "mark": "guard2"
+  },
+  "Z": {
+   "terrain": "floor_earth",
+   "mark": "ategnatos"
+  },
+  "O": {
+   "terrain": "floor_earth",
+   "mark": "ollognatos"
+  },
+  "k": {
+   "terrain": "crate",
+   "mark": "ollognatos_chest"
+  },
+  "J": {
+   "terrain": "cave",
+   "mark": "pit"
+  },
+  "q": {
+   "terrain": "grass",
+   "mark": "pit_guard"
+  },
+  "5": {
+   "terrain": "grass",
+   "mark": "h1"
+  },
+  "6": {
+   "terrain": "grass",
+   "mark": "h2"
+  },
+  "7": {
+   "terrain": "grass",
+   "mark": "h3"
+  },
+  "?": {
+   "terrain": "grass",
+   "mark": "shrine"
+  },
+  "!": {
+   "terrain": "grass",
+   "mark": "stakes"
+  },
+  "g": {
+   "terrain": "grass",
+   "mark": "gate_guard"
+  },
+  "1": {
+   "terrain": "road",
+   "mark": "p1"
+  },
+  "2": {
+   "terrain": "grass",
+   "mark": "p2"
+  },
+  "3": {
+   "terrain": "grass",
+   "mark": "p3"
+  }
+ },
+ "rows": [
+  "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+  "CCC.............................................CCCC",
+  "C...TT...........wwwwwwwwwwwwwwwwww.r..........T...C",
+  "C................wfffffffffffffffBw...........T....C",
+  "C..wwwwwww.......wffhfffffffffhfffw.....wwwwwwww...C",
+  "C..wfBfffw.......wffffffttttffffffw.....wfffBffw...C",
+  "C..wfhfZfw.......wf8fffffVffffff9fw.....wfhfOftw...C",
+  "C..wfffffw.......wffffffttttffffffw.....wffffkfw...C",
+  "C..wwwdwww.......wffhfffffffffhfffw.....wwwdwwww...C",
+  "C...........3....wfffffffffffffffBw................C",
+  "C................wwwwwwwwdwwwwwwwww..............T.C",
+  "C....._______________________________________......C",
+  "C..b..................1..__........................C",
+  "C........................__..........nnnnnnnnnnnnn.C",
+  "C...nnnnn....wwww.wwww...__..nnnnnnn.n...........n.C",
+  "C...nnJnn....wffw.wffw...__..n.....n.n..wwwww....n.C",
+  "C....mmm.....wwww.wwww...__..n..A..n.n..wfBfw.5..n.C",
+  "C......q.................__..n.?...n.n..wfhfd...rn.C",
+  "C............wwww.wwww...__..nnn.nnn.n..wwwww.6..n.C",
+  "C........b...wffw.wffw...__..........n.....7.....n.C",
+  "C.T..........wwww.wwww...__......2...nnnnn...nnnnn.C",
+  "C.T...n.n.n.n.n..........__........................C",
+  "C.....!!!!!!!!!..........@_........................C",
+  "C..T...................RR__RR......................C",
+  "C......................RR__RR.g.........b......TT..C",
+  "C.....r.......r........RRYYRR......................C",
+  "RRRRRRRRRRRRRRRRRRRRRRRRR__RRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRFFRRRRRRRRRRRRRRRRRRRRRRRRR"
+ ],
+ "arrive_text": "Inside the wall the plateau is wide and nearly flat, and the wind comes across it from the mountains with nothing to stop it. Houses stand in their fenced plots along graveled lanes, with granaries up on posts beside them. In the middle, bigger than any other building, is the hall where the elders sat until a few days ago. They don't sit there now.",
+ "actors": [
+  {
+   "uid": "vercingetorix",
+   "template": "vercingetorix",
+   "mark": "king",
+   "unless_flag": "verc_north"
+  },
+  {
+   "uid": "kg1",
+   "template": "kings_guard",
+   "mark": "guard1"
+  },
+  {
+   "uid": "kg2",
+   "template": "kings_guard",
+   "mark": "guard2"
+  },
+  {
+   "uid": "ollognatos",
+   "template": "ollognatos",
+   "mark": "ollognatos"
+  },
+  {
+   "uid": "ategnatos",
+   "template": "ategnatos",
+   "mark": "ategnatos",
+   "unless_flag": "ategnatos_taken"
+  },
+  {
+   "uid": "eppillos",
+   "template": "eppillos",
+   "mark": "pit",
+   "unless_flag": "pit_closed"
+  },
+  {
+   "uid": "pit_guard",
+   "template": "pit_guard",
+   "mark": "pit_guard"
+  },
+  {
+   "uid": "ger_h1",
+   "template": "ger_hostage",
+   "mark": "h1"
+  },
+  {
+   "uid": "ger_h2",
+   "template": "ger_hostage_f",
+   "mark": "h2"
+  },
+  {
+   "uid": "ger_h3",
+   "template": "ger_hostage",
+   "mark": "h3"
+  },
+  {
+   "uid": "ger_pg",
+   "template": "ger_gate_guard",
+   "mark": "gate_guard"
+  },
+  {
+   "uid": "ger_p1",
+   "template": "ger_levy",
+   "mark": "p1"
+  },
+  {
+   "uid": "ger_p2",
+   "template": "ger_townswoman",
+   "mark": "p2"
+  },
+  {
+   "uid": "ger_p3",
+   "template": "ger_townsman",
+   "mark": "p3"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "ollognatos_chest",
+   "name": "Ollognatos's chest",
+   "items": [
+    [
+     "gold_torque",
+     1
+    ],
+    [
+     "mead",
+     2
+    ]
+   ],
+   "silver": 70,
+   "lock": 55,
+   "owner": "ollognatos"
+  }
+ ],
+ "exits": [
+  {
+   "mark": "down",
+   "to": "map:gergovia_lower",
+   "entry": "from_plateau",
+   "label": "Down to the lower town"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "stakes",
+   "id": "stakes_ready",
+   "unless_flag": "verc_north",
+   "say": "A row of stakes stands in the open ground near the wall, new wood, each with a heap of faggots stacked at its foot. Nobody walks between them. Children are kept away from them, and so, you notice, are dogs."
+  },
+  {
+   "mark": "stakes",
+   "id": "stakes_burned",
+   "if_flag": "verc_north",
+   "dialogue": "ger_stakes"
+  },
+  {
+   "mark": "shrine",
+   "id": "shrine_view",
+   "say": "The sanctuary is a fenced square of beaten earth around an old stone. The ground at its edge is full of pits, some filled, some fresh: offerings, broken weapons, the bones of animals. Someone has left a little Roman bronze lamp on the stone, upside down."
+  }
+ ]
+}

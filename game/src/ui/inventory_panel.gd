@@ -92,6 +92,8 @@ func _select(id: String) -> void:
 		var b := UITheme.button("Equip", func(): _do(func(): p.equip(id)), 110)
 		b.disabled = not p.can_equip(id)
 		_actions.add_child(b)
+	if d.has("read") and hud.map != null:
+		_actions.add_child(UITheme.button("Read", func(): _read(d["read"]), 110))
 	if d.get("type", "") == "consumable":
 		_actions.add_child(UITheme.button("Use", func(): _do(func(): use_item(id)), 110))
 	if d.get("type", "") != "quest":
@@ -122,6 +124,15 @@ func _do(action: Callable) -> void:
 	hud.refresh()
 	if _selected != "" and _sheet().inventory.count(_selected) > 0:
 		_select(_selected)
+
+
+## Closes the inventory and opens the item's own talk (a letter, a tablet).
+func _read(dlg_id: String) -> void:
+	if hud.map.combat.active:
+		Game.say("Not in the middle of a fight.")
+		return
+	hud.close_modal(self)
+	hud.open_dialogue(dlg_id, null)
 
 
 func _drop(id: String) -> void:

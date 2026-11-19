@@ -1023,6 +1023,633 @@
     "tunic": "#7a6a4a",
     "face": "beard"
    }
+  },
+  {
+   "id": "theron",
+   "name": "Theron",
+   "faction": "greeks",
+   "ai": "idle",
+   "dialogue": "ger_theron",
+   "attrs": {
+    "STR": 4,
+    "AGI": 6,
+    "PER": 7,
+    "WIT": 9,
+    "PRE": 7
+   },
+   "skills": {
+    "barter": 55,
+    "latin": 60,
+    "lore": 40,
+    "speech": 45
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "dagger"
+   ],
+   "items": [
+    [
+     "roman_wine",
+     3
+    ],
+    [
+     "amphora_wine",
+     1
+    ],
+    [
+     "salt",
+     4
+    ],
+    [
+     "bread",
+     6
+    ],
+    [
+     "mead",
+     4
+    ],
+    [
+     "bandage",
+     5
+    ],
+    [
+     "poultice",
+     2
+    ],
+    [
+     "herbs",
+     4
+    ],
+    [
+     "lockpicks",
+     1
+    ],
+    [
+     "padded_linen",
+     1
+    ],
+    [
+     "leather_cap",
+     1
+    ],
+    [
+     "hunting_bow",
+     1
+    ],
+    [
+     "arrow",
+     40
+    ],
+    [
+     "sling",
+     1
+    ],
+    [
+     "sling_stone",
+     30
+    ],
+    [
+     "bronze_torque",
+     2
+    ]
+   ],
+   "silver": 320,
+   "xp": 40,
+   "desc": "A Greek from Massilia: soft hands, quick eyes, a good cloak kept carefully shabby. Speaks Gallic better than most Gauls and Latin better than most Romans, and says so.",
+   "look": {
+    "body": "roman",
+    "tunic": "#c8bfa8",
+    "cloak": "#4a6a7a",
+    "cloak2": "#b8a060",
+    "hair": "#2a2018",
+    "hair_style": "short",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "paconius",
+   "name": "Paconius",
+   "faction": "greeks",
+   "ai": "idle",
+   "dialogue": "ger_paconius",
+   "attrs": {
+    "STR": 4,
+    "END": 4,
+    "WIT": 8
+   },
+   "skills": {
+    "latin": 80,
+    "barter": 40
+   },
+   "silver": 35,
+   "xp": 20,
+   "desc": "A thin man in a Gallic cloak and Gallic trousers, with a Roman haircut that is growing out as fast as it can. Ink in the creases of his fingers.",
+   "look": {
+    "tunic": "#8a8478",
+    "trousers": "#5a5248",
+    "cloak": "#6a6a5a",
+    "hair": "#3a2a1a",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "vercingetorix",
+   "name": "Vercingetorix",
+   "faction": "arverni",
+   "ai": "idle",
+   "essential": true,
+   "dialogue": "ger_vercingetorix",
+   "attrs": {
+    "STR": 8,
+    "END": 8,
+    "AGI": 7,
+    "PER": 7,
+    "WIT": 8,
+    "PRE": 10,
+    "FOR": 7
+   },
+   "level": 8,
+   "tags": [
+    "blades",
+    "shield",
+    "speech"
+   ],
+   "equip": [
+    "gallic_sword",
+    "gallic_shield",
+    "chief_mail"
+   ],
+   "silver": 0,
+   "xp": 0,
+   "desc": "Young for a king, and not tall, and it doesn't matter: the room arranges itself around him. A heavy gold torc, a plain mail shirt, and the stillness of a man who has already decided.",
+   "look": {
+    "tunic": "#7a2a2a",
+    "cloak": "#2a3a5a",
+    "cloak2": "#c8a040",
+    "shield": "#8a2a2a",
+    "hair": "#a87a40",
+    "hair_style": "swept",
+    "face": "moustache",
+    "torc": "gold"
+   }
+  },
+  {
+   "id": "kings_guard",
+   "name": "King's guard",
+   "faction": "arverni",
+   "ai": "guard",
+   "dialogue": "ger_guard",
+   "attrs": {
+    "STR": 7,
+    "END": 7,
+    "AGI": 6
+   },
+   "level": 4,
+   "tags": [
+    "blades",
+    "shield"
+   ],
+   "equip": [
+    "gallic_sword",
+    "gallic_shield",
+    "mail_shirt",
+    "iron_helmet"
+   ],
+   "silver": 10,
+   "desc": "One of the young nobles who rode with Vercingetorix when he had nothing. Mail, a long sword, and no sense of humor about the king.",
+   "look": {
+    "tunic": "#6a2a2a",
+    "shield": "#8a2a2a",
+    "hair": "#8a6a3a",
+    "hair_style": "long",
+    "face": "moustache",
+    "torc": "bronze"
+   }
+  },
+  {
+   "id": "ollognatos",
+   "name": "Ollognatos",
+   "faction": "arverni",
+   "ai": "idle",
+   "essential": true,
+   "dialogue": "ger_ollognatos",
+   "attrs": {
+    "STR": 6,
+    "END": 6,
+    "PER": 7,
+    "WIT": 8,
+    "PRE": 7
+   },
+   "level": 5,
+   "tags": [
+    "blades",
+    "speech"
+   ],
+   "equip": [
+    "gallic_sword",
+    "mail_shirt"
+   ],
+   "silver": 60,
+   "desc": "The king's hostage-master. He counts the children the peoples of Gaul send to Gergovia, and the spears. Grey at the temples, a tally stick behind each ear, and very tired.",
+   "look": {
+    "tunic": "#5a4a6a",
+    "cloak": "#3a3a3a",
+    "hair": "#7a7a70",
+    "hair_style": "long",
+    "face": "moustache",
+    "torc": "gold"
+   }
+  },
+  {
+   "id": "ategnatos",
+   "name": "Ategnatos",
+   "faction": "arverni_old",
+   "ai": "idle",
+   "dialogue": "ger_ategnatos",
+   "attrs": {
+    "STR": 5,
+    "WIT": 7,
+    "PRE": 7
+   },
+   "level": 3,
+   "equip": [
+    "dagger"
+   ],
+   "items": [
+    [
+     "gold_torque",
+     1
+    ]
+   ],
+   "silver": 90,
+   "desc": "An old Arvernian noble of the uncle's party, the ones who said wait. He wasn't thrown out with the others. He has been wondering why ever since.",
+   "look": {
+    "tunic": "#4a5a4a",
+    "cloak": "#6a5a3a",
+    "cloak2": "#8a7a4a",
+    "hair": "#c8c8c0",
+    "hair_style": "long",
+    "face": "beard",
+    "torc": "gold"
+   }
+  },
+  {
+   "id": "eppillos",
+   "name": "Eppillos",
+   "faction": "arverni_old",
+   "ai": "idle",
+   "dialogue": "ger_eppillos",
+   "attrs": {
+    "STR": 6,
+    "AGI": 6
+   },
+   "level": 2,
+   "desc": "Ategnatos's son, nineteen or twenty, at the bottom of a pit with his hands tied in front of him. He has stopped shouting.",
+   "look": {
+    "tunic": "#6a6a5a",
+    "hair": "#a07040",
+    "hair_style": "long"
+   }
+  },
+  {
+   "id": "pit_guard",
+   "name": "Pit guard",
+   "faction": "arverni",
+   "ai": "guard",
+   "dialogue": "ger_pit_guard",
+   "attrs": {
+    "STR": 6,
+    "END": 6,
+    "PER": 5
+   },
+   "level": 2,
+   "tags": [
+    "spears"
+   ],
+   "equip": [
+    "spear",
+    "small_shield",
+    "leather_jerkin"
+   ],
+   "silver": 8,
+   "desc": "A spearman with a cold, watching a hole in the ground for the king.",
+   "look": {
+    "tunic": "#6a5a3a",
+    "shield": "#5a4a3a",
+    "hair": "#5a3a1a",
+    "hair_style": "long",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "ger_hostage",
+   "name": "Hostage",
+   "faction": "hostages",
+   "ai": "wander",
+   "dialogue": "ger_hostage",
+   "attrs": {},
+   "desc": "Somebody's son, sent to Gergovia so that his people will keep their word. Well fed, well dressed, and not allowed past the fence.",
+   "look": {
+    "tunic": "#4a6a8a",
+    "cloak": "#7a5a3a",
+    "hair": "#a07040",
+    "hair_style": "long",
+    "torc": "bronze"
+   }
+  },
+  {
+   "id": "ger_hostage_f",
+   "name": "Hostage",
+   "sex": "f",
+   "faction": "hostages",
+   "ai": "wander",
+   "dialogue": "ger_hostage",
+   "attrs": {},
+   "desc": "Somebody's daughter, sent to Gergovia so that her people will keep their word. Well fed, well dressed, and not allowed past the fence.",
+   "look": {
+    "tunic": "#7a4a5a",
+    "cloak": "#4a5a6a",
+    "hair": "#6a4020",
+    "torc": "bronze"
+   }
+  },
+  {
+   "id": "ger_recruiter",
+   "name": "Senognatos",
+   "faction": "arverni",
+   "ai": "idle",
+   "dialogue": "ger_recruiter",
+   "attrs": {
+    "STR": 7,
+    "END": 7,
+    "PRE": 6
+   },
+   "level": 3,
+   "tags": [
+    "spears",
+    "shield"
+   ],
+   "equip": [
+    "war_spear",
+    "gallic_shield",
+    "leather_jerkin"
+   ],
+   "silver": 20,
+   "desc": "Captain of the levy camp below the wall. He shouts for a living, and has the voice to show for it.",
+   "look": {
+    "tunic": "#7a3a2a",
+    "shield": "#7a3a2a",
+    "hair": "#8a5a2a",
+    "hair_style": "knot",
+    "face": "moustache",
+    "torc": "bronze"
+   }
+  },
+  {
+   "id": "ger_levy",
+   "name": "Levy man",
+   "faction": "arverni",
+   "ai": "wander",
+   "dialogue": "ger_levy",
+   "attrs": {
+    "STR": 6
+   },
+   "tags": [
+    "spears"
+   ],
+   "equip": [
+    "spear"
+   ],
+   "desc": "One of the poor men Vercingetorix raised in the countryside: a herdsman or a debtor or a runaway, with a spear the king gave him and nothing else.",
+   "look": {
+    "tunic": "#6a5e4a",
+    "hair": "#5a3a1a",
+    "hair_style": "long"
+   }
+  },
+  {
+   "id": "ger_townsman",
+   "name": "Townsman",
+   "faction": "gergovia",
+   "ai": "wander",
+   "dialogue": "ger_townsfolk",
+   "attrs": {},
+   "desc": "An Arvernian of the lower town.",
+   "look": {
+    "tunic": "#5a6a7a",
+    "hair": "#6a4a2a",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "ger_townswoman",
+   "name": "Townswoman",
+   "sex": "f",
+   "faction": "gergovia",
+   "ai": "wander",
+   "dialogue": "ger_townsfolk",
+   "attrs": {},
+   "desc": "An Arvernian of the lower town.",
+   "look": {
+    "tunic": "#7a5a4a",
+    "hair": "#4a2a1a"
+   }
+  },
+  {
+   "id": "ger_smith",
+   "name": "Excingos the smith",
+   "faction": "gergovia",
+   "ai": "idle",
+   "dialogue": "ger_smith",
+   "attrs": {
+    "STR": 8,
+    "END": 7
+   },
+   "skills": {
+    "barter": 25
+   },
+   "items": [
+    [
+     "spear",
+     8
+    ],
+    [
+     "war_spear",
+     2
+    ],
+    [
+     "javelin",
+     10
+    ],
+    [
+     "gallic_sword",
+     1
+    ],
+    [
+     "axe",
+     2
+    ],
+    [
+     "dagger",
+     3
+    ],
+    [
+     "gallic_shield",
+     2
+    ],
+    [
+     "small_shield",
+     2
+    ],
+    [
+     "iron_helmet",
+     1
+    ],
+    [
+     "leather_cap",
+     2
+    ],
+    [
+     "leather_jerkin",
+     2
+    ],
+    [
+     "mail_shirt",
+     1
+    ]
+   ],
+   "silver": 150,
+   "desc": "Black to the shoulders, burnt in a dozen places, and working faster than anyone should have to. The king wants spearheads. The king always wants spearheads.",
+   "look": {
+    "tunic": "#4a4a44",
+    "hair": "#2a1a10",
+    "hair_style": "knot",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "ger_market",
+   "name": "Nammia",
+   "sex": "f",
+   "faction": "gergovia",
+   "ai": "idle",
+   "dialogue": "ger_market",
+   "attrs": {
+    "PRE": 6,
+    "WIT": 7
+   },
+   "skills": {
+    "barter": 35
+   },
+   "items": [
+    [
+     "bread",
+     12
+    ],
+    [
+     "mead",
+     6
+    ],
+    [
+     "salt",
+     3
+    ],
+    [
+     "herbs",
+     6
+    ],
+    [
+     "poultice",
+     3
+    ],
+    [
+     "bandage",
+     6
+    ],
+    [
+     "wolf_pelt",
+     2
+    ],
+    [
+     "sling",
+     1
+    ],
+    [
+     "sling_stone",
+     40
+    ]
+   ],
+   "silver": 120,
+   "desc": "Sells bread, mead and gossip from a trestle under an awning. Her prices go up every time a rider comes in from the north.",
+   "look": {
+    "tunic": "#8a4a3a",
+    "cloak": "#4a5a3a",
+    "hair": "#8a5a2a"
+   }
+  },
+  {
+   "id": "ger_potter",
+   "name": "Uxellos the potter",
+   "faction": "gergovia",
+   "ai": "idle",
+   "dialogue": "ger_potter",
+   "attrs": {
+    "PER": 7
+   },
+   "desc": "A potter with clay to the elbows and opinions about everyone. His yard backs onto the palisade.",
+   "look": {
+    "tunic": "#9a8a6a",
+    "hair": "#7a5a3a",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "ger_earless",
+   "name": "Man by the road",
+   "faction": "gergovia",
+   "ai": "idle",
+   "dialogue": "ger_earless",
+   "attrs": {},
+   "desc": "He keeps his hood up. Under it, where his ears were, are two healing wounds.",
+   "look": {
+    "tunic": "#5a5a50",
+    "cloak": "#4a4a40",
+    "hair": "#5a4a3a"
+   }
+  },
+  {
+   "id": "ger_gate_guard",
+   "name": "Gate guard",
+   "faction": "arverni",
+   "ai": "guard",
+   "dialogue": "ger_gate",
+   "attrs": {
+    "STR": 7,
+    "END": 6,
+    "PER": 6
+   },
+   "level": 3,
+   "tags": [
+    "spears",
+    "shield"
+   ],
+   "equip": [
+    "war_spear",
+    "gallic_shield",
+    "leather_jerkin",
+    "iron_helmet"
+   ],
+   "silver": 12,
+   "desc": "Watches the gate in the wall, and everyone who goes through it.",
+   "look": {
+    "tunic": "#6a3a2a",
+    "shield": "#6a3a2a",
+    "hair": "#8a6a3a",
+    "hair_style": "long",
+    "face": "moustache"
+   }
   }
  ]
 }

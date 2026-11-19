@@ -1,0 +1,11 @@
+// A man by the road whose ears the king took. Foreshadows the pit.
+=== start
+He keeps his hood up and his eyes down. When you speak to him, he turns his head away, and the hood shifts, and you see where his ears used to be.
+* "What happened?" -> what
+* Leave him alone. -> END
+
+=== what
+"I said wait." His voice is flat. "In the council, before the winter. I said wait for the spring, wait for the Carnutes, wait and see what Caesar does. I wasn't the only one." He touches the hood. "This is a small fault. The big faults are on the plateau."
+
+"I'm going home. He says that's the point, that everyone should see me. My wife will see me." He stands up. "Good road to you."
+* "And to you." -> END

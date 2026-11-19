@@ -1,0 +1,25 @@
+// Senognatos, captain of the levy camp in the lower town.
+=== start
+"You! You've got two arms and a spear. That's more than half of them." Senognatos waves at the camp: men in their own clothes, sharpening, sleeping, drilling badly. "The king wants every free man who can stand. Are you free? Can you stand?"
+[quest vettius none] ~ quest vettius rumor
+-> hub
+
+=== hub
+* "I'm Cadurci. I'm on the king's business already, in a way." -> cadurci
+* "Who are all these men?" -> levy
+* [quest vettius active] "I heard you're hunting a Roman." -> roman
+* "Goodbye." -> END
+
+=== cadurci
+"Cadurci! Lucterius's lot." He slaps your shoulder hard enough to hurt. "Good fighters. Too far away. Well, go on with your king's business, then, and if it ends, come back here."
+-> hub
+
+=== levy
+"Herdsmen. Debtors. Men their lords threw out. Men who threw their lords out." He grins. "The king went round the countryside and raised everyone the nobles said were nothing. That's how he took Gergovia back. That's why some of the old families would rather eat their own boots than look at us."
+
+"He's hard on them. Cuts an ear off for a small fault. Burns a man for a big one. I've seen it." He shrugs. "They needed someone hard. Everyone else was soft, and Rome walked in."
+-> hub
+
+=== roman
+"Not hunting. Looking." He grins with half his teeth. "There were Romans in the lower town before the winter, wine men and their clerks. Most went. One clerk didn't, they say, and somebody's hiding him. The king wants him. A Roman who keeps accounts knows things." He nods down the street. "The Greek has a lot of friends. I'd start with the Greek."
+-> hub

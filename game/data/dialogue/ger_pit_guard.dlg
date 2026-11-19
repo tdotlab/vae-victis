@@ -1,0 +1,21 @@
+// The guard on Eppillos's pit. Can be bought for one night.
+=== start
+[quest pit=guard_paid] -> paid
+"Keep back from the edge." He sniffs, wipes his nose on his sleeve. "King's prisoner. Nobody talks to him, nobody feeds him, nobody looks at him funny."
+* [quest pit active, !flag pit_alarm, silver 60] "Cold night for it. Sixty silver says you'd rather be by a fire, around moonrise." -> bribe ~ silver -60
+* [quest pit active, !flag pit_alarm, barter 40, silver 35] "Thirty-five, and nobody ever knows. You'll have that cold till spring otherwise." -> bribe ~ silver -35
+* "Who is he?" -> who
+* "Goodbye." -> END
+
+=== who
+"Old Ategnatos's boy. Sent a rider to Gobannitio." He spits into the pit, but not quite at the man in it. "Stupid. He was all right, before. Bought a round in the winter, at the feast." He shrugs. "King's prisoner."
+* "Goodbye." -> END
+
+=== bribe
+~ quest pit guard_paid
+He looks at the silver, and at the pit, and at the sky. "Moonrise," he says. "There's a fire in the granary yard. I'll be at it. If anyone asks, I was there all night and I saw nothing, which is true."
+* "Moonrise." -> END
+
+=== paid
+"Moonrise," he says, not looking at you. "I've got a fire to get to."
+* "Go on, then." -> END

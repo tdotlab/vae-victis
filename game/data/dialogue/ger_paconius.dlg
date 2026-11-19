@@ -1,0 +1,109 @@
+// Paconius, freedman clerk of the house of Vettius, hiding as Theron's Greek
+// bookkeeper. Routes to his tablets: unmask him and get him out (sneak, silver or
+// speech at the gate), buy them, frighten them out of him, betray him to
+// Ollognatos (ger_ollognatos), pick his satchel, or kill him.
+=== start
+[flag clerk_unmasked] -> again
+"Theron is at the stall." He doesn't look up from his tablets. His Gallic is good, and careful, like a man walking on ice. "I only keep the accounts."
+-> hub
+
+=== hub
+* [latin 30] "Salve. Quid scribis?" -> latin
+* [PER 7] "That's a Roman haircut, growing out. And a Roman stylus." -> unmask
+* [flag potter_hint] "The potter says you came in with the Vettius wine carts, and never went out with them." -> unmask
+* [flag theron_confessed] "Theron told me who you are. I'm not here to hand you over." -> unmask
+* "Sorry to bother you." -> END
+
+=== latin
+"Bene, gratias, rationes tantum..." He stops. He has answered before he thought, the way you answer to your own name, and he goes the color of old wax.
+-> unmask
+
+=== unmask
+~ set clerk_unmasked; xp 25
+[quest vettius none] ~ quest vettius found
+[quest vettius=rumor] ~ quest vettius found
+He puts the stylus down very carefully, as if it might go off.
+
+"My name is Paconius. I was a slave in the house of Aulus Vettius, and then I was a freedman, and now I'm the last Roman in Gergovia, unless they've found another one since this morning." He looks at the door. "If you're going to call the guard, I'd rather you did it quickly."
+-> uhub
+
+=== again
+[item vettius_tablets] "You have them. I know you have them. Well." He looks at his empty hands. "I hope you can read."
+[!item vettius_tablets] He flinches when your shadow falls on him, then sees who it is. "Oh. You."
+-> uhub
+
+=== uhub
+* [!item vettius_tablets] "What's in the satchel you sleep on?" -> satchel
+* [!item vettius_tablets, !flag clerk_spooked] "Give me the tablets and I'll get you out of Gergovia." -> escape
+* [!item vettius_tablets, silver 50] "I'll buy them." -> buy
+* [!item vettius_tablets] "Give me the tablets, or I tell the king's men what you are." -> threat
+* [item vettius_tablets, !flag tablets_read] "Read these to me." -> read_ask
+* "I'll leave you to it." -> END
+
+=== satchel
+"My master's day book. Four leaves of wax, everything the house did here since the autumn." He puts a hand on it without thinking. "It's the only thing I have that anyone wants. While I have it, somebody in Rome may still think I'm worth fetching. Without it I'm a freedman with a stylus."
+
+"And it's evidence, of a kind. You wouldn't like what it's evidence of. I didn't."
+-> uhub
+
+=== escape
+"Get me out." He says it before you've finished. "Past the gate in the wall, and down to the road. Get me there and the tablets are yours, and I'll tell you what's in them on the way down."
+* [roll sneak -10] "Over the potter's back fence after dark. Walk where I walk." -> escaped | escape_fail
+* [silver 40] "The gate guard drinks. I'll make sure he drinks well tonight." -> escaped ~ silver -40
+* [speech 50] "You're my servant. Keep your mouth shut and carry the bags." -> escaped
+* "Not yet." -> uhub
+
+=== escape_fail
+~ set clerk_spooked
+Halfway across the potter's yard a dog finds you, and then a lamp, and then the potter, who looks at Paconius for a long, long moment and says nothing at all. You walk back the way you came. Paconius is shaking.
+
+"No," he says. "Not that way. Not again."
+-> uhub
+
+=== escaped
+~ give vettius_tablets; set tablets_given; set clerk_saved; set clerk_gone; quest vettius tablets; xp 75; honor 3
+The road is grey with the first light when you stop. Paconius gives you the satchel with both hands, like an offering.
+
+"Read them," he says. "Take them to someone who can make them matter. Not me. I'm going to Narbo, and then I'm going to keep a wine shop and never write anything down again." He goes, and doesn't look back, and you don't see him again.
+* "Good luck." -> END ~ leave
+
+=== buy
+"Buy them." He laughs, short and unhappy. "With what I'd pay to get out of here, and then I'd still be here, with no tablets." But his eyes go to your purse. "Eighty. It would buy me a place on a wine cart going south, if anyone is still running wine carts south."
+* [silver 80] Pay him. -> bought ~ silver -80
+* [barter 45, silver 50] "Fifty, and I forget your face." -> bought ~ silver -50
+* "Too much." -> uhub
+
+=== bought
+~ give vettius_tablets; set tablets_given; quest vettius tablets; xp 50
+He hands them over and counts the silver twice. "There. Now I'm a man with money and no reason to live. That's most of Rome."
+-> uhub
+
+=== threat
+He goes very still. "Yes. You could do that." He looks at you, measuring, the way he'd look at a column of figures.
+* [PRE 6] "I could. I'd rather not. The tablets." -> threat_give
+* [roll speech -10] "You've got until I finish this sentence." -> threat_give | threat_no
+* "Forget it." -> uhub
+
+=== threat_give
+~ give vettius_tablets; set tablets_given; quest vettius tablets; xp 25; honor -3
+He takes the satchel out from under his cloak and holds it out without a word. When you take it, he doesn't let go for a moment. Then he does.
+-> uhub
+
+=== threat_no
+"Then tell them." He has gone white, but his voice is level. "They'll burn me, and the tablets with me, because nobody up there can read, and you'll have nothing. Go on."
+-> uhub
+
+=== read_ask
+[flag clerk_gone] -> uhub
+"Read them." He takes them back and opens them on his knee, and his finger goes down the columns from habit.
+-> read
+
+=== read
+~ set tablets_read; quest vettius read done; known noviodunum
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+"Wine received, wine sold, all ordinary. Then: bought forward from the quartermaster at Noviodunum, three persons, Cadurci, hostages from the hill fort of Brigodunon, delivery when the season's fighting ends. On account of Dannotalos the Aeduan. Half paid." He doesn't look up. "That was my hand. I wrote it."
+
+"And Avaricum. A line with no number in it yet. The master always said a good merchant buys before the market knows there's a market."
+-> uhub

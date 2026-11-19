@@ -1,0 +1,318 @@
+{
+ "id": "gergovia_lower",
+ "name": "Gergovia, below the wall",
+ "default": "grass",
+ "legend": {
+  ".": "grass",
+  ",": "field",
+  ";": "meadow",
+  "_": "road",
+  "m": "mud",
+  "T": "tree",
+  "P": {
+   "terrain": "floor_earth",
+   "mark": "theron"
+  },
+  "b": "bush",
+  "r": "rock",
+  "C": "cliff",
+  "R": "rampart",
+  "p": "palisade",
+  "n": "fence",
+  "w": "wall_wood",
+  "s": "wall_stone",
+  "f": "floor_earth",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "d": "door",
+  "A": "altar",
+  "z": "bones",
+  "G": {
+   "terrain": "road",
+   "mark": "to_plateau"
+  },
+  "F": {
+   "terrain": "road",
+   "mark": "from_plateau"
+  },
+  "!": {
+   "terrain": "road",
+   "mark": "wall_view"
+  },
+  "L": {
+   "terrain": "grass",
+   "mark": "camp_view"
+  },
+  "Q": {
+   "terrain": "floor_earth",
+   "mark": "paconius"
+  },
+  "k": {
+   "terrain": "crate",
+   "mark": "theron_chest"
+  },
+  "x": {
+   "terrain": "crate",
+   "mark": "satchel"
+  },
+  "S": {
+   "terrain": "floor_earth",
+   "mark": "smith"
+  },
+  "N": {
+   "terrain": "floor_earth",
+   "mark": "market"
+  },
+  "E": {
+   "terrain": "grass",
+   "mark": "earless"
+  },
+  "U": {
+   "terrain": "grass",
+   "mark": "potter"
+  },
+  "K": {
+   "terrain": "grass",
+   "mark": "recruiter"
+  },
+  "g": {
+   "terrain": "road",
+   "mark": "gate_guard"
+  },
+  "j": {
+   "terrain": "grass",
+   "mark": "outer_guard"
+  },
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "W": {
+   "terrain": "road",
+   "mark": "world"
+  },
+  "e": {
+   "terrain": "grass",
+   "mark": "exit"
+  },
+  "X": {
+   "terrain": "road",
+   "mark": "exit"
+  },
+  "1": {
+   "terrain": "grass",
+   "mark": "t1"
+  },
+  "2": {
+   "terrain": "grass",
+   "mark": "l1"
+  },
+  "3": {
+   "terrain": "grass",
+   "mark": "l2"
+  },
+  "4": {
+   "terrain": "grass",
+   "mark": "l3"
+  },
+  "5": {
+   "terrain": "grass",
+   "mark": "l4"
+  },
+  "6": {
+   "terrain": "grass",
+   "mark": "t2"
+  },
+  "7": {
+   "terrain": "grass",
+   "mark": "t3"
+  },
+  "8": {
+   "terrain": "grass",
+   "mark": "t4"
+  }
+ },
+ "rows": [
+  "RRRRRRRRRRRRRRRRRRRRRRRGGRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RRRRRRRRRRRRRRRRRRRRRRR__RRRRRRRRRRRRRRRRRRRRRRRRR",
+  "mmmmmmmmmmmmmmmmmmmmmmm__mmmmmmmmmmmmmmmmmmmmmmmmm",
+  "...TT.................._Fg..................TT....",
+  ".wwwwwwwwwwww..........__...wwwww....wwwwwww......",
+  ".wfffffwfffBw..........!!...wfBfw....wfffffw......",
+  ".wfPffkwfQfxw..........__...wfhfw....wfhfSfw......",
+  ".wftfffdfffBw..........__...wwdww....wfffffd......",
+  ".wfffffwfhffw..........__............wwwwwww......",
+  ".wwwwdwwwwwww..8.......__......1..............b...",
+  "....._________________________________________....",
+  ".....................E.__......................T..",
+  "..wwwww..wwwwwwwwwwwww.__.wwwww...wwwww...wwwww...",
+  "..wfBfw..wfffffffffffw.__.wfBfw...wfhfw...wfBfw...",
+  "..wfhfd..dfftffNtfftfd.__.dfhfw...wfffw...wfhfw...",
+  "..wwwww..wfffffffffffw.__.wwwww...wwdww...wwdww...",
+  ".b.......wwwwwwdwwwwww.__.........................",
+  ".......................__...............7.........",
+  "...____________________________________________...",
+  ".nnnnnnnnnnnnnn........__.LL...................T..",
+  ".n..wwwww.....n........__....B.B.B...h....B.B.B...",
+  ".n..wfhfw..U..n...6....__......2.......K......3...",
+  ".n..wfBfw..............__....B.B.B...h....B.B.B...",
+  ".n..wwdww.....n........__......4..............5...",
+  ".n............n.....b..__........h.........h...T..",
+  ".nnnnnnnnnnnnnn..TT....__j........................",
+  "ppppppppppppppppppppppp__ppppppppppppppppppppppppp",
+  ",,,,,,,,,,,,,,,,,,,,,,,__,,,,,,,,,,,,,,,,,,,,,,,,,",
+  ",,,,,,,,,,,,,,,,,,,,,,,@W,,,,,,,,,,,,,,,,,,,,,,,,,",
+  ";;;;;;;;;;;;;;;;;;;;;;;__;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "eeeeeeeeeeeeeeeeeeeeeeeXXeeeeeeeeeeeeeeeeeeeeeeeee"
+ ],
+ "arrive_text": "Gergovia's plateau stands over the valley like a table set for giants, its wall a dark stripe along the top. Below the wall the lower town has spilled down the slope: houses on their plots, a market hall, smoke from a hundred fires, and on the open ground by the road a camp of men with new spears and old cloaks. Everyone is shouting. Nobody seems to be in charge, and everyone says the king is.",
+ "actors": [
+  {
+   "uid": "theron",
+   "template": "theron",
+   "mark": "theron",
+   "unless_flag": "theron_joined"
+  },
+  {
+   "uid": "paconius",
+   "template": "paconius",
+   "mark": "paconius",
+   "unless_flag": "clerk_gone"
+  },
+  {
+   "uid": "ger_smith",
+   "template": "ger_smith",
+   "mark": "smith"
+  },
+  {
+   "uid": "ger_market",
+   "template": "ger_market",
+   "mark": "market"
+  },
+  {
+   "uid": "ger_earless",
+   "template": "ger_earless",
+   "mark": "earless"
+  },
+  {
+   "uid": "ger_potter",
+   "template": "ger_potter",
+   "mark": "potter"
+  },
+  {
+   "uid": "ger_recruiter",
+   "template": "ger_recruiter",
+   "mark": "recruiter"
+  },
+  {
+   "uid": "ger_gate",
+   "template": "ger_gate_guard",
+   "mark": "gate_guard"
+  },
+  {
+   "uid": "ger_outer",
+   "template": "ger_gate_guard",
+   "mark": "outer_guard"
+  },
+  {
+   "uid": "ger_l1",
+   "template": "ger_levy",
+   "mark": "l1"
+  },
+  {
+   "uid": "ger_l2",
+   "template": "ger_levy",
+   "mark": "l2"
+  },
+  {
+   "uid": "ger_l3",
+   "template": "ger_levy",
+   "mark": "l3"
+  },
+  {
+   "uid": "ger_l4",
+   "template": "ger_levy",
+   "mark": "l4"
+  },
+  {
+   "uid": "ger_t1",
+   "template": "ger_townsman",
+   "mark": "t1"
+  },
+  {
+   "uid": "ger_t2",
+   "template": "ger_townswoman",
+   "mark": "t2"
+  },
+  {
+   "uid": "ger_t3",
+   "template": "ger_townsman",
+   "mark": "t3"
+  },
+  {
+   "uid": "ger_t4",
+   "template": "ger_townswoman",
+   "mark": "t4"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "theron_chest",
+   "name": "Theron's strongbox",
+   "items": [
+    [
+     "roman_wine",
+     2
+    ],
+    [
+     "bronze_torque",
+     1
+    ]
+   ],
+   "silver": 80,
+   "lock": 50,
+   "owner": "theron"
+  },
+  {
+   "mark": "satchel",
+   "name": "A clerk's satchel",
+   "items": [
+    [
+     "vettius_tablets",
+     1
+    ]
+   ],
+   "silver": 12,
+   "lock": 35,
+   "owner": "paconius",
+   "unless_flag": "tablets_given",
+   "gone_text": "The satchel is empty. Paconius took the tablets out of it."
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The road out of Gergovia"
+  },
+  {
+   "mark": "to_plateau",
+   "to": "map:gergovia_plateau",
+   "entry": "gate",
+   "label": "Up through the gate"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "wall_view",
+   "id": "wall_view",
+   "say": "The wall of the plateau, up close: a face of dry-laid stone with the square ends of timber beams showing every few feet, nailed together inside with iron spikes as long as your forearm, and earth heaped behind it all. Fire won't burn it and a ram won't shake it. The gate turns in between two horns of wall, so anyone who comes at it is boxed in on three sides."
+  },
+  {
+   "mark": "camp_view",
+   "id": "camp_view",
+   "say": "The levy camp smells of wet wool and smoke. These are the men the elders wouldn't let into the council: herdsmen, debtors, younger sons, runaways. Vercingetorix gave them spears and a name. They would die for him. Some of them are going to."
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+// Eppillos, in the pit. Freed at night, with the guard bribed or by stealth.
+=== start
+[quest pit done] -> gone
+[quest pit none] -> stranger
+He looks up from the bottom of the pit. Mud to the knees, hands tied in front of him, a split lip going black. "Who are you? Did my father send you?"
+-> hub
+
+=== stranger
+A young man at the bottom of a pit looks up at you, and then down again. He has stopped shouting a while ago. Whatever he did, it's somebody else's business.
+* Leave him. -> END
+
+=== gone
+The pit is empty except for the mud.
+* Leave. -> END
+
+=== hub
+* [!night] "Not in daylight. Tonight." -> wait
+* [night, quest pit=guard_paid] "The guard's looking the other way. Here's the rope." -> freed
+* [night, !quest pit=guard_paid, !flag pit_alarm, roll sneak -15] "Quiet. I'm getting you out." -> freed | caught
+* "Hold on." -> END
+
+=== wait
+"Tonight." He nods, and keeps nodding, as if he can't stop. "Tonight. Yes."
+* Leave. -> END
+
+=== freed
+~ set pit_closed; quest pit done_freed done; honor 3; renown 1; xp 75
+He comes up the rope hand over hand, faster than you'd think with his wrists tied, and you cut the cords at the top. For a moment he just breathes the cold air.
+
+"South gate's watched. I'll go over the cliff on the west side. My great-uncle's people are in the hills." He grips your arm. "Tell my father. Tell him I'm sorry, and I'd do it again."
+
+And he's gone into the dark, and the pit is empty.
+* Go. -> END ~ leave
+
+=== caught
+~ set pit_alarm; standing arverni -10
+The rope is halfway down when the guard turns round. He shouts, and somewhere a dog starts barking, and a light comes on in the granary. You're gone before anyone sees your face, but they'll double the watch now. That way is closed.
+* Get away. -> END

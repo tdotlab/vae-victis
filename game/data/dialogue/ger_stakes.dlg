@@ -1,0 +1,13 @@
+// Map trigger on the plateau after the king marches (verc_north).
+@speaker The stakes
+=== start
+[quest pit active] -> failed
+Black stakes in a row along the inside of the rampart, where the ground is scorched in circles. The ash has been rained on. Nobody walks this way who doesn't have to.
+* Walk on. -> END
+
+=== failed
+~ quest pit failed failed; set pit_closed
+Black stakes in a row along the inside of the rampart, where the ground is scorched in circles. The pit past the granaries is empty.
+
+The king marched north, and before he went he carried out his sentences. You were too slow, or you chose not to be quick. Either way, Eppillos burned.
+* Walk on. -> END

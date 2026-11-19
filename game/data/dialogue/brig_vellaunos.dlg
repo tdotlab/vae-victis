@@ -35,6 +35,8 @@ The hall smells of smoke and wet wool. The elders are all here, arguing, and whe
 * [quest hostages=north] "I know where the tally was cut." -> report
 * [quest grotto=pardon_asked] "Dubnacos has the tally. He wants to come home." -> pardon
 * [quest hostages active] "Tell me about the hostages." -> hostages
+* [quest levy done, !flag vell_levy] "Gergovia wants hostages from us too." -> levy
+* [flag tablets_read, !flag vell_tablets] "I found a Roman merchant's accounts in Gergovia." -> vtablets
 * "Goodbye." -> END
 
 === hostages
@@ -89,3 +91,20 @@ You hold the tally to the light. The letters are worn, and Roman soldiers abbrev
 === after
 "Still here? Noviodunum isn't getting any closer." But he says it gently.
 * "Going." -> END
+
+=== levy
+~ set vell_levy
+[flag levy_pledged] He hears you out, and then he's quiet so long that the fire needs feeding. "Two children. You promised two children of this village to a man you'd met for the time it takes to cut a notch." He feeds the fire. "Rome has three. Now the king will have two. You'd better be right about him."
+[flag levy_self] "You gave yourself instead." He looks at you for a long time. "Then Brigodunon will keep faith, because if it doesn't, it's you they'll come for. That's a heavy thing to hand an old man. Thank you."
+[flag levy_lucterius] He laughs, the first time you've heard him laugh. "Through Lucterius. Of course. Lucterius will want it from us in the end, and I'll have a month to think of something. That was well done."
+[flag levy_iron] "You paid it in silver." He nods. "Iron I can spare. Iron grows back."
+[flag levy_vindomagos] He stops you before you finish. "Vindomagos." His face doesn't move. "Sulicena will know who sent them. Everyone on the Oltis will know. We'll be paying for that in salt and in favors for twenty years." He turns away. "I'd have done the same, maybe. I'd have hated myself for it."
+[flag levy_refused] "Nothing?" He rubs his face. "Brave. And when the king's riders come to ask why, I'll be the one talking to them. Next time ask me first."
+-> hub
+
+=== vtablets
+~ set vell_tablets; xp 50
+You tell him what the tablets say. He doesn't interrupt. When you get to the name Dannotalos, he sits down.
+
+"Sold forward. Like grain." He says it to the floor. "We kept faith with Rome for five years so that they'd keep my daughter safe, and they've sold her to an Aeduan for when it's convenient." He looks up, and he isn't old at all for a moment. "Then we owe Rome nothing. Nothing. Tell that to the assembly when the spring comes, and show them those tablets."
+-> hub

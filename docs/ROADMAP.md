@@ -22,7 +22,7 @@ The target is the full game described in [DESIGN.md](DESIGN.md), roughly Fallout
 
 ## Phase 3: The rest of Gaul
 
-One milestone per location or pair of locations, in roughly the order a player meets them: Gergovia; Avaricum (timed); Cenabum and the Carnute forest; Bibracte and Noviodunum; the Germanic camp and the Bone Field; the Pens; Alesia. Companions are added as their home locations arrive.
+One milestone per location or pair of locations, in roughly the order a player meets them: Gergovia (built 2026-11-18, not yet played by T); Avaricum (timed); Cenabum and the Carnute forest; Bibracte and Noviodunum; the Germanic camp and the Bone Field; the Pens; Alesia. Companions are added as their home locations arrive.
 
 ## Phase 4: Finish
 

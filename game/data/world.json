@@ -189,7 +189,10 @@
     23
    ],
    "desc": "The Arverni capital on its plateau. Whoever holds it holds the revolt.",
-   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "map": "gergovia_lower",
+   "entry": "world",
+   "open_flag": "gergovia_taken",
+   "shut_text": "The gates are shut. Gobannitio's men hold the plateau, and the valley below it is full of his nephew's ragged army. Nobody gets in, and anyone who tries to get out is looked at very closely. Come back when one of them has won.",
    "size": 3
   },
   {

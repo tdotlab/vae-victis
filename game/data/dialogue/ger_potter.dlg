@@ -1,0 +1,17 @@
+// Uxellos the potter. Knows where Paconius came from.
+=== start
+"Mind the pots." Uxellos is up to his elbows in clay. "Everything you can see is somebody's supper dish, and I'll charge you for breaking it."
+* [quest vettius active, !flag clerk_unmasked, !flag potter_hint] "Seen any strangers in the lower town?" -> strangers
+* "Business good?" -> business
+* "Goodbye." -> END
+
+=== business
+"Pots break. There's a war. Armies break a lot of pots." He turns the wheel. "Can't complain. Do anyway."
+* "Goodbye." -> END
+
+=== strangers
+"Strangers." He doesn't look up. "Everybody's a stranger. The Greek's not a stranger, he's been here since my father." The wheel slows. "His bookkeeper, though. Came in with the Vettius wine carts in the autumn, the Roman ones. The carts went back out. He didn't."
+
+"My dog doesn't like him. My dog doesn't like Romans. It's the smell. Olive oil." He spits in the clay and works it in. "I'm not saying anything. I make pots."
+~ set potter_hint; xp 15
+* "Thanks." -> END

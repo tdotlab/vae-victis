@@ -1,0 +1,14 @@
+// Hostages in the king's yard on the plateau.
+=== start
+[flag levy_pledged] -> pledged
+"Are you from the south?" The hostage looks at your clothes. "I'm Lemovices. My father is in the council. I'm here so he stays in it." A careful shrug. "They feed us well. We learn to ride with the king's men. It's not bad. It's not home."
+* "Do they let you write home?" -> home
+* "Goodbye." -> END
+
+=== home
+"Nobody here can write." A small laugh. "They send a man, sometimes, and he tells my mother I'm well. Then he tells the king my mother is well, which means my father's well, which means he's still on the king's side." They look at the fence. "Rome's hostages don't get a man to say they're well. I asked."
+* "Goodbye." -> END
+
+=== pledged
+"They say two more are coming from the Cadurci. Children." The hostage looks at you. "Are you the one who promised them? Somebody in the hall said so." They don't say anything else, and they don't have to.
+* "Goodbye." -> END

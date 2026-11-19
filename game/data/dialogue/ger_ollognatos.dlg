@@ -1,0 +1,97 @@
+// Ollognatos, the king's hostage-master. Gives the levy quest. The man to see if
+// you want to sell out Paconius or Ategnatos.
+=== start
+[flag ollo_met] -> again
+~ set ollo_met
+[quest levy none] ~ quest levy start
+A long low house full of tally sticks: bundles of them on every beam, tied with colored wool, one color to a people. The man at the table has two more behind his ears and a third in his hand, and is cutting a notch in it.
+
+"Cadurci." He doesn't ask. "From Brigodunon, on the Oltis. Good. You've saved me a rider." He holds up a stick with no notches at all. "This is Brigodunon. The king wants two children of your leading families here by the new moon, to live in his hall and learn his ways, and ten spears with them. Lucterius has sworn for the Cadurci. Brigodunon hasn't sworn for anything yet."
+-> hub
+
+=== again
+"Back." He doesn't stop cutting. "Brigodunon's stick is still clean, if you've come about that."
+[quest levy done] "Brigodunon's stick has its notches. What do you want?"
+-> hub
+
+=== hub
+* [quest levy active] "About Brigodunon's levy." -> levy
+* [flag clerk_unmasked, !flag clerk_gone, !flag clerk_betrayed] "There's a Roman hiding in the lower town." -> betray_clerk
+* [quest pit active, flag pit_plan, !flag ategnatos_taken] "Ategnatos means to get his son out of the pit." -> betray_ateg
+* "What are the hostages for?" -> why
+* "Goodbye." -> END
+
+=== why
+"For?" He looks at you as if you've asked what a roof is for. "Every people in Gaul that joins the king sends its children to Gergovia. They live in his hall. They eat at his table. If their fathers change their minds, the king doesn't need to argue." He shrugs. "Rome does the same. The difference is the king feeds them better, and they'll go home."
+
+"Your own people know about this. Rome has three of yours."
+-> hub
+
+=== levy
+"Two children. Ten spears. By the new moon." He holds up the clean stick. "How shall I cut it?"
+* "Brigodunon will send them. You have my word." -> pledged
+* [honor >= 10] "Take me instead. My oath to the king, for Brigodunon's. If Brigodunon breaks faith, I'm yours." -> self
+* [PRE 6] "Take me instead. I'm worth more to you than two frightened children." -> self
+* [lore 40] "The Cadurci give hostages as a people, through Lucterius. Ask a hill fort and you insult him." -> lucterius
+* [silver 100] "The king needs iron more than children. Here's silver for spearheads." -> iron ~ silver -100
+* [barter 50, silver 60] "Sixty silver for spearheads, and I'll tell you which smith is cheating you." -> iron ~ silver -60
+* "Vindomagos is richer than Brigodunon, and closer to the road. Ask them." -> vindomagos
+* "Brigodunon gives nothing. We have no children to spare." -> refused
+* "I'll think about it." -> hub
+
+=== pledged
+~ set levy_pledged; quest levy done_pledged done; standing arverni 10
+He cuts two notches deep, and ten small ones. "Good. The new moon." He ties the stick into the Cadurci bundle without looking at you again. You have just promised two children of Brigodunon to a king you've never met, and it took less time than buying bread.
+-> hub
+
+=== self
+~ set levy_self; quest levy done_self done; standing arverni 10; honor 5; renown 2
+He looks at you for a long time, then cuts a single notch, and carves your name into the bark beside it.
+
+"Done. You're Brigodunon's hostage now, walking about free." He hands you nothing, which is the point. "If Brigodunon goes back on the war, I don't need to send riders to find two children. I only need to find you."
+-> hub
+
+=== lucterius
+~ set levy_lucterius; quest levy done_lucterius done; xp 50
+He stops cutting. "Lucterius." He says it like a sum that won't come out. "Yes. He would take it badly. And he has the Ruteni half sworn, and the king needs him more than he needs Brigodunon."
+
+He puts Brigodunon's stick back on the beam, uncut. "I'll ask him. He'll ask your Vellaunos. It will come back to you, but not this month."
+-> hub
+
+=== iron
+~ set levy_iron; quest levy done_iron done; standing arverni 5
+He weighs the silver in his palm, and something in his face loosens. "Spearheads. Yes. The smiths are the only men in Gergovia busier than I am." He cuts ten notches and no others. "No children. This time."
+-> hub
+
+=== vindomagos
+~ set levy_vindomagos; quest levy done_vindomagos done; honor -5
+"Vindomagos." He finds its stick, a newer one, pale, and turns it over. "Cadurci. On the Oltis, with the salt. Yes." He cuts a notch in that one instead. "I'll send riders."
+
+He doesn't thank you. He's seen this before, many times, this winter.
+-> hub
+
+=== refused
+~ set levy_refused; quest levy done_refused done; standing arverni -15
+He cuts a single notch, sideways, across the grain, and puts the stick behind his ear with the others.
+
+"That's what that means," he says, without being asked. "It means: remember."
+-> hub
+
+=== betray_clerk
+~ set clerk_betrayed; set clerk_gone; set tablets_given; quest vettius tablets; standing arverni 10; honor -10; silver 40; xp 50
+[!item vettius_tablets] ~ give vettius_tablets
+He sends two men down to the lower town before you've finished talking. Within the hour they're back with Paconius between them, and his satchel.
+
+Ollognatos turns the wax leaves over, frowns at them, and holds them out to you. "Roman scratches. If you want them, take them. The king wants the man." He drops forty silver on the table. "That's what a Roman is worth this month."
+
+Later, from the plateau, you see the smoke.
+-> hub
+
+=== betray_ateg
+~ set ategnatos_taken; set pit_closed; quest pit done_betrayed done; standing arverni 15; standing arverni_old -30; honor -10; xp 50
+Ollognatos listens without moving. Then he sighs, as if you'd brought him more work, which you have.
+
+"The old man. I told the king he'd try." He calls a name, and two of the king's guard come in, and go out again. "He was the last of the uncle's party with any sense. He should have used it."
+
+By nightfall there are two of them in the pit.
+-> hub

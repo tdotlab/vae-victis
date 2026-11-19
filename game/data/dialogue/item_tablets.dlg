@@ -1,0 +1,28 @@
+// Read from the inventory: the Vettius day book.
+@speaker Wax tablets
+=== start
+[flag tablets_read] -> again
+Four leaves of wood, hinged with leather, filled with dark wax. The seal on the strap says A VET C. The writing is small and close and Roman, a merchant's hand, with everything shortened that can be.
+* [latin 40] Read it. -> read
+* [companion theron] Hand it to Theron. -> theron
+* Put it away. -> END
+
+=== again
+The house of Aulus Vettius Calvus: wine, and people. Three hostages of Brigodunon, bought forward from Noviodunum on account of Dannotalos the Aeduan. A line for Avaricum, with no number in it yet.
+* Put it away. -> END
+
+=== theron
+Theron reads it aloud, slowly, translating as he goes. His voice gets flatter the further he goes.
+-> read
+
+=== read
+~ set tablets_read; quest vettius read done; known noviodunum
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+The day book of the house of Aulus Vettius Calvus, at Gergovia and Cabillonum. Wine received, wine sold, debts owing.
+
+Then, in the same hand: bought forward, from the quartermaster at Noviodunum, three persons, Cadurci, hostages of the hill fort Brigodunon, to be delivered when the season's fighting ends. On account of Dannotalos, Aeduan. Half paid.
+
+And a last line: Avaricum. No number. A space left for one.
+* Put it away. -> END

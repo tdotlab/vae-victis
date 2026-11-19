@@ -6,6 +6,7 @@
 === hub
 * "Let's trade." -> trade
 * [item hostage_tally, !flag tally_read] "Can you read this Roman mark?" -> tally
+* [item vettius_tablets, !flag tablets_read] "Can you read Roman wax tablets?" -> vtab
 * "What's the news from the road?" -> news
 * "Goodbye." -> END
 
@@ -28,4 +29,20 @@ He takes the stick, looks at it, and hands it back before you can blink. "I can.
 === news
 [flag cal_cevennes] "Caesar crossed the Cevennes in the snow. Six feet of it, they say, and he dug his way through. The Arverni had to run home to save their own farms. Prices went up."
 [!flag cal_cevennes] "Everyone's buying iron and selling grain. That's what war smells like, to a merchant. I'd sell you a spear if I had one."
+-> hub
+
+=== vtab
+He opens them, reads a line, and his eyebrows go up and stay there. "Vettius. The wine house." He reads further and stops smiling. "Forty silver. This is the kind of thing I'd rather not have read."
+* [silver 40] Pay him. -> vread ~ silver -40
+* [barter 50, silver 15] "Fifteen, and I don't tell anyone you read it." -> vread ~ silver -15
+* "Too much." -> hub
+
+=== vread
+~ set tablets_read; quest vettius read done; known noviodunum
+[quest hostages=find_tally] ~ quest hostages north
+[quest hostages=read_tally] ~ quest hostages north
+[quest hostages=ask_riders] ~ quest hostages north
+"A merchant's day book. Wine, wine, debts, wine." His finger stops. "Bought forward, from the quartermaster at Noviodunum: three persons, Cadurci, hostages of Brigodunon. Delivery when the fighting season ends. On account of Dannotalos, Aeduan." He closes the tablets. "And a line for Avaricum, with nothing in it yet."
+
+"I sold salt to Vettius's people for years," he says, after a while. "Paid on time. Always paid on time."
 -> hub

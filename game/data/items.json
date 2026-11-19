@@ -526,6 +526,31 @@
       "weight": 0,
       "value": 0,
       "desc": "A wax tablet from the horse leader's saddlebag: a pay chit for a decurion of auxiliary horse, stamped with a Roman depot mark."
+    },
+    {
+      "id": "vettius_tablets",
+      "name": "Wax tablets",
+      "type": "quest",
+      "weight": 0.5,
+      "value": 0,
+      "read": "item_tablets",
+      "desc": "Three beech-wood tablets bound with a thong, the wax inside scratched close with Roman cursive. A seal on the binding: a running boar and the letters A VET C."
+    },
+    {
+      "id": "safe_conduct",
+      "name": "King's token",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "desc": "Half of a bronze coin cut with a chisel, threaded on a cord. Ollognatos keeps the other half. Shown to the king's men, it says the bearer goes where they like."
+    },
+    {
+      "id": "amphora_wine",
+      "name": "Amphora of wine",
+      "type": "trade",
+      "weight": 20,
+      "value": 180,
+      "desc": "A full Italian amphora, its stopper sealed with pitch and stamped by a Campanian potter. In Gaul, the price of a slave. Traders say it the other way round."
     }
   ]
 }

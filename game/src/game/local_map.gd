@@ -127,9 +127,14 @@ func _spawn_actors() -> void:
 	var entry := gs.entry if map.has_mark(gs.entry) else "start"
 	player.cell = map.mark(entry)
 	actors.append(player)
-	# Map NPCs
+	# Map NPCs. One who travels with the player comes in as a companion below.
+	var with_player := {}
+	for cd in gs.companions:
+		with_player[cd.get("uid", "")] = true
 	for e in map.def.get("actors", []):
 		var uid: String = e.get("uid", e["template"])
+		if with_player.has(uid):
+			continue
 		if e.has("if_flag") and gs.flag(e["if_flag"]) == 0:
 			continue
 		if e.has("unless_flag") and gs.flag(e["unless_flag"]) != 0:
