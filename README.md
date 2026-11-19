@@ -11,6 +11,7 @@ Status: a playable demo, "Leaving home": the first village, a cave, a neighborin
 - [docs/DECISIONS.md](docs/DECISIONS.md): decisions and the reasons for them.
 - [docs/STATUS.md](docs/STATUS.md): where things stand.
 - [docs/research/](docs/research/README.md): source-cited history and material culture, with the corrections the game still needs.
+- [docs/shots/](docs/shots/README.md): screenshots over time, a visual history of development.
 
 ## Layout
 
