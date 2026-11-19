@@ -17,6 +17,32 @@ const TEXT_MIN_H := 120.0
 const TEXT_MAX_H := 330.0
 
 
+## The speaker, full length at three times map size (the sprites are
+## rendered at twice it), turned three-quarters toward the reader.
+class _Portrait extends Control:
+	var actor: Actor
+	const W := 150.0
+	const H := 230.0
+
+	func _ready() -> void:
+		custom_minimum_size = Vector2(W, H)
+		size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+		texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		clip_contents = true
+
+	func _draw() -> void:
+		draw_rect(Rect2(Vector2.ZERO, size), Color("#0e1012"))
+		var foot := Vector2(W * 0.5 - 4.0, H - 16.0)
+		for i in range(6):
+			var k := 1.0 - i / 6.0
+			draw_set_transform(foot, 0, Vector2(1, 0.32))
+			draw_circle(Vector2.ZERO, 40.0 + i * 9.0, Color(0.16, 0.18, 0.2, 0.18 * k))
+		draw_set_transform(foot, 0, Vector2(3, 3))
+		Art.draw_figure(self, Vector2.ZERO, actor, 0.0, Color(0, 0, 0, 0), 5)
+		draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+		draw_rect(Rect2(Vector2.ZERO, size), UITheme.EDGE, false, 1.0)
+
+
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -33,9 +59,17 @@ func _ready() -> void:
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(780, 0)
 	center.add_child(panel)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 14)
+	panel.add_child(row)
+	if speaker and Art.on():
+		var por := _Portrait.new()
+		por.actor = speaker
+		row.add_child(por)
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 8)
-	panel.add_child(vb)
+	vb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(vb)
 	_dlg = Dialogue.load_dialogue(dlg_id)
 	var who: String = speaker.display_name() if speaker else _dlg.get("speaker", "")
 	var title := UITheme.label(who, 22, UITheme.BRONZE)

@@ -1,200 +1,206 @@
 {
- "id": "vindomagos",
- "name": "Vindomagos",
- "default": "grass",
- "legend": {
-  ".": "grass",
-  ",": "field",
-  ";": "meadow",
-  "_": "road",
-  "P": "pine",
-  "T": "tree",
-  "b": "bush",
-  "r": "rock",
-  "R": "rampart",
-  "w": "wall_wood",
-  "s": "wall_stone",
-  "n": "fence",
-  "f": "floor_earth",
-  "h": "hearth",
-  "B": "bed",
-  "t": "table",
-  "d": "door",
-  "A": "altar",
-  "x": {
-   "terrain": "crate",
-   "mark": "salt"
+  "id": "vindomagos",
+  "name": "Vindomagos",
+  "default": "grass",
+  "legend": {
+    ".": "grass",
+    ",": "field",
+    ";": "meadow",
+    "_": "road",
+    "P": "pine",
+    "T": "tree",
+    "b": "bush",
+    "r": "rock",
+    "R": "rampart",
+    "w": "wall_wood",
+    "s": "wall_stone",
+    "n": "fence",
+    "f": "floor_earth",
+    "h": "hearth",
+    "B": "bed",
+    "t": "table",
+    "d": "door",
+    "A": "altar",
+    "x": {
+      "terrain": "crate",
+      "mark": "salt"
+    },
+    "X": "cave_wall",
+    "o": "cave",
+    "z": "bones",
+    "~": "water",
+    "=": "shallows",
+    "m": "mud",
+    "C": "cliff",
+    "W": {
+      "terrain": "road",
+      "mark": "world"
+    },
+    "@": {
+      "terrain": "grass",
+      "mark": "start"
+    },
+    "S": {
+      "terrain": "floor_earth",
+      "mark": "sulicena"
+    },
+    "k": {
+      "terrain": "crate",
+      "mark": "sulicena_chest"
+    },
+    "Y": {
+      "terrain": "floor_earth",
+      "mark": "trader"
+    },
+    "H": {
+      "terrain": "floor_earth",
+      "mark": "banna"
+    },
+    "1": {
+      "terrain": "grass",
+      "mark": "v1"
+    },
+    "2": {
+      "terrain": "grass",
+      "mark": "v2"
+    },
+    "3": {
+      "terrain": "grass",
+      "mark": "v3"
+    },
+    "4": {
+      "terrain": "grass",
+      "mark": "v4"
+    },
+    "F": {
+      "terrain": "road",
+      "mark": "to_ford"
+    },
+    "U": {
+      "terrain": "road",
+      "mark": "south"
+    },
+    "e": {
+      "terrain": "grass",
+      "mark": "exit"
+    },
+    "l": "loom",
+    "y": "granary",
+    "L": "stall",
+    "/": "cart",
+    "Q": "quern",
+    "#": "woodpile"
   },
-  "X": "cave_wall",
-  "o": "cave",
-  "z": "bones",
-  "~": "water",
-  "=": "shallows",
-  "m": "mud",
-  "C": "cliff",
-  "W": {
-   "terrain": "road",
-   "mark": "world"
-  },
-  "@": {
-   "terrain": "grass",
-   "mark": "start"
-  },
-  "S": {
-   "terrain": "floor_earth",
-   "mark": "sulicena"
-  },
-  "k": {
-   "terrain": "crate",
-   "mark": "sulicena_chest"
-  },
-  "Y": {
-   "terrain": "floor_earth",
-   "mark": "trader"
-  },
-  "H": {
-   "terrain": "floor_earth",
-   "mark": "banna"
-  },
-  "1": {
-   "terrain": "grass",
-   "mark": "v1"
-  },
-  "2": {
-   "terrain": "grass",
-   "mark": "v2"
-  },
-  "3": {
-   "terrain": "grass",
-   "mark": "v3"
-  },
-  "4": {
-   "terrain": "grass",
-   "mark": "v4"
-  },
-  "F": {
-   "terrain": "road",
-   "mark": "to_ford"
-  },
-  "U": {
-   "terrain": "road",
-   "mark": "south"
-  },
-  "e": {
-   "terrain": "grass",
-   "mark": "exit"
-  }
- },
- "rows": [
-  "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-  "..TT..............._W.................TT",
-  ".TTT..,,,,,,,,,,..._@..,,,,,,,,,,,,.....",
-  "......,,,,,,,,,,..._...,,,,,,,,,,,,.....",
-  "......,,,,,,,,,,..._...,,,,,,,,,,,,.....",
-  "..................._....................",
-  "..wwwwwwwww........_.......wwwwwww......",
-  "..wfffBfffw...1...._.......wffBffw......",
-  "..wfhfSfffd________________dfhfffw......",
-  "..wffffffkw........_.......wfffbfw......",
-  "..wwwwwwwww........_.......wwwwwww......",
-  "..................._....................",
-  "......sssss..2....._...nnnnnnnnn........",
-  "......sxxxs........_...n;;;;;;;n........",
-  "......sfYfd_______._...n;;;;;;;n........",
-  "......sssss......._._..n;;;;;;;n........",
-  "................3.._...nnnnn.nnn........",
-  "..wwwww............_....................",
-  "..wfHfd____________._...........TT......",
-  "..wfhfw............_...4.......TTT......",
-  "..wwwww............_..............b.....",
-  "..b................._...................",
-  "....;;;;;;;;;;;;;;;;_;;;;;;;;;;;;;;.....",
-  "...;;;;;;;;;;;;;;;;;U;;;;;;;;;;;;;;;....",
-  "....................F..................."
- ],
- "arrive_text": "Vindomagos sits in the bend of the river where the salt road crosses the valley: twenty houses, a salt store of real stone, and fields that go all the way to the water. People here have money and know it.",
- "actors": [
-  {
-   "uid": "sulicena",
-   "template": "sulicena",
-   "mark": "sulicena"
-  },
-  {
-   "uid": "vind_trader",
-   "template": "vind_trader",
-   "mark": "trader"
-  },
-  {
-   "uid": "banna",
-   "template": "banna",
-   "mark": "banna"
-  },
-  {
-   "uid": "vind_v1",
-   "template": "vind_villager",
-   "mark": "v1"
-  },
-  {
-   "uid": "vind_v2",
-   "template": "vind_villager_f",
-   "mark": "v2"
-  },
-  {
-   "uid": "vind_v3",
-   "template": "vind_villager",
-   "mark": "v3"
-  },
-  {
-   "uid": "vind_v4",
-   "template": "vind_villager_f",
-   "mark": "v4"
-  }
- ],
- "containers": [
-  {
-   "mark": "sulicena_chest",
-   "name": "Sulicena's chest",
-   "items": [
-    [
-     "roman_wine",
-     2
-    ],
-    [
-     "salt",
-     3
-    ],
-    [
-     "bronze_torque",
-     1
-    ]
-   ],
-   "silver": 60,
-   "lock": 40,
-   "owner": "sulicena"
-  },
-  {
-   "mark": "salt",
-   "name": "Salt crates",
-   "items": [
-    [
-     "salt",
-     8
-    ]
-   ],
-   "owner": "vind_trader"
-  }
- ],
- "exits": [
-  {
-   "mark": "exit",
-   "to": "world",
-   "label": "The salt road"
-  },
-  {
-   "mark": "to_ford",
-   "to": "map:oltis_ford",
-   "entry": "north",
-   "label": "Down to the ford"
-  }
- ]
+  "rows": [
+    "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "..TT..............._W.................TT",
+    ".TTT..,,,,,,,,,,..._@..,,,,,,,,,,,,.....",
+    "......,,,,,,,,,,..._...,,,,,,,,,,,,.....",
+    "......,,,,,,,,,,..._...,,,,,,,,,,,,.....",
+    "..................._../.................",
+    "..wwwwwwwww........_.......wwwwwww......",
+    "..wfffBfffw...1...._.......wffBflw......",
+    "..wfhfSfffd________________dfhfffw......",
+    "..wQfffffkw........_.......wfffbfw......",
+    "..wwwwwwwww........_.......wwwwwww......",
+    "....#.............._../.......y.........",
+    "......wwwww..2....._...nnnnnnnnn........",
+    "......wxxxw..L....._...n;;;;;;;n........",
+    "......wfYfd_______._...n;;;;;;;n........",
+    "......wwwww......._._..n;;;;;;;n........",
+    "................3.._...nnnnn.nnn....y...",
+    "..wwwww.#.........._....................",
+    "..wfHfd____________._...........TT......",
+    "..wfhfw............_...4.......TTT......",
+    "..wwwww............_..............b.....",
+    "..b................._...................",
+    "....;;;;;;;;;;;;;;;;_;;;;;;;;;;;;;;.....",
+    "...;;;;;;;;;;;;;;;;;U;;;;;;;;;;;;;;;....",
+    "....................F..................."
+  ],
+  "arrive_text": "Vindomagos sits in the bend of the river where the salt road crosses the valley: twenty houses, a salt store of timber and daub on a footing of real stone, and fields that go all the way to the water. People here have money and know it.",
+  "actors": [
+    {
+      "uid": "sulicena",
+      "template": "sulicena",
+      "mark": "sulicena"
+    },
+    {
+      "uid": "vind_trader",
+      "template": "vind_trader",
+      "mark": "trader"
+    },
+    {
+      "uid": "banna",
+      "template": "banna",
+      "mark": "banna"
+    },
+    {
+      "uid": "vind_v1",
+      "template": "vind_villager",
+      "mark": "v1"
+    },
+    {
+      "uid": "vind_v2",
+      "template": "vind_villager_f",
+      "mark": "v2"
+    },
+    {
+      "uid": "vind_v3",
+      "template": "vind_villager",
+      "mark": "v3"
+    },
+    {
+      "uid": "vind_v4",
+      "template": "vind_villager_f",
+      "mark": "v4"
+    }
+  ],
+  "containers": [
+    {
+      "mark": "sulicena_chest",
+      "name": "Sulicena's chest",
+      "items": [
+        [
+          "roman_wine",
+          2
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "bronze_torque",
+          1
+        ]
+      ],
+      "silver": 60,
+      "lock": 40,
+      "owner": "sulicena"
+    },
+    {
+      "mark": "salt",
+      "name": "Salt crates",
+      "items": [
+        [
+          "salt",
+          8
+        ]
+      ],
+      "owner": "vind_trader"
+    }
+  ],
+  "exits": [
+    {
+      "mark": "exit",
+      "to": "world",
+      "label": "The salt road"
+    },
+    {
+      "mark": "to_ford",
+      "to": "map:oltis_ford",
+      "entry": "north",
+      "label": "Down to the ford"
+    }
+  ]
 }

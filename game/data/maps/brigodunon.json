@@ -1,242 +1,249 @@
 {
- "id": "brigodunon",
- "name": "Brigodunon",
- "default": "grass",
- "legend": {
-  ".": "grass",
-  ",": "field",
-  ";": "meadow",
-  "_": "road",
-  "P": "pine",
-  "T": "tree",
-  "b": "bush",
-  "r": "rock",
-  "R": "rampart",
-  "w": "wall_wood",
-  "s": "wall_stone",
-  "n": "fence",
-  "f": "floor_earth",
-  "h": "hearth",
-  "B": "bed",
-  "t": "table",
-  "d": "door",
-  "A": {
-   "terrain": "altar",
-   "mark": "altar"
+  "id": "brigodunon",
+  "name": "Brigodunon",
+  "default": "grass",
+  "legend": {
+    ".": "grass",
+    ",": "field",
+    ";": "meadow",
+    "_": "road",
+    "P": "pine",
+    "T": "tree",
+    "b": "bush",
+    "r": "rock",
+    "R": "rampart",
+    "w": "wall_wood",
+    "s": "wall_stone",
+    "n": "fence",
+    "f": "floor_earth",
+    "h": "hearth",
+    "B": "bed",
+    "t": "table",
+    "d": "door",
+    "A": {
+      "terrain": "altar",
+      "mark": "altar"
+    },
+    "x": {
+      "terrain": "crate",
+      "mark": "smith_crate"
+    },
+    "X": "cave_wall",
+    "o": "cave",
+    "z": "bones",
+    "~": "water",
+    "=": "shallows",
+    "m": "mud",
+    "C": "cliff",
+    "@": {
+      "terrain": "floor_earth",
+      "mark": "start"
+    },
+    "M": {
+      "terrain": "floor_earth",
+      "mark": "mother"
+    },
+    "k": {
+      "terrain": "crate",
+      "mark": "home_chest"
+    },
+    "V": {
+      "terrain": "floor_earth",
+      "mark": "vellaunos"
+    },
+    "S": {
+      "terrain": "floor_earth",
+      "mark": "smith"
+    },
+    "v": {
+      "terrain": "grass",
+      "mark": "vates"
+    },
+    "G": {
+      "terrain": "road",
+      "mark": "gate_guard"
+    },
+    "W": {
+      "terrain": "road",
+      "mark": "world"
+    },
+    "1": {
+      "terrain": "road",
+      "mark": "v1"
+    },
+    "2": {
+      "terrain": "grass",
+      "mark": "v2"
+    },
+    "3": {
+      "terrain": "grass",
+      "mark": "v3"
+    },
+    "4": {
+      "terrain": "road",
+      "mark": "v4"
+    },
+    "D": {
+      "terrain": "floor_earth",
+      "mark": "dubnacos_home"
+    },
+    "e": {
+      "terrain": "grass",
+      "mark": "exit"
+    },
+    "E": {
+      "terrain": "road",
+      "mark": "exit"
+    },
+    "l": "loom",
+    "y": "granary",
+    "<": "smithy",
+    "/": "cart",
+    "Q": "quern",
+    "F": "woodpile",
+    "a": "amphorae"
   },
-  "x": {
-   "terrain": "crate",
-   "mark": "smith_crate"
-  },
-  "X": "cave_wall",
-  "o": "cave",
-  "z": "bones",
-  "~": "water",
-  "=": "shallows",
-  "m": "mud",
-  "C": "cliff",
-  "@": {
-   "terrain": "floor_earth",
-   "mark": "start"
-  },
-  "M": {
-   "terrain": "floor_earth",
-   "mark": "mother"
-  },
-  "k": {
-   "terrain": "crate",
-   "mark": "home_chest"
-  },
-  "V": {
-   "terrain": "floor_earth",
-   "mark": "vellaunos"
-  },
-  "S": {
-   "terrain": "floor_earth",
-   "mark": "smith"
-  },
-  "v": {
-   "terrain": "grass",
-   "mark": "vates"
-  },
-  "G": {
-   "terrain": "road",
-   "mark": "gate_guard"
-  },
-  "W": {
-   "terrain": "road",
-   "mark": "world"
-  },
-  "1": {
-   "terrain": "road",
-   "mark": "v1"
-  },
-  "2": {
-   "terrain": "grass",
-   "mark": "v2"
-  },
-  "3": {
-   "terrain": "grass",
-   "mark": "v3"
-  },
-  "4": {
-   "terrain": "road",
-   "mark": "v4"
-  },
-  "D": {
-   "terrain": "floor_earth",
-   "mark": "dubnacos_home"
-  },
-  "e": {
-   "terrain": "grass",
-   "mark": "exit"
-  },
-  "E": {
-   "terrain": "road",
-   "mark": "exit"
-  }
- },
- "rows": [
-  "PPPPPPPPPPPPPPP....TTTTTT.....PPPPPPPPPPPPPP",
-  "PPPPPPPPPP......T..T.A..T...........PPPPPPPP",
-  "PPPPPPP.........T....v...T.............PPPPP",
-  "PPPP......RRRRRRRRRRRR_RRRRRRRRRRR........PP",
-  "PP.......RR.........._...........RR.......PP",
-  "P.......RR..wwwwwww.._...wwwww....RR.......P",
-  "........R...wfffBfw.._...wfhfw.....R........",
-  "........R...wf@hffw.._...wfMfd.....R........",
-  "........R...wfkfffw.._...wwwww.....R........",
-  "........R...wwwdwww.._.............R........",
-  "........R......_______________1....R........",
-  "........R..........._wwwwwwwwwwwww.R........",
-  "........R..2........_wfffffffffffw.R........",
-  "........R...........dfffttfffffffw.R........",
-  "........R...........wffhfffVfffffw.R........",
-  "........R...........wfffttfffffffw.R........",
-  "........R...........wffffffffffffw.R........",
-  "........R...........wwwwwwwwwwwwww.R........",
-  "........R..wwwww.....3.............R........",
-  "........R..wfSfd____________.......R........",
-  "........R..wfhxw.....____...wwwww..R........",
-  "........R..wwwww.......4_...wfDfd..R........",
-  "........RR...............__.wwwww.RR........",
-  ".........RR...............__.....RR.........",
-  "..........RRRRRRRRRRRRRRRR_GRRRRRR..........",
-  ",,,,,,,,,,,,,,,,,,,,,,,,,,_W,,,,,,,,,,,,,,,,",
-  ",,,,,,,,,,,,,,,,,,,,,,,,,_,,,,,,,,,,,,,,,,,,",
-  ";;;;b;;;;;;;;;;;;;;;;;;;_;;;;;;;;b;;;;;;;;;;",
-  ";;;;;;;;;;;;;;;;;;;;;;;;_;;;;;;;;;;;;;;;;;;;",
-  "eeeeeeeeeeeeeeeeeeeeeeeeEeeeeeeeeeeeeeeeeeee"
- ],
- "arrive_text": "Brigodunon: forty houses behind a rampart of timber and limestone, on a hill above the river. Everyone you have ever known is here, and this morning they are all talking at once.",
- "arrive_dialogue": "brig_wake",
- "actors": [
-  {
-   "uid": "matugenta",
-   "template": "matugenta",
-   "mark": "mother"
-  },
-  {
-   "uid": "vellaunos",
-   "template": "vellaunos",
-   "mark": "vellaunos"
-  },
-  {
-   "uid": "cobnertos",
-   "template": "cobnertos",
-   "mark": "smith"
-  },
-  {
-   "uid": "cintugnatos",
-   "template": "cintugnatos",
-   "mark": "vates"
-  },
-  {
-   "uid": "moccos",
-   "template": "moccos",
-   "mark": "gate_guard"
-  },
-  {
-   "uid": "brig_v1",
-   "template": "brig_villager",
-   "mark": "v1"
-  },
-  {
-   "uid": "brig_v2",
-   "template": "brig_villager_f",
-   "mark": "v2"
-  },
-  {
-   "uid": "brig_v3",
-   "template": "brig_warrior",
-   "mark": "v3"
-  },
-  {
-   "uid": "brig_v4",
-   "template": "brig_villager_f",
-   "mark": "v4"
-  },
-  {
-   "uid": "dubnacos_home",
-   "template": "dubnacos_home",
-   "mark": "dubnacos_home",
-   "if_flag": "dubnacos_pardoned"
-  }
- ],
- "containers": [
-  {
-   "mark": "home_chest",
-   "name": "Your family's chest",
-   "items": [
-    [
-     "bread",
-     2
-    ],
-    [
-     "bandage",
-     2
-    ],
-    [
-     "sling",
-     1
-    ],
-    [
-     "sling_stone",
-     12
-    ]
-   ],
-   "silver": 5
-  },
-  {
-   "mark": "smith_crate",
-   "name": "Smith's crate",
-   "items": [
-    [
-     "javelin",
-     3
-    ],
-    [
-     "leather_cap",
-     1
-    ]
-   ],
-   "silver": 30,
-   "lock": 30,
-   "owner": "cobnertos"
-  }
- ],
- "exits": [
-  {
-   "mark": "exit",
-   "to": "world",
-   "label": "The road out"
-  }
- ],
- "triggers": [
-  {
-   "mark": "altar",
-   "id": "shrine_seen",
-   "say": "The shrine's offering box lies open on the altar stone, its lid split. Whatever was in it is gone."
-  }
- ]
+  "rows": [
+    "PPPPPPPPPPPPPPP....TTTTTT.....PPPPPPPPPPPPPP",
+    "PPPPPPPPPP......T..T.A..T...........PPPPPPPP",
+    "PPPPPPP.........T....v...T.............PPPPP",
+    "PPPP......RRRRRRRRRRRR_RRRRRRRRRRR........PP",
+    "PP.......RR.........._...........RR.......PP",
+    "P.......RR..wwwwwww.._.y.wwwww....RR.......P",
+    "........R...wfffBfw.._...wQhfw.....R........",
+    "........R.F.wf@hffw.._...wfMfd.....R........",
+    "........R...wfkfffw.._...wwwww.....R........",
+    "........R...wwwdwww.._.............R........",
+    "........R......_______________1....R........",
+    "........R..........._wwwwwwwwwwwww.R........",
+    "........R..2........_wfffffffffffw.R........",
+    "........R...........dfffttfffffffw.R........",
+    "........R...........wffhfffVfffffw.R........",
+    "........R...........wfffttfffffffw.R........",
+    "........R...........wfafffffffflfw.R........",
+    "........R...........wwwwwwwwwwwwww.R........",
+    "........R..wwwww.....3.............R........",
+    "........R..wfSfd____________.......R........",
+    "........R..wfhxw.<...____...wwwww..R........",
+    "........R..wwwww.......4_...wfDfd..R........",
+    "........RR...F......../..__.wwwww.RR........",
+    ".........RR...............__.....RR.........",
+    "..........RRRRRRRRRRRRRRRR_GRRRRRR..........",
+    ",,,,,,,,,,,,,,,,,,,,,,,,,,_W,,,,,,,,,,,,,,,,",
+    ",,,,,,,,,,,,,,,,,,,,,,,,,_,,,,,,,,,,,,,,,,,,",
+    ";;;;b;;;;;;;;;;;;;;;;;;;_;;;;;;;;b;;;;;;;;;;",
+    ";;;;;;;;;;;;;;;;;;;;;;;;_;;;;;;;;;;;;;;;;;;;",
+    "eeeeeeeeeeeeeeeeeeeeeeeeEeeeeeeeeeeeeeeeeeee"
+  ],
+  "arrive_text": "Brigodunon: forty houses behind a rampart of timber and limestone, on a hill above the river. Everyone you have ever known is here, and this morning they are all talking at once.",
+  "arrive_dialogue": "brig_wake",
+  "actors": [
+    {
+      "uid": "matugenta",
+      "template": "matugenta",
+      "mark": "mother"
+    },
+    {
+      "uid": "vellaunos",
+      "template": "vellaunos",
+      "mark": "vellaunos"
+    },
+    {
+      "uid": "cobnertos",
+      "template": "cobnertos",
+      "mark": "smith"
+    },
+    {
+      "uid": "cintugnatos",
+      "template": "cintugnatos",
+      "mark": "vates"
+    },
+    {
+      "uid": "moccos",
+      "template": "moccos",
+      "mark": "gate_guard"
+    },
+    {
+      "uid": "brig_v1",
+      "template": "brig_villager",
+      "mark": "v1"
+    },
+    {
+      "uid": "brig_v2",
+      "template": "brig_villager_f",
+      "mark": "v2"
+    },
+    {
+      "uid": "brig_v3",
+      "template": "brig_warrior",
+      "mark": "v3"
+    },
+    {
+      "uid": "brig_v4",
+      "template": "brig_villager_f",
+      "mark": "v4"
+    },
+    {
+      "uid": "dubnacos_home",
+      "template": "dubnacos_home",
+      "mark": "dubnacos_home",
+      "if_flag": "dubnacos_pardoned"
+    }
+  ],
+  "containers": [
+    {
+      "mark": "home_chest",
+      "name": "Your family's chest",
+      "items": [
+        [
+          "bread",
+          2
+        ],
+        [
+          "bandage",
+          2
+        ],
+        [
+          "sling",
+          1
+        ],
+        [
+          "sling_stone",
+          12
+        ]
+      ],
+      "silver": 5
+    },
+    {
+      "mark": "smith_crate",
+      "name": "Smith's crate",
+      "items": [
+        [
+          "javelin",
+          3
+        ],
+        [
+          "leather_cap",
+          1
+        ]
+      ],
+      "silver": 30,
+      "lock": 30,
+      "owner": "cobnertos"
+    }
+  ],
+  "exits": [
+    {
+      "mark": "exit",
+      "to": "world",
+      "label": "The road out"
+    }
+  ],
+  "triggers": [
+    {
+      "mark": "altar",
+      "id": "shrine_seen",
+      "say": "The shrine's offering box lies open on the altar stone, its lid split. Whatever was in it is gone."
+    }
+  ]
 }

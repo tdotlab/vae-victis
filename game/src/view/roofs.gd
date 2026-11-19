@@ -12,7 +12,7 @@ extends RefCounted
 const WALLS := {"wall_wood": true, "wall_stone": true, "door": true}
 const EAVE := 24.0   # screen px: the eaves hang a little below the wall tops
 const OVER := 16.0   # px the eaves reach past the wall line
-const PITCH := 42.0  # degrees
+const PITCH := 48.0  # degrees: the research puts Gallic thatch nearer 48 than 45
 const ZS := 0.785    # screen px per world px of height (cos of the camera's elevation)
 const UV_SCALE := 1.0 / 128.0
 # Toward the sun in (x, flat y, up); the sprites' sun shines from the

@@ -168,7 +168,8 @@ static func draw_thing(ci: CanvasItem, c: Vector2i, terrain: String, fade: float
 ## carry, each a layer of its own. Beasts with a sprite (by NPC template)
 ## draw the same way without the gear. Returns false when there is no sprite,
 ## so the caller can fall back to Paint.
-static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: float, ring: Color) -> bool:
+## facing overrides the actor's own (portraits face the viewer).
+static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: float, ring: Color, facing := -1) -> bool:
 	var f: Dictionary = manifest().get("figure", {})
 	if a.look.get("beast", false):
 		f = manifest().get("beasts", {}).get(a.template, {})
@@ -182,7 +183,7 @@ static func draw_figure(ci: CanvasItem, pos: Vector2, a: Actor, walk_phase: floa
 	var idx := 18
 	if not down:
 		var s := sin(walk_phase)
-		idx = a.facing * 3 + (1 if s > 0.35 else (2 if s < -0.35 else 0))
+		idx = (a.facing if facing < 0 else facing) * 3 + (1 if s > 0.35 else (2 if s < -0.35 else 0))
 	var look := a.look
 	var tints := {
 		"tunic": Color(look.get("tunic", Paint._faction_color(a.faction))),

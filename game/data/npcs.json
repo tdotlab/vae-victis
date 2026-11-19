@@ -1686,9 +1686,9 @@
    "silver": 40,
    "desc": "One of the magistrates of Avaricum: a big, soft-spoken man with black eyebrows and a gold torque he keeps touching, as if to make sure the city is still there.",
    "look": {
-    "tunic": "#3a4a6a",
-    "cloak": "#6a2a2a",
-    "cloak2": "#c8a040",
+    "tunic": "#6a2a2a",
+    "cloak": "#3a4a6a",
+    "cloak2": "#6a7a9a",
     "hair": "#4a4a44",
     "hair_style": "long",
     "face": "moustache",
