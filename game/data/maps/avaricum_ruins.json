@@ -3,6 +3,7 @@
  "name": "Avaricum, after",
  "default": "grass",
  "weather": "rain",
+ "fires": false,
  "legend": {
   ".": "grass",
   ",": "field",
