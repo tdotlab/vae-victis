@@ -81,7 +81,7 @@ func _build_bar() -> void:
 	_log.bbcode_enabled = true
 	_log.scroll_following = true
 	_log.custom_minimum_size = Vector2(440, 0)
-	_log.add_theme_font_size_override("normal_font_size", 14)
+	_log.add_theme_font_size_override("normal_font_size", 16)
 	_log.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
 	well.add_child(_log)
 
@@ -98,14 +98,14 @@ func _build_bar() -> void:
 	hv.alignment = BoxContainer.ALIGNMENT_CENTER
 	hv.add_theme_constant_override("separation", -2)
 	hwell.add_child(hv)
-	hv.add_child(UITheme.caps("Health", 10))
-	_hp = UITheme.label("", 30, UITheme.TEXT)
+	hv.add_child(UITheme.caps("Health", 11))
+	_hp = UITheme.title_label("", 30, UITheme.TEXT)
 	_hp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	hv.add_child(_hp)
 	_hp_max = UITheme.label("", 12, UITheme.DIM)
 	_hp_max.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	hv.add_child(_hp_max)
-	_date = UITheme.label("", 12, UITheme.DIM)
+	_date = UITheme.label("", 13, UITheme.DIM)
 	_date.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_date.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
 	_date.add_theme_constant_override("shadow_offset_y", 1)
@@ -138,7 +138,7 @@ func _build_bar() -> void:
 	wv.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	wv.add_theme_constant_override("separation", 2)
 	_weapon_btn.add_child(wv)
-	var wcap := UITheme.caps("Weapon", 10)
+	var wcap := UITheme.caps("Weapon", 11)
 	wcap.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	wv.add_child(wcap)
 	_weapon_name = UITheme.label("", 17, UITheme.TEXT)
@@ -166,7 +166,7 @@ func _build_bar() -> void:
 	if map:
 		_end_turn.pressed.connect(func(): map.combat.player_end_turn())
 	bcol.add_child(_end_turn)
-	_end_turn_label = UITheme.caps("End turn", 9)
+	_end_turn_label = UITheme.caps("End turn", 10)
 	_end_turn_label.position = Vector2(0, 36)
 	_end_turn_label.size = Vector2(88, 16)
 	_end_turn_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -205,7 +205,7 @@ func _tb(text: String, tip: String, cb: Callable) -> Button:
 	b.custom_minimum_size.y = 32
 	b.tooltip_text = tip
 	b.add_theme_font_override("font", UITheme.caps_font())
-	b.add_theme_font_size_override("font_size", 11)
+	b.add_theme_font_size_override("font_size", 12)
 	b.add_theme_color_override("font_color", UITheme.TEXT.darkened(0.08))
 	b.add_theme_color_override("font_hover_color", UITheme.BRONZE)
 	return b

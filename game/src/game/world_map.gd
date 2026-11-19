@@ -34,7 +34,7 @@ func _ready() -> void:
 	var gs := Game.state
 	gs.map_id = ""
 	world = WorldData.load_world()
-	_font = ThemeDB.fallback_font
+	_font = UITheme.BODY_FONT
 	_pos = gs.world_pos
 	if not world.in_bounds(_pos):
 		var home := world.location(DB.story().get("home_location", "brigodunon"))

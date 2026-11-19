@@ -1010,7 +1010,7 @@ func _draw_things(ci: CanvasItem) -> void:
 		var pos := from.lerp(to, k) - Vector2(0, sin(k * PI) * 18.0)
 		var dir := (to - from).normalized()
 		ci.draw_line(pos - dir * 9.0, pos + dir * 3.0, p[3], 2.0)
-	var font := ThemeDB.fallback_font
+	var font := UITheme.BODY_FONT
 	for f in floaters:
 		var pos: Vector2 = f[0] - Vector2(0, f[3] * 30.0)
 		var col: Color = f[2]

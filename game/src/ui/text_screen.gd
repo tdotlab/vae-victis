@@ -20,7 +20,7 @@ func _ready() -> void:
 	vb.custom_minimum_size.x = 760
 	vb.add_theme_constant_override("separation", 18)
 	center.add_child(vb)
-	var t := UITheme.label(args.get("title", ""), 34, UITheme.BRONZE)
+	var t := UITheme.title_label(args.get("title", ""), 34)
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(t)
 	var body := RichTextLabel.new()

@@ -8,7 +8,7 @@ Newest first. Each entry: the decision, and why.
 - **The UI art is procedural, from `art/ui.py`,** not painted or downloaded: height fields (hammer dents, blurred noise) lit from the upper left, supersampled. Every piece regenerates from one script, and nine-patch centers tile, so the bar fits any window width.
 - **Windows sit above the bar when they fit** (barter, gear, journal, loot, dialogue), as in Fallout; a window too tall for that space (the character sheet) covers the whole screen.
 - **The world map hides the turn controls.** Action points and END TURN mean nothing on the road.
-- **The interface font is still Godot's default sans.** A display face for the caps labels would help most of all, but only sans and mono fonts are on disk, and downloading one is T's call.
+- **Two fonts, both SIL Open Font License, in `game/assets/fonts/`:** Cinzel, a face drawn from inscribed capitals, for anything cut into the iron (bar labels, buttons, window titles, names, the health number, the title screen); Alegreya Sans, a humanist sans that stays readable small, for everything read. Latin capitals suit Gaul: the Coligny calendar and Gallic coin legends use them.
 
 ## 2026-11-18 (art pass: people, props, weather)
 

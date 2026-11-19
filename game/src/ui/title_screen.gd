@@ -19,7 +19,7 @@ func _ready() -> void:
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 12)
 	center.add_child(vb)
-	var t := UITheme.label("VAE VICTIS", 72, UITheme.BRONZE)
+	var t := UITheme.title_label("VAE VICTIS", 72)
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	t.add_theme_color_override("font_outline_color", Color("#0a0b0d"))
 	t.add_theme_constant_override("outline_size", 10)

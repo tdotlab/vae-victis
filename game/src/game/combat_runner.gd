@@ -540,7 +540,7 @@ func draw_overlay(ci: CanvasItem) -> void:
 		return
 	var h := map.hover
 	var target := map.actor_at(h)
-	var font := ThemeDB.fallback_font
+	var font := UITheme.BODY_FONT
 	if target and target != map.player and not target.is_companion:
 		var w := map.player.sheet.weapon_def()
 		var txt := "%d%%" % chance_for(map.player, target, w, "torso")

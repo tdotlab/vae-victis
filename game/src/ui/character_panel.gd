@@ -45,7 +45,7 @@ func _refresh() -> void:
 	var c1 := VBoxContainer.new()
 	c1.custom_minimum_size.x = 260
 	_body.add_child(c1)
-	c1.add_child(UITheme.label(s.name, 24, UITheme.BRONZE))
+	c1.add_child(UITheme.title_label(s.name, 24))
 	c1.add_child(UITheme.label("Level %d   (%d / %d xp)" % [s.level, s.xp, CharacterSheet.xp_for_level(s.level + 1)], 14))
 	c1.add_child(UITheme.label("Honor: %s" % Game.honor_word(), 14))
 	c1.add_child(UITheme.label("Renown: %s" % Game.renown_word(), 14))

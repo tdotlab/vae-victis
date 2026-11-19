@@ -39,7 +39,7 @@ func _ready() -> void:
 	var top := HBoxContainer.new()
 	top.add_theme_constant_override("separation", 12)
 	vb.add_child(top)
-	top.add_child(UITheme.label("Who are you?", 26, UITheme.BRONZE))
+	top.add_child(UITheme.title_label("Who are you?", 26))
 	_name = LineEdit.new()
 	_name.placeholder_text = "Your name"
 	_name.text = pre.get("name", "")

@@ -17,13 +17,23 @@ const WARN := Color("#e0b050")
 
 static var _theme: Theme
 static var _caps: FontVariation
+static var _title: FontVariation
+## Alegreya Sans for reading, Cinzel for anything cut into the iron. Both
+## SIL Open Font License; the licenses sit beside the fonts.
+const BODY_FONT := preload("res://assets/fonts/AlegreyaSans-Regular.ttf")
+const BOLD_FONT := preload("res://assets/fonts/AlegreyaSans-Bold.ttf")
+const ITALIC_FONT := preload("res://assets/fonts/AlegreyaSans-Italic.ttf")
+const CARVED_FONT := preload("res://assets/fonts/Cinzel.ttf")
 
 
 static func get_theme() -> Theme:
 	if _theme:
 		return _theme
 	var t := Theme.new()
-	t.default_font_size = 15
+	t.default_font = BODY_FONT
+	t.default_font_size = 16
+	t.set_font("bold_font", "RichTextLabel", BOLD_FONT)
+	t.set_font("italics_font", "RichTextLabel", ITALIC_FONT)
 	var panel := tex_box("panel", 20, 16)
 	panel.axis_stretch_horizontal = StyleBoxTexture.AXIS_STRETCH_MODE_TILE_FIT
 	panel.axis_stretch_vertical = StyleBoxTexture.AXIS_STRETCH_MODE_TILE_FIT
@@ -78,15 +88,32 @@ static func button_box(name: String) -> StyleBoxTexture:
 	return s
 
 
-## Small capitals with a little air between them, for labels cut into the
-## iron ("HEALTH", "GEAR").
+## Capitals with a little air between them, for labels cut into the iron
+## ("HEALTH", "GEAR").
 static func caps_font() -> FontVariation:
 	if _caps == null:
 		_caps = FontVariation.new()
-		_caps.base_font = ThemeDB.fallback_font
-		_caps.spacing_glyph = 2
-		_caps.variation_embolden = 0.4
+		_caps.base_font = CARVED_FONT
+		_caps.variation_opentype = {TextServerManager.get_primary_interface().name_to_tag("wght"): 700}
+		_caps.spacing_glyph = 1
 	return _caps
+
+
+## Window titles and names.
+static func title_font() -> FontVariation:
+	if _title == null:
+		_title = FontVariation.new()
+		_title.base_font = CARVED_FONT
+		_title.variation_opentype = {TextServerManager.get_primary_interface().name_to_tag("wght"): 600}
+	return _title
+
+
+static func title_label(text: String, size: int = 22, color: Color = BRONZE) -> Label:
+	var l := label(text, size, color)
+	l.add_theme_font_override("font", title_font())
+	l.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+	l.add_theme_constant_override("shadow_offset_y", 1)
+	return l
 
 
 static func caps(text: String, size: int = 11, color: Color = BRONZE) -> Label:
@@ -150,7 +177,7 @@ static func modal(parent: Node, title: String, size: Vector2) -> Array:
 	vb.add_theme_constant_override("separation", 8)
 	panel.add_child(vb)
 	if title != "":
-		var t := label(title, 22, BRONZE)
+		var t := title_label(title, 22)
 		t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		vb.add_child(t)
 	parent.add_child(root)

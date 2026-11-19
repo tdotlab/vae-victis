@@ -72,7 +72,7 @@ func _ready() -> void:
 	row.add_child(vb)
 	_dlg = Dialogue.load_dialogue(dlg_id)
 	var who: String = speaker.display_name() if speaker else _dlg.get("speaker", "")
-	var title := UITheme.label(who, 22, UITheme.BRONZE)
+	var title := UITheme.title_label(who, 22)
 	vb.add_child(title)
 	_text = RichTextLabel.new()
 	_text.bbcode_enabled = true
