@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-11-19.
+Updated 2026-11-20.
 
 **Phase:** T has played the demo ("a damn solid foundation"). The cleanup pass is done (the clock follows Caesar, the research's text fixes, three bugs). The figure rework and grit pass are done: women, Roman kit, optional torcs, moustaches and beards, seven hairstyles, hide capes, checked cloaks, an iron Gallic helmet and a bird helm; harder light, outlines, a darker winter ground and a color grade. Phase 3 has started: Gergovia and Avaricum are built. An art pass followed: hoods and headwraps, a shorter stride for women, ten new props and rebuilt furniture on every town map, smoke, firelight and rain, steeper roofs, and the speaker's figure in the dialogue window. The interface was then rebuilt: an iron and bronze bar with a La Tène rim, action-point studs and a shield boss for END TURN, iron window panels, windows that sit above the bar, and two real fonts (Cinzel, Alegreya Sans). All of it is pushed and live online since 2026-11-19. Next: T plays both, then Cenabum and the Carnute forest. Not yet applied from [research/](research/README.md): the rampart redraw. Gear swaps the research suggests but that change balance are left for T: rider archers with javelins, the German riders' leather jerkins for hide cloaks, padded linen for Vellaunos, and a sword worn on the right hip (the sword layer has no scabbard).
 
@@ -35,6 +35,6 @@ Updated 2026-11-19.
 - Art: the indoor firelight (shown only while the player is inside) is untested on screen, water is a plain texture, skin tone is not recolored, hair can show under a cloak in back views, and gear cut by the body holdout gets a thin outline on the body edge, only the wolf has a beast sprite (other beasts fall back to the placeholder), and the world map and title screen are unchanged.
 - Consequences that pay off later (hired riders in Act III, the discovered lie, the pardoned exile, Brigodunon's levy, the king's surety, the betrayed clerk) are recorded as flags; the content that uses them doesn't exist yet.
 - Theron has no personal quest beyond joining, no way to part ways, and no ending slide yet.
-- Balance is untested by a human: check odds, enemy strength, prices.
+- Balance: one playtester found the road wolves too deadly, and `tools/arena.sh` agreed, so wolves were softened (2026-11-20). The arena also shows fresh characters lose nearly every fight against the road brigands and the Roman foragers (0 to 4% even with a sword and shield); not yet decided whether that is intended, since the player can avoid them if they spot them first. Prices and quest-fight odds are untested.
 
 **Waiting on T:** the open questions at the end of [DESIGN.md](DESIGN.md), including real names for the placeholders.

@@ -272,8 +272,25 @@
  ],
  "encounters": [
   {
+   "id": "wolf_lone",
+   "weight": 9,
+   "terrain": [
+    "forest",
+    "hills",
+    "plain"
+   ],
+   "days": [
+    0,
+    110
+   ],
+   "actors": [
+    "wolf"
+   ],
+   "text": "A lone wolf, ribs showing, has been following your tracks."
+  },
+  {
    "id": "wolves",
-   "weight": 10,
+   "weight": 4,
    "terrain": [
     "forest",
     "hills",
@@ -292,7 +309,7 @@
   },
   {
    "id": "wolf_pair",
-   "weight": 6,
+   "weight": 7,
    "terrain": [
     "plain",
     "marsh"

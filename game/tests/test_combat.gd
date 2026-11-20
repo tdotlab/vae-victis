@@ -63,6 +63,25 @@ func test_turn_order_by_sequence() -> void:
 	eq(o[0], fast)
 
 
+func test_wolves_break_sooner_than_men() -> void:
+	# Same wounds and morale; the wolf's template "nerve" makes it run.
+	var dice := Dice.new()
+	dice.reseed(11)
+	var wolf_runs := 0
+	var man_runs := 0
+	for i in range(300):
+		var wolf := Actor.from_template("wolf")
+		var man := Actor.from_template("brigand")
+		for a in [wolf, man]:
+			a.sheet.hp = a.sheet.max_hp() / 3
+		if not CombatRules.morale_holds(wolf, 10, dice):
+			wolf_runs += 1
+		if not CombatRules.morale_holds(man, 10, dice):
+			man_runs += 1
+	check(wolf_runs > 100, "a hurt wolf usually runs")
+	check(wolf_runs > man_runs * 2, "wolves run far sooner than brigands")
+
+
 func test_trade_prices() -> void:
 	var p := CharacterSheet.create("P", {"PRE": 5}, ["barter"])
 	var t := CharacterSheet.create("T", {"PRE": 5}, [])

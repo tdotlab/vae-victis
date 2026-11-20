@@ -99,10 +99,11 @@
    "faction": "beast",
    "hostile": true,
    "ai": "wander",
+   "nerve": -45,
    "attrs": {
-    "STR": 4,
-    "AGI": 8,
-    "END": 4,
+    "STR": 3,
+    "AGI": 7,
+    "END": 3,
     "PER": 8
    },
    "tags": [

@@ -42,6 +42,12 @@ tools/shot.sh sandbox /tmp/shot.png 40 "walk:12:5,fight"
 `shot.sh` runs the game windowed in a scenario, performs the listed actions and saves a screenshot. Scenarios and actions are in `game/src/game/scenarios.gd` (`sandbox`, `fight`, `world`, `newgame`, `create`, or any map id). Actions include `talk:<uid>`, `key:<n>` (a dialogue reply), `walk:x:y`, and state setters such as `quest:<id>:<stage>`, `flag:<name>`, `give:<item>`, `known:<location>`.
 
 ```bash
+tools/arena.sh
+```
+
+The combat arena: fresh character builds fight every random encounter a few hundred times each on open ground, and the table shows win rates. Use it after touching enemy stats, weapons or `rules.json`. Options: `--runs=N`, `--only=<encounter id>`, `--turns`. It's `game/tests/arena.gd`; the turn loop is a stripped copy of `CombatRunner`'s, the math is `CombatRules`'s.
+
+```bash
 tools/export-web.sh && tools/serve-web.sh
 ```
 

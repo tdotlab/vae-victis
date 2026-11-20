@@ -2,6 +2,12 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-20 (balance)
+
+- **Combat arena instead of guesswork.** A playtester said wolves were too hard. `tools/arena.sh` runs fresh builds against every random encounter headless and prints win rates, so balance changes can be checked in numbers. It copies the turn loop and reuses `CombatRules` for the math, so it drifts if `CombatRunner` changes.
+- **Wolves.** A fresh character lost to three wolves nearly every time: wolves had a person's hit points and nine action points, bit three times a turn, and never broke. Now: lower Strength, Endurance and Agility, and a template `nerve` of -45 so a hurt wolf runs. The three-wolf pack is rarer, and a lone wolf was added. Result: a pair is a fair fight, and the pack punishes a bare dagger but loses to a sword and shield.
+- **`nerve` on NPC templates** is a flat modifier to morale tests. Use it for animals and anyone with no reason to die for you.
+
 ## 2026-11-19 (interface)
 
 - **The interface bar is an object in the world, not a debug strip.** A hammered iron plate under a bronze rim cut with a La Tène wave tendril, riveted end caps, sunk wax-dark wells for the log, health and weapon, a row of bronze studs for action points, and END TURN on a round shield boss modelled on the Vachères boss (ten rivets; see research/dress-and-arms.md). Fallout's bar did the same job in its own world's materials. Iron, bronze and verdigris only: T hates brown, so no leather.

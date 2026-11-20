@@ -130,6 +130,9 @@ static func morale_holds(a: Actor, shock: int, dice: Dice) -> bool:
 	if hp_frac > 0.5 and a.morale > 40:
 		return true
 	var nerve := a.morale + a.sheet.attr("END") * 3 + a.sheet.attr("PRE") * 2
+	# Animals and the like carry a template "nerve" modifier: a wolf has no
+	# stake in your purse and runs once it's hurt.
+	nerve += int(DB.npc_template(a.template).get("nerve", 0))
 	return dice.chance(clampi(nerve, 5, 95))
 
 
