@@ -63,7 +63,7 @@ He goes very still. "Where was that?"
 * "I'll keep it for now." -> hub
 
 === idol_give
-~ take grotto_idol; xp 50; honor 5; give poultice 2
+~ take grotto_idol; set idol_returned; xp 50; honor 5; give poultice 2
 He wraps it in a white cloth and holds it like a child.
 "Here. For the road." Two poultices, wrapped in leaves.
 -> hub

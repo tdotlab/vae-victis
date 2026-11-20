@@ -1,0 +1,33 @@
+// Toutillos, a novice of the grove: dresses wounds, explains the vigil.
+=== start
+[!flag tou_met] -> first
+He stops mouthing verses. "Oh. You again. Are you hurt?"
+-> hub
+
+=== first
+~ set tou_met
+A boy in undyed wool is walking the inside of the ditch with his lips moving, counting his steps, or his verses, or both. He stops when he sees you and looks embarrassed, as if you'd caught him talking to himself, which you have.
+
+"Toutillos. I'm learning." He gestures vaguely at everything. "Seven years. Thirteen to go. I'm on the descents of the Senones. There are a lot of Senones."
+-> hub
+
+=== hub
+* "Can you see to my wounds?" -> heal
+* [quest judgment active] "What's the vigil?" -> vigil
+* "What happens if you forget a verse?" -> forget
+* "Goodbye." -> END
+
+=== heal
+~ heal 100; time 60
+He's better at this than at the Senones. He washes the wounds with something that stings and packs them with something that smells of moss, and binds them with clean linen, humming. "Senouindos says a man who can't heal shouldn't be allowed to sacrifice. He says it about once a week."
+-> hub
+
+=== vigil
+"You sit under the old oak at the north end of the grove, from dark to dawn, alone, without sleeping and without fire. The gods come and look at you." He says it simply, as a fact about the weather. "Most people run before midnight. One man last winter swore a boar spoke to him. I don't think it did. I think he was cold."
+
+"If you last till morning, Senouindos listens to you differently. He won't say so. But he does."
+-> hub
+
+=== forget
+He looks genuinely frightened for a moment. "You start again. From the beginning. From the descents of the gods." He swallows. "I haven't forgotten one in three years."
+-> hub

@@ -1,0 +1,14 @@
+// Pilgrims waiting at the grove with their quarrels.
+=== start
+[flag pledge_void] -> heard
+"Three days I've been waiting. A boundary stone, moved in the night, by my own brother." They spit. "He says it was the frost. Frost doesn't move a stone uphill."
+* "Good luck." -> END
+* "Who's next to be heard?" -> next
+
+=== next
+"Whoever Senouindos looks at." They shrug. "Some people give first, at the pit. Some sit the night under the oak. I've got nothing to give and I'm not sitting under that tree. So I wait."
+* Go. -> END
+
+=== heard
+"You're the Cadurcan he judged for. We all heard him." They look at you with something between envy and fear. "Free of Rome, he said. Out loud. With the Aedui's people standing right there." They lower their voice. "I'd not want to be those Aedui, going home."
+* Go. -> END

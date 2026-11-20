@@ -1,0 +1,20 @@
+// The offering pit inside the enclosure (after Gournay-sur-Aronde). A gift
+// to the gods before asking for judgment opens a plea to Senouindos.
+@speaker The pit
+=== start
+[flag judg_gift] -> given
+A pit in the middle of the enclosure, deep and squared, lined with clay. Down in the dark at the bottom there are bones, cattle mostly, and the glint of bent iron. The smell is old and not quite gone.
+* [item gold_torque] Throw in a gold torque. -> give ~ take gold_torque
+* [item bronze_torque] Throw in a bronze torque. -> give ~ take bronze_torque
+* [item gallic_sword] Bend a sword over your knee and throw it in. -> give ~ take gallic_sword
+* [silver 50] Throw in fifty silver, a handful at a time. -> give ~ silver -50
+* Step back from the edge. -> END
+
+=== give
+~ set judg_gift; honor 2
+It goes down into the dark without a sound you can hear. Nothing happens. Nothing was supposed to.
+* Go. -> END
+
+=== given
+The pit. Somewhere down there is what you gave.
+* Go. -> END

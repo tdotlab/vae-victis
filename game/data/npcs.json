@@ -2903,6 +2903,107 @@
     "hair": "#b8b0a8",
     "hair_style": "bun"
    }
+  },
+  {
+   "id": "senouindos",
+   "name": "Senouindos",
+   "faction": "druids",
+   "ai": "idle",
+   "dialogue": "for_senouindos",
+   "attrs": {
+    "WIT": 8,
+    "PRE": 8,
+    "PER": 6,
+    "FOR": 7
+   },
+   "skills": {
+    "lore": 90,
+    "speech": 60,
+    "healing": 70
+   },
+   "desc": "A very old man in undyed wool, bald as an egg, with a beard he has stopped bothering to trim and eyes that have read the entrails of more bulls than you have eaten. He sits as if the grove had been planted round him.",
+   "look": {
+    "tunic": "#d8d2c4",
+    "cloak": "#c8c2b2",
+    "hair": "#e0dcd4",
+    "hair_style": "short",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "bitugenos",
+   "name": "Bitugenos",
+   "faction": "druids",
+   "ai": "idle",
+   "dialogue": "for_bitugenos",
+   "attrs": {
+    "WIT": 7,
+    "PRE": 7
+   },
+   "skills": {
+    "lore": 55,
+    "speech": 55
+   },
+   "desc": "A bard: a man of forty with a lyre on his knee and a voice that carries further than he means it to. He knows the names of everyone's grandfathers, and what each of them did wrong.",
+   "look": {
+    "tunic": "#3a5a6a",
+    "cloak": "#6a3a4a",
+    "hair": "#a07a40",
+    "hair_style": "long",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "toutillos",
+   "name": "Toutillos",
+   "faction": "druids",
+   "ai": "idle",
+   "dialogue": "for_toutillos",
+   "attrs": {
+    "WIT": 6,
+    "AGI": 6
+   },
+   "skills": {
+    "lore": 30,
+    "healing": 45
+   },
+   "desc": "A novice of fourteen or so, ink-less and book-less, mouthing verses under his breath. He has seven years of them learned and thirteen to go.",
+   "look": {
+    "tunic": "#c8c2b2",
+    "hair": "#6a4020",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "for_pilgrim",
+   "name": "Pilgrim",
+   "faction": "druids",
+   "ai": "wander",
+   "dialogue": "for_pilgrims",
+   "attrs": {},
+   "desc": "Someone who has walked a long way to have a quarrel judged.",
+   "look": {
+    "tunic": "#5a6a4a",
+    "cloak": "#4a4a5a",
+    "hair": "#8a6a3a",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "for_pilgrim_f",
+   "name": "Pilgrim",
+   "sex": "f",
+   "faction": "druids",
+   "ai": "wander",
+   "dialogue": "for_pilgrims",
+   "attrs": {},
+   "desc": "Someone who has walked a long way to have a quarrel judged.",
+   "look": {
+    "tunic": "#6a4a5a",
+    "cloak": "#4a5a5a",
+    "hair": "#5a3a1a",
+    "hair_style": "bun"
+   }
   }
  ]
 }

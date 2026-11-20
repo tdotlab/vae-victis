@@ -1,0 +1,37 @@
+// The old oak at the north end of the grove, where a petitioner can sit the
+// night (Fortitude or Endurance). Success makes Senouindos hear you.
+@speaker The old oak
+=== start
+[flag judg_vigil] -> done
+[quest judgment none] -> idle
+[!night] -> day
+An oak older than the grove around it, hollow on one side, with a hundred strips of cloth knotted in its lower branches. The ground under it is worn smooth by people sitting. It's dark now, and colder than it should be, and the wind is in the leaves that are left.
+* [roll FOR -10] Sit with your back to the trunk and wait for whatever comes. -> kept | broke
+* [roll END -10] Sit, and stay awake, and stay warm, by plain stubbornness. -> kept | broke
+* Not tonight. -> END
+
+=== idle
+An oak older than the grove around it, hollow on one side, with strips of cloth knotted in its lower branches. People have worn the ground smooth under it, sitting.
+* Go. -> END
+
+=== day
+An oak older than the grove around it, with strips of cloth in its branches and a worn place among the roots where people sit. Toutillos said the vigil starts at dark.
+* Go. -> END
+
+=== kept
+~ set judg_vigil; wait_until 6; xp 75
+You sit. The cold comes up out of the ground into your bones and stays. Something moves in the leaves above you, a long time, and stops. Around midnight you hear footsteps circle the oak, slowly, three times, and nobody is there. Later you're sure you see someone you knew standing at the edge of the trees, someone who has been dead for years, and you don't get up.
+
+Toward morning, a grey light. A crow on the ditch bank, looking at you. You're still here.
+* Get up. -> END
+
+=== broke
+~ wait_until 6
+You sit. The cold comes up out of the ground into your bones and stays. Around midnight something circles the oak, slowly, and you're on your feet with your hand on your weapon before you know you've moved, and then you're walking back toward the fire, fast, and then you're sitting by it, shaking, with Bitugenos pretending not to look at you.
+
+There's always another night.
+* Go. -> END
+
+=== done
+The oak. You know it now. You don't need to sit under it again.
+* Go. -> END

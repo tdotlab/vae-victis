@@ -175,6 +175,7 @@ Then Vellaunos stands up, and the hall goes quiet. "{name} has been to Noviodunu
 * [flag vell_tablets] Tell them about the Roman merchant's day book: three children of Brigodunon, bought forward, half paid. -> rise_proof
 * [item hostage_roll] Hold up Ateula's roll and read them the right-hand column. -> rise_roll
 * [flag pledge_void] "The druids of the Carnutes have judged. Rome broke faith first. Our oath is void." -> rise_druids
+* [flag pledge_bound] "The druids of the Carnutes have judged. Rome hasn't broken its word, so we haven't either. We're bound." -> faith_druids
 * [speech 40] "Rome keeps our children to sell. I saw the rolls. Whatever we decide, decide it knowing that." -> rise_speech
 * [speech 50] "Rome has six legions and grain for a year. I counted it. Keep faith, and keep Brigodunon." -> faith
 * [honor >= 25] "I gave my word to bring them back, and I kept it. Rome gave its word too. Let it keep it. We keep ours." -> faith
@@ -218,6 +219,10 @@ They hear you out. Senovir nods. And then Toutorix stands up and talks about the
 Brigodunon rises. The vote is shouted, not counted. Toutorix clasps Vellaunos's arm and rides out before dark to tell Lucterius, and the smith's fire doesn't go out that night or the next.
 ~ ending endings/act1.json
 * Go. -> END
+
+=== faith_druids
+You hold up the bronze wheel, and the hall goes quiet the way a hall does when the gods are mentioned by someone who means it. Toutorix argues anyway; he's young. But Senovir only has to say "the Carnutes" twice, and the old men nod, and the young men look at their feet.
+-> faith
 
 === faith
 ~ set brig_faith; quest hostages done_faith done; set act1_done; xp 200

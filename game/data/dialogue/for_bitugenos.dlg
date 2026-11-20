@@ -1,0 +1,41 @@
+// Bitugenos the bard, at the pilgrims' fire. Songs, gossip, and a hint at the
+// law of pledges that makes the Judgment easier to argue.
+=== start
+[!flag bit_met] -> first
+He tunes a string that doesn't need it. "The Cadurcan. Sit. The fire's free; the songs aren't."
+-> hub
+
+=== first
+~ set bit_met
+A man with a lyre is sitting at the pilgrims' fire, outside the ditch, singing under his breath to nobody in particular. He stops when he sees you and looks you up and down the way a tailor would.
+
+"Cadurci. I can hear the hills in your boots." He grins. "Bitugenos. I'm a bard. I praise men who pay me and make up verses about men who don't, and the verses last longer than the men."
+-> hub
+
+=== hub
+* "Sing something." -> song
+* "What do the druids do here?" -> druids
+* [quest judgment active, !flag judg_law_hint] "Do you know the law on pledges?" -> law
+* [quest judgment active] "How do I get Senouindos to hear me?" -> how
+* "Goodbye." -> END
+
+=== song
+He plays a few bars, and then sings: about Cenabum, and a cry that went from field to field across the snow faster than a horse could carry it, all the way to the Arverni. It's a good song. It leaves out the part where they killed merchants in the street, and the part where the merchants had families.
+
+"New," he says. "Made it this winter. In ten years everyone will think it's old."
+-> hub
+
+=== druids
+"Everything." He lays the lyre across his knees. "They judge, they sacrifice, they teach. The novices learn twenty years of verses by heart and never write a line of it down, because what's written down is forgotten. Accounts they write, in Greek letters; the gods they keep in their heads." He nods toward the enclosure. "Once a year they all meet here, from every people in Gaul, and the man who won't obey their judgment is cut off from the sacrifices. Nobody will sit with him or speak to him. It's worse than death. Death, at least, is quick."
+-> hub
+
+=== law
+~ set judg_law_hint; xp 15
+"The law on pledges? There's a song." Of course there is. He plays it: a man gives a cow in pledge for a debt, and the man who holds it sells it at market, and the gods strike the seller blind, because the cow was never his to sell. It's funny, in the old way, where the joke is that someone suffers horribly.
+
+"The pledge died at the market," he says, "not in the field. That's the law. Every druid knows the song. They don't like being reminded they learned it from bards."
+-> hub
+
+=== how
+"Give before you ask. Everyone does." He points with his chin at the pit inside the ditch. "Or sit the night in the oaks, alone, like the old heroes, and come to him in the morning with the dew on you. He likes that. It's very old-fashioned." He shrugs. "Or have something to show him. He's old, but he's not a fool, and he's tired of men who only have words."
+-> hub

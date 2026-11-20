@@ -253,7 +253,8 @@
     3
    ],
    "desc": "Where the druids of all Gaul meet once a year.",
-   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "map": "carnute_forest",
+   "entry": "start",
    "size": 2,
    "hidden": true
   },

@@ -1,0 +1,139 @@
+// Senouindos, the druid who keeps Brigodunon's oath in the Carnute forest
+// and judges whether Rome has broken it (BG VI.13: the druids settle public
+// and private disputes; their sentence is final). Routes: evidence, the law
+// (Lore), the case (Speech or Presence), the vigil, a gift and a plea, or a
+// plain request for a straight answer. Also the Dubnacos callback.
+=== start
+[quest judgment done] -> after
+[!flag sen_d_met] -> first
+He opens his eyes, which you hadn't noticed were closed. "You're back."
+-> hub
+
+=== first
+~ set sen_d_met
+In the middle of the enclosure, on a bench beside the pit, an old man in undyed wool sits with his hands on his knees and his eyes shut. The offered weapons hang behind him on the palisade, row on row, bent double so nobody will ever use them again. He doesn't open his eyes when you come, and then, when you've decided he's asleep, he speaks.
+
+"Cadurci. From the hills above the Oltis. You walk like a man who has been walking downhill all his life." He opens his eyes. "I am Senouindos. People come here to be judged, or to ask a question, or to give something to the gods. Which are you?"
+[trait grove_raised] He looks at you more closely. "And you were raised in a grove. I can see it in how you stand at the ditch. Whose?"
+-> hub
+
+=== hub
+[flag dubnacos_pardoned, !flag sen_d_dub] -> dub
+* [quest judgment none] "I'm from Brigodunon. You keep our oath to Rome." -> oath_start
+* [quest judgment active] "About Brigodunon's oath." -> case
+* [item grotto_idol] Show him the idol from the grotto above Brigodunon. -> idol
+* "What is this place?" -> place
+* [trait grove_raised, !flag sen_d_grove] "My foster-father kept a grove in the south." -> grove
+* "Goodbye." -> END
+
+=== place
+"The middle of Gaul. Or the gods' idea of it." He gestures with two fingers at the ditch, the palisade, the bent swords. "Once a year the druids of every people come here, and men bring their quarrels, and we settle them. Murders. Boundaries. Inheritances. Oaths." He pauses on the last word. "The rest of the year the grove is quieter, but it's never empty. The gods don't keep seasons."
+
+"Those weapons were taken from enemies and given. We bend them so no man can take them back. The pit is for the rest."
+-> hub
+
+=== grove
+~ set sen_d_grove; xp 15
+You tell him. He listens, nodding at the names of trees and the names of people. "Then you know what I'm going to tell you, and you've come anyway. Good. Someone raised by us ought to know how little we can do, and do it."
+-> hub
+
+=== oath_start
+~ quest judgment start
+"Brigodunon." He doesn't have to think about it. "Five years ago. Three children given to Rome, and the elder's oath, and the Roman officer's. A druid of the Cadurci carried the oath up here, and it's here still, with all the others." He nods at the oaks, as if the oaths hung in them. "What do you want of it?"
+* "Rome broke faith first. We want it judged void." -> case
+* "We want to know whether it still binds us." -> case
+
+=== case
+~ set judg_heard
+"Then make the case. An oath is a rope between two peoples, held by the gods at the middle. If Rome has let go its end, you're free of yours. If Rome still holds it, you are not. Show me which."
+* [item vettius_tablets] Give him the Roman merchant's day book, and tell him what it says. -> ev_tablets
+* [item hostage_roll] Unroll Ateula's roll and read him the right-hand column. -> ev_roll
+* [item aeduan_letter] Show him Dannotalos's letter: the Aeduan buying the hostages. -> ev_letter
+* [lore 50] "A pledge is held, not owned. A man who sells what he holds in pledge has broken the pledge. Rome holds our children to sell." -> law
+* [flag judg_law_hint, lore 35] "Bitugenos sang it: the cow given in pledge and sold at market. The pledge died at the market, not in the field." -> law
+* [speech 55] "Ask the children. One is a Roman's clerk, one makes Roman nails, one teaches Roman letters. That's not holding. That's taking." -> case_won
+* [PRE 7] Say nothing; stand there with the whole weight of five years on you until he looks away first. -> case_won
+* [flag judg_vigil] "I sat the night in the grove. I'm not here to argue. I'm here to be answered." -> vigil_won
+* [flag judg_gift, !flag judg_pleaded, roll speech 0] "I gave to the gods first. Now I'm asking them, through you." -> case_won | plea_failed ~ set judg_pleaded
+* "Judge it straight. Whatever it is, we'll live with it." -> straight
+* "Not yet." -> hub
+
+=== ev_tablets
+He can't read Latin, or says he can't. He has you read it to him: the merchant's name, the children of Brigodunon, bought forward, half paid. He has you read it again. Then he holds the tablets in both hands as if weighing them.
+-> void
+
+=== ev_roll
+He listens to the whole column, all the names, all the sums, all the "half paid". When you finish he's quiet a long time.
+
+"A girl wrote that," he says. "One of the pledges. Kept the account of her own sale in a good hand." He shakes his head slowly. "The gods will want that remembered."
+-> void
+
+=== ev_letter
+He listens while you tell him what the letter is: an Aeduan noble with the price of Gaul's hostages on a tablet, buying them from the Romans the way a man buys grain futures. He doesn't touch it.
+
+"The Aedui," he says. "Rome's brothers. Of course."
+-> void
+
+=== law
+He nods slowly, the way a master nods at a pupil who has finally said the obvious thing in the right words. "Yes. That's the law. It's older than Rome, and older than us." He closes his eyes. "And what you're telling me is that Rome sells what it holds. Show me you're not lying."
+
+You show him what you know, and tell him where you learned it. He listens with his eyes shut.
+-> void
+
+=== case_won
+He looks at you a long time. "Yes," he says at last. "Yes. I think so."
+-> void
+
+=== vigil_won
+He studies your face. Whatever he sees in it, he's seen before. "You sat with the gods. Then they've already told you, and you've already heard it." He nods. "Very well."
+-> void
+
+=== plea_failed
+He shakes his head, not unkindly. "The gods took your gift. They don't owe you for it. Bring me something I can weigh." He closes his eyes again.
+-> hub
+
+=== void
+~ quest judgment done_void done; set pledge_void; give druid_token; xp 100
+He gets up, slowly, and goes to the oak at the edge of the enclosure where a strip of cloth is tied among a hundred others, and puts his hand on it.
+
+"Rome let go of its end of the rope," he says, loud enough for the pilgrims at the ditch to hear. "Brigodunon of the Cadurci is free of its word. Let it be said at your assembly that the Carnutes have judged, and let any man who argues it come here and argue it with me."
+
+He gives you a little bronze wheel of six spokes on a cord. "So they'll believe you. Anyone who has stood in this grove knows what it means."
+-> hub
+
+=== straight
+~ quest judgment done_bound done; set pledge_bound; give druid_token; xp 75
+He nods as if you had finally said something worth hearing.
+
+"Then here it is. Your children are held. They're fed. Two are taught a trade; one is taught letters. Whatever Romans do with other people's pledges, I've had no one stand in this grove and show me that Rome has sold yours." He spreads his hands. "Brigodunon gave its word. Rome has not yet broken its own. You're bound."
+
+"That's not what the young men want to hear. It may still be the truth." He gives you a little bronze wheel of six spokes on a cord. "Show them this, so they know it was said here and not by you."
+-> hub
+
+=== dub
+~ set sen_d_dub
+"Before anything else, Cadurcan." He doesn't change his tone. "Your elder pardoned a man called Dubnacos, who took from a shrine. What's taken from the gods is ours to judge, not an elder's, and the judgment is death." He waits.
+* [flag idol_returned] "The idol went back to the gods, with the right words, from our own vates. The gods have what was theirs." -> dub_eased
+* [lore 40] "The god he robbed was a god of our hills. Our vates set it right, and our elder judged the man. The grove can let a small house keep its own floor swept." -> dub_eased
+* "Then the gods can judge him. They know where he lives." -> dub_left
+
+=== dub_eased
+~ xp 25; honor 5
+He considers it. "Mm. Small houses. Small floors." A shrug. "Let him keep his life, then. Tell him the gods have a long memory, and so have I."
+-> hub
+
+=== dub_left
+"They will." He closes his eyes. "They always do."
+-> hub
+
+=== idol
+~ take grotto_idol; set idol_returned; xp 50; honor 5
+He takes it from you in both hands and turns it to the light. "Old. Older than the shrine it came from." He wraps it in a fold of his robe. "It'll go back. Not by you; you've carried it far enough."
+-> hub
+
+=== after
+[flag pledge_void] "Brigodunon." He nods to you. "Free of its word. Use it well. Freedom is a thing you can waste."
+[flag pledge_bound] "Brigodunon." He nods to you. "Still bound. There are worse things to be."
+[flag dubnacos_pardoned, !flag sen_d_dub] -> dub
+* [item grotto_idol] Show him the idol from the grotto above Brigodunon. -> idol
+* "Goodbye." -> END

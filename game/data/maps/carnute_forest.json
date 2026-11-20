@@ -1,0 +1,152 @@
+{
+ "id": "carnute_forest",
+ "name": "The Carnute forest",
+ "default": "grass",
+ "weather": "rain",
+ "legend": {
+  "T": "tree",
+  "P": "pine",
+  "b": "bush",
+  ".": "grass",
+  ";": "meadow",
+  "_": "dirt",
+  "m": "mud",
+  "p": "palisade",
+  "o": "dirt",
+  "n": "bones",
+  "A": "altar",
+  "k": "tent",
+  "h": "hearth",
+  "F": "woodpile",
+  "/": "cart",
+  "E": {
+   "terrain": "dirt",
+   "mark": "exit"
+  },
+  "@": {
+   "terrain": "dirt",
+   "mark": "start"
+  },
+  "X": {
+   "terrain": "bones",
+   "mark": "pit"
+  },
+  "S": {
+   "terrain": "meadow",
+   "mark": "senouindos"
+  },
+  "U": {
+   "terrain": "meadow",
+   "mark": "toutillos"
+  },
+  "B": {
+   "terrain": "grass",
+   "mark": "bitugenos"
+  },
+  "V": {
+   "terrain": "grass",
+   "mark": "vigil"
+  },
+  "1": {
+   "terrain": "grass",
+   "mark": "p1"
+  },
+  "2": {
+   "terrain": "grass",
+   "mark": "p2"
+  },
+  "3": {
+   "terrain": "grass",
+   "mark": "p3"
+  }
+ },
+ "rows": [
+  "PTTTTPTTTTPTTTTPTTTTPTTTTPTTTTPTTTTPTTTT",
+  "TTTTPPPTTPTTTTPTPTTPTTTTPTTTTTTTPTTPTTTT",
+  "TPTPTTPTTTTTTTTTTTTTTTTPTTPTTTTTTTTTTTTP",
+  "TPTPTTTTPTTTTTTPTT..V..TTPTPTTTTTTTTTTTT",
+  "TTTPTTTTPTPTbTTP;P;;_T;;;TTTbTTTTTTTTPTT",
+  "PTTTTTTTPPTTmmmmmmmmmmmmmmmmmmPTTTTTPTTT",
+  "TTTTTTTTTTbPmppppppppppppppppmbTTPTTTPTP",
+  "TTTPTPTTPTT.mp;n;n;n;n;n;n;;pm.TTTTTTPPT",
+  "TTPTTTTTb..;mp;;;;;;;;;;;;;;pm.PbTTTTTTT",
+  "TTTTTPTT;...mpn;;;;;;;;;;;;;pm...PTPTPTP",
+  "PTPTPPbT;...mp;;;;;;;;;A;;;;pm;...bTPTTP",
+  "TTTTPTT....;mp;;;;;nXn;;;;;;oo_;;;PTPPTT",
+  "TPTPbP;.....mpn;;;;nnn;S;;;;oo__...PbPTT",
+  "TTTTTTP.;;;.mp;;;A;;;;;;;;;;pm.._.TTTTTP",
+  "TTTTTT;;;...mp;;;;;;;;;;;;;;pm.;._.TPTTT",
+  "PTTTTT..;;..mpn;;;;;;;;;;U;;pm..._.PTTTP",
+  "TTPTbT.;...;mp;;;;;;;;;;;;;;pm.._;.TbTPT",
+  "TTTTTT..;.;;mppppppppppppppppm;_..;TTPTT",
+  "TTPTTT.k...;mmmmmmmmmmmmmmmmmm;_..bTTTTT",
+  "TTPPTP2.;.;....;3;.;.;;;......_;.;PTPTTT",
+  "PTTTTT..;k.;F..;..;.....;;;.;._;..TTTTTT",
+  "TTTTTT;;;.B_________....;.;.;_...TTTTTTP",
+  "TTTTTPk..h...1..;;....;;;..F._;.TTbTTPTT",
+  "TTPTTT.;F.;k.;;......;;;/;.._..TTTTTTTTT",
+  "TTTTTT..;..;........@________TTTTTTTTTTP",
+  "PPTTTTTPPPTTTP.;;..._;.;;.TTTTTTTTTTTTPP",
+  "TTTTTTTTTTTTTPbTTT;_..;TTTbTTPPTTTTTTTTP",
+  "TTTTTTTTTTTTTTPTTT._.PTTPTTPPTTTTTTTTTTT",
+  "TTTTPTTTPPTTTTTTTTT._.TTPPTTTTTTTPTTTPPT",
+  "TPPTTTPTTTTTTTTPTTT._.TTPTTTTPTPTPTTTPTT",
+  "PPTTTTTTTTPTTPTTTTTT._.TTPTPTTPTPTTTTTTT",
+  "TTTTTTTTPTTTTTTTTTPT.E.TTTTTTTTTTTTTPTPT"
+ ],
+ "arrive_text": "The road runs a long way through oaks so old that the trunks are wider than a cart, and then opens into a clearing with a ditch and a palisade in the middle of it, and smoke. Outside the ditch, pilgrims are camped in leather tents. Inside it, behind the stakes, rows of iron catch the light: swords and spearheads, every one of them bent double.",
+ "actors": [
+  {
+   "uid": "senouindos",
+   "template": "senouindos",
+   "mark": "senouindos"
+  },
+  {
+   "uid": "toutillos",
+   "template": "toutillos",
+   "mark": "toutillos"
+  },
+  {
+   "uid": "bitugenos",
+   "template": "bitugenos",
+   "mark": "bitugenos"
+  },
+  {
+   "uid": "for_p1",
+   "template": "for_pilgrim",
+   "mark": "p1"
+  },
+  {
+   "uid": "for_p2",
+   "template": "for_pilgrim_f",
+   "mark": "p2"
+  },
+  {
+   "uid": "for_p3",
+   "template": "for_pilgrim",
+   "mark": "p3"
+  }
+ ],
+ "containers": [],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The road out of the forest"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "pit",
+   "id": "pit",
+   "once": false,
+   "dialogue": "for_pit"
+  },
+  {
+   "mark": "vigil",
+   "id": "vigil",
+   "once": false,
+   "dialogue": "for_vigil"
+  }
+ ]
+}
