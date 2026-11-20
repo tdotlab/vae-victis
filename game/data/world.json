@@ -325,8 +325,22 @@
    "text": "Two wolves are shadowing you through the brush."
   },
   {
-   "id": "brigands",
-   "weight": 9,
+   "id": "brigand_lone",
+   "weight": 6,
+   "terrain": [],
+   "days": [
+    0,
+    9999
+   ],
+   "actors": [
+    "brigand"
+   ],
+   "text": "A man with an axe and a hungry look steps out of the brush. He's alone, or wants you to think so.",
+   "parley": [{"kind": "pay", "cost": 8, "label": "Pay him", "text": "You hold out the coins. He counts them, spits, and steps aside. 'Safe road,' he says, and means the opposite."}, {"kind": "skill", "skill": "speech", "bonus": 20, "label": "Talk", "win": "You talk about the war, the cold and the next village, and the longer you talk the less he wants an argument. He lets you by.", "lose": "He listens to the end and then hits you with the flat of the axe. Talking is over.", "xp": 15}]
+  },
+  {
+   "id": "brigand_pair",
+   "weight": 6,
    "terrain": [],
    "days": [
     0,
@@ -334,10 +348,26 @@
    ],
    "actors": [
     "brigand",
+    "brigand_slinger"
+   ],
+   "text": "Two men on the road with weapons and no village. In a war, that's a trade.",
+   "parley": [{"kind": "pay", "cost": 10, "label": "Pay them", "text": "You pay. The slinger takes the coins and the axeman takes his time, but they let you by."}, {"kind": "skill", "skill": "speech", "bonus": 10, "label": "Talk", "win": "You tell them what the Romans do to men like them, and what Brigodunon does to men who rob its people. They look at each other and let you pass.", "lose": "They're not in a listening mood. The axeman starts toward you.", "xp": 20}]
+  },
+  {
+   "id": "brigands",
+   "weight": 3,
+   "terrain": [],
+   "days": [
+    20,
+    9999
+   ],
+   "actors": [
+    "brigand",
     "brigand",
     "brigand_slinger"
    ],
-   "text": "Men on the road with weapons and no village. In a war, that's a trade."
+   "text": "A gang on the road with weapons and no village. In a war, that's a trade.",
+   "parley": [{"kind": "pay", "cost": 20, "label": "Pay them", "text": "It costs you, and the leader makes a show of counting it, but they step off the road."}, {"kind": "skill", "skill": "speech", "bonus": 0, "label": "Talk", "win": "Three men and no good answer for why you would be worth the trouble. The leader waves you on, and you walk away slowly.", "lose": "The leader smiles. The other two spread out.", "xp": 30}, {"kind": "skill", "skill": "sneak", "bonus": 10, "label": "Slip away", "win": "You back into the trees without turning your back on them, and keep going until the road is only a sound.", "lose": "A branch cracks under your foot. All three heads turn.", "xp": 25}]
   },
   {
    "id": "refugees",
@@ -378,8 +408,27 @@
    "text": "A trader with two mules, a guard, and opinions."
   },
   {
+   "id": "forager_pair",
+   "weight": 5,
+   "terrain": [
+    "plain",
+    "hills",
+    "forest"
+   ],
+   "days": [
+    45,
+    9999
+   ],
+   "actors": [
+    "roman_forager",
+    "auxiliary_slinger"
+   ],
+   "text": "A Roman soldier and an auxiliary slinger, a long way from their camp, stripping a farm. They see you.",
+   "parley": [{"kind": "pay", "cost": 15, "label": "Pay him off", "text": "The soldier weighs the silver, and what it's worth against a report. He has never seen you."}, {"kind": "skill", "skill": "latin", "bonus": 15, "label": "Speak Latin", "win": "You greet them in their own tongue and give a name that could be anyone's. The soldier waves you on as one more native who keeps out of the way.", "lose": "Your Latin runs out in the middle of a sentence. The soldier draws his gladius.", "xp": 30}, {"kind": "skill", "skill": "sneak", "bonus": 15, "label": "Slip away", "win": "You go to ground in a ditch and wait them out. They never look your way.", "lose": "A dog barks at you from the farmyard. The soldier turns.", "xp": 25}]
+  },
+  {
    "id": "foragers",
-   "weight": 7,
+   "weight": 3,
    "terrain": [
     "plain",
     "hills",
@@ -394,7 +443,8 @@
     "roman_forager",
     "auxiliary_slinger"
    ],
-   "text": "Roman foragers, a long way from their camp, stripping a farm. They see you."
+   "text": "Roman foragers, a long way from their camp, stripping a farm. They see you.",
+   "parley": [{"kind": "pay", "cost": 30, "label": "Pay them off", "text": "It takes everything that can be spared, but they take it. None of them looks at you again."}, {"kind": "skill", "skill": "latin", "bonus": 5, "label": "Speak Latin", "win": "You speak slowly and politely, like a man with nothing to hide, and they lose interest.", "lose": "They don't believe a word. The sergeant calls an order.", "xp": 40}, {"kind": "skill", "skill": "sneak", "bonus": 10, "label": "Slip away", "win": "You stay low behind the wall until they've finished and gone. You don't breathe much.", "lose": "One of them sees the movement and shouts. They come over the wall.", "xp": 35}]
   }
  ],
  "reveal_radius": 1

@@ -313,21 +313,71 @@ func _roll_encounter(c: Vector2i) -> void:
 	var e := world.pick_encounter(c, gs.day(), gs.dice)
 	if e.is_empty():
 		return
+	_offer_encounter(e, c)
+
+
+## Stops travel and puts an encounter to the player: approach, go around,
+## or whatever the encounter's parley data allows.
+func _offer_encounter(e: Dictionary, c: Vector2i) -> void:
+	var gs := Game.state
 	var dest: Vector2i = _path.back() if not _path.is_empty() else c
 	var dest_loc := _dest_loc
 	stop()
 	var spot := clampi(_survival() + 10, 5, 95)
 	var text: String = e.get("text", "")
+	var title: String = world.def.get("encounter_title", "On the road")
+	var carry_on := func() -> void:
+		_set_destination(dest)
+		_dest_loc = dest_loc
+	var buttons: Array = []
+	var talkable: bool = not e.get("parley", []).is_empty()
 	if gs.dice.chance(spot):
-		_popup(world.def.get("encounter_title", "On the road"), text + "\n\n" + world.def.get("spotted_text", "You see them before they see you."), [
-			["Approach", func(): _start_encounter(e, c)],
-			["Go around", func():
-				Game.say(world.def.get("avoided_text", "You give them a wide berth."))
-				_set_destination(dest)
-				_dest_loc = dest_loc],
-		])
+		text += "\n\n" + world.def.get("spotted_text", "You see them before they see you.")
+		buttons.append(["Fight" if talkable else "Approach", func(): _start_encounter(e, c)])
+		buttons.append(["Go around", func():
+			Game.say(world.def.get("avoided_text", "You give them a wide berth."))
+			carry_on.call()])
 	else:
-		_popup(world.def.get("encounter_title", "On the road"), text, [["Go on", func(): _start_encounter(e, c)]])
+		buttons.append(["Fight" if talkable else "Go on", func(): _start_encounter(e, c)])
+	# People can be paid off or talked past; animals can't.
+	for p in e.get("parley", []):
+		var b := _parley_button(e, c, p, title, carry_on)
+		if not b.is_empty():
+			buttons.append(b)
+	_popup(title, text, buttons)
+
+
+## One way out of a road encounter, from the encounter's "parley" data:
+##   {"kind": "pay", "cost", "label", "text"}: silver buys the road.
+##   {"kind": "skill", "skill", "bonus", "label", "win", "lose", "xp"}: a roll
+##   against skill + bonus; losing starts the fight.
+## Returns [label, callback], or [] if the player can't try it.
+func _parley_button(e: Dictionary, c: Vector2i, p: Dictionary, title: String, carry_on: Callable) -> Array:
+	var gs := Game.state
+	if p.get("kind", "") == "pay":
+		var cost := int(p.get("cost", 0))
+		if gs.player.silver < cost:
+			return []
+		return ["%s (%d silver)" % [p.get("label", "Pay"), cost], func():
+			gs.player.silver -= cost
+			Game.say(p.get("text", "You pay."), "good")
+			carry_on.call()]
+	var sk: String = p.get("skill", "speech")
+	var chance := clampi(gs.player.skill(sk) + int(p.get("bonus", 0)), 5, 90)
+	return ["%s (%d%%)" % [p.get("label", "Talk"), chance], func():
+		if gs.dice.chance(chance):
+			Game.say(p.get("win", "They let you pass."), "good")
+			Game.give_xp(int(p.get("xp", 0)), "Talked your way past trouble")
+			carry_on.call()
+		else:
+			_popup(title, p.get("lose", "It doesn't work."), [["Fight", func(): _start_encounter(e, c)]])]
+
+
+## For scripted screenshots: offers the named encounter right here.
+func offer_encounter_by_id(id: String) -> void:
+	for e in world.def.get("encounters", []):
+		if e["id"] == id:
+			_offer_encounter(e, _pos)
 
 
 func _start_encounter(e: Dictionary, c: Vector2i) -> void:
@@ -401,14 +451,22 @@ func _popup(title: String, text: String, buttons: Array) -> void:
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD
 	l.custom_minimum_size.x = 520
 	vb.add_child(l)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 10)
+	var row: Container
+	if buttons.size() > 3:
+		var g := GridContainer.new()
+		g.columns = 2
+		row = g
+		row.add_theme_constant_override("h_separation", 10)
+		row.add_theme_constant_override("v_separation", 8)
+	else:
+		row = HBoxContainer.new()
+		row.add_theme_constant_override("separation", 10)
 	vb.add_child(row)
 	for b in buttons:
 		var cb: Callable = b[1]
 		row.add_child(UITheme.button(b[0], func():
 			hud.close_modal(root)
-			cb.call(), 160))
+			cb.call(), 250 if buttons.size() > 3 else 160))
 	hud.push_modal(root)
 
 

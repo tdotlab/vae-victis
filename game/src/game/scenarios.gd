@@ -47,7 +47,7 @@ static func start(name: String) -> void:
 
 ## Scripted actions for screenshot runs: walk:x:y, fight, talk:<uid>,
 ## open:<panel>, wait:<frames>, attack:<uid>, endturn, key:<choice number>,
-## flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, known:<location>, reload.
+## encounter:<id> (world map), press:<button text prefix>, flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, known:<location>, reload.
 static func act(main: Node, a: String) -> void:
 	var parts := a.split(":")
 	var tree := main.get_tree()
@@ -127,6 +127,18 @@ static func act(main: Node, a: String) -> void:
 		"hover":
 			if map:
 				map.hover = Hex.offset_to_axial(int(parts[1]), int(parts[2]))
+		"press":
+			var btn := _find_button(main, ":".join(parts.slice(1)))
+			if btn:
+				btn.pressed.emit()
+			for i in range(5):
+				await tree.process_frame
+		"encounter":
+			var wm := screen as WorldMap
+			if wm:
+				wm.offer_encounter_by_id(parts[1])
+				for i in range(5):
+					await tree.process_frame
 		"reload":
 			# Re-enter the current map, so actors gated on flags set above respawn.
 			Game.goto("map", {})
@@ -140,3 +152,13 @@ static func act(main: Node, a: String) -> void:
 				map.combat.on_click(c2, MOUSE_BUTTON_LEFT)
 				for i in range(60):
 					await tree.process_frame
+
+
+static func _find_button(n: Node, prefix: String) -> Button:
+	if n is Button and (n as Button).text.begins_with(prefix) and (n as Button).is_visible_in_tree():
+		return n
+	for c in n.get_children():
+		var b := _find_button(c, prefix)
+		if b:
+			return b
+	return null

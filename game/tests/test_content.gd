@@ -73,6 +73,34 @@ func test_maps_reference_real_things() -> void:
 			check(m.has_mark("start"), "%s has a start mark" % id)
 
 
+func test_road_encounters_are_well_formed() -> void:
+	var world: Dictionary = DB.load_json("world.json")
+	var skills := Dialogue.SKILL_IDS
+	for e in world["encounters"]:
+		var id: String = e["id"]
+		check(not e["actors"].is_empty(), "%s has no actors" % id)
+		var hostile := false
+		for a in e["actors"]:
+			check(not DB.npc_template(a).is_empty(), "%s uses unknown NPC %s" % [id, a])
+			hostile = hostile or DB.npc_template(a).get("hostile", false)
+		# Anyone who'd rather talk than fight must offer a way to.
+		var humans := false
+		for a in e["actors"]:
+			if DB.npc_template(a).get("faction", "") in ["bandit", "rome"]:
+				humans = true
+		if hostile and humans:
+			check(not e.get("parley", []).is_empty(), "%s is a human fight with no way out" % id)
+		for p in e.get("parley", []):
+			check(p.get("label", "") != "", "%s: parley option without a label" % id)
+			if p.get("kind", "") == "pay":
+				check(int(p.get("cost", 0)) > 0 and p.get("text", "") != "", "%s: bad pay option" % id)
+			elif p.get("kind", "") == "skill":
+				check(p.get("skill", "") in skills, "%s: unknown skill %s" % [id, p.get("skill", "")])
+				check(p.get("win", "") != "" and p.get("lose", "") != "", "%s: skill option needs win and lose text" % id)
+			else:
+				fail("%s: unknown parley kind %s" % [id, p.get("kind", "")])
+
+
 func test_world_locations_enter_at_real_marks() -> void:
 	for l in DB.world()["locations"]:
 		if l.has("map"):

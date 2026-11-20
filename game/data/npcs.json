@@ -131,10 +131,11 @@
    "faction": "bandit",
    "hostile": true,
    "ai": "guard",
+   "nerve": -25,
    "attrs": {
-    "STR": 6,
+    "STR": 5,
     "AGI": 6,
-    "END": 5
+    "END": 4
    },
    "tags": [
     "blades"
@@ -346,6 +347,7 @@
    "faction": "rome",
    "hostile": true,
    "ai": "guard",
+   "nerve": -20,
    "attrs": {
     "STR": 6,
     "END": 6,

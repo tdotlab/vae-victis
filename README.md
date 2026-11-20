@@ -39,7 +39,7 @@ tools/test.sh
 tools/shot.sh sandbox /tmp/shot.png 40 "walk:12:5,fight"
 ```
 
-`shot.sh` runs the game windowed in a scenario, performs the listed actions and saves a screenshot. Scenarios and actions are in `game/src/game/scenarios.gd` (`sandbox`, `fight`, `world`, `newgame`, `create`, or any map id). Actions include `talk:<uid>`, `key:<n>` (a dialogue reply), `walk:x:y`, and state setters such as `quest:<id>:<stage>`, `flag:<name>`, `give:<item>`, `known:<location>`.
+`shot.sh` runs the game windowed in a scenario, performs the listed actions and saves a screenshot. Scenarios and actions are in `game/src/game/scenarios.gd` (`sandbox`, `fight`, `world`, `newgame`, `create`, or any map id). Actions include `talk:<uid>`, `key:<n>` (a dialogue reply), `walk:x:y`, `encounter:<id>` (world map) and `press:<button text>`, and state setters such as `quest:<id>:<stage>`, `flag:<name>`, `give:<item>`, `known:<location>`.
 
 ```bash
 tools/arena.sh
