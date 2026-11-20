@@ -213,6 +213,7 @@ Additions that fit the period:
 - **Javelins ruin shields.** A thrown javelin that hits a shield can stick in it and make it useless until the bearer spends AP to drop it. Caesar describes exactly this against the Helvetii, and the Roman pilum is built to do it.
 - **Aimed attacks** at head, eyes, arms, legs, torso, and groin, with Fallout-style effects: crippled limbs, knockdown, blindness.
 - **Morale.** Most enemies flee when their side breaks or a leader falls. Ancient battles were decided by panic. Fleeing enemies can be let go, which affects Honor and later encounters.
+- **Getting out.** Stepping onto a map exit mid-fight escapes if no enemy is within two hexes. A band of three or more equals beats a lone character on open ground almost every time, so a fight a failed roll would start always offers a way out first (run, talk, pay), and a deliberate one shows the odds before it starts.
 - **Formations, lightly.** Allies adjacent to each other with shields get a defense bonus. Legionaries fight as a unit and are dangerous in groups and much weaker alone.
 - **Ammunition is cheap and finite.** Sling stones, javelins, arrows. Javelins can be recovered after a fight.
 
@@ -253,21 +254,21 @@ Avaricum is the Necropolis: one location, three states. The world map picks the 
 - **The Most Beautiful City.** Nertomara's children: early with a good word, by boat, by the adit, by the king's runners. The city itself can't be saved; the clock is history's.
 - **What the Soldiers Left.** A girl in the ruins: stealth, Latin, silver, the factor's word, or force.
 
-### Cenabum
+### Cenabum (built)
 
 Cenabum is the Junktown: a Carnute river town on the Liger with a wooden bridge, where the revolt began. The Roman traders' houses are gutted and nobody has rebuilt them; the people who killed them still walk past every day. Caesar takes Vellaunodunum around day 94-97 and Cenabum on day 100: the townsfolk try to slip out over the narrow bridge at night, are caught, and the town is plundered and burned (BG VII.11). The world map switches it to a burned map (`map_by_flag`). The leaders of the massacre (Caesar's Cotuatus and Conconnetodumnus) are talked about, not met.
 
 - **The Roman's Widow.** Litumara, a Carnute woman, was married to a freedman of the dead commissary Fufius Cita. She hides with her son, who has a Roman name and a Gallic one, and with her husband's seal and grain ledger. Atepomaros, whose brother went to the Romans as a debt slave, wants the boy. Routes: get them out at night (Sneak), argue for them before the elder (Speech, or Lore: blood of the tribe is the druids' to judge), pay Atepomaros the blood price, betray her, or fight. Saving her gets the commissary's seal and the ledger (which names the depot at Noviodunum); betraying her gets the seal off her body. The seal is a way into Noviodunum and a tool for a forged order there.
 - **The Narrow Bridge.** From day 94 the news of Vellaunodunum says Caesar is two days off. Senuacos the elder means to take the town out over the bridge at night, which is how they're all caught. Routes: talk him into leaving by day (Speech, or Renown), find the old ford upstream (Survival or Lore), or pay Onnacos the boatman to ferry the families downstream at night. Fails if the town is still inside on day 100.
 
-### The Carnute forest
+### The Carnute forest (built)
 
 The Brotherhood: the sacred grove where the druids of all Gaul hold their yearly session (BG VI.13). Not the session yet; the grove is never empty. A ditched enclosure with a pit and racks of offered weapons, after Gournay-sur-Aronde. Hidden on the world map until the vates at home, the Cenabum elder, or the road shows it.
 
-- **The Judgment.** Bring Brigodunon's case: does a pledge still bind when Rome has sold the pledged? Senouindos the druid hears it. Routes: show the evidence (the tablets, the factor's list, the letter, Hermeros's day book), argue the law (Lore), argue the case (Speech or Presence), keep the vigil in the grove for a night (Fortitude or Endurance), or give to the gods first for a better hearing. A verdict that the pledge is void carries weight at the assembly at home. The druid's token gets you past an Aeduan gate.
+- **The Judgment.** Bring Brigodunon's case: does a pledge still bind when Rome has sold the pledged? Senouindos the druid hears it. Routes: show the evidence (the tablets, the factor's list, the letter, Hermeros's day book), argue the law (Lore), argue the case (Speech or Presence), keep the vigil in the grove for a night (Fortitude or Endurance), or give to the gods first for a better hearing. A verdict that the pledge is void carries weight at the assembly at home; a straight answer that it still binds is an argument too, for keeping faith. The druid's token gets you past an Aeduan gate.
 - Bitugenos the bard sings your deeds back to you, mostly wrong, from what you've done. Pay him for a better version (renown) or correct him (Speech).
 
-### Noviodunum: the end of Act I
+### Noviodunum: the end of Act I (built)
 
 Caesar's depot on the Liger in Aeduan country: a palisade and ditch on the river flat below the Aeduan town, with horse lines, granaries, the paymaster's hut, the quartermaster's office, and a long low house by the river where the hostages of all Gaul are kept (BG VII.55). Lucius Orbius, the quartermaster, is the officer who cut Brigodunon's tally five years ago. Dagolitos keeps the gate for Dannotalos.
 
@@ -330,7 +331,7 @@ The architecture will get its own document when the code exists. The commitments
 - **Engine:** Godot 4.7, GDScript only (C# doesn't export to the web), exported to Windows and to the web. Web is the easy way to share it.
 - **Rules separated from presentation:** combat, skill checks, stats, and quest state are pure GDScript with no scene dependencies, run headless, and covered by tests. Random rolls go through one seeded generator so fights can be replayed.
 - **Data-driven content:** items, characters, quests, dialogue, encounters, and maps are data files in the repo, readable by a person and writable by an agent. A dialogue format is to be chosen; the requirement is that a writer can read and edit it comfortably.
-- **Saves:** plain data files, versioned.
+- **Saves:** plain JSON files, versioned, in `user://saves`: an autosave on every arrival, a quicksave and six slots, each carrying a summary (name, level, date, place, time saved) for the save and load windows.
 
 ## Scale target for the full game
 

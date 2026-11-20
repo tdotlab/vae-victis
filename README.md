@@ -2,7 +2,7 @@
 
 A turn-based, isometric, open-world role-playing game in the mold of Fallout 1, set in Gaul during the Great Revolt of 52 BC. You can't change who wins. You can change who's left.
 
-Status: a playable demo, "Leaving home": the first village, a cave, a neighboring village and a held river ford, with every quest solvable several ways. Gergovia and Avaricum, the first locations of Phase 3, are built on top of it. See [docs/STATUS.md](docs/STATUS.md).
+Status: Act I is playable start to finish, from the village that sends you out to Caesar's depot at Noviodunum and back to the assembly at home, with every quest solvable several ways. See [docs/STATUS.md](docs/STATUS.md).
 
 ## Docs
 
@@ -45,7 +45,7 @@ tools/shot.sh sandbox /tmp/shot.png 40 "walk:12:5,fight"
 tools/arena.sh
 ```
 
-The combat arena: fresh character builds fight every random encounter a few hundred times each on open ground, and the table shows win rates. Use it after touching enemy stats, weapons or `rules.json`. Options: `--runs=N`, `--only=<encounter id>`, `--turns`. It's `game/tests/arena.gd`; the turn loop is a stripped copy of `CombatRunner`'s, the math is `CombatRules`'s.
+The combat arena: fresh character builds fight every random encounter a few hundred times each on open ground, and the table shows win rates. Use it after touching enemy stats, weapons or `rules.json`. Options: `--runs=N`, `--only=<encounter id>`, `--turns`; `--quest` runs the scripted quest fights instead, at the levels a player usually has by then, and `--group=a,b,c --level=N` any group of NPC templates. It's `game/tests/arena.gd`; the turn loop is a stripped copy of `CombatRunner`'s, the math is `CombatRules`'s.
 
 ```bash
 tools/export-web.sh && tools/serve-web.sh
@@ -65,4 +65,4 @@ To play from the editor, open `game/project.godot` in Godot 4.7 and press F5.
 
 ## Controls
 
-Left click walks, talks, opens and attacks. Right click examines, or in a fight opens the aimed-attack menu. Space ends your turn, Enter ends a fight when no enemy is aware of you, A starts a fight, S toggles sneaking. C, I, J open the character sheet, gear and journal; M opens the world map; walking off a map's edge does too. On the world map, click a known place or open country to travel, E enters where you stand, R rests, Space or right click stops. Arrow keys pan the camera, the wheel zooms, Home recenters. F5 and F9 quicksave and quickload. F2 cycles the art style. Escape closes windows or opens the menu. Number keys pick dialogue replies.
+Left click walks, talks, opens and attacks. Right click examines, or in a fight opens the aimed-attack menu. Space ends your turn, Enter ends a fight when no enemy is aware of you, A starts a fight, S toggles sneaking. C, I, J open the character sheet, gear and journal; M opens the world map; walking off a map's edge does too. On the world map, click a known place or open country to travel, E enters where you stand, R rests, Space or right click stops. Arrow keys pan the camera, the wheel zooms, Home recenters. F5 and F9 quicksave and quickload; Save and Load in the menu open the slots. F2 cycles the art style. Escape closes windows or opens the menu. Number keys pick dialogue replies.
