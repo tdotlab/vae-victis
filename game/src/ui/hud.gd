@@ -448,22 +448,36 @@ func open_menu() -> void:
 	var root: Control = r[0]
 	var vb: VBoxContainer = r[1]
 	vb.add_child(UITheme.button("Resume", func(): close_modal(root)))
-	var save_b := UITheme.button("Save (F5)", func():
+	var save_b := UITheme.button("Save", func():
 		close_modal(root)
-		if map:
-			map.quick_save()
-		else:
-			world.quick_save())
+		open_saves("save"))
 	save_b.disabled = in_fight()
 	vb.add_child(save_b)
-	var load_b := UITheme.button("Load (F9)", func(): Game.goto("load", {"slot": "quick"}))
-	load_b.disabled = not Game.has_save("quick")
+	var load_b := UITheme.button("Load", func():
+		close_modal(root)
+		open_saves("load"))
+	load_b.disabled = Game.newest_save() == ""
 	vb.add_child(load_b)
 	vb.add_child(UITheme.button("Help", func():
 		close_modal(root)
 		open_help()))
 	vb.add_child(UITheme.button("Quit to title", func(): Game.goto("title", {})))
 	push_modal(root)
+
+
+func open_saves(mode: String) -> void:
+	if _is_open(SaveSlotsPanel):
+		return
+	var w := SaveSlotsPanel.new()
+	w.mode = mode
+	w.on_close = func(): close_modal(w)
+	w.on_save = func(slot: String):
+		if map:
+			map.quick_save(slot)
+		else:
+			world.quick_save(slot)
+	add_child(w)
+	push_modal(w)
 
 
 func open_help() -> void:

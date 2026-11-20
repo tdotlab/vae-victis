@@ -31,6 +31,8 @@ func _ready() -> void:
 		elif a.begins_with("--style="):
 			Art.set_style(a.substr(8), false)
 	if scenario != "":
+		# Harness runs save somewhere of their own, not over the player's games.
+		Game.save_dir = "user://harness_saves"
 		Scenarios.start(scenario)
 	else:
 		_on_screen("title", {})

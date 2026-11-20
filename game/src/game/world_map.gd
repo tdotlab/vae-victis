@@ -72,8 +72,16 @@ func _ready() -> void:
 	_refresh_panel()
 	Game.say("You are on the road. Click a place to travel there.")
 	_discover()
+	_set_place()
+	Game.autosave()
 	await get_tree().process_frame
 	_show_news()
+
+
+## For save summaries: the place the player stands at, or the road.
+func _set_place() -> void:
+	var loc := world.location_at(_pos)
+	Game.place = String(loc.get("name", "")) if not loc.is_empty() else String(DB.story().get("saves", {}).get("road", ""))
 
 
 # --- Geometry ----------------------------------------------------------------
@@ -440,9 +448,10 @@ func rest() -> void:
 	_show_news()
 
 
-func quick_save() -> void:
+func quick_save(slot: String = "quick") -> void:
 	Game.state.world_pos = _pos
-	if Game.save_game("quick"):
+	_set_place()
+	if Game.save_game(slot):
 		Game.say("Game saved.", "good")
 
 

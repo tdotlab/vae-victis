@@ -28,16 +28,27 @@ func _ready() -> void:
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(sub)
 	vb.add_child(Control.new())
-	var cont := UITheme.button("Continue", func(): Game.goto("load", {"slot": "quick"}), 280)
-	cont.disabled = not Game.has_save("quick")
+	var newest := Game.newest_save()
+	var cont := UITheme.button("Continue", func(): Game.goto("load", {"slot": newest}), 280)
+	cont.disabled = newest == ""
 	vb.add_child(cont)
 	vb.add_child(UITheme.button("New game", func(): Game.goto("create", {}), 280))
+	var load_b := UITheme.button("Load game", _open_load, 280)
+	load_b.disabled = newest == ""
+	vb.add_child(load_b)
 	if OS.get_name() != "Web":
 		vb.add_child(UITheme.button("Quit", func(): get_tree().quit(), 280))
 	var ver := UITheme.label(DB.story().get("version", ""), 12, UITheme.DIM)
 	ver.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 	ver.position += Vector2(-140, -28)
 	add_child(ver)
+
+
+func _open_load() -> void:
+	var w := SaveSlotsPanel.new()
+	w.mode = "load"
+	w.on_close = func(): w.queue_free()
+	add_child(w)
 
 
 ## A hill fort on a ridge against a winter sky, drawn in code for now.

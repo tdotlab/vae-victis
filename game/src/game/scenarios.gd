@@ -47,7 +47,7 @@ static func start(name: String) -> void:
 
 ## Scripted actions for screenshot runs: walk:x:y, fight, talk:<uid>,
 ## open:<panel>, wait:<frames>, attack:<uid>, endturn, key:<choice number>,
-## encounter:<id> (world map), press:<button text prefix>, flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, known:<location>, reload.
+## encounter:<id> (world map), press:<button text prefix>, flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, known:<location>, save:<slot>, reload.
 static func act(main: Node, a: String) -> void:
 	var parts := a.split(":")
 	var tree := main.get_tree()
@@ -111,7 +111,12 @@ static func act(main: Node, a: String) -> void:
 						map.open_container(parts[2] if parts.size() > 2 else "chest")
 					"barter":
 						map.hud.open_barter(map.find_actor(parts[2]))
+					"save", "load":
+						map.hud.open_saves(parts[1])
 				await tree.process_frame
+		"save":
+			if map:
+				map.quick_save(parts[1])
 		"flag":
 			Game.state.set_flag(parts[1], int(parts[2]) if parts.size() > 2 else 1)
 		"quest":

@@ -33,10 +33,33 @@
    1
   ]
  ],
- "start_equip": ["dagger"],
+ "start_equip": [
+  "dagger"
+ ],
  "start_silver": 10,
  "ending_title": "The road north",
  "ending_button": "Keep playing",
  "_proper_words": "Words that keep their capital when a name is used mid-sentence.",
- "proper_words": ["Gallic", "Roman", "Germanic", "Aeduan", "Arvernian"]
+ "proper_words": [
+  "Gallic",
+  "Roman",
+  "Germanic",
+  "Aeduan",
+  "Arvernian"
+ ],
+ "saves": {
+  "save_title": "Save game",
+  "load_title": "Load game",
+  "close": "Close",
+  "auto": "Autosave",
+  "quick": "Quicksave",
+  "slot": "Slot %d",
+  "empty": "Empty",
+  "damaged": "This save can't be read.",
+  "who": "%s, level %d",
+  "day": "Day %d",
+  "saved": "saved %s",
+  "confirm": "Click again to save over this.",
+  "road": "On the road"
+ }
 }

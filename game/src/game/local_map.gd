@@ -109,6 +109,13 @@ func _ready() -> void:
 		Game.say(t, "story")
 	Game.hint("hint_start")
 	_fired_triggers = gs.map_states.get(map.id, {}).get("triggers", {}).duplicate()
+	Game.place = map.name
+	# Autosave on arrival, but never into a fight on the road.
+	if map.def.get("encounter", false):
+		Game.skip_autosave = false
+	else:
+		save_map_state()
+		Game.autosave()
 	if first_visit and map.def.has("arrive_dialogue"):
 		await get_tree().process_frame
 		open_dialogue(map.def["arrive_dialogue"], null)
@@ -832,12 +839,12 @@ func leave_to(to: String, entry: String = "start") -> void:
 		Game.goto("map", {})
 
 
-func quick_save() -> void:
+func quick_save(slot: String = "quick") -> void:
 	if combat.active:
 		Game.say("You can't save during a fight.")
 		return
 	save_map_state()
-	if Game.save_game("quick"):
+	if Game.save_game(slot):
 		Game.say("Game saved.", "good")
 
 

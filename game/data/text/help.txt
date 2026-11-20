@@ -4,6 +4,8 @@ Fighting is turn-based. A fight starts when someone hostile sees you, or when yo
 
 Shields stop blows that come from the front. A javelin that hits a shield can stick in it and make it useless for the rest of the fight.
 
-Keys: Escape menu and this help, I gear, C character, J journal, M travel, S sneak, A start a fight, F5 save, F9 load, arrow keys move the view, mouse wheel zooms, Home recenters.
+Keys: Escape menu and this help, I gear, C character, J journal, M travel, S sneak, A start a fight, F5 quicksave, F9 quickload, arrow keys move the view, mouse wheel zooms, Home recenters.
 
 On the world map, click a place you know (on the map or in the list) to travel there, or click open country to walk toward it. Right-click or Space stops. E enters the place you're standing on, R rests, Home recenters. Open country is faster than forest, hills and marsh, and the days pass as you walk: news of the war will find you on the road.
+
+Saving: the menu has six save slots besides the quicksave. The game also autosaves each time you arrive somewhere, though never into a fight on the road. Continue on the title loads whichever save is newest.

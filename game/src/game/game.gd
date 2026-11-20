@@ -8,8 +8,17 @@ signal screen_requested(screen: String, args: Dictionary)
 signal stats_changed
 
 const SAVE_DIR := "user://saves"
+## Slots, in the order the save and load windows list them. "auto" is written
+## by the game on the way into a place; "quick" by F5; the rest by hand.
+const MANUAL_SLOTS := 6
 
 var state: GameState
+## Where the player is, for save summaries. Screens set it when they open.
+var place := ""
+## Lets tests point saving somewhere harmless.
+var save_dir := SAVE_DIR
+## Set by a load so the screen it opens doesn't autosave over the autosave.
+var skip_autosave := false
 
 
 func new_game(sheet: CharacterSheet) -> void:
@@ -124,30 +133,107 @@ func renown_word() -> String:
 func save_game(slot: String = "quick") -> bool:
 	if state == null:
 		return false
-	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
-	var f := FileAccess.open("%s/%s.json" % [SAVE_DIR, slot], FileAccess.WRITE)
+	DirAccess.make_dir_recursive_absolute(save_dir)
+	var f := FileAccess.open(_save_path(slot), FileAccess.WRITE)
 	if f == null:
 		say("Could not save the game.", "bad")
 		return false
-	f.store_string(JSON.stringify(state.to_dict(), "\t"))
+	var d := state.to_dict()
+	d["meta"] = {
+		"name": state.player.name, "level": state.player.level,
+		"day": state.day(), "date": state.date_text(), "place": place,
+		"saved_at": int(Time.get_unix_time_from_system()),
+	}
+	f.store_string(JSON.stringify(d, "	"))
 	f.close()
 	return true
 
 
+## Saves to the autosave slot on the way into a place. Screens call it when
+## they open; it does nothing right after a load, or with the player dead.
+func autosave() -> void:
+	if skip_autosave:
+		skip_autosave = false
+		return
+	if state != null and state.player != null and state.player.hp > 0:
+		save_game("auto")
+
+
 func has_save(slot: String = "quick") -> bool:
-	return FileAccess.file_exists("%s/%s.json" % [SAVE_DIR, slot])
+	return FileAccess.file_exists(_save_path(slot))
 
 
 func load_game(slot: String = "quick") -> bool:
-	var path := "%s/%s.json" % [SAVE_DIR, slot]
+	var path := _save_path(slot)
 	if not FileAccess.file_exists(path):
 		return false
-	var d = JSON.parse_string(FileAccess.get_file_as_string(path))
+	var d = _read(path)
 	if not d is Dictionary:
 		say("That save is damaged.", "bad")
 		return false
 	state = GameState.from_dict(d)
+	skip_autosave = true
 	return true
+
+
+func delete_save(slot: String) -> void:
+	if has_save(slot):
+		DirAccess.remove_absolute(_save_path(slot))
+
+
+static func save_slots(with_auto := true) -> Array:
+	var out: Array = ["auto", "quick"] if with_auto else ["quick"]
+	for i in range(1, MANUAL_SLOTS + 1):
+		out.append("slot%d" % i)
+	return out
+
+
+## What a slot holds, for the save and load windows: name, level, day, date,
+## place and saved_at (unix seconds). Empty if the slot is empty;
+## {"damaged": true} if it can't be read. Old saves without a summary get
+## one worked out from the state.
+func save_info(slot: String) -> Dictionary:
+	var path := _save_path(slot)
+	if not FileAccess.file_exists(path):
+		return {}
+	var d = _read(path)
+	if not d is Dictionary or not d.has("player"):
+		return {"slot": slot, "damaged": true, "saved_at": 0}
+	var m: Dictionary = d.get("meta", {}).duplicate()
+	if m.is_empty():
+		var mins := int(d.get("minutes", 0))
+		m = {"name": d["player"].get("name", ""), "level": int(d["player"].get("level", 1)),
+			"day": mins / 1440 + 1, "date": "", "place": "",
+			"saved_at": FileAccess.get_modified_time(path)}
+	m["slot"] = slot
+	return m
+
+
+## The most recently written slot, or "" if there are no saves.
+func newest_save() -> String:
+	var best := ""
+	var best_t := -1
+	for slot in save_slots():
+		var info := save_info(slot)
+		if info.is_empty() or info.get("damaged", false):
+			continue
+		if int(info.get("saved_at", 0)) > best_t:
+			best_t = int(info.get("saved_at", 0))
+			best = slot
+	return best
+
+
+## A save file's contents, or null if it isn't JSON (quietly: a damaged save
+## is shown as damaged, not raised as an engine error).
+static func _read(path: String) -> Variant:
+	var j := JSON.new()
+	if j.parse(FileAccess.get_file_as_string(path)) != OK:
+		return null
+	return j.data
+
+
+func _save_path(slot: String) -> String:
+	return "%s/%s.json" % [save_dir, slot]
 
 
 # --- The historical clock ---------------------------------------------------
