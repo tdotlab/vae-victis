@@ -1,0 +1,107 @@
+// Ateula, Vellaunos's daughter, seventeen, clerk to the quartermaster.
+// She may stay. If she does, she gives the hostage roll. She can also
+// write a release order, given a seal that isn't hers.
+=== start
+[flag met_ateula] -> again
+~ set met_ateula
+A young woman at the end of Orbius's table is copying a roll from one tablet to another, very fast, without looking up. A plain Roman dress, ink on her fingers, a stylus behind her ear.
+
+"You're from Brigodunon." She still doesn't look up. "You stand like my father." Then she does look up, and she has his eyes, the grain-weighing look. "I'm Ateula. You know that. You're here for Eponina."
+
+"And for you."
+
+"Yes," she says. "I thought you'd say that."
+-> hub
+
+=== again
+[flag ateula_out] -> END
+[flag ateula_stays] "Still here?" She doesn't stop writing. "So am I."
+[!flag ateula_stays] "Cadurci." She doesn't stop writing.
+-> hub
+
+=== hub
+* [!flag ateula_ready] "Your father wants you home." -> father
+* [!flag ateula_ready] "Why would you stay?" -> why
+* "What's in the rolls?" -> rolls
+* [!flag ateula_ready, !flag ateula_order] "Can you get them out on paper?" -> paper
+* [flag ateula_order, !flag release_written, item orbius_seal] "I have the quartermaster's seal." -> write_orbius
+* [flag ateula_order, !flag release_written, item commissary_seal] "I have Cita's seal, from Cenabum." -> write_cita
+* [flag ateula_stays, !item hostage_roll] "If you're staying, give your father something." -> roll
+* [flag epo_out, flag ateula_ready, !flag ateula_out] "The others are out. Come now." -> late
+* "Goodbye." -> END
+
+=== father
+"Does he." She sets the stylus down very precisely. "Did he send anything? In five years? A cloak?"
+
+You tell her he sent you, and his ring, and that he'd come himself if he were twenty years younger and less of a fool. She smiles at that, a little. "He says that about everything."
+* [item elders_ring, PRE 6] Hold out his ring. -> ring
+* [speech 60] "He's going to stand up in the assembly and decide whether Brigodunon goes to war. He doesn't know what you know. Come home and tell him." -> convinced
+* [flag tablets_read, !flag ateula_rolled, roll speech 10] "You're on a list in a Roman merchant's day book. Bought forward, on Dannotalos's account. You're not keeping anybody off the lists. You're on one." -> convinced | stays ~ set ateula_rolled
+* "Think about it." -> hub
+
+=== ring
+He's never had it off his hand. She knows that better than you do. She takes it and holds it a long time, and turns it over, and puts her thumb in the worn place.
+
+"He gave you this," she says. "To come and get me."
+-> convinced
+
+=== why
+"Because I've read the rolls." She lays a hand flat on the tablets. "Six legions. Grain for a year, bought, stored, here. Horses from three provinces. Pay for every man, every month, in this box, on time. Have you ever seen anything paid on time?"
+
+"The Arverni have a king with a good face and an army of people who are hungry. Rome has this." She taps the table. "I know how it ends. If Brigodunon fights, Brigodunon burns, and I'd rather not be in it."
+
+She looks at the door of the long house, through the wall. "And here I can do things. A girl from the Lingones was on the sale list last month. I wrote her down sick. She's still here."
+-> hub
+
+=== rolls
+"Everyone who came in. Everyone who went out." She turns a tablet so you can see the columns, neat as a field. "Grain by the bushel, horses by the head, hostages by the people. Three of the Cadurci of Brigodunon: Ateula, Iccios, Eponina." Her finger moves along the line. "And here, on the right, in my hand, because Orbius told me to: 'On account of Dannotalos. Half paid.'"
+
+"I wrote my own name on that line," she says. "Of course I did. It's my job."
+-> hub
+
+=== paper
+~ set ateula_order
+She doesn't pretend not to understand. "A release order. The legate's style, Orbius's seal, three names, road and bread." She thinks about it the way her father thinks about a field. "I can write it. I can't seal it. My seal is a hostage's; it's worth nothing."
+
+"He keeps his ring in the box in the corner, when he's writing. It hurts his fingers. Or bring me another Roman seal that's good enough to frighten an Aeduan who can't read."
+-> hub
+
+=== write_orbius
+~ set release_written; give release_order; xp 50
+She takes the ring without a word, writes the order in four lines of perfect official Latin, presses the seal into the wax, and hands both back to you as if she'd done it every day for five years, which in a sense she has.
+
+"Show it to the man on the long house door. He can't read; he knows the seal. Orbius will know by morning." She picks up her stylus. "Go before then."
+-> hub
+
+=== write_cita
+~ set release_written; give release_order; xp 50
+She turns the ring to the light. "Fufius Cita. The grain commissary." She looks at you a moment longer than she needs to. "He's dead. They killed him at Cenabum." Then she writes the order anyway, in the commissary's style, which she knows because his grain came through this office, and presses the corn-ear seal into the wax.
+
+"Show it to the man on the long house door. He can't read; he knows a Roman seal when he sees one. Go before Orbius hears."
+-> hub
+
+=== convinced
+~ set ateula_ready; clear ateula_stays; xp 75
+She is quiet a long time. Then she rolls up the tablet she was copying, and the next one, and the next, and puts them in a satchel.
+
+"Then I'll come home and tell him." Her voice doesn't change at all. "And I'll bring the rolls. All of them. Let the assembly see what I've seen and then vote."
+-> hub
+
+=== stays
+~ set ateula_stays
+"I know," she says. "I wrote it. Haven't you been listening?" She picks the stylus up again. "Get the others out. I'll stay and keep the books."
+-> hub
+
+=== roll
+~ give hostage_roll; set ateula_stays; xp 50
+She hesitates, then takes two clean tablets from the stack and writes, fast, for as long as it takes to say a prayer. She binds them and gives them to you.
+
+"The roll. Every hostage in this depot, people by people, and the price beside the ones who've been sold forward. Give it to my father." She looks at you levelly. "Let them decide with their eyes open. That's all I want. Tell him that."
+-> hub
+
+=== late
+~ set ateula_out; clear ateula_stays; xp 50
+[flag iccios_out] ~ quest hostages freed
+She doesn't argue. She closes the satchel of rolls, stands, and puts Orbius's chair straight. Then she walks out of the office beside you, out of the depot, nodding to the sentries at the gate the way she does every morning when she goes up to the town for ink, and doesn't come back.
+~ travel noviodunum town
+* Go. -> END

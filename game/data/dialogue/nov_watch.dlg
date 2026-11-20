@@ -1,0 +1,63 @@
+// The Aeduan watch inside the depot (watchmen and their sergeant). The man on
+// the long house door takes a release order; any of them takes a bribe.
+=== start
+[flag escape_alarm] -> alarm
+[night] -> night
+"Long house is that way. Don't go near the river." He leans on his spear. He has been leaning on it since dawn.
+-> hub
+
+=== night
+He's by the forge with his hands out to the coals, and he doesn't get up. "You. What are you doing about at this hour?"
+-> hub
+
+=== alarm
+He doesn't talk. He's already got the spear up.
+* Fight. -> fight
+
+=== fight
+He shouts for the others, and they come.
+~ fight_all depot_watch
+
+=== hub
+* [item release_order, !flag epo_out] Give him the sealed order. -> order
+* [item release_order, flag epo_out, !flag iccios_out] Give him the sealed order. -> order_rest
+* [!flag watch_bribed, night, silver 50] "Cold night. Here's for a jar of something. Drink it facing the fire." -> bribe ~ silver -50
+* [!flag watch_bribed, night, barter 45, silver 30] "Thirty silver says nobody walks the stakes tonight." -> bribe ~ silver -30
+* "What's there to guard?" -> what
+* "Goodbye." -> END
+
+=== what
+"Horses." He jerks his head at the stable. "Grain. The Romans' money. The children." He spits. "The children are the easy part. Where would they go?"
+-> hub
+
+=== bribe
+~ set watch_bribed
+He looks at the silver, and at the gate where the Romans are, a long way off in the rain. Then he takes it. "Nobody walks the stakes in this," he says. "Not after midnight. You'd have to be mad." He goes back to warming his hands.
+-> hub
+
+=== order
+~ take release_order; set release_forged; set epo_out; set iccios_out; clear hostages_left; xp 100
+[flag ateula_ready] ~ set ateula_out
+[!flag ateula_ready] ~ set ateula_stays
+[flag ateula_out] ~ quest hostages freed
+[!flag ateula_out] ~ quest hostages freed_some
+He takes the tablet and looks at it upside down, and then the right way up, which doesn't help him. He looks at the seal. He knows the seal. Everyone in the depot knows what a Roman seal means: somebody bigger than you has already decided.
+
+"Three of the Cadurci." He says it as if he'd read it, and maybe he has, in a way. He unlocks the long house door with a key on a thong round his neck and shouts for Eponina, and sends a boy running for the smith's lad from the forge.
+[flag ateula_ready] Ateula is waiting for you outside the office with her satchel. She doesn't look back at it.
+[!flag ateula_ready] Ateula doesn't come. When you pass the office door she's at the table, writing, and doesn't look up.
+You walk them out through the gate and up through the town, and put them on the road south with a carter and all the silver you can spare. Somewhere behind you, sooner or later, Lucius Orbius is going to look at that order.
+
+"Come home," Eponina says. "Don't you dare die and make me tell her."
+~ travel noviodunum town
+* Go. -> END
+
+=== order_rest
+~ take release_order; set release_forged; set iccios_out; xp 50
+[flag ateula_ready] ~ set ateula_out
+[flag ateula_out] ~ quest hostages freed
+He looks at the seal, and nods, and sends a boy for the smith's lad. Iccios comes with his tools in a sack.
+[flag ateula_ready] Ateula comes from the office with her satchel and walks out beside you.
+You walk them out through the gate and put them on the road south.
+~ travel noviodunum town
+* Go. -> END

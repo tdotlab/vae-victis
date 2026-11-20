@@ -1,0 +1,49 @@
+// Neitin, the Spanish horse-boy. Will loose the horses at night, which pulls
+// the watch away from the river. Then he's gone.
+=== start
+[flag horses_loose] -> done
+[flag neitin_met] -> again
+~ set neitin_met
+He's rubbing down a horse taller than any horse you've ever seen, talking to it in a language that isn't Gallic or Latin or anything else you know. When he sees you he switches to Latin, then to a few words of bad Gallic, and grins.
+
+"Big, yes? From my country. Hispania." He slaps the horse's neck. "This one is worth more than you. More than me, for sure."
+-> hub
+
+=== again
+"Gaul." He grins. He calls everyone Gaul.
+-> hub
+
+=== done
+"Tonight, yes?" he whispers, and goes back to his horses.
+-> END
+
+=== hub
+* "How did you get here?" -> how
+* [latin 30] (In Latin) "Where in Hispania? What's it like?" -> home
+* "If the horses got loose at night, what would the watch do?" -> idea
+* "Goodbye." -> END
+
+=== how
+"Bought." He shrugs. "Like the horses. Same ship. They wanted a boy who knows horses, and I know horses." He pats the big neck. "Five winters. In my country it is warm now. Here it rains on the rain."
+-> hub
+
+=== home
+~ set neitin_home
+His face opens. He talks for a long time, fast, about a river and a town on a hill with walls of stone, about his mother's horses, about a girl. Some of it is Latin and some of it isn't. You don't need all the words.
+
+"Nobody asks," he says at last. "Five winters. Nobody asks."
+-> hub
+
+=== idea
+He looks at you for a long moment, and the grin comes back slowly, and it isn't a boy's grin anymore.
+
+"Run," he says. "All of them. A horse is worth more than a child. If the horses are in the tents, the watch is with the horses." He strokes the big neck. "And maybe one horse is not found. Maybe a boy is not found. Big night."
+* [silver 30] "Thirty silver for your big night." -> deal ~ silver -30
+* [flag neitin_home] "Tonight, then. And take the best one home." -> deal
+* [speech 40] "You've been waiting five winters for somebody to ask. I'm asking." -> deal
+* "Forget I said it." -> hub
+
+=== deal
+~ set horses_loose; xp 50
+"Tonight." He spits in his palm and holds it out, and you shake. "When you go to the river, I open the stable. You will hear." He laughs, very quietly. "Everyone will hear."
+-> hub

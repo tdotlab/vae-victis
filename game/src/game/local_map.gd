@@ -183,6 +183,8 @@ func _spawn_actors() -> void:
 			a.dialogue = e["dialogue"]
 		if e.has("ai"):
 			a.ai = e["ai"]
+		if e.has("kill_flag"):
+			a.set_meta("kill_flag", e["kill_flag"])
 		a.home = a.cell
 		if saved.has(uid):
 			a.apply_state(saved[uid])

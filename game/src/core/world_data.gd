@@ -12,7 +12,8 @@ extends RefCounted
 ##   "seasons":   season -> {terrain id or "*": multiplier}
 ##   "rows":      strings, one char per cell
 ##   "locations": [{id, name, cell [x, y], map, entry, desc, size, closed_text,
-##                  open_flag, shut_text, map_by_flag [{flag, map, entry}]}]
+##                  open_flag, shut_text, map_by_flag [{flag, map, entry}],
+##                  closed_by_flag [{flag, text}]}]
 ##                map_by_flag: the first entry whose flag is set replaces the
 ##                map and/or the entry mark (a place that changes on the clock)
 ##   "encounters":[{id, weight, terrain [...], days [from, to], map, actors [...], text}]

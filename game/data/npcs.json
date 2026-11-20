@@ -2170,6 +2170,475 @@
     "tunic": "#7a6a5a",
     "hair": "#6a4020"
    }
+  },
+  {
+   "id": "dagolitos",
+   "name": "Dagolitos",
+   "faction": "aedui",
+   "ai": "idle",
+   "dialogue": "nov_dagolitos",
+   "attrs": {
+    "PER": 7,
+    "WIT": 7,
+    "PRE": 6
+   },
+   "skills": {
+    "barter": 40,
+    "latin": 35
+   },
+   "equip": [
+    "gallic_sword"
+   ],
+   "silver": 60,
+   "desc": "The Aeduan keeper of the gate: a good cloak, a gold ring on every other finger, and the patient look of a man who is paid by everyone who passes.",
+   "look": {
+    "tunic": "#3a5a7a",
+    "cloak": "#6a2a3a",
+    "cloak2": "#c8a040",
+    "hair": "#c09050",
+    "hair_style": "long",
+    "face": "moustache",
+    "torc": "gold"
+   }
+  },
+  {
+   "id": "nov_sentry",
+   "name": "Sentry",
+   "faction": "depot_sentry",
+   "ai": "guard",
+   "dialogue": "nov_sentry",
+   "attrs": {
+    "STR": 7,
+    "END": 7,
+    "AGI": 6
+   },
+   "level": 4,
+   "tags": [
+    "blades",
+    "shield"
+   ],
+   "equip": [
+    "gladius",
+    "scutum",
+    "bronze_helmet"
+   ],
+   "silver": 8,
+   "desc": "A legionary on gate duty in the rain, the most boring job in the Roman army, and he knows it.",
+   "look": {
+    "tunic": "#8e3424",
+    "shield": "#8a2a20",
+    "hair": "#2a2018",
+    "body": "roman"
+   }
+  },
+  {
+   "id": "nov_watch",
+   "name": "Watchman",
+   "faction": "depot_watch",
+   "ai": "guard",
+   "dialogue": "nov_watch",
+   "attrs": {
+    "STR": 6,
+    "END": 6,
+    "AGI": 5,
+    "PER": 6
+   },
+   "level": 2,
+   "tags": [
+    "spears",
+    "shield"
+   ],
+   "equip": [
+    "spear",
+    "small_shield",
+    "padded_linen"
+   ],
+   "items": [
+    [
+     "bread",
+     1
+    ]
+   ],
+   "silver": 6,
+   "xp": 50,
+   "nerve": 40,
+   "desc": "An Aeduan levy man hired to walk the depot at night and stand at doors by day. Paid in Roman silver and bored in two languages.",
+   "look": {
+    "tunic": "#4a6a5a",
+    "shield": "#5a7a8a",
+    "hair": "#a07a40",
+    "hair_style": "short",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "nov_guard",
+   "name": "Watch sergeant",
+   "faction": "depot_watch",
+   "ai": "guard",
+   "dialogue": "nov_watch",
+   "attrs": {
+    "STR": 7,
+    "END": 6,
+    "AGI": 6,
+    "PER": 6
+   },
+   "level": 3,
+   "tags": [
+    "blades",
+    "shield"
+   ],
+   "leader": true,
+   "equip": [
+    "gallic_sword",
+    "small_shield",
+    "leather_jerkin",
+    "leather_cap"
+   ],
+   "silver": 15,
+   "xp": 70,
+   "nerve": 50,
+   "desc": "The man in charge of the night watch, which means he walks the line twice and then sits by the forge.",
+   "look": {
+    "tunic": "#3a5a4a",
+    "shield": "#5a7a8a",
+    "hair": "#6a5a4a",
+    "hair_style": "knot",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "nov_paymaster",
+   "name": "Paymaster's clerk",
+   "faction": "depot",
+   "ai": "guard",
+   "dialogue": "nov_paymaster",
+   "attrs": {
+    "STR": 5,
+    "PER": 7,
+    "WIT": 7
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "gladius"
+   ],
+   "silver": 20,
+   "desc": "A Roman freedman who sits by the pay chest with a gladius across his knees and counts the same coins twice a day.",
+   "look": {
+    "body": "roman",
+    "tunic": "#c8bfa8",
+    "hair": "#4a3a2a",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "naevius",
+   "name": "Naevius",
+   "faction": "nov_town",
+   "ai": "idle",
+   "dialogue": "nov_naevius",
+   "attrs": {
+    "PER": 6,
+    "WIT": 7,
+    "PRE": 6
+   },
+   "skills": {
+    "barter": 50,
+    "latin": 70
+   },
+   "items": [
+    [
+     "roman_wine",
+     2
+    ],
+    [
+     "bread",
+     6
+    ],
+    [
+     "bandage",
+     4
+    ],
+    [
+     "poultice",
+     2
+    ],
+    [
+     "salt",
+     3
+    ],
+    [
+     "javelin",
+     4
+    ],
+    [
+     "leather_cap",
+     1
+    ],
+    [
+     "padded_linen",
+     1
+    ],
+    [
+     "bronze_torque",
+     1
+    ]
+   ],
+   "silver": 260,
+   "desc": "A Roman wine trader from Placentia who has lived among the Aedui so long he says 'we' about both, depending on who's asking.",
+   "look": {
+    "body": "roman",
+    "tunic": "#7a3a4a",
+    "cloak": "#4a5a6a",
+    "hair": "#8a8070",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "nov_townsman",
+   "name": "Townsman",
+   "faction": "nov_town",
+   "ai": "wander",
+   "dialogue": "nov_townsfolk",
+   "attrs": {},
+   "desc": "An Aeduan of Noviodunum.",
+   "look": {
+    "tunic": "#4a5a7a",
+    "hair": "#a08050",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "nov_townswoman",
+   "name": "Townswoman",
+   "sex": "f",
+   "faction": "nov_town",
+   "ai": "wander",
+   "dialogue": "nov_townsfolk",
+   "attrs": {},
+   "desc": "An Aeduan of Noviodunum.",
+   "look": {
+    "tunic": "#6a4a6a",
+    "hair": "#8a5a2a",
+    "hair_style": "bun"
+   }
+  },
+  {
+   "id": "orbius",
+   "name": "Lucius Orbius",
+   "faction": "depot",
+   "ai": "idle",
+   "dialogue": "nov_orbius",
+   "attrs": {
+    "STR": 5,
+    "PER": 7,
+    "WIT": 8,
+    "PRE": 6
+   },
+   "level": 4,
+   "skills": {
+    "latin": 80,
+    "barter": 60,
+    "speech": 45
+   },
+   "tags": [
+    "blades"
+   ],
+   "equip": [
+    "gladius"
+   ],
+   "silver": 30,
+   "desc": "The quartermaster of the depot. Fifty, bald, ink on the side of his hand, a cough he's had since the autumn. He counts everything that comes in, and everything that goes out, including people.",
+   "look": {
+    "body": "roman",
+    "tunic": "#a8a090",
+    "cloak": "#5a3a3a",
+    "hair": "#8a8a80",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "ateula",
+   "name": "Ateula",
+   "sex": "f",
+   "faction": "hostages",
+   "ai": "idle",
+   "dialogue": "nov_ateula",
+   "attrs": {
+    "PER": 7,
+    "WIT": 9,
+    "PRE": 6
+   },
+   "skills": {
+    "latin": 70
+   },
+   "desc": "Vellaunos's daughter, seventeen. A plain Roman dress, ink on her fingers, a stylus behind her ear. She looks at you the way her father does, as if weighing grain.",
+   "look": {
+    "tunic": "#7a8a9a",
+    "hair": "#3a2a1a",
+    "hair_style": "bun"
+   }
+  },
+  {
+   "id": "eponina",
+   "name": "Eponina",
+   "sex": "f",
+   "faction": "hostages",
+   "ai": "idle",
+   "dialogue": "nov_eponina",
+   "attrs": {
+    "AGI": 7,
+    "WIT": 7,
+    "PRE": 6
+   },
+   "skills": {
+    "latin": 60
+   },
+   "desc": "Your sister. Fourteen. Her hair is cut short like a Roman girl's and she has your mother's chin.",
+   "look": {
+    "tunic": "#a8a8b8",
+    "hair": "#8a5a2a",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "iccios",
+   "name": "Iccios",
+   "faction": "hostages",
+   "ai": "idle",
+   "dialogue": "nov_iccios",
+   "attrs": {
+    "STR": 8,
+    "END": 7,
+    "PRE": 4
+   },
+   "tags": [
+    "brawling"
+   ],
+   "desc": "Cobnertos's son. Nineteen, broad as a door, with burn scars up both forearms. He works the depot forge and doesn't look up.",
+   "look": {
+    "tunic": "#5a5a5a",
+    "hair": "#6a4a2a",
+    "hair_style": "short",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "neitin",
+   "name": "Neitin",
+   "faction": "depot",
+   "ai": "idle",
+   "dialogue": "nov_neitin",
+   "attrs": {
+    "AGI": 8,
+    "PER": 7
+   },
+   "skills": {
+    "latin": 40
+   },
+   "desc": "A horse-boy from Hispania, sixteen or so, with a groom's bent back already. He talks to the horses in a language nobody else here speaks.",
+   "look": {
+    "tunic": "#6a7a4a",
+    "hair": "#1a1a1a",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "nov_hostage",
+   "name": "Hostage",
+   "faction": "hostages",
+   "ai": "wander",
+   "dialogue": "nov_hostage",
+   "attrs": {},
+   "desc": "Somebody's son, from somewhere in Gaul, kept here so his people keep their word.",
+   "look": {
+    "tunic": "#9a9aa8",
+    "hair": "#a07040",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "nov_hostage_f",
+   "name": "Hostage",
+   "sex": "f",
+   "faction": "hostages",
+   "ai": "wander",
+   "dialogue": "nov_hostage",
+   "attrs": {},
+   "desc": "Somebody's daughter, from somewhere in Gaul, kept here so her people keep their word.",
+   "look": {
+    "tunic": "#9a9aa8",
+    "hair": "#c09050",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "eponina_home",
+   "name": "Eponina",
+   "sex": "f",
+   "faction": "brigodunon",
+   "ai": "wander",
+   "dialogue": "brig_eponina",
+   "attrs": {
+    "AGI": 7,
+    "WIT": 7,
+    "PRE": 6
+   },
+   "skills": {
+    "latin": 60
+   },
+   "desc": "Your sister, home. Her hair is growing out, badly, and she won't let anyone cut it.",
+   "look": {
+    "tunic": "#4a6a8a",
+    "hair": "#8a5a2a",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "iccios_home",
+   "name": "Iccios",
+   "faction": "brigodunon",
+   "ai": "idle",
+   "dialogue": "brig_iccios",
+   "attrs": {
+    "STR": 8,
+    "END": 7,
+    "PRE": 4
+   },
+   "tags": [
+    "brawling"
+   ],
+   "desc": "Cobnertos's son, back at his father's anvil as if he'd never left. He has.",
+   "look": {
+    "tunic": "#5a5a5a",
+    "hair": "#6a4a2a",
+    "hair_style": "short",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "ateula_home",
+   "name": "Ateula",
+   "sex": "f",
+   "faction": "brigodunon",
+   "ai": "idle",
+   "dialogue": "brig_ateula",
+   "attrs": {
+    "PER": 7,
+    "WIT": 9,
+    "PRE": 6
+   },
+   "skills": {
+    "latin": 70
+   },
+   "desc": "Vellaunos's daughter, home, still with ink on her fingers. She has started writing down what the elders say.",
+   "look": {
+    "tunic": "#4a5a7a",
+    "hair": "#3a2a1a",
+    "hair_style": "bun"
+   }
   }
  ]
 }

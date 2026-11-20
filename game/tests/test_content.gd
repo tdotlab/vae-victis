@@ -22,6 +22,26 @@ func test_every_dialogue_is_clean() -> void:
 			fail("%s.dlg: %s" % [id, e])
 
 
+func test_every_ending_is_clean() -> void:
+	var quests := {}
+	for q in DB.load_json("quests.json")["quests"]:
+		quests[q["id"]] = q["stages"]
+	for f in _files("endings", ".json"):
+		for e in Endings.validate("endings/%s.json" % f):
+			fail(e)
+		for s in DB.load_json("endings/%s.json" % f)["slides"]:
+			for c in s.get("if", []):
+				var parts := String(c).trim_prefix("!").split(" ")
+				if parts[0] == "quest" and parts.size() > 1:
+					var qs := parts[1].split("=")
+					check(quests.has(qs[0]), "%s: unknown quest in %s" % [f, c])
+					if qs.size() > 1 and quests.has(qs[0]):
+						check(quests[qs[0]].has(qs[1]), "%s: unknown stage in %s" % [f, c])
+		var gs := GameState.new()
+		gs.player = CharacterSheet.create("Test", {}, [])
+		check(not Endings.pages(gs, "endings/%s.json" % f).is_empty(), "%s has pages for a bare game" % f)
+
+
 func test_npc_templates_reference_real_things() -> void:
 	for t in DB.load_json("npcs.json")["npcs"]:
 		for e in t.get("equip", []):

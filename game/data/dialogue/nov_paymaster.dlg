@@ -1,0 +1,9 @@
+// The paymaster's clerk by the pay chest.
+=== start
+He doesn't get up, and the gladius on his knees doesn't move, which is the point of it. "No closer," he says in Latin, and then in Gallic, in case. "That's the army's pay. Four months of it. I count it in the morning and I count it at night, and it is always the same, and I would like it to stay the same."
+* "How much is in there?" -> much
+* "Goodbye." -> END
+
+=== much
+He smiles thinly. "Enough that if it went missing, the legate would crucify me and then come looking for you." He pats the chest. "So it won't."
+-> END

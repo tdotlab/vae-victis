@@ -1,0 +1,34 @@
+// Trigger: the leaning stake at the river end of the palisade. Fires until
+// depot_pass. At night a quiet person can get in here.
+@speaker The river gap
+=== start
+[!night] -> day
+The gap between the stakes is a shoulder wide and full of mud. On the other side, a lamp moves along the line of tents and stops, and moves again: the night watch, walking its round.
+* [survival 40] Lie in the reeds and count the watchman's steps. Go when he turns. -> counted
+* [roll sneak 0] Wait for the lamp to pass, then go through. -> through | seen
+* [roll AGI -20] Go now, fast and low. -> through | seen
+* Not tonight. -> END
+
+=== day
+In daylight the gap is obvious, and so is the watchman walking the line inside, and the sentries on the bluff who can see the whole riverbank. A thin person could get through here at night. Not now.
+* Back off. -> END
+
+=== counted
+~ xp 25
+Twenty-two steps to the forge, a pause to warm his hands, twenty-two back. He never looks at the river. Why would he? Nobody breaks into a prison.
+
+On the twenty-third step, you go through.
+-> inside
+
+=== through
+The mud takes you to the knee, the stake scrapes your back, and then you're inside, flat in the dark behind a tent, with the lamp going away from you.
+-> inside
+
+=== inside
+~ set depot_pass; set depot_sneaked; xp 50
+* Get up. -> END
+
+=== seen
+The lamp swings round. "Who's that?" A dog starts barking somewhere, then two. You're back through the gap and in the reeds before anyone with a spear gets there, but they'll be watching the river for a while now.
+~ time 120
+~ travel noviodunum reeds

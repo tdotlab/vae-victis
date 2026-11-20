@@ -409,6 +409,10 @@ func _enter(l: Dictionary) -> void:
 	if l.has("open_flag") and gs.flag(l["open_flag"]) == 0:
 		_popup(l["name"], "%s\n\n%s" % [l.get("desc", ""), l.get("shut_text", "")], [["Back", func(): pass]])
 		return
+	for v in l.get("closed_by_flag", []):
+		if gs.flag(String(v["flag"])) != 0:
+			_popup(l["name"], "%s\n\n%s" % [l.get("desc", ""), v.get("text", "")], [["Back", func(): pass]])
+			return
 	var where := WorldData.map_entry(l, gs.flags)
 	gs.map_id = where["map"]
 	gs.entry = where["entry"]

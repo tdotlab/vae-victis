@@ -1,0 +1,38 @@
+// Naevius, a Roman wine trader settled among the Aedui at Noviodunum. Trades,
+// and knows everyone's business.
+=== start
+[flag naevius_met] -> again
+~ set naevius_met
+A low room stacked with amphorae, a brazier, and a Roman in a wine-colored tunic who says "Welcome, welcome" in Gallic with an Aeduan accent, and then, seeing your cloak, "Cadurci! Long way. You'll want a drink. Everyone who comes this far wants a drink."
+-> hub
+
+=== again
+"Back! Drink?"
+-> hub
+
+=== hub
+* "Show me what you've got." -> trade
+* "What's the news?" -> news
+* "Tell me about the depot." -> depot
+* [!flag naevius_orbius] "What's the quartermaster like?" -> orbius
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Italian red, Aeduan bread, Roman bandages. Everything a war needs."
+-> hub
+
+=== news
+[!flag cenabum_burned] "News? Cenabum, still. They're still killing Romans in Cenabum, or they were. And Caesar's coming back over the mountains, and the Arvernian boy calls himself king." He pours. "I've lived here twenty years. I married an Aeduan woman. I'm waiting to find out which side I'm on."
+[flag cenabum_burned] "Cenabum's gone." He doesn't pour, for once. "Caesar took it at night. They tried to get out over the bridge, all of them at once. I knew people there."
+[flag aedui_wavering] "And the young men up the hill are talking about the Arverni a great deal more than they used to. When the Aedui go, they'll come for us first, the Romans in the town. I have a boat."
+-> hub
+
+=== depot
+"Caesar's money box." He laughs. "I sell them wine. The quartermaster pays on time, which is more than any Gaul ever did. The Aeduan at the gate takes a little, the watch takes a little, everyone takes a little, the Romans pretend not to see, and the wine goes in." He winks. "So do other things. Ask Dagolitos. Ask him nicely, with silver."
+-> hub
+
+=== orbius
+~ set naevius_orbius
+"Orbius?" Naevius sobers. "An honest man, poor fellow. Twenty-five years in the Seventh, and they gave him a depot instead of a farm because he can count. He drinks alone and he coughs and he teaches the hostage children their letters himself, because the army won't pay a teacher." He shakes his head. "He'll die of that cough. Or of honesty. Whichever is quicker in a war."
+-> hub

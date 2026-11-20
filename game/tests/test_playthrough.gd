@@ -88,7 +88,7 @@ func _tally_read_needed() -> void:
 	_pick("Vindomagos, then")
 
 
-func test_main_line_to_the_ending() -> void:
+func test_main_line_to_the_report() -> void:
 	_tally_read_needed()
 	_talk("vind_sulicena")
 	_pick("Can you read Roman marks?")
@@ -106,7 +106,10 @@ func test_main_line_to_the_ending() -> void:
 	_talk("brig_vellaunos")
 	_pick("I know where the tally was cut")
 	eq(gs.quest_stage("hostages"), "reported")
-	check(_acted("ending "), "the demo ending plays")
+	check(not _acted("ending "), "the report no longer ends the game")
+	_pick("I'll be back before the spring")
+	_talk("brig_vellaunos")
+	check(not _has("Call the assembly"), "no assembly before Noviodunum")
 
 
 func test_reading_the_tally_yourself() -> void:

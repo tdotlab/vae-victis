@@ -1,0 +1,30 @@
+// Eponina, home at Brigodunon.
+=== start
+[flag act1_done] -> after
+[flag epo_home_met] -> again
+~ set epo_home_met
+She's sitting on the woodpile in the rain because, she says, she can. "Five years I asked to go out in the rain. Nobody ever said yes." She holds her face up to it. "Mother wants to cut my hair to match. I won't let her. I want everyone to see."
+-> hub
+
+=== again
+"{name}." She doesn't say it carefully anymore.
+-> hub
+
+=== hub
+* "What will you do now?" -> now
+* "Do you miss it?" -> miss
+* "Goodbye." -> END
+
+=== now
+"Teach." She says it as if she's been thinking about it all the way home, which she has. "Nobody here can read. Not Vellaunos, not the vates. When the Romans come with their tablets, somebody in Brigodunon should know what they say." She looks at you. "Ateula's better at it than me. But I'm here."
+-> hub
+
+=== miss
+She's quiet a long time. "The others," she says. "There was a little girl from the Lingones who slept next to me. I touched her shoulder when I left and didn't wake her." She wipes the rain off her face. "Orbius taught us himself, you know. When he wasn't counting. He was kind. I hate that he was kind."
+-> hub
+
+=== after
+[flag brig_rising] "War, then." She looks at the young men drilling in the lower field. "I know what the Romans have. I counted it, with Ateula. They're all going to die." She says it flatly, the way a hostage says things. "Teach me to use a sling, {name}. I'm not going back to that house."
+[flag brig_faith] "We kept faith." She laughs, not nicely. "With the people who were going to sell me. Good. Very Roman of us."
+[flag brig_split] "Half of them went." She watches the road. "Half of them stayed. And I'm the one everybody looks at when they argue about it."
+* "Goodbye." -> END

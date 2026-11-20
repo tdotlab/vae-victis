@@ -1,0 +1,19 @@
+// The other hostages at Noviodunum: children of other peoples.
+=== start
+[flag epo_out] -> after
+They look at you, decide you're nobody's father, and answer anyway, in Gallic with a Latin word in every sentence.
+* "Where are you from?" -> where
+* "Do you want to go home?" -> home
+* "Goodbye." -> END
+
+=== where
+"Lingones." Or "Senones," or "Treveri," or a people you've never heard of from somewhere near the sea. "My father is a chief. He sent me." A pause. "He sent me so they wouldn't burn our village. So I'm worth a village." It's said with pride, and something under the pride.
+-> END
+
+=== home
+They look at you as if you've asked whether they'd like to fly. "When the war ends. If my people keep faith." A shrug, learned from the older ones. "If they don't, they sell us. Orbius told us. He tells us everything. He says it's kinder."
+-> END
+
+=== after
+"Is it true?" A small voice. "Eponina's gone home? Orbius wrote her dead, but she isn't, is she?" They look at you very hard. "We won't tell."
+-> END

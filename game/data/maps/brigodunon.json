@@ -101,7 +101,19 @@
     "/": "cart",
     "Q": "quern",
     "F": "woodpile",
-    "a": "amphorae"
+    "a": "amphorae",
+    "p": {
+      "terrain": "floor_earth",
+      "mark": "eponina"
+    },
+    "i": {
+      "terrain": "grass",
+      "mark": "iccios"
+    },
+    "u": {
+      "terrain": "floor_earth",
+      "mark": "ateula"
+    }
   },
   "rows": [
     "PPPPPPPPPPPPPPP....TTTTTT.....PPPPPPPPPPPPPP",
@@ -111,20 +123,20 @@
     "PP.......RR.........._...........RR.......PP",
     "P.......RR..wwwwwww.._.y.wwwww....RR.......P",
     "........R...wfffBfw.._...wQhfw.....R........",
-    "........R.F.wf@hffw.._...wfMfd.....R........",
+    "........R.F.wf@hfpw.._...wfMfd.....R........",
     "........R...wfkfffw.._...wwwww.....R........",
     "........R...wwwdwww.._.............R........",
     "........R......_______________1....R........",
     "........R..........._wwwwwwwwwwwww.R........",
     "........R..2........_wfffffffffffw.R........",
     "........R...........dfffttfffffffw.R........",
-    "........R...........wffhfffVfffffw.R........",
+    "........R...........wffhfffVfufffw.R........",
     "........R...........wfffttfffffffw.R........",
     "........R...........wfafffffffflfw.R........",
     "........R...........wwwwwwwwwwwwww.R........",
     "........R..wwwww.....3.............R........",
     "........R..wfSfd____________.......R........",
-    "........R..wfhxw.<...____...wwwww..R........",
+    "........R..wfhxw.<i..____...wwwww..R........",
     "........R..wwwww.......4_...wfDfd..R........",
     "........RR...F......../..__.wwwww.RR........",
     ".........RR...............__.....RR.........",
@@ -188,6 +200,24 @@
       "template": "dubnacos_home",
       "mark": "dubnacos_home",
       "if_flag": "dubnacos_pardoned"
+    },
+    {
+      "uid": "eponina_home",
+      "template": "eponina_home",
+      "mark": "eponina",
+      "if_flag": "epo_out"
+    },
+    {
+      "uid": "iccios_home",
+      "template": "iccios_home",
+      "mark": "iccios",
+      "if_flag": "iccios_out"
+    },
+    {
+      "uid": "ateula_home",
+      "template": "ateula_home",
+      "mark": "ateula",
+      "if_flag": "ateula_out"
     }
   ],
   "containers": [

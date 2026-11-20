@@ -1,0 +1,68 @@
+// Iccios, Cobnertos's son, at the depot forge. Nineteen and afraid to run.
+// iccios_ready decides whether he comes on the night escape.
+=== start
+[flag met_iccios] -> again
+~ set met_iccios
+He's at the anvil, making nails: a rod of iron, four blows, cut, quench, again. A basket of them at his feet, hundreds. He sees you and the hammer stops halfway up.
+
+"You're Cadurci." His voice is deep and very quiet. "From home." He looks over your shoulder, at the tents, at the gate. "Don't stand there. Hold this." He gives you the tongs, so you'll look like you belong.
+-> hub
+
+=== again
+[flag iccios_out] -> END
+"Hold the tongs," he says, without looking up.
+-> hub
+
+=== hub
+* [!flag iccios_ready] "Your father sent me." -> father
+* [item smiths_token, !flag iccios_ready] Give him the little hammer. -> token
+* [!flag iccios_ready] "We're getting out of here. You're coming." -> push
+* "Tell me about the depot." -> depot
+* [flag epo_out, flag iccios_ready, night] "The others are out. Your turn. Now." -> late
+* "I'll come back." -> END
+
+=== father
+"My father." He makes four nails before he says anything else. "He didn't come. Five years. I thought maybe he'd... I thought he'd come." He wipes his face with a burned forearm. "He's got other things. The spears. He always had the spears."
+
+"I'm all right here. They pay me. Not much. It's a good forge, better than his." He doesn't sound like he believes it, and he doesn't sound like he expects you to.
+-> hub
+
+=== token
+~ set iccios_ready; take smiths_token; xp 50
+He takes the little hammer and turns it over in his enormous hand. It disappears in there.
+
+"He made this." He's not quiet now; he isn't anything. "When I was four. He put my hand round it and he said, 'Not like that. Like this.'" He holds it the right way, the way his father showed him, and his shoulders start to shake, and he turns his back to the tents so nobody will see.
+
+"All right," he says, when he can. "All right. Whatever you're doing. I'll come."
+-> hub
+
+=== push
+"You don't know what they do." He grips the hammer. "A Senone boy ran. Last winter. They flogged him in front of all of us, and then they sold him to a dealer from Massilia, and Orbius wrote it down. I made the chain they used. They asked and I made it."
+
+"If I run and they catch me, they sell me. If I stay, I make nails. I can live with nails."
+* [speech 45] "If you stay, you're nails. Iron for Caesar's boots. Your father makes spears for people who are going to fight him. Which do you want to have made?" -> ready
+* [honor >= 15] "Look at me. I give you my word: if they catch you, they catch me first." -> ready
+* [STR 8] "Nobody's going to sell a man your size who doesn't want to be sold." -> ready
+* "Think about it." -> hub
+
+=== ready
+~ set iccios_ready; xp 50
+He makes one more nail. He looks at it as if it were the first one he'd ever made. Then he drops it in the basket with the others and puts down the hammer.
+
+"Tell me when," he says. "I'll be in the reeds. I know the place. Everyone knows the place."
+-> hub
+
+=== depot
+"The watch sit here at night, by the forge, where it's warm. Three of them. They drink. The one with the knotted hair, the sergeant, can't hold it." He bangs a nail flat. "Orbius has a box in his office with his seal in it. He takes the ring off to write; it hurts his fingers. The Spanish boy in the stable would set the whole place on fire if you asked him nicely."
+
+He looks at you. "I notice things. You stand at a forge long enough, people forget you've got ears."
+-> hub
+
+=== late
+~ set iccios_out; xp 50
+[flag ateula_out] ~ quest hostages freed
+He's ready. He's been ready for days; his tools are in a sack under the anvil. You go out by the river, past the sleeping watch, through the leaning stake, and he goes through it like a bull through a hedge and nobody wakes.
+
+On the bank he looks back once at the depot, at the glow of the forge he built up every morning for five years. Then he turns south and doesn't look back again.
+~ travel noviodunum reeds
+* Go. -> END

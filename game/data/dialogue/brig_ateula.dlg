@@ -1,0 +1,18 @@
+// Ateula, home at her father's hall.
+=== start
+She's writing. Of course she is: on a board of wax she's made herself, with a stylus of bone. "The elders' decisions," she says, before you ask. "Who owes what. Who swore what. In Latin letters, because there aren't any others." She looks up. "Somebody has to keep the books."
+* "You came home." -> home
+* [flag act1_done] "Was it worth it?" -> worth
+* "Goodbye." -> END
+
+=== home
+"I came home." She sets the stylus down, precisely. "Father cried. I've never seen him cry. He pretended it was the smoke." She looks at the board. "I still know how it ends, you know. I read the rolls. Coming home doesn't change the numbers."
+
+"It changes who's standing next to you when they come out," she says. "That's all."
+-> END
+
+=== worth
+[flag brig_rising] "Ask me in a year." She doesn't look up. "If there's anyone left to ask."
+[flag brig_faith] "My father kept faith with the people who sold me forward." She writes something down. "I'm writing that down too."
+[flag brig_split] "Forty went. I wrote their names." She turns the board so you can see. "So someone will know who they were."
+-> END

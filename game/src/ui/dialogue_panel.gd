@@ -223,7 +223,12 @@ func _finish() -> void:
 					m.combat.start_combat(first)
 			"ending":
 				m.save_map_state()
-				Game.goto("text", {"title": DB.story().get("ending_title", ""), "text": DB.text_file(parts[1]), "next": "map", "button": DB.story().get("ending_button", "Go on")})
+				if parts[1].ends_with(".json"):
+					var ed: Dictionary = DB.load_json(parts[1])
+					Game.goto("text", {"pages": Endings.pages(Game.state, parts[1]), "next": "map",
+						"button": ed.get("button", DB.story().get("ending_button", "Go on"))})
+				else:
+					Game.goto("text", {"title": DB.story().get("ending_title", ""), "text": DB.text_file(parts[1]), "next": "map", "button": DB.story().get("ending_button", "Go on")})
 				return
 	m.save_map_state()
 	hud.refresh()

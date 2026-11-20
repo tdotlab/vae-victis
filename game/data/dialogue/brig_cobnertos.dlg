@@ -8,6 +8,7 @@ The smith doesn't stop working when you come in. The hammer goes up and down, up
 -> hub
 
 === again
+[flag iccios_out] -> son
 [quest hostages=reported] "Noviodunum, Vellaunos says. Never heard of it. Bring my boy back from it anyway."
 "What do you need?"
 -> hub
@@ -16,6 +17,7 @@ The smith doesn't stop working when you come in. The hammer goes up and down, up
 * "Show me what you've got." -> trade
 * "Tell me about Iccios." -> iccios
 * [!flag smith_gift, quest hostages active] "I'll need a real weapon." -> gift
+* [!flag smith_token, !flag iccios_out, quest hostages active] "If Iccios won't believe me, what do I show him?" -> token
 * "Goodbye." -> END
 
 === trade
@@ -33,3 +35,24 @@ He looks at you, then goes to the back of the forge and comes back with a spear:
 
 "I made this for Iccios's sixteenth. He wasn't here for it." He puts it in your hands. "Use it on the right people."
 * "I will." -> hub
+
+=== token
+~ set smith_token; give smiths_token
+He stops the hammer. Then he goes to a shelf at the back of the forge, behind the good tongs, and takes down something small wrapped in a rag: a hammer no longer than your hand, the iron head no bigger than a thumb.
+
+"I made it for him when he was four. He wouldn't put it down. Slept with it." He puts it in your palm and closes your fingers over it with his own, which are hot from the forge. "He'll know it. Tell him I said, not like that. Like this. He'll know."
+-> hub
+
+=== son
+[flag smith_son_seen] -> son2
+~ set smith_son_seen; xp 50
+Two hammers are going in the forge, not one: the father's, heavy and slow, and another, quicker, lighter, from a big young man at the second anvil with burn scars up both arms.
+
+Cobnertos puts down his hammer when he sees you. He wipes his hands on his apron for much longer than they need, and then he comes and grips your forearm and doesn't say anything at all.
+[!flag smith_reward] Then he goes to the back and comes out with a sword: long, plain, perfectly balanced, the best thing you have ever seen him make. "I started it the day you left," he says. "Take it. Don't argue."
+[!flag smith_reward] ~ set smith_reward; give gallic_sword
+* Take it. -> son2
+
+=== son2
+"Show me what you need," Cobnertos says. Iccios, at the second anvil, doesn't look up, but he's smiling at the iron.
+-> hub

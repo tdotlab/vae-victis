@@ -1,0 +1,279 @@
+{
+ "_comment": "End of Act One. Endings.pages picks the first slide that holds in each group, in file order. Player-facing text; T may rewrite.",
+ "title": "End of Act One",
+ "button": "Keep playing",
+ "slides": [
+  {
+   "group": "assembly",
+   "if": [
+    "quest hostages=done_late"
+   ],
+   "title": "Brigodunon",
+   "text": "Brigodunon rose without hearing from you. Lucterius's man spoke to a hall that had nobody in it who had been to Noviodunum, and the young men went to the king in the spring with nothing but his word to go on. They would have gone anyway. That is what Vellaunos tells himself, and most nights he believes it."
+  },
+  {
+   "group": "assembly",
+   "if": [
+    "flag brig_rising"
+   ],
+   "title": "Brigodunon",
+   "text": "Brigodunon rose. Forty spears and a hundred men went south to Lucterius before the barley was in, and the smith's fire burned for a month without going out. They knew what they were fighting for, which is more than most men in that war could say. Whether knowing it helped them is another question."
+  },
+  {
+   "group": "assembly",
+   "if": [
+    "flag brig_faith"
+   ],
+   "title": "Brigodunon",
+   "text": "Brigodunon kept faith. It sent the king nothing and Rome no reason, and sat on its hill and watched the war go by on the road below. Lucterius never forgot it. Neither did Rome, which remembered such things only when it was convenient, and in that country it was rarely convenient."
+  },
+  {
+   "group": "assembly",
+   "if": [
+    "flag brig_split"
+   ],
+   "title": "Brigodunon",
+   "text": "Brigodunon split. Forty young men rode with Toutorix in the morning; the rest banked up the rampart and kept their fires. It was the kind of choice a free people makes, and the kind that neither side ever forgives. For the rest of their lives, the men who went and the men who stayed would sit at opposite ends of the same hall."
+  },
+  {
+   "group": "hostages",
+   "if": [
+    "flag epo_out",
+    "flag iccios_out",
+    "flag ateula_out"
+   ],
+   "title": "The hostages",
+   "text": "All three came home. Eponina taught the children of Brigodunon their letters on wax she made herself, in Latin, because there weren't any others. Iccios made spears at his father's second anvil and counted every one. Ateula kept the elders' books, and wrote down who swore what, so that when the time came there would be a record nobody could argue with."
+  },
+  {
+   "group": "hostages",
+   "if": [
+    "flag epo_out",
+    "flag ateula_stays"
+   ],
+   "title": "The hostages",
+   "text": "{sibling} came home. Ateula stayed behind to keep the books, and in the summer, when the Aedui turned against Rome and seized Noviodunum, they took her with every other hostage in Gaul to Bibracte. She kept the rolls there too, for new masters. The last anyone in Brigodunon heard, she had taught three Aeduan clerks to read and was teaching a fourth."
+  },
+  {
+   "group": "hostages",
+   "if": [
+    "flag epo_out",
+    "!flag iccios_out"
+   ],
+   "title": "The hostages",
+   "text": "{sibling} came home. Iccios didn't. He was still in the long house in the summer when the Aedui seized Noviodunum and marched the hostages of every people in Gaul to Bibracte. Cobnertos made the journey north twice that year, alone, and came back both times without his son, and didn't speak of it."
+  },
+  {
+   "group": "hostages",
+   "if": [
+    "flag epo_out"
+   ],
+   "title": "The hostages",
+   "text": "{sibling} came home, and the others came with her, by one road or another. It was more than anyone in Brigodunon had expected, and less than they had hoped."
+  },
+  {
+   "group": "hostages",
+   "if": [
+    "flag hostages_left"
+   ],
+   "title": "The hostages",
+   "text": "You left them in Noviodunum. In the summer the Aedui turned against Rome and seized the depot, and marched the hostages of every people in Gaul south to Bibracte, to be bargained with by someone else. {sibling} was fourteen. She knew how to say yes in Latin and in Aeduan, and she said it, and she lived."
+  },
+  {
+   "group": "hostages",
+   "if": [],
+   "title": "The hostages",
+   "text": "Nobody from Brigodunon reached Noviodunum in time. In the summer the Aedui turned against Rome, seized the depot, and took the hostages of every people in Gaul to Bibracte. {sibling} went with them. Somewhere there is a roll with her name on it, and a price beside the name, half paid."
+  },
+  {
+   "group": "orbius",
+   "if": [
+    "flag orbius_mercy"
+   ],
+   "title": "Orbius",
+   "text": "When the Aedui took Noviodunum they killed the garrison and every Roman merchant in the town, and Orbius the quartermaster was among them. In his books, which the Aedui burned with the rest, three children of the Cadurci died of fever that winter. It was the only entry he ever falsified, and he did it in his best hand."
+  },
+  {
+   "group": "orbius",
+   "if": [
+    "flag release_forged"
+   ],
+   "title": "Orbius",
+   "text": "The release order passed three inspections before anyone noticed the seal was wrong. Orbius was blamed for it, docked a year's pay and nearly flogged, and was still arguing his case in writing when the Aedui came for Noviodunum and killed every Roman in the town. His appeal was found unfinished on his table."
+  },
+  {
+   "group": "orbius",
+   "if": [
+    "flag dannotalos_cheated"
+   ],
+   "title": "Orbius",
+   "text": "Orbius released Dannotalos's property to Dannotalos's partner, and wrote it down. When Dannotalos's real agent came up the road in the spring with the other half of the money, there was nothing to sell him. The two of them were still arguing about it when the Aedui came for Noviodunum and settled the matter for both of them."
+  },
+  {
+   "group": "orbius",
+   "if": [
+    "flag hostages_bought"
+   ],
+   "title": "Orbius",
+   "text": "Orbius made money on the fever, as he said he would, and sent Dannotalos his half back with regrets. It was the most profitable winter of his career. He didn't live to spend it: when the Aedui took Noviodunum they killed every Roman merchant in the town, and Orbius had always kept his silver too close to hand."
+  },
+  {
+   "group": "orbius",
+   "if": [
+    "flag depot_pass"
+   ],
+   "title": "Orbius",
+   "text": "Orbius wrote down what happened in Noviodunum that winter as carefully as he wrote down everything else. When the Aedui took the town in the summer they killed him with the other Romans, and burned his books, and the tally of a dozen peoples' children went up with them."
+  },
+  {
+   "group": "neitin",
+   "if": [
+    "flag horses_loose"
+   ],
+   "title": "Neitin",
+   "text": "One horse was not found, the night the lines went down at Noviodunum. Neither was the boy who knew horses. Somewhere south and west there is a town on a hill with walls of stone, and a river, and his mother's horses. Nobody knows if he got there. Nobody asked."
+  },
+  {
+   "group": "bridge",
+   "if": [
+    "quest bridge=done_saved"
+   ],
+   "title": "Cenabum",
+   "text": "Caesar reached Cenabum at nightfall and found the gates open and the streets empty. The bridge he had meant to hold was nothing but a bridge. He burned the town anyway, and gave its plunder to his soldiers, and in his account of the war he does not mention how little there was."
+  },
+  {
+   "group": "bridge",
+   "if": [
+    "quest bridge active"
+   ],
+   "title": "Cenabum",
+   "text": "The townsmen of Cenabum tried to slip out over the bridge in the dark, all of them at once, and the bridge was narrow. The legions were waiting at the gate. In his account Caesar says that hardly anyone escaped. He was not exaggerating."
+  },
+  {
+   "group": "widow",
+   "if": [
+    "quest widow=done_saved"
+   ],
+   "title": "Litumara",
+   "text": "Litumara and her son got out of Cenabum ahead of the legions, with her husband's tablets sewn into her cloak. When the Romans asked, she was the widow of a citizen's freedman; when Gauls asked, she was a Carnute. Her son grew up with a Latin name and a Gallic mother, and spoke both languages without an accent, and belonged to neither."
+  },
+  {
+   "group": "widow",
+   "if": [
+    "quest widow=done_judged"
+   ],
+   "title": "Litumara",
+   "text": "The elder of Cenabum let Litumara live, and she was in the town when Caesar came to it. What became of her afterward nobody wrote down. The tribunal that spared her had been the last thing in Cenabum done according to law."
+  },
+  {
+   "group": "widow",
+   "if": [
+    "quest widow=done_bought"
+   ],
+   "title": "Litumara",
+   "text": "The blood price for Litumara went into Cenabum's treasury, and Cenabum's treasury went to Caesar's soldiers a few weeks later. Litumara and her son were already on the road south. It was, by the standards of that year, a good use of silver."
+  },
+  {
+   "group": "widow",
+   "if": [
+    "quest widow=done_given"
+   ],
+   "title": "Litumara",
+   "text": "The townsmen of Cenabum killed Litumara and her son, for a dead Roman's sake, and a few weeks later the Romans killed the townsmen of Cenabum, for a dead Roman's sake. The account was considered settled on both sides."
+  },
+  {
+   "group": "widow",
+   "if": [
+    "quest widow=done_dead"
+   ],
+   "title": "Litumara",
+   "text": "Litumara died in Cenabum. Her son was never found. The Romans, when they came, asked about Cita's freedman and his family, and were told that nobody knew, and burned the town."
+  },
+  {
+   "group": "judgment",
+   "if": [
+    "quest judgment=done_void"
+   ],
+   "title": "The Carnute forest",
+   "text": "The druids of the Carnutes declared Brigodunon's oath to Rome void, and the oak that held it was cut down at midsummer. It was a small thing among the things that happened in Gaul that year. In Brigodunon it was the only thing anyone talked about for a month."
+  },
+  {
+   "group": "judgment",
+   "if": [
+    "quest judgment=done_bound"
+   ],
+   "title": "The Carnute forest",
+   "text": "The druids of the Carnutes held that Brigodunon's oath still bound it. Senouindos said so to your face, and gave his reasons, and they were good ones. Rome never learned that a wood in the north had once kept faith on its behalf more carefully than Rome itself did."
+  },
+  {
+   "group": "levy",
+   "if": [
+    "quest levy=done_self"
+   ],
+   "title": "The king's levy",
+   "text": "Your name stayed on Ollognatos's stick all that year, in place of two children of Brigodunon. When the king's army went north to Alesia, the stick went with it."
+  },
+  {
+   "group": "levy",
+   "if": [
+    "quest levy=done_pledged"
+   ],
+   "title": "The king's levy",
+   "text": "Two children of Brigodunon went to Gergovia as hostages for the king. Rome had held its children for five years; Vercingetorix held them for one. It was not, in the end, much different."
+  },
+  {
+   "group": "levy",
+   "if": [
+    "quest levy=done_iron"
+   ],
+   "title": "The king's levy",
+   "text": "Brigodunon's levy went to the king in silver, and Ollognatos wrote it down as spears. No children of Brigodunon were taken to Gergovia that year. It was the cheapest bargain anyone made in the whole war."
+  },
+  {
+   "group": "levy",
+   "if": [
+    "quest levy=done_vindomagos"
+   ],
+   "title": "The king's levy",
+   "text": "The king's riders took two children from Vindomagos instead. Sulicena never asked who had sent them. She didn't have to."
+  },
+  {
+   "group": "pit",
+   "if": [
+    "quest pit=done_freed"
+   ],
+   "title": "Eppillos",
+   "text": "Eppillos, who should have burned in the pit at Gergovia, reached his great-uncle in the hills and lived to be old. Ategnatos paid his debt to you for the rest of his life, quietly, in ways you mostly never found out about."
+  },
+  {
+   "group": "avaricum",
+   "if": [
+    "quest nertomara done"
+   ],
+   "title": "Avaricum",
+   "text": "Avaricum fell, and of forty thousand people some eight hundred reached the king's camp. Nertomara was not one of them. Her two children reached her sister at Argentomagus, and lived, and had children of their own, who were told about the most beautiful city in Gaul."
+  },
+  {
+   "group": "avaricum",
+   "if": [
+    "flag survivor_out"
+   ],
+   "title": "Avaricum",
+   "text": "Avaricum fell, and of forty thousand people some eight hundred reached the king's camp. One of them was a girl who had hidden in the last granary in the city. She never told anyone your name, because you never told her."
+  },
+  {
+   "group": "avaricum",
+   "if": [
+    "quest nertomara=failed"
+   ],
+   "title": "Avaricum",
+   "text": "Avaricum fell with Nertomara's children still in it. Of forty thousand people, some eight hundred reached the king's camp. They were not among them."
+  },
+  {
+   "group": "next",
+   "if": [],
+   "title": "The war",
+   "text": "Gergovia held. Then the Aedui broke with Rome, and for one summer it looked as though all of Gaul might stand together. Then came Alesia.\n\nThe Cadurci fought on longer than almost anyone. The next year Lucterius would make his stand at Uxellodunum, in your own country, on a hill above the Duranius, and Caesar, who was proud of his clemency, would cut off the hands of every man there who had carried arms.\n\nThat is another story. This one ends here, for now.\n\nYou can keep playing: the roads are open, and Gaul is still at war."
+  }
+ ]
+}

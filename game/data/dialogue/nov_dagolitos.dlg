@@ -1,0 +1,68 @@
+// Dagolitos, the Aeduan keeper of the depot gate. Sells the way in, and news.
+=== start
+[flag dago_met] -> again
+~ set dago_met
+The Aeduan by the fire doesn't get up. He's warming his hands, and his rings, of which there are a great many. "Cadurci," he says pleasantly. "Down from the hills. You're a long way from your mountains, friend, and the wrong side of a war."
+
+"I'm Dagolitos. I keep the gate. The Romans keep what's behind it, and between us we keep the peace."
+-> hub
+
+=== again
+[flag depot_pass] "Still here? Enjoy the view. Nobody else does."
+[!flag depot_pass] "Back again. The gate hasn't moved."
+-> hub
+
+=== hub
+* [!flag depot_pass, !flag dago_paid] "I want to go in." -> price
+* "What's the depot for?" -> depot
+* "The Aedui are Rome's friends, then." -> friends
+* [flag letter_read] "Who is Dannotalos?" -> dannotalos
+* [!flag dago_hint] "Who runs things inside?" -> inside
+* "Goodbye." -> END
+
+=== price
+He smiles at the fire. "Everyone wants to go in. Wine traders, horse dealers, mothers. The Romans don't care who goes in as long as somebody they trust says so. I'm somebody."
+
+"Forty silver, and I'll be looking the other way when you get to the gate."
+* [silver 40] Pay him. -> paid ~ silver -40
+* [barter 40, silver 25] "Twenty-five. You'd get nothing at all for watching the rain." -> paid ~ silver -25
+* [item druid_token] Show him the bronze wheel. -> wheel
+* "Not today." -> hub
+
+=== paid
+~ set dago_paid
+He doesn't count it, which is how you know he already has. "Walk up to the gate and tell the boys Dagolitos says you're expected. Go on."
+-> hub
+
+=== wheel
+He looks at the wheel for a long time, and when he looks up he isn't smiling. "Where did you get that?"
+
+You tell him. He touches his forehead with two fingers, a quick small movement he probably doesn't know he's making. "Put it away. Go up to the gate and show them that, and I'll come over. No charge." He pulls his cloak tighter. "The Romans can have the grain. The gods are still ours."
+~ set dago_paid
+-> hub
+
+=== depot
+"Caesar's purse." He ticks it off on his rings. "Grain for six legions, bought from us. Horses from Italy and Spain, the best in the world, for his cavalry, which is mostly Gauls. The army's pay chest, the baggage, the sick. And the hostages. Every people that's sworn to Rome sends children, and Caesar keeps them here, where his friends the Aedui can mind them."
+
+"Very safe place, Noviodunum." He says it as if he's only just thought about it. "Very rich."
+-> hub
+
+=== friends
+"Friends." He turns the word over. "For a hundred years. Rome helped us against the Arverni, and against the Sequani, and against the Germans. We've had a great deal of help." He holds his hands closer to the fire. "Some of our young men think we've had enough help. Some of our old men are getting rich. Ask me again in the summer."
+-> hub
+
+=== dannotalos
+~ set dago_dannotalos
+"Dannotalos!" He laughs. "My wife's cousin's husband. A good house. Very old, very poor, until lately." He winks. "He buys things forward. Grain before it's grown. Wine before it's landed. People before the war is over. When Caesar wins, the Romans will sell what's left over cheap, and Dannotalos will already have paid half."
+
+"And if Caesar loses?" you ask.
+
+He shrugs. "Then Dannotalos will have made friends with whoever won. He's very good at friends."
+-> hub
+
+=== inside
+~ set dago_hint
+"The quartermaster. Lucius Orbius. A decent man for a Roman, which is to say he counts honestly and drinks alone." He nods at the depot. "His clerk is a Gaulish girl who writes Latin better than he does. The watch is Aeduan, hired, and they sleep at the forge from midnight on."
+
+He seems to realize he's said that last part out loud, and smiles at you. "But you won't need to know that."
+-> hub

@@ -160,6 +160,10 @@ func check_calendar() -> Array:
 	var shown: Array = []
 	for e in WorldData.due_events(DB.calendar(), state.day(), state.flags):
 		state.set_flag("cal_" + String(e["id"]))
+		# An event can be overtaken by the player ("unless_flag"): it passes
+		# without news or effects.
+		if e.has("unless_flag") and state.flag(String(e["unless_flag"])) != 0:
+			continue
 		var fl: Dictionary = e.get("flags", {})
 		for f in fl:
 			state.set_flag(f, int(fl[f]))

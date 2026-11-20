@@ -592,6 +592,66 @@
       "weight": 3,
       "value": 150,
       "desc": "A long sword from the furnaces of Avaricum, hammered from good Biturigan iron and quenched in the river. It does not bend."
+    },
+    {
+      "id": "smiths_token",
+      "name": "Little hammer",
+      "type": "quest",
+      "weight": 0.5,
+      "value": 0,
+      "desc": "A child's hammer, iron head no bigger than a thumb, the handle worn dark. Cobnertos made it for Iccios when the boy was four."
+    },
+    {
+      "id": "hostage_roll",
+      "name": "Hostage roll",
+      "type": "quest",
+      "weight": 0.5,
+      "value": 0,
+      "read": "item_roll",
+      "desc": "Two wax tablets in Ateula's small, neat hand: a copy of the quartermaster's roll of every hostage kept at Noviodunum, people by people, with the price beside some of the names."
+    },
+    {
+      "id": "commissary_seal",
+      "name": "Commissary's ring",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "read": "item_seal",
+      "desc": "A bronze seal ring, the bezel cut with a corn ear and the letters C FVF CIT. It belonged to Caesar's grain commissary at Cenabum. He doesn't need it now."
+    },
+    {
+      "id": "grain_ledger",
+      "name": "Grain ledger",
+      "type": "quest",
+      "weight": 0.5,
+      "value": 0,
+      "read": "item_ledger",
+      "desc": "The commissary's book from Cenabum, burned at one corner: grain bought, grain shipped, and where it went."
+    },
+    {
+      "id": "druid_token",
+      "name": "Bronze wheel",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "desc": "A little bronze wheel of six spokes on a leather cord, given by the druids in the Carnute forest. Gauls who see it step aside, or at least lower their voices."
+    },
+    {
+      "id": "orbius_seal",
+      "name": "Quartermaster's seal",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "read": "item_seal",
+      "desc": "An iron seal ring with a worn carnelian, cut with a ship's prow and L ORB. Lucius Orbius signs for everything at Noviodunum with this."
+    },
+    {
+      "id": "release_order",
+      "name": "Release order",
+      "type": "quest",
+      "weight": 0,
+      "value": 0,
+      "desc": "A wax tablet in good Latin, sealed: the hostages of Brigodunon, three, to be released to the bearer and given road and bread. Whether it is true depends on who's asking."
     }
   ]
 }

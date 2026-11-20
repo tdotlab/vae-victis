@@ -1,5 +1,7 @@
 // The player's mother, after the first morning.
 === start
+[flag epo_out] -> home
+[flag hostages_left] -> left
 [quest hostages=reported] -> after
 [quest hostages=summoned] -> summoned
 "You're still here." It isn't quite a complaint.
@@ -40,3 +42,23 @@ She has it ready already, wrapped in a cloth: bread, a twist of dried herbs, ten
 === after2
 She nods slowly. "Then go. Bring her back, and don't you dare send word you're dead. Come and tell me yourself."
 * Go. -> END
+
+=== home
+[flag mother_home_seen] -> home2
+~ set mother_home_seen; xp 50
+Your mother is sitting at the hearth with Eponina's head in her lap, combing her short Roman hair with her fingers, over and over, as if she could make it grow. She doesn't get up. She looks at you over your sister's head, and her face does something it hasn't done in five years.
+
+"You came and told me yourself," she says. "Good. Good."
+
+Eponina, without opening her eyes: "I bit him again, Mother. Nearly. I wanted to."
+* Sit down with them. -> home2
+
+=== home2
+"Sit," your mother says. "Eat. You're thin." She hasn't let go of Eponina's hair. "She talks in her sleep in Latin. I don't care. Let her talk."
+* "I will." -> END
+
+=== left
+"You saw her." Your mother's hands are still. "She's alive. She can read, you said. In two languages." She turns back to the fire. "Then she's worth something to them. They'll keep her. You'll go back."
+
+It isn't a question.
+* "I'll go back." -> END

@@ -1,0 +1,10 @@
+// Read from the inventory: Ateula's copy of the Noviodunum hostage roll.
+@speaker Hostage roll
+=== start
+~ set roll_read
+Two tablets in a small, neat, Roman hand. People by people: Lingones four, Senones six, Treveri three, Bituriges five, Cadurci of Brigodunon three, a dozen more peoples, nearly a hundred names. The writing is Latin, but Ateula has written each Gallic name the way it should sound.
+
+Beside some of the names, in the right-hand column, a few words: a merchant's name, a sum, "half paid." There are a great many of them. The Cadurci of Brigodunon are not the only children in Gaul who have been sold forward.
+
+At the bottom, smaller, a line that isn't part of any roll: "Let them decide with their eyes open."
+* Put it away. -> END

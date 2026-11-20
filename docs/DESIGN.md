@@ -253,6 +253,40 @@ Avaricum is the Necropolis: one location, three states. The world map picks the 
 - **The Most Beautiful City.** Nertomara's children: early with a good word, by boat, by the adit, by the king's runners. The city itself can't be saved; the clock is history's.
 - **What the Soldiers Left.** A girl in the ruins: stealth, Latin, silver, the factor's word, or force.
 
+### Cenabum
+
+Cenabum is the Junktown: a Carnute river town on the Liger with a wooden bridge, where the revolt began. The Roman traders' houses are gutted and nobody has rebuilt them; the people who killed them still walk past every day. Caesar takes Vellaunodunum around day 94-97 and Cenabum on day 100: the townsfolk try to slip out over the narrow bridge at night, are caught, and the town is plundered and burned (BG VII.11). The world map switches it to a burned map (`map_by_flag`). The leaders of the massacre (Caesar's Cotuatus and Conconnetodumnus) are talked about, not met.
+
+- **The Roman's Widow.** Litumara, a Carnute woman, was married to a freedman of the dead commissary Fufius Cita. She hides with her son, who has a Roman name and a Gallic one, and with her husband's seal and grain ledger. Atepomaros, whose brother went to the Romans as a debt slave, wants the boy. Routes: get them out at night (Sneak), argue for them before the elder (Speech, or Lore: blood of the tribe is the druids' to judge), pay Atepomaros the blood price, betray her, or fight. Saving her gets the commissary's seal and the ledger (which names the depot at Noviodunum); betraying her gets the seal off her body. The seal is a way into Noviodunum and a tool for a forged order there.
+- **The Narrow Bridge.** From day 94 the news of Vellaunodunum says Caesar is two days off. Senuacos the elder means to take the town out over the bridge at night, which is how they're all caught. Routes: talk him into leaving by day (Speech, or Renown), find the old ford upstream (Survival or Lore), or pay Onnacos the boatman to ferry the families downstream at night. Fails if the town is still inside on day 100.
+
+### The Carnute forest
+
+The Brotherhood: the sacred grove where the druids of all Gaul hold their yearly session (BG VI.13). Not the session yet; the grove is never empty. A ditched enclosure with a pit and racks of offered weapons, after Gournay-sur-Aronde. Hidden on the world map until the vates at home, the Cenabum elder, or the road shows it.
+
+- **The Judgment.** Bring Brigodunon's case: does a pledge still bind when Rome has sold the pledged? Senouindos the druid hears it. Routes: show the evidence (the tablets, the factor's list, the letter, Hermeros's day book), argue the law (Lore), argue the case (Speech or Presence), keep the vigil in the grove for a night (Fortitude or Endurance), or give to the gods first for a better hearing. A verdict that the pledge is void carries weight at the assembly at home. The druid's token gets you past an Aeduan gate.
+- Bitugenos the bard sings your deeds back to you, mostly wrong, from what you've done. Pay him for a better version (renown) or correct him (Speech).
+
+### Noviodunum: the end of Act I
+
+Caesar's depot on the Liger in Aeduan country: a palisade and ditch on the river flat below the Aeduan town, with horse lines, granaries, the paymaster's hut, the quartermaster's office, and a long low house by the river where the hostages of all Gaul are kept (BG VII.55). Lucius Orbius, the quartermaster, is the officer who cut Brigodunon's tally five years ago. Dagolitos keeps the gate for Dannotalos.
+
+Getting in: Dannotalos's letter, a bribe to Dagolitos, the druid's token, offering yourself to Orbius as an interpreter (Latin), the dead commissary's seal (Latin or Speech), or the river at night (Sneak).
+
+Inside are Eponina, fourteen and fluent in Latin; Iccios, who works the depot forge and is afraid to run; and Ateula, who copies Orbius's rolls and won't leave the others unrecorded. Each needs something: Iccios his father's word (Cobnertos's token) or a good argument; Ateula a strong argument, or she stays and gives you a copy of the roll of every hostage and who has bought them (the Act II thread).
+
+Getting them out:
+- **Orbius's word.** Show him his own tally. He promised they would go home if the Cadurci kept faith. Speech or Honor; he writes them off as dead of fever.
+- **Buy them.** Silver per head, less with Barter.
+- **Dannotalos's claim.** With the letter, ask for early delivery on Dannotalos's account (Speech, or automatic if Epomeduos wrote you in as partner). Dannotalos will remember.
+- **Paper.** Forge a release in the proconsul's name with the commissary's seal or Orbius's own (Latin).
+- **By night.** Prepare them, then lead them out through the river (Sneak), helped if Neitin the Spanish horse-boy turns the horses loose. Failure means fighting the house guards.
+- **Leave them.** They are safe until the autumn; the Aedui will take them to Bibracte on about day 196 (Act II).
+
+Freed hostages walk home and are in Brigodunon when the player gets there.
+
+**The assembly.** Back home, Vellaunos calls the assembly, with Lucterius's man in the hall. The player speaks: rise with Lucterius, hold back while Rome has hostages, or send the young men and keep the village's name out of it. Evidence and the druid's verdict make arguments easier. The Cadurci rise either way, as they did; the choice is how Brigodunon goes into it. If the player is not home by day 120, the assembly meets without them and rises. The act closes with Fallout-style slides (one per thing the player changed) and play continues.
+
 ## Items and economy
 
 - **Weapons:** daggers, swords (Gallic long swords and Roman short swords), axes, spears, javelins and pila, slings, bows, clubs. Quality tiers: crude, common, fine, masterwork.

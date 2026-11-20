@@ -1,0 +1,12 @@
+// Read from the inventory: a Roman seal ring (Orbius's or Cita's). With good
+// Latin you can write your own release order.
+@speaker Seal ring
+=== start
+A Roman seal. Pressed into wax at the foot of a few lines of Latin, it turns a lie into an order.
+* [latin 55, !flag release_written, quest hostages active] Scrape a wax tablet smooth and write a release order for the hostages of Brigodunon. -> write
+* Put it away. -> END
+
+=== write
+~ set release_written; give release_order; xp 50
+You write it as carefully as you've ever written anything: the legate's style, as near as you can manage it, three names, road and bread, the seal pressed deep. It isn't perfect. But the man who reads it will be an Aeduan watchman who can't read.
+* Put it away. -> END

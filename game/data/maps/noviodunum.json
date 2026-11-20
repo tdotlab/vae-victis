@@ -1,0 +1,395 @@
+{
+ "id": "noviodunum",
+ "name": "Noviodunum",
+ "default": "grass",
+ "weather": "rain",
+ "legend": {
+  ".": "grass",
+  "T": "tree",
+  "b": "bush",
+  ";": "meadow",
+  "q": "shallows",
+  "~": "water",
+  "_": "road",
+  "o": "dirt",
+  "m": "mud",
+  "p": "palisade",
+  "w": "wall_wood",
+  "f": "floor_earth",
+  "d": "door",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "a": "amphorae",
+  "l": "loom",
+  "Q": "quern",
+  "y": "granary",
+  "s": "stall",
+  "F": "woodpile",
+  "/": "cart",
+  "<": "smithy",
+  "M": "tent",
+  "E": {
+   "terrain": "road",
+   "mark": "exit"
+  },
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "Z": {
+   "terrain": "road",
+   "mark": "town"
+  },
+  "I": {
+   "terrain": "road",
+   "mark": "inside"
+  },
+  "X": {
+   "terrain": "shallows",
+   "mark": "reeds"
+  },
+  "L": {
+   "terrain": "shallows",
+   "mark": "bank_exit"
+  },
+  "G": {
+   "terrain": "dirt",
+   "mark": "gate"
+  },
+  "R": {
+   "terrain": "dirt",
+   "mark": "river_gap"
+  },
+  "8": {
+   "terrain": "grass",
+   "mark": "sentry1"
+  },
+  "9": {
+   "terrain": "grass",
+   "mark": "sentry2"
+  },
+  "D": {
+   "terrain": "grass",
+   "mark": "dagolitos"
+  },
+  "N": {
+   "terrain": "floor_earth",
+   "mark": "naevius"
+  },
+  "k": {
+   "terrain": "crate",
+   "mark": "naevius_stock"
+  },
+  "1": {
+   "terrain": "floor_earth",
+   "mark": "t1"
+  },
+  "2": {
+   "terrain": "grass",
+   "mark": "t2"
+  },
+  "3": {
+   "terrain": "grass",
+   "mark": "t3"
+  },
+  "O": {
+   "terrain": "floor_earth",
+   "mark": "orbius"
+  },
+  "A": {
+   "terrain": "floor_earth",
+   "mark": "ateula"
+  },
+  "x": {
+   "terrain": "crate",
+   "mark": "orbius_box"
+  },
+  "c": {
+   "terrain": "crate",
+   "mark": "pay_chest"
+  },
+  "Y": {
+   "terrain": "dirt",
+   "mark": "paymaster"
+  },
+  "K": {
+   "terrain": "floor_earth",
+   "mark": "horses"
+  },
+  "V": {
+   "terrain": "dirt",
+   "mark": "neitin"
+  },
+  "W": {
+   "terrain": "dirt",
+   "mark": "patrol2"
+  },
+  "P": {
+   "terrain": "dirt",
+   "mark": "patrol"
+  },
+  "j": {
+   "terrain": "dirt",
+   "mark": "iccios"
+  },
+  "g": {
+   "terrain": "dirt",
+   "mark": "house_guard"
+  },
+  "e": {
+   "terrain": "floor_earth",
+   "mark": "eponina"
+  },
+  "J": {
+   "terrain": "floor_earth",
+   "mark": "h1"
+  },
+  "u": {
+   "terrain": "floor_earth",
+   "mark": "h2"
+  },
+  "v": {
+   "terrain": "floor_earth",
+   "mark": "h3"
+  }
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTT..EEE..TTTTTTTTTTTTTTTTTTTT",
+  "TT.TT.................@................TT...TT",
+  "TT..wwwwwwwww........._....wwwwwwww......T..TT",
+  "TT..waaffffkw...2s...._....wfffffBw.wwwwww..TT",
+  "TT..wffftNffw........._____dfffhffw.wfffBw..TT",
+  "TT..wfffffffd__________....wflff1fw.dfhffw..TT",
+  "TT..waffffffw........._....wwwwwwww.wffQfw..TT",
+  "TT..wwwwwwwww........._..3..........wwwwww..TT",
+  "TTT..........wwwwww..._..........y........T.TT",
+  "TT......../..wBhffd...Z.......F.............TT",
+  "TTT..........wwwwww.8._.9.D................TTT",
+  "TTTmmmmmmmmmmmmmmmmmmm_mmmmmmmmmmmmmmmmmmmmTTT",
+  "TTT.pppppppppppppppppGGGpppppppppppppppppp.TTT",
+  "TTTbpooooooooooyoyoyoo_oooowwwwwwwwwwwwwopbTTT",
+  "TTTbpowwwwwwwwooooooooIoooowFKKKKKKKKKFwopbTTT",
+  "TTTbpowBffffxwoooooooo_oooowKKKKKKKKKKKwopbTTT",
+  "TTTbpowffttffd_________oooodKKKKKKKKKKKwopbTTT",
+  "TTTbpowfAfOffwoooooooo_oooowFKKKKKKKKKFwopbTTT",
+  "TTTbpowafffffwoooooooo_oooowwwwwwdwwwwwwopbTTT",
+  "TTTbpowwwwwwwwoyoyoooo_oooooooooooooooooopbTTT",
+  "TTTbpoooooooooooooogoo_oooooooooVoooooooopbTTT",
+  "TTTbpowwwwwowwwwwwdwwwwwwwwooooooooooooWopbTTT",
+  "TTTbpowfcfdYwBfBfffffffBffwoojoooooMoMooopbTTT",
+  "TTTbpowfffwowfeffJfhffufvfwooo<FoooooooMopbTTT",
+  "TTTbpowwwwwowBfffffffBfffBwo/oooooooPoooopbTTT",
+  "TTTbpooooooowwwwwwwwwwwwwwwoooooooooooooopbTTT",
+  "TTTbpppppppppppppppppppppppppppppppppRppppbTTT",
+  ";bb;bb;bb;bb;bb;bb;bb;bb;bb;bb;bb;bb;qb;bb;bbb",
+  "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqXL",
+  "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+ ],
+ "arrive_text": "Noviodunum of the Aedui sits on its bluff above the Liger, a town of thatch and smoke like any other. Below it, on the flat by the river, is the thing that isn't like any other: a square of ditch and stakes with Roman sentries at the gate. Behind the stakes are Caesar's grain, his baggage, his remounts, his pay chest, and the children every people in Gaul handed over to keep its word.",
+ "actors": [
+  {
+   "uid": "dagolitos",
+   "template": "dagolitos",
+   "mark": "dagolitos"
+  },
+  {
+   "uid": "nov_sentry1",
+   "template": "nov_sentry",
+   "mark": "sentry1"
+  },
+  {
+   "uid": "nov_sentry2",
+   "template": "nov_sentry",
+   "mark": "sentry2"
+  },
+  {
+   "uid": "naevius",
+   "template": "naevius",
+   "mark": "naevius"
+  },
+  {
+   "uid": "nov_t1",
+   "template": "nov_townswoman",
+   "mark": "t1"
+  },
+  {
+   "uid": "nov_t2",
+   "template": "nov_townsman",
+   "mark": "t2"
+  },
+  {
+   "uid": "nov_t3",
+   "template": "nov_townswoman",
+   "mark": "t3"
+  },
+  {
+   "uid": "orbius",
+   "template": "orbius",
+   "mark": "orbius"
+  },
+  {
+   "uid": "ateula",
+   "template": "ateula",
+   "mark": "ateula",
+   "unless_flag": [
+    "ateula_out"
+   ]
+  },
+  {
+   "uid": "eponina",
+   "template": "eponina",
+   "mark": "eponina",
+   "unless_flag": [
+    "epo_out"
+   ]
+  },
+  {
+   "uid": "iccios",
+   "template": "iccios",
+   "mark": "iccios",
+   "unless_flag": [
+    "iccios_out"
+   ]
+  },
+  {
+   "uid": "neitin",
+   "template": "neitin",
+   "mark": "neitin"
+  },
+  {
+   "uid": "nov_house_guard",
+   "template": "nov_watch",
+   "mark": "house_guard",
+   "kill_flag": "house_guard_down"
+  },
+  {
+   "uid": "nov_patrol",
+   "template": "nov_watch",
+   "mark": "patrol"
+  },
+  {
+   "uid": "nov_patrol2",
+   "template": "nov_guard",
+   "mark": "patrol2"
+  },
+  {
+   "uid": "nov_paymaster",
+   "template": "nov_paymaster",
+   "mark": "paymaster"
+  },
+  {
+   "uid": "nov_h1",
+   "template": "nov_hostage",
+   "mark": "h1"
+  },
+  {
+   "uid": "nov_h2",
+   "template": "nov_hostage_f",
+   "mark": "h2"
+  },
+  {
+   "uid": "nov_h3",
+   "template": "nov_hostage",
+   "mark": "h3"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "naevius_stock",
+   "name": "Naevius's stock",
+   "items": [
+    [
+     "roman_wine",
+     3
+    ],
+    [
+     "bread",
+     6
+    ],
+    [
+     "bandage",
+     4
+    ]
+   ],
+   "owner": "naevius"
+  },
+  {
+   "mark": "orbius_box",
+   "name": "The quartermaster's box",
+   "items": [
+    [
+     "orbius_seal",
+     1
+    ],
+    [
+     "bandage",
+     2
+    ]
+   ],
+   "silver": 40,
+   "lock": 50,
+   "owner": "orbius"
+  },
+  {
+   "mark": "pay_chest",
+   "name": "The pay chest",
+   "items": [
+    [
+     "bronze_torque",
+     2
+    ]
+   ],
+   "silver": 400,
+   "lock": 75,
+   "owner": "nov_paymaster",
+   "if_seen": "fight"
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The road up out of Noviodunum"
+  },
+  {
+   "mark": "bank_exit",
+   "to": "world",
+   "label": "Along the riverbank"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "gate",
+   "id": "gate",
+   "once": false,
+   "unless_flag": "depot_pass",
+   "dialogue": "nov_gate"
+  },
+  {
+   "mark": "river_gap",
+   "id": "river_gap",
+   "once": false,
+   "unless_flag": "depot_pass",
+   "dialogue": "nov_river"
+  },
+  {
+   "mark": "horses",
+   "id": "horses",
+   "say": "The stable is warm and dark and full of horses: tall ones, taller than any Gaul breeds, brought over the mountains from Italy and Spain at a price nobody here will ever be told. They shift and blow and watch you. A good one is worth a family."
+  },
+  {
+   "mark": "reeds",
+   "id": "reeds_view",
+   "say": "Reeds, mud, and the Liger, brown and fast with snowmelt. The palisade comes down to the bank here, and where the ground is soft one of the stakes has leaned out of line. There's a gap a thin person could get through. Somebody else has noticed: the mud in it is full of footprints, all of them small."
+  },
+  {
+   "mark": "inside",
+   "id": "inside_view",
+   "say": "Inside, the depot is a town that only counts things. Granaries on stilts, a stable longer than Brigodunon's hall, wagons lined up by size, a forge, tents for the guard. Everything has a number painted on it. Down by the river is a long low house with a guard at the door and small tunics drying under the eaves."
+  }
+ ]
+}

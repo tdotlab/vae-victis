@@ -1,0 +1,14 @@
+// The legionaries on the depot gate.
+=== start
+[flag depot_pass] -> inside
+"Keep moving." He doesn't look at you. He's looking at the rain, which he has been looking at for a month.
+* "What's in there?" -> what
+* "Goodbye." -> END
+
+=== what
+"Grain. Horses. Money. Children." He counts them off as if they were all the same kind of thing, which for him they are. "And me, out here. Keep moving."
+-> END
+
+=== inside
+"You've been let in." He says it as if somebody else will be blamed for it. "Don't touch the horses."
+-> END

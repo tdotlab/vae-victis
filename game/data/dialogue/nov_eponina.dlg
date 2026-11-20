@@ -1,0 +1,166 @@
+// Eponina, the player's sister, in the long house at Noviodunum. Fourteen.
+// The night escape starts here.
+=== start
+[flag met_eponina] -> again
+~ set met_eponina; xp 50
+[quest hostages active] ~ quest hostages inside
+[quest hostages none] ~ quest hostages inside
+The long house is warm and smells of porridge and wet wool. A dozen children of a dozen peoples look up from their games, decide you're nobody's father, and look down again. One doesn't.
+
+She's taller. Her hair is cut short like a Roman girl's, and she has your mother's chin, and she says something in Latin, quick and flat, before she hears herself and stops.
+
+"{name}." In Gallic, this time. Carefully, like a word she hasn't used in a long time. "You came. Nobody comes."
+* "Mother sent me." -> mother
+* "I've come to take you home." -> home
+* Hold her. -> hold
+
+=== hold
+~ set epo_held
+She lets you, for a moment, stiff as a post. Then she isn't stiff at all, and her face is in your cloak, and she's saying something into it that you can't hear and don't need to.
+
+When she steps back she wipes her face with the heel of her hand, hard, as if it had done something to her. "They'll see," she says. "Don't. They'll see."
+-> hub
+
+=== again
+[flag epo_out] -> END
+[flag escape_alarm] -> alarm
+"{name}." She still says it carefully.
+-> hub
+
+=== hub
+* [!flag epo_ready] "Mother sent me." -> mother
+* "Tell me about this place." -> place
+* "Where are the others? Ateula and Iccios?" -> others
+* [!flag epo_eels] "Do you ever get out of here?" -> eels
+* [flag epo_ready, night] "Tonight. We go now." -> go
+* [flag epo_ready, !night] "I'll come back for you after dark." -> later
+* [flag hostages_left] "I'm sorry. I can't get you out. Not now." -> left_again
+* [!flag hostages_left, quest hostages active] "I can't get you out. Not now." -> leave
+* "I'll be back." -> END
+
+=== mother
+~ set epo_ready
+"Mother." She looks at the door. "She didn't come. Five years. Ateula's father didn't come, and Iccios's didn't. The others' fathers send things sometimes. Cloaks. Honey. A boy from the Lingones got a dog."
+
+You tell her about the ten silver for the spring sowing, wrapped in a cloth. About the grey at the temples. About "both of you." She listens with her jaw tight.
+
+"She used to say I'd bite the wrong person one day." She almost smiles. "I bit a Roman. Did she tell you? He laughed. He's the one who counts us now."
+-> hub
+
+=== home
+~ set epo_ready
+"Home." She says it like the name of a place in a story. Then she grabs your arm hard enough to hurt. "Yes. Yes. Don't ask me again, I'll start thinking about it. Yes."
+-> hub
+
+=== place
+"It's not bad." She says it fast, like a lesson. "We eat. We learn our letters. Orbius, the old man with the cough, teaches us himself when he isn't counting. Nobody hits us unless we run." She looks at her hands. "A Senone boy ran, last winter. They brought him back and flogged him in front of us, and then he was sold. Orbius wrote it down. He cried while he wrote it. He still wrote it."
+
+"There's a guard on the door all day. At night it's the watch, Aeduans with spears, walking the stakes, but they don't walk much after midnight. They sit by the forge where it's warm."
+-> hub
+
+=== others
+"Iccios is at the forge. They found out he was a smith's son and now he makes nails for them, and hinges, and the locks." She snorts. "He made the lock on our door. He's afraid of everything. He's the biggest person here and he's afraid of everything."
+
+"Ateula's in the office with Orbius. She writes the rolls. She's Roman now. She says she isn't, but she reads the rolls, and she says when you've read the rolls you know how this ends." Eponina shrugs, a hostage's shrug, learned. "She's cleverer than me. Maybe she's right."
+-> hub
+
+=== eels
+~ set epo_eels
+She looks at you sideways, deciding something. Then she grins, and she's nine again for a moment.
+
+"There's a stake by the river that leans. We go out through it at night, the small ones, and catch eels in the reeds. The watch knows. They don't care. We always come back." The grin goes. "Where would we go? Two hundred miles, in the snow, with a war on?"
+
+She looks at you.
+
+"Oh," she says.
+-> hub
+
+=== later
+"After dark." She nods, quick. "After midnight is best. The watch sits by the forge. If you're outside, come by the river, the leaning stake. You'll see my eel tracks."
+-> hub
+
+=== leave
+"Not now." She takes that in. She has had five years of practice taking things in. "Then when?"
+* "I'll come back for you. I swear it." -> leave_sworn
+* "I don't know." -> leave_sure
+
+=== leave_sworn
+"Don't swear." She's angry, suddenly. "Everybody swears. Our fathers swore, that's why we're here." She turns away. "Go on. Tell Mother I'm alive. Tell her I can read."
+-> hub
+
+=== leave_sure
+Her chin comes up, your mother's chin. "Then go home and tell Mother I'm alive." She hesitates. "Tell her I can read. In two languages. Tell her I'm worth something."
+* "I'm leaving you here." -> left
+* "Wait. Not yet." -> hub
+
+=== left
+~ set hostages_left; quest hostages left; honor -5
+She doesn't cry. She has had five years of practice at that too. "Go on, then," she says. "Before they see."
+* Go. -> END
+
+=== left_again
+"I know." She doesn't look at you. "Go on."
+-> hub
+
+=== go
+She's ready in a breath: a cloak, a twist of bread from under the bed, nothing else. She touches the shoulder of a sleeping girl as she passes, and doesn't wake her.
+[flag house_guard_down] Outside, the door is unguarded. The man who stood there is lying in the mud.
+[flag house_guard_down] -> out
+[flag watch_bribed] The watch is at the forge, as paid for, with their backs turned and a jar going round. Nobody looks up.
+[flag watch_bribed] -> out
+* [flag horses_loose, roll sneak 20] Go now, while the watch is chasing horses. -> out | spotted
+* [!flag horses_loose, roll sneak -10] Go now. Down to the river, along the stakes. -> out | spotted
+* "Not yet." -> hub
+
+=== spotted
+[flag horses_loose] Somewhere behind you the stable door bangs and horses go thundering through the tents, and the watch go after them, shouting, all but one.
+A lamp swings up out of the dark between you and the river. "Who's that?" A spear catches the light. "Stand still!"
+* Let Eponina talk. -> eel_lie
+* Fight your way through. -> alarm_fight
+* Run for the gap alone, and come back another night. -> run
+
+=== eel_lie
+~ set nov_eel_lie
+Eponina steps into the light with her hands up and says something in Latin, laughing, with the word for eels in it twice. The watchman lowers his spear. He knows her; they all know her. He says something back, and she ducks her head, and he jerks his thumb at the long house.
+
+"Bed," she whispers to you, without moving her lips. "He thinks you're one of the Treveri. Go back the way you came. Come another night." She goes, slowly, the way a child goes to bed.
+* Slip away. -> run_quiet
+
+=== run_quiet
+You go back along the stakes the way you came, and nobody stops you.
+~ time 120
+~ travel noviodunum reeds
+
+=== run
+~ time 120
+You leave her standing in the lamplight and run. Behind you a man shouts, and a dog, and then you're through the gap and lying in the reeds with your heart going like a hammer. They don't follow. They don't need to. They've got her.
+~ travel noviodunum reeds
+
+=== alarm_fight
+~ set escape_alarm
+"Behind me," you tell her, and you go for the lamp.
+~ fight_all depot_watch
+
+=== alarm
+"Is it done?" She's white. "Then now. Now, before the Romans come down from the gate."
+* "Now." -> out
+* "Wait." -> END
+
+=== out
+~ set epo_out; set hostages_night; clear hostages_left; xp 150
+[flag iccios_ready] ~ set iccios_out
+[flag ateula_ready] ~ set ateula_out
+[!flag ateula_ready] ~ set ateula_stays
+[flag ateula_out, flag iccios_out] ~ quest hostages freed
+[!flag ateula_out] ~ quest hostages freed_some
+[flag ateula_out, !flag iccios_out] ~ quest hostages freed_some
+Down to the river, along the stakes, through the leaning gap with the mud to your knees.
+[flag iccios_out] A big shape is waiting in the reeds already, shaking: Iccios, with his tools wrapped in a sack, because a smith doesn't leave his tools.
+[flag ateula_out] And another, small and still, with a satchel of tablets: Ateula, who doesn't say a word.
+[!flag iccios_out] Iccios isn't there. You knew he wouldn't be.
+[!flag ateula_out] Ateula isn't there. You knew she wouldn't be.
+[flag horses_loose] Neitin is waiting further down the bank with three of the best horses in Gaul on a string, grinning like a thief, which he is now. He hands Eponina a rope and points south. Then he's gone the other way, west, toward Hispania.
+[!flag horses_loose] You walk them south along the river until the sky goes grey, and put them on the road home with a carter going that way, and all the silver you can spare.
+"Come home," Eponina says. "Don't you dare die and make me tell her."
+~ travel noviodunum reeds
+* Go. -> END

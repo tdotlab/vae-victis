@@ -11,7 +11,15 @@
         "read_tally": "I have the tally back. Nobody in Brigodunon reads Roman letters. Vellaunos says Sulicena, headwoman of Vindomagos, trades with everyone; she may know who can.",
         "ask_riders": "Sulicena can't read the tally either. The horsemen holding the ford at the Oltis served in Caesar's cavalry and would know a Roman depot mark. So would Lugurix, the salt merchant in Vindomagos, for a price.",
         "north": "The tally was cut at Noviodunum, Caesar's depot on the Liger, in Aedui country. Vellaunos should hear this.",
-        "reported": "Vellaunos knows. The road goes north, to Noviodunum."
+        "reported": "Vellaunos knows. The road goes north, to Noviodunum, and I have to be back before the assembly meets in the spring.",
+        "inside": "I found them at Noviodunum, in the depot on the Liger: Eponina in the long house by the river, Iccios at the forge, Ateula copying the quartermaster's rolls. The quartermaster is Lucius Orbius, the man who cut our tally. Now to get them out.",
+        "freed": "All three are out of Noviodunum and on the road home. Now Vellaunos, and the assembly.",
+        "freed_some": "I got them out of Noviodunum, but not all of them. Ateula stayed. Vellaunos has to hear it from me before the assembly.",
+        "left": "I left them at Noviodunum. Vellaunos has to hear it from me before the assembly.",
+        "done_rising": "The assembly of Brigodunon voted to join the revolt. Whatever comes next, it comes for all of us.",
+        "done_faith": "The assembly of Brigodunon voted to keep faith with Rome, and to sit out the war if Rome and the king will let it.",
+        "done_split": "The assembly of Brigodunon could not agree. Those who want war will ride with Lucterius; the rest stay home and keep their heads down.",
+        "done_late": "The assembly met without me and voted to join the revolt. I was somewhere else."
       }
     },
     {
@@ -155,6 +163,39 @@
         "done_paid": "Thirty silver bought a legionary's back for long enough. The girl is out.",
         "done_vouched": "Epomeduos wrote the girl into his book as Aeduan property and walked her past the sentry himself. He sent her toward the marsh. I didn't ask what he wanted for it.",
         "done_fought": "I took the girl out of the granary and cut a way through. She's out. I may not be."
+      }
+    },
+    {
+      "id": "widow",
+      "name": "The Roman's Widow",
+      "xp": 200,
+      "stages": {
+        "start": "In Cenabum the townsmen have taken a widow and her small son. Her husband was a freedman of Cita, the Roman grain commissary they killed in the massacre, and somebody wants her dead too before the Romans come back.",
+        "done_saved": "I got Litumara and her boy out of Cenabum alive.",
+        "done_judged": "I argued for Litumara before the elder of Cenabum, and the town let her live.",
+        "done_bought": "I paid the blood price for Litumara and her boy. Cenabum took the silver and let them go.",
+        "done_given": "I gave Litumara up. Her son, too.",
+        "done_dead": "Litumara is dead."
+      }
+    },
+    {
+      "id": "bridge",
+      "name": "The Narrow Bridge",
+      "xp": 200,
+      "stages": {
+        "start": "Caesar is coming to Cenabum. The town has one wooden bridge over the Liger, and when the legions arrive everyone in Cenabum will try to cross it in the same night. Somebody should get the people out before then.",
+        "done_saved": "I got the people of Cenabum out before the legions came. The town burned anyway, but it burned empty.",
+        "done_failed": "Caesar came before Cenabum was empty. The bridge was too narrow."
+      }
+    },
+    {
+      "id": "judgment",
+      "name": "The Judgment",
+      "xp": 250,
+      "stages": {
+        "start": "The druids of the Carnutes hold Brigodunon's old oath to Rome, sworn when the hostages were given. Senouindos will judge whether Rome has broken it. If Rome has, Brigodunon is free of it.",
+        "done_void": "The druids have judged: Rome broke faith, and Brigodunon's oath is void. Whatever the assembly decides, it decides free.",
+        "done_bound": "The druids have judged that the oath still binds. Brigodunon gave its word; Rome has not yet broken its own."
       }
     }
   ]

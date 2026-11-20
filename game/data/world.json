@@ -218,8 +218,15 @@
     17,
     11
    ],
-   "desc": "Caesar's depot on the Liger. Hostages, horses, grain.",
-   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "desc": "Caesar's depot on the Liger, in the country of the Aedui. Hostages, horses, grain, and the army's pay.",
+   "map": "noviodunum",
+   "entry": "start",
+   "closed_by_flag": [
+    {
+     "flag": "aedui_defected",
+     "text": "Noviodunum is ash. The Aedui have gone over to the revolt, and their young men came over the stakes at night, killed every Roman in the depot, and took the horses, the money and the grain. The hostages of every people in Gaul went east to Bibracte, in Aeduan carts, to be bargained with."
+    }
+   ],
    "size": 2,
    "hidden": true
   },

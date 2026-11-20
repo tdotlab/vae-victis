@@ -1,0 +1,146 @@
+// Lucius Orbius, quartermaster of the depot at Noviodunum. Cut Brigodunon's
+// tally five years ago. Decent inside the machine. Three of the ways out go
+// through him: his mercy, his price, or Dannotalos's claim.
+=== start
+[flag orbius_met] -> again
+~ set orbius_met
+A long room full of boxes, every one with a number painted on it. A brazier, a table, two stools, a bald man with ink on the side of his hand, coughing into a cloth. He folds the cloth and puts it away before he looks up.
+
+[flag nov_interpreter] "Ah. The interpreter. The sentry sent a boy running; I'm told you read Gallic." His Latin is soft and quick. "Sit down, sit down. I have four hundred names in this depot and I can spell eleven of them."
+[flag letter_shown] "Dannotalos's man." His Latin is soft and quick, his Gallic slow and bad. "Dagolitos sent word. I wondered when one of you would come to look at the merchandise."
+[flag nov_visitor] "A visitor." His Gallic is slow and bad, and he knows it. "Family. We get some. Not many." He looks at you a moment. "Not many."
+[flag depot_sneaked] He looks at your legs, mud to the knee, and then at your face. "You didn't come through my gate," he says in bad Gallic. "No. Well. You're here now. Sit, before the watch sees you standing about."
+[!flag nov_interpreter, !flag letter_shown, !flag nov_visitor, !flag depot_sneaked] "Yes?" His Gallic is slow and bad, and he knows it.
+-> hub
+
+=== again
+[flag orbius_done] -> after
+He coughs, folds the cloth, looks up. "Yes?"
+-> hub
+
+=== after
+[flag orbius_mercy] "Go away," he says, not unkindly. "You were never here. Three children died of fever. I have it in writing."
+[!flag orbius_mercy] "Our business is done." He doesn't look up.
+* "Goodbye." -> END
+
+=== hub
+* [item hostage_tally, !flag orbius_tally] Show him the tally from Brigodunon. -> tally
+* [!flag orbius_tally] "You keep hostages here. Three from Brigodunon." -> brig
+* "What happens to them?" -> fate
+* [flag orbius_tally, !flag orbius_asked] "Let them go." -> mercy
+* [flag orbius_tally] "What would it cost to take them home?" -> price
+* [flag orbius_tally, item aeduan_letter] "Dannotalos wants his three now, before the roads close." -> claim
+* [flag nov_interpreter, !flag orbius_names] Help him with his roll of Gallic names. -> names
+* "Goodbye." -> END
+
+=== brig
+"Brigodunon." He finds it without looking, the way Ateula found it: a box, a tablet, a line. "Cadurci. Three. I cut the tally myself." He looks up. "Five years ago, in the hills. A big boy, a clever girl, and a little one." He almost smiles. "The little one bit Sextus through the glove. He said she'd do well."
+
+"You'll want to see them, I suppose. Everyone wants to see them."
+~ set orbius_tally; quest hostages inside
+-> hub
+
+=== tally
+~ set orbius_tally; quest hostages inside; xp 25
+He takes the stick and turns it over, and runs his thumb along the burned letters, and for a moment he looks his age and more. "My hand. My legion, the Seventh. DEP NOVIOD. I was proud of that, the abbreviation. Very neat."
+
+"Three of the Cadurci of Brigodunon. A big boy, a clever girl, and a little one who bit Sextus through the glove. He said she'd do well." He gives you the tally back. "She has. They all have. They're the best of the lot."
+-> hub
+
+=== fate
+"They're fed. They're taught. Some of them like it; your clever girl likes it." He rubs the ink on his hand. "When the war ends, those whose people kept faith go home. Those whose people didn't..." He opens a hand. "Rome sells them. That is the law. I write it down."
+
+"And some," he says, more quietly, "are sold forward, before the war has ended, to Gauls with money who would like to have something to bargain with when it does. That is not the law. But it is done, and the money goes to the army, and I write that down too."
+-> hub
+
+=== mercy
+~ set orbius_asked
+"Let them go." He says it back to you, tasting it. "And when the legate asks me where three hostages of the Cadurci have gone, in a war, with the Cadurci riding for Vercingetorix?"
+* [speech 50] "Write them dead. It's been a bad winter; everyone's coughing. Three children of a hill fort nobody in Rome has heard of. Nobody will ask but Dannotalos, and you don't owe Dannotalos anything." -> mercy_yes
+* [honor >= 20] "You cut that tally. You promised my people they'd be safe. I'm asking you to keep the promise, not Rome's." -> mercy_yes
+* [roll speech -10] "You cried when you wrote down the Senone boy. Don't write down these three." -> mercy_yes | mercy_no
+* "Forget I asked." -> hub
+
+=== mercy_no
+"Yes. I cried." He picks up his stylus. "And then I wrote it. That's what I'm for." He doesn't look up again. "Ask me something else."
+-> hub
+
+=== mercy_yes
+~ set orbius_mercy; set orbius_done; honor 5; xp 100
+He's quiet a long time. He coughs, and folds the cloth, and puts it away.
+
+"There's fever in the long house," he says at last. "There always is, in winter. Three of the Cadurci of Brigodunon." He finds the line and writes in it, slowly, three short words, and dusts the wax with his sleeve. "Dead. It's a pity. They were the best of the lot."
+
+He calls the watchman from the door and says something to him in bad Gallic. "Take them up to the town gate before the cart goes. The bodies are to be buried by their own people. Their own people are here." He looks at you. "Go on. Before I count again."
+-> release
+
+=== price
+"Cost." He finds the line. "Dannotalos has paid half of what Rome would get for three healthy Cadurci at the market in Massilia, which is to say a great deal. If someone else were to pay the whole, Dannotalos would get his half back, with my regrets, and a story about fever." He shrugs. "That is not mercy. That is accounts."
+
+"Three hundred. Or one hundred, for the little one alone."
+* [silver 300] Pay three hundred. -> bought ~ silver -300
+* [barter 50, silver 200] "Two hundred, and you keep the half Dannotalos paid. You make money on the fever." -> bought ~ silver -200
+* [item gold_torque] Put a gold torque on the table. -> bought ~ take gold_torque
+* [silver 100] "One hundred. For my sister." -> bought_one ~ silver -100
+* [barter 50, silver 70] "Seventy, for the little one. She bites. You said so yourself." -> bought_one ~ silver -70
+* "Not now." -> hub
+
+=== bought
+~ set hostages_bought; set orbius_done; xp 75
+He counts it twice, which is his job, and writes in the line, and dusts the wax. "Fever," he says. "A bad winter." He calls the watchman from the door. "Three of the Cadurci, to the town gate, with their things. They're going home."
+-> release
+
+=== bought_one
+~ set hostages_bought; set orbius_done; set epo_out; clear hostages_left; xp 50
+~ quest hostages freed_some
+He counts it twice and writes a single short word on the line. "One," he says. "The little one." He calls the watchman. "The Cadurci girl from the long house, the small one, to the town gate."
+
+He looks at you. "The other two are still on Dannotalos's account. I hope you know what you've chosen."
+[!flag ateula_stays, !item hostage_roll] As you go, Ateula catches your sleeve at the office door and pushes two wax tablets into your hand. "The roll," she says. "Every hostage here, and their prices. Give it to my father. Let the assembly see it."
+[!flag ateula_stays, !item hostage_roll] ~ give hostage_roll; set ateula_stays
+You walk your sister out through the gate and up through the town, and put her on the road south with a carter and all the silver you have left. She doesn't look back at the depot. She looks back at you, all the way to the bend in the road.
+~ travel noviodunum town
+* Go. -> END
+
+=== claim
+~ set orbius_claimed
+"Now." He holds out his hand for the letter and reads it, and reads it again. "'Show him the pens and whatever in them is on my account.' It says show. It doesn't say deliver." He taps the tablet. "The terms were: when the season's fighting ends."
+* [speech 40] "The season's fighting will end with the Arverni between here and the Aedui and no roads at all. Dannotalos would rather have them early than not at all. You'd rather be paid." -> claim_yes
+* [flag factor_turned] "Read the bottom. I'm his partner. I'm not asking you; I'm telling you." -> claim_yes
+* [roll speech -10] "Do you want to explain to Dannotalos why you kept his property in a war?" -> claim_yes | claim_no
+* "Fair enough." -> hub
+
+=== claim_no
+"I'd like it in his own hand." He gives you the letter back. "When Dannotalos wants delivery, Dannotalos can come and ask."
+-> hub
+
+=== claim_yes
+~ set dannotalos_cheated; set orbius_done; xp 75
+He's tired, and the roads are bad, and it's not his money. "Very well. On Dannotalos's account, delivered." He writes in the line. "The other half he owes on delivery. I'll have it from him when he comes." He coughs. "He won't like hearing it was you who collected. That's between you."
+
+He calls the watchman from the door. "Three of the Cadurci, to the town gate. They belong to an Aeduan now."
+-> release
+
+=== names
+~ set orbius_names; xp 50; silver 20
+You sit with him for an hour while the brazier ticks, reading Gallic names off the old tallies and spelling them for him in Latin letters. Senones, Lingones, Bituriges, Treveri. He writes them down neatly, and pays you twenty silver out of his own purse, and doesn't ask why you stop on certain names longer than others.
+
+"Thank you," he says. "Nobody here can say them. I've been calling them by their numbers."
+-> hub
+
+=== release
+~ set epo_out; clear hostages_left
+~ set iccios_out
+[flag ateula_ready] ~ set ateula_out
+[!flag ateula_ready] ~ set ateula_stays
+[flag ateula_out] ~ quest hostages freed
+[!flag ateula_out] ~ quest hostages freed_some
+[flag ateula_ready] Ateula is already standing with her satchel of rolls when the watchman comes. She puts her stylus down on Orbius's table, straight, and doesn't say goodbye to him. He doesn't look up.
+[!flag ateula_ready] Ateula doesn't move from her stool. "I'm staying," she says, to you, to him, to the rolls. "Somebody has to keep the books."
+[!flag ateula_ready, !item hostage_roll] At the door she catches your sleeve and pushes two wax tablets into your hand. "The roll. Every hostage here, and their prices. Give it to my father. Let the assembly see it."
+[!flag ateula_ready, !item hostage_roll] ~ give hostage_roll
+Iccios comes from the forge with his tools in a sack, because nobody told him to leave them, and Eponina from the long house at a run. You walk them out through the gate and up through the town, and put them on the road south with a carter going that way and all the silver you can spare.
+
+"Come home," your sister says. "Don't you dare die and make me tell her."
+~ travel noviodunum town
+* Go. -> END

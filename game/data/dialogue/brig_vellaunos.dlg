@@ -1,7 +1,14 @@
-// Vellaunos, chief of the elders. Gives the main quest and closes the demo.
+// Vellaunos, chief of the elders. Gives the main quest, hears what became of
+// the hostages, and calls the assembly that ends Act I.
 === start
+[flag act1_done] -> post
+[flag assembly_met] -> late
 [quest hostages=summoned] -> commission
 [quest hostages=reported] -> after
+[quest hostages=freed] -> home_all
+[quest hostages=freed_some] -> home_some
+[quest hostages=left] -> home_none
+[quest hostages=inside] -> home_none
 "Well?"
 -> hub
 
@@ -35,6 +42,7 @@ The hall smells of smoke and wet wool. The elders are all here, arguing, and whe
 * [quest hostages=north] "I know where the tally was cut." -> report
 * [quest grotto=pardon_asked] "Dubnacos has the tally. He wants to come home." -> pardon
 * [quest hostages active] "Tell me about the hostages." -> hostages
+* [flag assembly_ready, !flag act1_done] "Call the assembly." -> assembly
 * [quest levy done, !flag vell_levy] "Gergovia wants hostages from us too." -> levy
 * [flag tablets_read, !flag vell_tablets] "I found a Roman merchant's accounts in Gergovia." -> vtablets
 * "Goodbye." -> END
@@ -62,10 +70,10 @@ You hold the tally to the light. The letters are worn, and Roman soldiers abbrev
 -> report
 
 === report
-~ quest hostages reported; xp 150; ending text/demo_end.txt
+~ quest hostages reported; xp 150
 "Noviodunum." Vellaunos says it slowly. "Aedui country. The Aedui are Rome's oldest friends in Gaul, and they don't like us much." He goes to the door and looks out at the village: smoke, children, a dog asleep in the mud. "It's a long way. Through the Arverni, who are at war, and the Bituriges, who will be. With winter not yet done."
 
-"Go anyway. Take what you need. And {name}: the assembly is in the spring. Whatever you find, I need to know it before then."
+"Go anyway. Take what you need. And {name}: the assembly is in the spring, when the roads dry. Lucterius will send a man to hear what the Cadurci of Brigodunon decide. Whatever you find, I need to know it before then. If you're not back, they'll decide without you, and I know which way."
 * "I'll be back before the spring." -> END
 
 === pardon
@@ -108,3 +116,133 @@ You tell him what the tablets say. He doesn't interrupt. When you get to the nam
 
 "Sold forward. Like grain." He says it to the floor. "We kept faith with Rome for five years so that they'd keep my daughter safe, and they've sold her to an Aeduan for when it's convenient." He looks up, and he isn't old at all for a moment. "Then we owe Rome nothing. Nothing. Tell that to the assembly when the spring comes, and show them those tablets."
 -> hub
+
+=== home_all
+~ set assembly_ready
+[!flag vell_home_seen] -> reunion
+"The assembly is waiting on you," he says. "They've been waiting since the snow went."
+-> hub
+
+=== reunion
+~ set vell_home_seen; honor 5; renown 3; xp 100
+Ateula is sitting at his table with her tablets spread out, as if she had never left it, and Vellaunos is standing behind her, not touching her, with his hand an inch from her shoulder and the look of a man who has been given back something he'd already finished grieving for.
+
+"You did it." He has to stop. "All three. Cobnertos hasn't let go of his boy since the gate; he's working one-handed. Your mother..." He shakes his head. "Go and see your mother."
+
+"And then come back. The assembly is waiting on you."
+-> hub
+
+=== home_some
+~ set assembly_ready
+[!flag vell_home_seen] -> reunion_some
+"The assembly is waiting on you," he says.
+-> hub
+
+=== reunion_some
+~ set vell_home_seen; xp 75
+[flag epo_out] "Your sister's home. I saw her come up the road with her hair cut like a Roman's, arguing with the carter." He almost smiles.
+
+[flag ateula_stays] He's quiet a long time when you tell him about Ateula. "She stayed." He says it to the fire. "To keep the books." And then, so low you almost don't hear it: "Of course she did."
+[flag ateula_stays, item hostage_roll] You give him the tablets she wrote. He can't read them. He holds them anyway, with his thumb in the wax where her stylus went, and then he gives them back. "You'll need these. Not me."
+[flag ateula_out, !flag iccios_out] "Ateula's home." He can't say more than that, and doesn't try. "And the smith's boy is still there. Cobnertos hasn't said a word since you came back."
+
+"The assembly is waiting on you. Whatever you tell them, tell them what you saw."
+-> hub
+
+=== home_none
+~ set assembly_ready
+[!flag vell_home_seen] -> reunion_none
+"The assembly is waiting on you," he says.
+-> hub
+
+=== reunion_none
+~ set vell_home_seen
+You tell him. Noviodunum, the stakes, the long house, the quartermaster with the cough. Ateula at the table with the rolls. You tell him why you came back without them.
+
+He hears all of it without moving. "Alive," he says, when you've finished. "All three. You saw them." He nods slowly, as if that settled something. "Then they're still worth something to Rome, and we still have something to lose. Tell the assembly. They'll need to hear it."
+-> hub
+
+=== assembly
+The hall is full: every head of every house in Brigodunon, some from the farms, and Toutorix, Lucterius's man, a hard lean rider with mud to the thigh and the king's gold on his arm. The fire is built up high. Nobody sits.
+
+Toutorix speaks first. Lucterius has sworn the Cadurci to the king. The Ruteni are coming in, and the Nitiobriges, and the Gabali. Every hill fort that holds back is a door left open for Rome. He doesn't threaten. He doesn't need to.
+
+Then old Senovir, who has never forgiven anyone anything. Rome has held our children five years and kept faith in its way. A war is a thing you start, and other people finish.
+[flag epo_out] He doesn't look at the hostages who are home, sitting by the wall. Everyone else does.
+[!flag epo_out] Everyone looks at the empty place by the wall where three children would sit, if they were here.
+
+Then Vellaunos stands up, and the hall goes quiet. "{name} has been to Noviodunum," he says. "Tell them what you saw."
+* [flag vell_tablets] Tell them about the Roman merchant's day book: three children of Brigodunon, bought forward, half paid. -> rise_proof
+* [item hostage_roll] Hold up Ateula's roll and read them the right-hand column. -> rise_roll
+* [flag pledge_void] "The druids of the Carnutes have judged. Rome broke faith first. Our oath is void." -> rise_druids
+* [speech 40] "Rome keeps our children to sell. I saw the rolls. Whatever we decide, decide it knowing that." -> rise_speech
+* [speech 50] "Rome has six legions and grain for a year. I counted it. Keep faith, and keep Brigodunon." -> faith
+* [honor >= 25] "I gave my word to bring them back, and I kept it. Rome gave its word too. Let it keep it. We keep ours." -> faith
+* [roll speech -15] "War is a thing you start and other people finish. Don't start it." -> faith | rise_lost
+* [PRE 6] "Nobody in this hall can make anyone else go to war. Let those who want to ride, ride. The rest stay home." -> split
+* [lore 40] "Our grandfathers never voted as one hill on anything. A free people can send its young men to the king and still keep its own fires." -> split
+* Say nothing. Let them decide. -> rise_silent
+
+=== rise_proof
+~ set brig_rising
+The hall is silent while you tell it, and then it isn't. Sold forward, like grain. Half paid. Senovir sits down. Toutorix doesn't smile, but he looks at you the way a man looks at a horse he means to buy.
+-> rising
+
+=== rise_roll
+~ set brig_rising
+You read them the column on the right: a merchant's name, a sum, half paid, half paid, half paid. Nearly a hundred children of a dozen peoples, written in a girl's careful hand. Nobody in the hall can read, and nobody needs to.
+-> rising
+
+=== rise_druids
+~ set brig_rising
+Nobody argues with the Carnutes. Senovir opens his mouth and shuts it again. The oath is void. They're free, and being free, they choose what free men choose in a winter like this one.
+-> rising
+
+=== rise_speech
+~ set brig_rising
+You tell them about the long house and the rolls and the price beside the names. You don't shout. You don't need to. By the time you've finished, the young men are on their feet.
+-> rising
+
+=== rise_silent
+~ set brig_rising
+You say nothing. The hall argues until the fire burns down, and the young men shout, and the old men go quiet one by one. It was always going to go this way. You just didn't push.
+-> rising
+
+=== rise_lost
+~ set brig_rising
+They hear you out. Senovir nods. And then Toutorix stands up and talks about the stakes on the plateau at Gergovia, and Cenabum, and the king's face, and the young men shout you down.
+-> rising
+
+=== rising
+~ quest hostages done_rising done; set act1_done; renown 5; xp 200
+Brigodunon rises. The vote is shouted, not counted. Toutorix clasps Vellaunos's arm and rides out before dark to tell Lucterius, and the smith's fire doesn't go out that night or the next.
+~ ending endings/act1.json
+* Go. -> END
+
+=== faith
+~ set brig_faith; quest hostages done_faith done; set act1_done; xp 200
+It takes all night. In the end it's the young men who are quiet, and Senovir who stands and says it for everyone: Brigodunon keeps faith. It gives the king nothing and Rome no reason. It sits on its hill and waits for the war to go past.
+
+Toutorix leaves without a word. You watch him ride down the hill, and you know what he'll tell Lucterius, and so does everyone else.
+~ ending endings/act1.json
+* Go. -> END
+
+=== split
+~ set brig_split; quest hostages done_split done; set act1_done; xp 200
+They argue until the fire goes to ash, and then Vellaunos stands and says what you said, in his own words: let those who want to ride, ride. Forty young men go with Toutorix in the morning. The rest stay, and bank up the rampart, and don't look at each other.
+
+It isn't peace. It isn't war. It's Brigodunon.
+~ ending endings/act1.json
+* Go. -> END
+
+=== late
+~ set brig_rising; set act1_done; quest hostages done_late done
+"The assembly met," Vellaunos says. "We couldn't wait any longer. Lucterius's man stood where you're standing and nobody spoke against him, because the one who'd been to Noviodunum wasn't here." He looks old. "Brigodunon rose. It was going to anyway. But you should have been here."
+~ ending endings/act1.json
+* Go. -> END
+
+=== post
+[flag brig_rising] "The young men are drilling in the lower field. Every one of them thinks he'll be home for the harvest." He rubs his face. "There's war everywhere now, and Brigodunon can't spare anyone who knows the roads."
+[flag brig_faith] "We kept faith." He says it as if testing a floorboard. "Lucterius hasn't sent anyone. That worries me more than if he had."
+[flag brig_split] "Forty of ours are with Lucterius. The rest are here, pretending not to count the days." He looks at the fire. "Half a village at war is still a village at war."
+* "Goodbye." -> END

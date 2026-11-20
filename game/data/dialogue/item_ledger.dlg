@@ -1,0 +1,25 @@
+// Read from the inventory: Fufius Cita's grain ledger, saved out of Cenabum.
+// Needs Latin to make sense of; it names the depot at Noviodunum.
+@speaker Grain ledger
+=== start
+[!flag ledger_read] -> first
+Wheat bought, wheat shipped, and the name of the place it went, over and over: Noviodunum.
+* Put it away. -> END
+
+=== first
+A Roman book of wax tablets bound with thongs, one corner black where it lay too near a fire. Columns of figures in a neat hand, and in the margins a second, cruder hand that keeps adding things up and getting them wrong.
+* [latin 20] Read it. -> read
+* [!latin 20] Turn the tablets over. You can make out numbers, and one word that comes again and again. -> word
+* Put it away. -> END
+
+=== read
+~ set ledger_read; known noviodunum; xp 25
+It's a grain commissary's book. Wheat bought from the Carnutes and the Senones on account, at prices that make you wince, and shipped up the Liger, every load of it, to the same place: Noviodunum, of the Aedui. "To the depot," the margin says. "Against the baggage, the remounts and the hostages."
+
+The last entry is the evening before the massacre. Nothing after.
+* Put it away. -> END
+
+=== word
+~ set ledger_read; known noviodunum; xp 10
+The word is NOVIODVNVM. Even you can count it: thirty-one times. Wherever this man's grain went, it went there.
+* Put it away. -> END

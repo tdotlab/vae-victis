@@ -1,0 +1,75 @@
+// Trigger: the gate of the Roman depot at Noviodunum. Fires until depot_pass.
+// Ways in: Dagolitos paid, Dannotalos's letter, the druids' wheel, Latin,
+// Cita's seal, or the plain truth. The river gap at night is nov_river.
+@speaker The gate
+=== start
+[flag gate_seen] -> again
+~ set gate_seen
+The two legionaries at the gate step together, and their big curved shields meet edge to edge with a knock like a door shutting. Behind them the road runs on between granaries into the depot.
+
+"Business," says the older one, in Gallic that he has learned from people who were afraid of him.
+-> hub
+
+=== again
+The shields knock together again. "Business," says the sentry. He remembers you, and it hasn't helped.
+-> hub
+
+=== hub
+* [flag dago_paid] "Dagolitos says I'm expected." -> dago
+* [item aeduan_letter] Hold up the sealed tablet with the horse on it. -> letter
+* [item druid_token] Let the bronze wheel hang where the Aeduan by the fire can see it. -> druid
+* [latin 40] (In Latin) "I'm here for the quartermaster. I read Gallic, and he has a roll full of Gallic names." -> latin
+* [item commissary_seal, speech 40] "I've come from Cenabum about Gaius Fufius Cita's accounts." -> cita
+* [speech 50] "My sister is in there. I've walked two hundred miles to see her." -> truth
+* [honor >= 20] "My sister is in there. Ask anyone on the road who I am." -> truth
+* "Never mind." -> back
+
+=== back
+The shields part a hand's breadth, which is as far as they're going to.
+~ travel noviodunum town
+
+=== dago
+The sentry looks past you to the fire, where the Aeduan in the good cloak lifts one ringed hand without getting up. The sentry sighs through his nose, the way soldiers have sighed at the local arrangements since there have been soldiers.
+
+"In. Don't touch the horses."
+-> pass
+
+=== letter
+The sentry can't read it and doesn't pretend to. He whistles, and the Aeduan by the fire, Dagolitos, gets up, takes the tablet, reads it with his lips moving, and laughs.
+
+"Dannotalos's." He hands it back. "Of course you are. He owns half of what's in there, or thinks he does. Go in, go in, look at your property." He says something in Latin to the sentry, who stands aside.
+~ set letter_shown
+-> pass
+
+=== druid
+The Aeduan by the fire sees the wheel, and his face changes. He's up and between you and the sentries before you've said a word, talking fast in Latin about the gods and about how the Aedui have their own customs, Roman friends or not.
+
+The sentry shrugs. Whatever the bronze thing is, it isn't his problem. "In."
+~ set druid_shown
+-> pass
+
+=== latin
+The sentry's eyebrows go up at good Latin from a Gaul in a wet cloak. "Orbius will kiss you." He jerks his head at the depot. "The office with the boxes. Wipe your feet, he hates mud."
+~ set nov_interpreter
+-> pass
+
+=== cita
+"Cita's dead." The sentry says it flatly. Everyone in the army has heard about Cenabum by now.
+
+"Cita is. His accounts aren't." You turn the bronze ring so the corn ear catches the light. "Somebody has to close them. Two hundred bushels went to this depot that nobody paid for."
+
+He doesn't know whether that's true. Neither does anyone else alive. "The quartermaster," he says, and stands aside.
+~ set cita_shown
+-> pass
+
+=== truth
+He looks at you for a long moment. Somewhere behind those eyes is a village in Italy and a mother, or there isn't, and you'll never know which.
+
+"Visiting is by the quartermaster's leave," he says at last. "He's in. You go to him first, and you don't run, and you don't go near the river." He raises his voice. "Watch! One for the long house."
+~ set nov_visitor; honor 2
+-> pass
+
+=== pass
+~ set depot_pass; xp 50
+The shields part. The depot smells of horse, wet grain and smoke from the forge, and somewhere down by the river a child is laughing.
+* Go in. -> END

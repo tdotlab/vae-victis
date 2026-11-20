@@ -1,0 +1,15 @@
+// Iccios, home at his father's forge.
+=== start
+"Hold the tongs," he says, and then catches himself, and laughs, the first time you've heard him laugh. "Sorry. Habit."
+* "How is it, being home?" -> home
+* [flag act1_done] "What will you make now?" -> war
+* "Goodbye." -> END
+
+=== home
+"Loud." He bangs a nail flat. "Everybody talks. Nobody counts anything. My father makes three spearheads and says he's made four." He shakes his head, smiling. "I'll fix that."
+-> END
+
+=== war
+[flag brig_faith] "Ploughshares, Father says." He looks at the spearheads on the rack. "He says it the way you'd say a prayer you don't believe in."
+[!flag brig_faith] "Spears." He doesn't look up. "I made nails for Caesar's boots for five years. Now I make spears for the men who'll meet them." He turns the iron. "I don't know which I'd rather have made. Ask me after."
+-> END

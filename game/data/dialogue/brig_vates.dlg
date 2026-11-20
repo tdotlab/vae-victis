@@ -23,6 +23,8 @@ The vates is on his knees by the altar stone, picking splinters of the offering 
 * [quest grotto active] "Tell me about the grotto." -> grotto
 * [quest grotto active] "Tell me about Dubnacos." -> dubnacos
 * [!flag vates_lore] "Who are the hanging dead?" -> lore
+* [quest hostages active, !flag vates_druids] "When we gave Rome the hostages, we swore an oath. Who holds it?" -> druids
+* [flag act1_done] "What happens now?" -> now
 * "I'm hurt. Can you help?" -> heal
 * [item grotto_idol] "I found this deep in the grotto." -> idol
 * [item hostage_tally, quest grotto active] "I have the tally back." -> tally
@@ -69,4 +71,16 @@ He wraps it in a white cloth and holds it like a child.
 === tally
 ~ quest grotto done done
 "Good." He doesn't ask how. He looks at the stick and not at you. "Take it to Vellaunos. It's his business now, and yours."
+-> hub
+
+=== druids
+~ set vates_druids; known carnute_forest; xp 25
+[quest judgment none] ~ quest judgment start
+He's quiet a moment. "I was there. A boy holding the bowl. The Roman officer swore by his gods and Vellaunos by ours, and the druid who came down from the north took the oath away with him, the way they do." He picks at the grass. "Oaths like that are kept in the Carnute forest, where the druids of all Gaul meet once a year. North, past Cenabum. A sanctuary in the oaks."
+
+"If Rome broke faith first, the druids can say so, and Brigodunon is free of its word. That would matter, at an assembly. Men will do a great deal with a clean conscience." He looks up. "Or the druids can say we're bound. They're not in the business of telling people what they want to hear."
+-> hub
+
+=== now
+"Now?" He looks at the sky the way he'd look at entrails, without much hope. "Now the war comes to everyone. Even here. Even to people who voted against it." He gets up, knees cracking. "Go and do something useful. The gods will be busy."
 -> hub

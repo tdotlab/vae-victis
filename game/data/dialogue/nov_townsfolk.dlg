@@ -1,0 +1,19 @@
+// Aeduan townsfolk of Noviodunum.
+=== start
+[flag epo_out] -> after
+"Cadurci?" They look at your cloak. "Here for the depot? Everyone's here for the depot."
+* "What do you think of the Romans?" -> romans
+* "Have you seen the hostages?" -> hostages
+* "Goodbye." -> END
+
+=== romans
+"They pay. Silver, for grain, for wool, for anything." A shrug. "My cousin says they'll pay us right up until they own us. My cousin's young. But he talks about the Arverni a great deal lately, and so do his friends."
+-> END
+
+=== hostages
+"The children? You see them some days, going up for water with a guard. Little ones. Big ones. One of them's a girl who argues with the guard in Latin." A laugh. "And at night the small ones go out through the stakes by the river after eels, and come back, and everyone pretends not to know. Where would they go?"
+-> END
+
+=== after
+"They're saying three of the hostages are gone." A glance at you, and away. "Fever, the Romans say. Nobody believes it, and nobody's asking."
+-> END
