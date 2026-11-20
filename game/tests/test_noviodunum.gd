@@ -260,3 +260,13 @@ func test_the_river_way_in() -> void:
 	_pick("count the watchman's steps")
 	eq(gs.flag("depot_pass"), 1)
 	eq(gs.flag("depot_sneaked"), 1)
+
+
+func test_the_alarm_can_be_outrun() -> void:
+	_inside()
+	gs.set_flag("escape_alarm")
+	_talk("nov_watch")
+	eq(page["node"], "alarm")
+	_pick("Run for the gap")
+	check(not _acted("fight_all depot_watch"), "no fight")
+	check(_acted("travel noviodunum reeds"), "out into the reeds")

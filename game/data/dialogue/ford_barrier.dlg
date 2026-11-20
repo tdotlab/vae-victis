@@ -6,7 +6,13 @@
 A rider wades into the water in front of the stakes, spear held low and easy. "Toll," he says in bad Gaulish. "Five." He holds up five fingers in case you missed it.
 * [silver 5] Pay him five silver and wade across. -> paid ~ silver -5
 * "I'll talk to Haldo first." -> back
-* Push past him. -> fight
+* Push past him. -> odds
+
+=== odds
+He shouts without taking his eyes off you. Up on the bank, four men get up from the fire, and one of them is Haldo, and every one of them has a spear. Nobody hurries. They know how this goes.
+* Push past him anyway. -> fight
+* [silver 5] Pay him the five silver after all. -> paid ~ silver -5
+* Back off. -> back
 
 === paid
 ~ set ford_waded

@@ -271,10 +271,41 @@ func test_ford_horses() -> void:
 	_ford_closed_by_sulicena("horses_gone")
 
 
+## Getting caught at the horse line is never a straight drop into a fight
+## with the whole band: run, talk, pay, or stare Haldo down.
+func test_ford_horses_caught() -> void:
+	for way in [["Drop into the reeds", true, ""], ["I came looking for Haldo", true, ""],
+			["Drop into the reeds", false, "Hold out twenty silver"],
+			["Drop into the reeds", false, "say nothing at all"]]:
+		_at_the_ford()
+		gs.player.silver = 20
+		gs.minutes = (gs.minutes / 1440) * 1440 + 23 * 60
+		_talk("ford_horses")
+		_pick("Cut the picket rope", false)
+		eq(page["node"], "caught")
+		_pick(way[0], way[1])
+		if way[2] != "":
+			eq(page["node"], "cornered")
+			_pick(way[2], true)
+		check(not _acted("fight_all riders"), "%s: no fight" % way[0])
+		eq(gs.flag("horses_watched"), 1)
+		eq(gs.flag("horses_gone"), 0)
+		_talk("ford_horses")
+		eq(page["node"], "watched", "the horse line is guarded now")
+	_at_the_ford()
+	gs.minutes = (gs.minutes / 1440) * 1440 + 23 * 60
+	_talk("ford_horses")
+	_pick("Cut the picket rope", false)
+	_pick("Fight.")
+	check(_acted("fight_all riders"), "or fight")
+
+
 func test_ford_barrier_fight_and_after() -> void:
 	_at_the_ford()
 	_talk("ford_barrier")
 	_pick("Push past him")
+	check(not _acted("fight_all riders"), "the band stands up first")
+	_pick("Push past him anyway")
 	check(_acted("fight_all riders"), "pushing starts the fight")
 	_talk("ford_barrier")
 	eq(gs.flag("ford_open"), 1)

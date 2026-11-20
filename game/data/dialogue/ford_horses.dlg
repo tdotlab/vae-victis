@@ -2,6 +2,7 @@
 @speaker The horse line
 === start
 [flag ford_settled] -> settled
+[flag horses_watched] -> watched
 [night] -> dark
 Twenty horses on a picket line, small and shaggy and better fed than anyone in Vindomagos. Two riders sit on a log where they can see the whole line, and they're watching you now.
 
@@ -37,9 +38,51 @@ Twenty horses is a fortune. It is also, now, something to bargain with.
 * Slip away. -> END
 
 === caught
+The guard isn't as asleep as he looked. He shouts, and all over the camp men are throwing off their cloaks and reaching for spears.
+* [roll AGI 0] Drop into the reeds and run. -> fled | cornered
+* [roll speech -10] Stand still with your hands open. "Easy. Easy. I came looking for Haldo." -> bluffed | cornered
+* Fight. -> fight
+
+=== fled
+~ set horses_watched
+You're in the reeds before the spears get there, running bent double with the river to your knees, and then lying flat in the mud while they beat the bank above you with spear shafts and swear in their own language. After a long time they give up and go back to the fire.
+
+From now on there will be more than one man on that log.
+* Crawl away. -> END
+
+=== bluffed
+~ set horses_watched
+They walk you to the fire with a spear at your back. Haldo sits up in his blankets and looks at you for a long time.
+
+"Looking for me," he says. "In my horses. In the dark." Then he laughs, and some of the others laugh because he did. "Come in daylight next time, farmer, like a man with business. Now go away before I change my mind."
+* Go, while he's laughing. -> END
+
+=== cornered
+They're around you before you've gone ten paces, a ring of spear points and angry faces in the firelight. Haldo pushes through, barefoot, with his spear.
+
+"Horse thief," he says. "Give me a reason not to."
+* [silver 20] Hold out twenty silver. "For your trouble. And my life." -> paid ~ silver -20
+* [roll PRE -10] Look at him and say nothing at all. -> stared | fight
+* Fight. -> fight
+
+=== paid
+~ set horses_watched
+He takes it, weighs it, and nods at the dark. "Your life is cheap. Go."
+* Go. -> END
+
+=== stared
+~ set horses_watched
+The silence stretches. Somebody coughs. Haldo looks away first, and covers it by spitting in the fire. "Not worth the digging," he says. "Get out of my camp."
+* Go. -> END
+
+=== fight
 ~ set ford_fought; fight_all riders
-The guard isn't as asleep as he looked. He shouts, and the camp comes up with spears.
+Five of them, and the river at your back.
 * Fight. -> END
+
+=== watched
+Three riders sit on the log by the picket line now, awake, with their spears across their knees. One of them sees you and lifts his spear an inch, and smiles.
+* Leave them. -> END
 
 === settled
 The picket line is quiet. The horses are none of your business now.

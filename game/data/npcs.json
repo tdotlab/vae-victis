@@ -2243,7 +2243,7 @@
     "AGI": 5,
     "PER": 6
    },
-   "level": 2,
+   "level": 1,
    "tags": [
     "spears",
     "shield"
@@ -2283,7 +2283,7 @@
     "AGI": 6,
     "PER": 6
    },
-   "level": 3,
+   "level": 2,
    "tags": [
     "blades",
     "shield"

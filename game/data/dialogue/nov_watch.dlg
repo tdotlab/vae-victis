@@ -13,6 +13,12 @@ He's by the forge with his hands out to the coals, and he doesn't get up. "You. 
 === alarm
 He doesn't talk. He's already got the spear up.
 * Fight. -> fight
+* Run for the gap in the stakes. -> run
+
+=== run
+~ time 60
+You turn and run. A spear goes past your ear into the mud, and then you're through the gap and into the reeds, and the shouting stays behind you at the stakes.
+~ travel noviodunum reeds
 
 === fight
 He shouts for the others, and they come.
