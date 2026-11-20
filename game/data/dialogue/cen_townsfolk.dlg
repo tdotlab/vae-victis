@@ -1,0 +1,19 @@
+// Townspeople of Cenabum. Lines change with the bridge and the widow.
+=== start
+[quest bridge=agreed] -> waiting
+[flag caesar_near_cenabum] -> near
+[quest widow active] -> widow
+"Don't look at the Roman houses. Nobody looks at the Roman houses." They go on past.
+* Go. -> END
+
+=== widow
+"Atepomaros has the Roman's woman in his pen." They lower their voice. "It isn't right. But nobody'll say so. Not this winter. Senuacos could. He's too old to care what anyone thinks of him."
+* Go. -> END
+
+=== near
+"Vellaunodunum's fallen. Three days, the riders say. Three days!" They look toward the bridge. "Senuacos says we'll fight. Others say we'll cross in the night. I say we should have gone a month ago."
+* Go. -> END
+
+=== waiting
+"The old man says when the word comes, we go, by day, and not all by the bridge." They're tying up a bundle as they talk. "I've got it all packed. Everything. It's not much, when it's packed."
+* Go. -> END

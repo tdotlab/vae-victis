@@ -1,0 +1,40 @@
+// Cunissos, who lives in the gutted Roman houses and sells them back to the
+// town a room at a time. Stays when Cenabum leaves; stays after it burns.
+=== start
+[flag cenabum_burned] -> ash
+[!flag cun_met] -> first
+"Back again. I've got wine. Roman wine, from a Roman cellar. The Romans won't miss it."
+-> hub
+
+=== first
+~ set cun_met
+A thin man with soot to the elbows is sitting on a Roman doorstep that has no door, eating figs out of a Roman jar. He doesn't get up.
+
+"Cunissos. I'm the only man in Cenabum who isn't ashamed of the Roman houses." He waves a fig at them. "Everyone else walks past and looks at the ground. I walk in. There's wine in the cellars and bronze in the walls and nobody wants it, because of what happened. So I sell it to them, at night, and they buy it, and look at the ground."
+-> hub
+
+=== hub
+* "Let's trade." -> trade
+* "Did you see it happen?" -> saw
+* [quest widow active] "What about the widow?" -> widow
+* "Goodbye." -> END
+
+=== trade
+~ barter
+"Cash or kind. I'm not particular."
+-> hub
+
+=== saw
+He stops eating. "I saw. I was in the street." He looks at the fig. "I didn't do anything. Either way. That's what I'm best at." He puts the fig back in the jar.
+-> hub
+
+=== widow
+"Litumara? Atepomaros's guest." He grins without much in it. "His cousin's a drinker. I sell to him. After dark he's at the miller's more than he's at the pen, if somebody's paid for the jar." He holds out a hand, palm up, then laughs and takes it back. "That one's free. I liked her husband. He paid on time."
+-> hub
+
+=== ash
+He's sitting on the same doorstep, in a street that isn't there anymore. The Roman houses are the only ones with walls still standing, because they were built of stone at the bottom; Caesar's men burned everything else.
+
+"Still open," he says. "Business is terrible. Want some wine?"
+* "Let's trade." -> trade
+* "Goodbye." -> END

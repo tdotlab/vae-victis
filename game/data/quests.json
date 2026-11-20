@@ -173,7 +173,7 @@
         "start": "In Cenabum the townsmen have taken a widow and her small son. Her husband was a freedman of Cita, the Roman grain commissary they killed in the massacre, and somebody wants her dead too before the Romans come back.",
         "done_saved": "I got Litumara and her boy out of Cenabum alive.",
         "done_judged": "I argued for Litumara before the elder of Cenabum, and the town let her live.",
-        "done_bought": "I paid the blood price for Litumara and her boy. Cenabum took the silver and let them go.",
+        "done_bought": "I paid Atepomaros for Litumara and her boy: what the Romans had paid for his brother. He took the silver and let them go.",
         "done_given": "I gave Litumara up. Her son, too.",
         "done_dead": "Litumara is dead."
       }
@@ -184,6 +184,7 @@
       "xp": 200,
       "stages": {
         "start": "Caesar is coming to Cenabum. The town has one wooden bridge over the Liger, and when the legions arrive everyone in Cenabum will try to cross it in the same night. Somebody should get the people out before then.",
+        "agreed": "Senuacos has agreed: when the news comes that Caesar is near, Cenabum goes, by daylight and not by the bridge. I can only hope the news comes in time.",
         "done_saved": "I got the people of Cenabum out before the legions came. The town burned anyway, but it burned empty.",
         "done_failed": "Caesar came before Cenabum was empty. The bridge was too narrow."
       }

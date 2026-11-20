@@ -1,0 +1,230 @@
+{
+ "id": "cenabum_burned",
+ "name": "Cenabum",
+ "default": "grass",
+ "weather": "rain",
+ "legend": {
+  ".": "grass",
+  "T": "tree",
+  "b": "bush",
+  ";": "meadow",
+  "q": "shallows",
+  "~": "water",
+  "_": "road",
+  "o": "dirt",
+  "R": "rampart",
+  "w": "wall_wood",
+  "f": "floor_earth",
+  "d": "door",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "a": "amphorae",
+  "l": "loom",
+  "Q": "quern",
+  "y": "granary",
+  "s": "stall",
+  "F": "woodpile",
+  "/": "cart",
+  "r": "rubble",
+  "k": "floor_wood",
+  "z": "fence",
+  "p": "palisade",
+  "n": "bones",
+  "E": {
+   "terrain": "road",
+   "mark": "exit"
+  },
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "Z": {
+   "terrain": "road",
+   "mark": "town"
+  },
+  "V": {
+   "terrain": "meadow",
+   "mark": "river"
+  },
+  "X": {
+   "terrain": "floor_wood",
+   "mark": "bridge_exit"
+  },
+  "W": {
+   "terrain": "shallows",
+   "mark": "bank_exit"
+  },
+  "G": {
+   "terrain": "road",
+   "mark": "bridge"
+  },
+  "O": {
+   "terrain": "meadow",
+   "mark": "onnacos"
+  },
+  "M": {
+   "terrain": "shallows",
+   "mark": "boats"
+  },
+  "C": {
+   "terrain": "road",
+   "mark": "cunissos"
+  },
+  "S": {
+   "terrain": "dirt",
+   "mark": "senuacos"
+  },
+  "A": {
+   "terrain": "dirt",
+   "mark": "atepomaros"
+  },
+  "K": {
+   "terrain": "dirt",
+   "mark": "kin1"
+  },
+  "J": {
+   "terrain": "dirt",
+   "mark": "kin2"
+  },
+  "L": {
+   "terrain": "dirt",
+   "mark": "litumara"
+  },
+  "Y": {
+   "terrain": "dirt",
+   "mark": "boy"
+  },
+  "c": {
+   "terrain": "crate",
+   "mark": "cellar"
+  },
+  "x": {
+   "terrain": "crate",
+   "mark": "ate_chest"
+  },
+  "1": {
+   "terrain": "dirt",
+   "mark": "t1"
+  },
+  "2": {
+   "terrain": "dirt",
+   "mark": "t2"
+  },
+  "3": {
+   "terrain": "dirt",
+   "mark": "t3"
+  },
+  "4": {
+   "terrain": "dirt",
+   "mark": "t4"
+  },
+  "P": {
+   "terrain": "crate",
+   "mark": "stock"
+  }
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTT.EEE.TTTTTTTTTTTTTTTTTTTTT",
+  "...TT....T....b.......@.............T...TT....",
+  ".T...................._.......b.............T.",
+  "bTRRRRRRRRRRRRRRRRRRRo_oRRRRRRRRRRRRRRRRRRRRTT",
+  "TbR..................._....................RTT",
+  "TTR.worroorr.wwrroow.._..wwowwowwrw........RTT",
+  "TTR.wcoorroo.rroorow.._..wrooooooor.r.r....RTT",
+  "TTR.rorrooro_____________oSoooooroo........RTT",
+  "TTR.rrooorrw.ororror.._..wrooooooow.....o..RTT",
+  "TTR.roowwwoo.wrrwwoo.._..ooooooooow........RTT",
+  "TTR..................._..rwowwwowrw........RTT",
+  "TTR.owrrrww..oo.......Z........r...........RTT",
+  "TTR.rrrrrro__C_________............owoowrw.RTT",
+  "TTR.rrrorrr....r......_........oooorooooow.RTT",
+  "TTR.rrrrrrw....ooooooo_ooo2ooo.oooowrooooo.RTT",
+  "TTR.rwwwwww....ooooooo_________oooooooooow.RTT",
+  "TTR............oo1oooo_ooooooo.oooowrrrrrw.RTT",
+  "TTR.........r..ooooo3o_ooooooo.ooooorowowr.RTT",
+  "TTR.wwrowor____________........oooo..o.....RTT",
+  "TTR.ooooooo_.wwwowwo.._..oowwwwr...ororrro.RTT",
+  "TTR.wrroroo_.worooow.._..wooror.o..oooooor.RTT",
+  "TTR.woororo..roooooo..___oooroo....ooooror.RTT",
+  "TTR.wowwoor..oroooow.._..r4orow....ooooorr.RTT",
+  "TTR..........owwworr.._..orooor....oorrrrr.RTT",
+  "TTR.........r.......o._..........o.........RTT",
+  "TTRb...b...b...b...b.._b...b...b...b...b...bTT",
+  "bb;;;;;;;;;;;;;;;;;;;;G;;;;;V;O;;;;;;;;;;;;;bb",
+  "Wqqqqqqqqqqqqqqqqqqqqqkkqqqqqqqqqqqqqqqqqqqqqq",
+  "qqqqqqqqqqqqqqqqqqqqqqkkqqqqqqqqqqqqqqqqqqqqqq",
+  "~~~~~~~~~~~~~~~~~~~~~~kk~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~kk~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~kk~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~XX~~~~~~~~~~~~~~~~~~~~~~"
+ ],
+ "arrive_text": "Cenabum is ash. The rampart still stands, because earth doesn't burn, and the bridge, because Caesar needed it to cross. Everything between them is black stumps and wet char that smokes when the rain stops. A dog trots down the main street with something in its mouth and doesn't look at you.",
+ "actors": [
+  {
+   "uid": "cen_ash",
+   "template": "cen_ash",
+   "mark": "t1"
+  },
+  {
+   "uid": "cunissos",
+   "template": "cunissos",
+   "mark": "cunissos"
+  },
+  {
+   "uid": "senuacos",
+   "template": "senuacos",
+   "mark": "senuacos",
+   "if_flag": "cenabum_saved",
+   "dialogue": "cen_senuacos_after"
+  },
+  {
+   "uid": "cen_t2",
+   "template": "cen_townsman",
+   "mark": "t2",
+   "if_flag": "cenabum_saved"
+  },
+  {
+   "uid": "cen_t4",
+   "template": "cen_townswoman",
+   "mark": "t3",
+   "if_flag": "cenabum_saved"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "cellar",
+   "name": "A cellar under the ash",
+   "items": [
+    [
+     "roman_wine",
+     1
+    ],
+    [
+     "bandage",
+     2
+    ]
+   ],
+   "silver": 35,
+   "lock": 40
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The road out of Cenabum"
+  },
+  {
+   "mark": "bridge_exit",
+   "to": "world",
+   "label": "Over the bridge, south"
+  },
+  {
+   "mark": "bank_exit",
+   "to": "world",
+   "label": "Along the bank"
+  }
+ ],
+ "triggers": []
+}

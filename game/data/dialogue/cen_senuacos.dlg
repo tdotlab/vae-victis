@@ -1,0 +1,110 @@
+// Senuacos, elder of Cenabum. Explains the massacre (BG VII.3), owns the
+// bridge quest (get the town out before Caesar comes, BG VII.11), can judge
+// the widow, and points the way to the druids (BG VI.13).
+=== start
+[!flag sen_met] -> first
+He looks up from the fire. "The Cadurcan. Sit, if you're staying."
+-> hub
+
+=== first
+~ set sen_met
+An old man sits by the hearth with a staff of black wood across his knees, as if he were in judgment and had been for some time. He looks at your boots before he looks at your face: the road you came by is on them.
+
+"Cadurci," he says. "By the voice. You've come a long way to look at a town that did a foolish thing." He gestures at the bench. "I am Senuacos. I sit here because I'm old, and the young men who should be sitting here have gone to the king."
+-> hub
+
+=== hub
+* [!flag sen_told] "What happened here?" -> massacre
+* [quest bridge none] "When Caesar comes back, what then?" -> bridge_open
+* [quest bridge=start] "About the bridge." -> bridge_hub
+* [quest widow=start, !flag sen_refused] "There's a woman in a pen behind Atepomaros's house." -> widow
+* [quest widow none, !flag lit_gone] "There's a pen behind Atepomaros's house, with a woman in it." -> widow_first
+* [!flag sen_druids] "Where do the druids meet?" -> druids
+* "Goodbye." -> END
+
+=== massacre
+~ set sen_told
+"On the day the god chose, two men named Cotuatus and Conconnetodumnus came in at the gate with their friends and their spears, and went to the Roman houses, and killed every man in them. Merchants, mostly. Gaius Fufius Cita, who bought our grain for Caesar's army and paid for it late." He turns the staff in his hands. "The houses are still there. You'll have seen them. Nobody will live in them."
+
+"Then they stood in the fields and shouted it. Field to field, man to man, all across Gaul. It was among the Arverni before the first watch of the night was out, they say, a hundred and sixty miles. That's how the war started: with men shouting across ploughland in the snow."
+* "Where are those two now?" -> where
+* "Were you for it?" -> for_it
+* "I see." -> hub
+
+=== where
+"With the king. Where else?" His mouth twists. "Men who start a thing like that don't stay to see what it costs. That's left to the rest of us, who were only standing nearby."
+-> hub
+
+=== for_it
+He takes a long time with that. "I was told of it the night before, and I didn't stop it. You may decide for yourself what that makes me. I've been deciding it all winter."
+-> hub
+
+=== bridge_open
+~ quest bridge start
+"Then we close the gate and fight, because a town that killed Roman citizens doesn't get to surrender." He says it plainly, like a price at market. "And if the gods want otherwise, we go over the bridge in the night to the Bituriges, and Caesar finds the place empty."
+
+You've seen the bridge: one long timber road on piles, a cart wide. Every soul in Cenabum on it in one night, in the dark, with the legions at the gate.
+-> bridge_hub
+
+=== bridge_hub
+* [speech 50] "One bridge, one night, a whole town. Half of them will go in the river. Go now, by daylight, while the roads are still yours." -> agreed
+* [flag caesar_near_cenabum, speech 35] "Caesar's at Vellaunodunum. Three days' march. You don't have a night to spare. You have a morning." -> agreed
+* [renown >= 15] "You've heard what I did. Hear this too: if you wait for him, you die on that bridge." -> agreed
+* [lore 40, !flag cen_ford_found] "Your grandfathers didn't need a bridge. Where did they cross before there was one?" -> ford
+* [flag cen_ford_found] "The old ford below the island still holds. Half the town wades while the other half crosses. Nobody waits." -> agreed
+* [flag cen_boats] "Onnacos's boats are yours. Forty souls a trip. Start sending the old and the children today." -> agreed
+* "I'll think on it." -> hub
+
+=== ford
+~ set cen_ford_found; xp 25
+He looks at you sideways. "The druids' ford. Below the island, where the river spreads out and goes shallow over the gravel. They drove the cattle over it before my grandfather's time, at the low water." He nods slowly. "Nobody's used it since the bridge was built. Nobody young knows it's there."
+-> bridge_hub
+
+=== agreed
+[flag caesar_near_cenabum] -> leaving
+~ quest bridge agreed; xp 50
+He's quiet for a long time, looking at the fire as if it had an opinion.
+
+"Very well. When the word comes that he's on the Liger, we go. By daylight, and not all by the bridge. The old first, and the children, and the grain we can carry; the rest we leave him." He looks up. "If you're wrong, I'll have emptied a town for nothing, and they'll say so for a hundred years. I find I can live with that."
+-> hub
+
+=== leaving
+~ quest bridge done_saved done; set cenabum_saved; xp 100
+He gets up, which takes a while, and goes to the door and shouts for his grandsons. By noon the carts are loading in the street. Nobody argues much; they have heard about Vellaunodunum too, and they were waiting for someone old enough to say it.
+
+The last of them goes over the bridge and down the bank toward the ford in the rain, a long line of people carrying everything they own. Senuacos goes last. "If he burns it," he says, "he burns timber. We can cut more timber."
+~ leave_all cenabum
+* Go. -> END
+
+=== widow_first
+~ quest widow start
+"Litumara. Cita's freedman's wife, and a Carnute, and now nobody's." He sighs. "Atepomaros has her and the boy. He has a grievance against the Romans and he means to settle it out of her. It isn't law. It's a man with a pen."
+-> widow
+
+=== widow
+"What would you have me do? Half this town has blood on its hands from the Roman houses, and the other half is ashamed it hasn't. If I take her from Atepomaros, I'm the old man who took a Roman's side." He looks at you. "Give me a reason I can say aloud."
+* [speech 50] "She's Carnute. Her blood is the tribe's, and the tribe's blood is yours to judge, not his. If you don't judge it, you're not an elder; you're an old man by a fire." -> judged
+* [lore 40] "The blood of the tribe is the druids' to judge, or the elders'. Not a farmer's with a sword he didn't own last year." -> judged
+* [!flag sen_rolled, roll speech -15] "When Caesar comes, he'll ask after Cita's people. Better he finds them alive than finds them in a ditch." -> judged | refused ~ set sen_rolled
+* "Then I'll see to it myself." -> hub
+
+=== judged
+~ quest widow done_judged done; set lit_free; xp 50
+He sits a while longer. Then he takes his staff and goes out into the rain, and you follow.
+
+Atepomaros meets him in his own yard with his hand on his sword, and takes it off again when the old man starts to speak. It's a short judgment and an old form: the woman is of the Carnutes, her blood is the tribe's, and the tribe has no quarrel with her that the tribe has spoken. Atepomaros listens with his jaw working. When it's over he goes into his house and shuts the door.
+
+"There," Senuacos says. "Now he'll hate me instead of her. That's what elders are for."
+-> hub
+
+=== refused
+~ set sen_refused
+"No." He shakes his head. "Not this winter, with this town as it is. I'll not put my hand between a man and his grievance for a Roman's sake. Find another way, if you're set on it."
+-> hub
+
+=== druids
+~ set sen_druids; known carnute_forest
+"Every year, at the fixed season, they meet in the forest east of here, in the middle of all Gaul, and men come from every people to have their quarrels judged." He points with the staff, east, through the wall. "Two days. Follow the river and then the old road through the oaks. Senouindos sits there now. He's older than I am and less patient."
+
+"If you're going to them, go with something to say. They're not interested in anything else."
+-> hub

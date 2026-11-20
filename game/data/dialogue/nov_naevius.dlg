@@ -24,7 +24,8 @@ A low room stacked with amphorae, a brazier, and a Roman in a wine-colored tunic
 
 === news
 [!flag cenabum_burned] "News? Cenabum, still. They're still killing Romans in Cenabum, or they were. And Caesar's coming back over the mountains, and the Arvernian boy calls himself king." He pours. "I've lived here twenty years. I married an Aeduan woman. I'm waiting to find out which side I'm on."
-[flag cenabum_burned] "Cenabum's gone." He doesn't pour, for once. "Caesar took it at night. They tried to get out over the bridge, all of them at once. I knew people there."
+[flag cenabum_burned, flag cenabum_saved] "Cenabum's burned. But they got out, they say, by daylight, the old man sent them out before Caesar came. Caesar found an empty town." He pours, and drinks it himself. "I knew people there. I'd like to think some of them are drinking somewhere tonight."
+[flag cenabum_burned, !flag cenabum_saved] "Cenabum's gone." He doesn't pour, for once. "Caesar took it at night. They tried to get out over the bridge, all of them at once. I knew people there."
 [flag aedui_wavering] "And the young men up the hill are talking about the Arverni a great deal more than they used to. When the Aedui go, they'll come for us first, the Romans in the town. I have a boat."
 -> hub
 

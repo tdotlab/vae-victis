@@ -2639,6 +2639,270 @@
     "hair": "#3a2a1a",
     "hair_style": "bun"
    }
+  },
+  {
+   "id": "senuacos",
+   "name": "Senuacos",
+   "faction": "cenabum",
+   "ai": "idle",
+   "dialogue": "cen_senuacos",
+   "attrs": {
+    "WIT": 7,
+    "PRE": 7,
+    "PER": 6
+   },
+   "skills": {
+    "lore": 60,
+    "speech": 50
+   },
+   "desc": "The elder of Cenabum: white-bearded, a judge's staff of black wood across his knees, and the stillness of a man who has decided that whatever happens next is the gods' business.",
+   "look": {
+    "tunic": "#4a5a3a",
+    "cloak": "#5a4a6a",
+    "hair": "#c8c0b0",
+    "hair_style": "long",
+    "face": "beard",
+    "torc": "gold"
+   }
+  },
+  {
+   "id": "litumara",
+   "name": "Litumara",
+   "sex": "f",
+   "faction": "cen_widow",
+   "ai": "idle",
+   "dialogue": "cen_litumara",
+   "attrs": {
+    "WIT": 7,
+    "PRE": 6
+   },
+   "skills": {
+    "latin": 40
+   },
+   "desc": "A Carnute woman of thirty in a Roman-cut gown gone filthy, sitting in the straw with her arm round a small boy. She watches the door the way you'd watch a dog you don't know.",
+   "look": {
+    "tunic": "#6a5a7a",
+    "hair": "#3a2a1a",
+    "hair_style": "bun"
+   }
+  },
+  {
+   "id": "cen_boy",
+   "name": "Boy",
+   "faction": "cen_widow",
+   "ai": "idle",
+   "dialogue": "cen_boy",
+   "attrs": {},
+   "desc": "Five or six. His mother's eyes and a Roman haircut, and two names, and he answers to both.",
+   "look": {
+    "tunic": "#a8a090",
+    "hair": "#3a2a1a",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "atepomaros",
+   "name": "Atepomaros",
+   "faction": "atepomaros",
+   "ai": "guard",
+   "dialogue": "cen_atepomaros",
+   "attrs": {
+    "STR": 7,
+    "END": 7,
+    "AGI": 5,
+    "PER": 6,
+    "PRE": 6
+   },
+   "level": 4,
+   "tags": [
+    "blades",
+    "shield"
+   ],
+   "equip": [
+    "gallic_sword",
+    "small_shield",
+    "leather_jerkin"
+   ],
+   "silver": 40,
+   "xp": 90,
+   "nerve": 60,
+   "desc": "A big Carnute farmer in his forties with a sword he hasn't owned long. Three years ago his brother went to the Romans for a debt, and he keeps the account of it the way other men keep a grudge: exactly.",
+   "look": {
+    "tunic": "#6a4a3a",
+    "shield": "#5a6a3a",
+    "hair": "#8a6a3a",
+    "hair_style": "knot",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "cen_kinsman",
+   "name": "Kinsman",
+   "faction": "atepomaros",
+   "ai": "guard",
+   "dialogue": "cen_kinsman",
+   "attrs": {
+    "STR": 6,
+    "END": 6,
+    "AGI": 5,
+    "PER": 5
+   },
+   "level": 2,
+   "tags": [
+    "spears",
+    "shield"
+   ],
+   "equip": [
+    "spear",
+    "small_shield",
+    "padded_linen"
+   ],
+   "items": [
+    [
+     "bread",
+     1
+    ]
+   ],
+   "silver": 5,
+   "xp": 50,
+   "nerve": 40,
+   "desc": "One of Atepomaros's cousins, keeping the pen because he was told to.",
+   "look": {
+    "tunic": "#5a4a3a",
+    "shield": "#5a6a3a",
+    "hair": "#a07a40",
+    "hair_style": "short",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "cunissos",
+   "name": "Cunissos",
+   "faction": "cen_scavenger",
+   "ai": "idle",
+   "dialogue": "cen_cunissos",
+   "attrs": {
+    "PER": 7,
+    "WIT": 6,
+    "AGI": 6
+   },
+   "skills": {
+    "barter": 45,
+    "latin": 20
+   },
+   "items": [
+    [
+     "roman_wine",
+     3
+    ],
+    [
+     "bread",
+     4
+    ],
+    [
+     "bandage",
+     3
+    ],
+    [
+     "poultice",
+     1
+    ],
+    [
+     "salt",
+     2
+    ],
+    [
+     "leather_cap",
+     1
+    ],
+    [
+     "gladius",
+     1
+    ],
+    [
+     "bronze_torque",
+     1
+    ],
+    [
+     "javelin",
+     3
+    ]
+   ],
+   "silver": 120,
+   "desc": "A thin man with sooty hands who has been living in the Roman traders' houses since the killing, and selling them back to the town a room at a time.",
+   "look": {
+    "tunic": "#5a5a4a",
+    "cloak": "#3a3a3a",
+    "hair": "#4a3a2a",
+    "hair_style": "short"
+   }
+  },
+  {
+   "id": "onnacos",
+   "name": "Onnacos",
+   "faction": "cenabum",
+   "ai": "idle",
+   "dialogue": "cen_onnacos",
+   "attrs": {
+    "STR": 7,
+    "END": 7,
+    "PER": 6
+   },
+   "skills": {
+    "survival": 55,
+    "barter": 35
+   },
+   "desc": "A short, wide boatman with forearms like hams, mending a net on an upturned boat. He talks about the Liger as if it were a person, and not one he likes.",
+   "look": {
+    "tunic": "#3a4a5a",
+    "hair": "#6a5a4a",
+    "hair_style": "short",
+    "face": "beard"
+   }
+  },
+  {
+   "id": "cen_townsman",
+   "name": "Townsman",
+   "faction": "cenabum",
+   "ai": "wander",
+   "dialogue": "cen_townsfolk",
+   "attrs": {},
+   "desc": "A Carnute of Cenabum.",
+   "look": {
+    "tunic": "#5a6a3a",
+    "hair": "#8a6a3a",
+    "face": "moustache"
+   }
+  },
+  {
+   "id": "cen_townswoman",
+   "name": "Townswoman",
+   "sex": "f",
+   "faction": "cenabum",
+   "ai": "wander",
+   "dialogue": "cen_townsfolk",
+   "attrs": {},
+   "desc": "A Carnute of Cenabum.",
+   "look": {
+    "tunic": "#7a5a4a",
+    "hair": "#6a4020",
+    "hair_style": "bun"
+   }
+  },
+  {
+   "id": "cen_ash",
+   "name": "Old woman",
+   "sex": "f",
+   "faction": "cen_ruins",
+   "ai": "idle",
+   "dialogue": "cen_ash",
+   "attrs": {},
+   "desc": "An old woman sitting on the stone footing of a house that isn't there anymore, with her hands in her lap.",
+   "look": {
+    "tunic": "#4a4a4a",
+    "hair": "#b8b0a8",
+    "hair_style": "bun"
+   }
   }
  ]
 }

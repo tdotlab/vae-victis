@@ -144,7 +144,7 @@
   {
    "group": "bridge",
    "if": [
-    "quest bridge active"
+    "quest bridge=done_failed"
    ],
    "title": "Cenabum",
    "text": "The townsmen of Cenabum tried to slip out over the bridge in the dark, all of them at once, and the bridge was narrow. The legions were waiting at the gate. In his account Caesar says that hardly anyone escaped. He was not exaggerating."
@@ -163,7 +163,7 @@
     "quest widow=done_judged"
    ],
    "title": "Litumara",
-   "text": "The elder of Cenabum let Litumara live, and she was in the town when Caesar came to it. What became of her afterward nobody wrote down. The tribunal that spared her had been the last thing in Cenabum done according to law."
+   "text": "The elder of Cenabum judged Litumara a woman of the Carnutes, and let her go, and she crossed the Liger with her son before the legions came. What became of her afterward nobody wrote down. The judgment that freed her was the last thing in Cenabum done according to law."
   },
   {
    "group": "widow",
@@ -171,7 +171,7 @@
     "quest widow=done_bought"
    ],
    "title": "Litumara",
-   "text": "The blood price for Litumara went into Cenabum's treasury, and Cenabum's treasury went to Caesar's soldiers a few weeks later. Litumara and her son were already on the road south. It was, by the standards of that year, a good use of silver."
+   "text": "Atepomaros took the silver for Litumara and went to the coast to buy his brother back. Nobody in Cenabum ever heard whether he found the ship. Litumara and her son were on the road south before the legions came. It was, by the standards of that year, a good use of silver."
   },
   {
    "group": "widow",

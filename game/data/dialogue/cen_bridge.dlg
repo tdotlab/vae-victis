@@ -1,0 +1,14 @@
+// The bridge-head at Cenabum, seen once. A good eye spots the old ford.
+@speaker The bridge
+=== start
+~ set cen_bridge_seen
+The bridge over the Liger is a long timber road on piles, rough-planked, one cart wide, going out over brown water toward the Bituriges' country on the far side. It moves a little underfoot when the current hits the piles. Now the river is high and fast and the colour of the road.
+
+One cart wide. A whole town, in the dark, at once.
+* [survival 45] Look downstream, where the river spreads out round the island. -> ford
+* Go. -> END
+
+=== ford
+~ set cen_ford_found; xp 15
+Below the island the water goes broad and thin and wrinkled, the way water goes over gravel. There are old posts on both banks, rotted down to stumps, in a line. Somebody used to cross here, before there was a bridge, and not on a boat.
+* Go. -> END

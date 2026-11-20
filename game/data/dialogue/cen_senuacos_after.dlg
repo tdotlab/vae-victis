@@ -1,0 +1,19 @@
+// Senuacos in the ashes, if the town got out in time.
+=== start
+[flag sen_rewarded] -> again
+~ set sen_rewarded; renown 5
+The old man is standing in the street that used to be the street, with his staff, watching his grandsons drag a burned beam out of what used to be his hall.
+
+"The Cadurcan." He nods to you. "He came at nightfall and found the gates open and nobody to kill. He burned it all, of course. Timber. We'll cut more." He fumbles in his cloak. "The elders voted you this. I voted twice."
+~ give gold_torque
+[!flag sen_druids] -> druids
+-> again
+
+=== druids
+~ set sen_druids; known carnute_forest
+"And if you have business with the druids, they meet in the forest east of here, two days. Senouindos sits there now. Tell him Senuacos sent you; he'll pretend not to know who I am."
+-> again
+
+=== again
+"Go well. Come back when there's a roof to sit under."
+* Go. -> END

@@ -1,0 +1,44 @@
+// Onnacos the boatman: boats for the bridge quest, and the old ford.
+=== start
+[!flag onn_met] -> first
+He doesn't look up from the net. "The river's high. Ask what you want."
+-> hub
+
+=== first
+~ set onn_met
+A short, wide man with forearms like hams is mending a net on the hull of an upturned boat. Two more boats are drawn up in the shallows behind him, black with tar, and he says there are three more upriver.
+
+"Onnacos. I take people over. I take grain up and fish down." He jerks his head at the river without turning. "She's high and she's cold and she's in a temper. Don't fall in."
+-> hub
+
+=== hub
+* [quest bridge=start, !flag cen_boats] "How many could your boats take across in a day?" -> boats
+* [quest bridge=start, !flag cen_ford_found] "Is there anywhere to cross besides the bridge?" -> ford
+* "What's the river like?" -> river
+* "Goodbye." -> END
+
+=== river
+"The Liger?" He spits into her. "Wide and shallow and treacherous. Sandbanks that move in the night. Floods in spring that take the bottom fields. Then in summer you can walk across in places and not wet your knees." He bites a knot tight. "She'll drown you as soon as look at you, and the next week she'll give you eels. I don't like her. I've never lived anywhere else."
+-> hub
+
+=== boats
+"Five boats. Forty souls a crossing, if they sit still, which they won't. All of Cenabum in a day, if the old man said go and people went." He looks up for the first time. "But that's work, and boats wear, and nobody's paying me to empty a town. Eighty silver."
+* [silver 80] "Done." -> boats_done ~ silver -80
+* [barter 40, silver 50] "Fifty. And if Caesar comes, your boats burn with everything else." -> boats_done ~ silver -50
+* "Too dear." -> hub
+
+=== boats_done
+~ set cen_boats; xp 25
+He takes the silver. "Tell the old man. When he says go, I'll be at the bank." He goes back to the net. "And tell him not to wait for the night. Never cross her at night."
+-> hub
+
+=== ford
+"Ask the old men." He shrugs. "There was a ford once, before the bridge. I know where. Knowing where costs."
+* [silver 10] "Ten silver." -> ford_told ~ silver -10
+* [speech 30] "If the town has to run, it runs past your boats. You'd want it to run somewhere." -> ford_told
+* "Never mind." -> hub
+
+=== ford_told
+~ set cen_ford_found; xp 15
+"Below the island. The river goes wide and thin over the gravel there; at this water, a man can wade it to the chest, holding a rope. Cattle went over it in my grandfather's day." He jerks his head downstream. "Tell the old man the boatman said so. He'll know."
+-> hub

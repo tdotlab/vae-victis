@@ -1,0 +1,10 @@
+// Litumara's son: Gaius to his father's people, Cingetos to his mother's.
+=== start
+[flag lit_trust] -> latin
+He looks at you over his mother's arm, solemn, the way small children look at large strangers. "I'm Cingetos," he says. Then, after thinking about it: "And Gaius."
+* [latin 20] "Salve, Gai." -> latin
+* Go. -> END
+
+=== latin
+His face lights up. "Salve!" he says, and then a great deal more Latin very fast, about a dog he had and a cart with a red wheel, and his mother puts her hand on his head and he stops.
+* Go. -> END

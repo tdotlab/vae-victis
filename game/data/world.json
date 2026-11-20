@@ -237,8 +237,12 @@
     9,
     3
    ],
-   "desc": "The Carnute trading town where the revolt began.",
-   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "desc": "The Carnute trading town on the Liger where the revolt began.",
+   "map": "cenabum",
+   "entry": "start",
+   "map_by_flag": [
+    {"flag": "cenabum_burned", "map": "cenabum_burned", "entry": "start"}
+   ],
    "size": 2
   },
   {

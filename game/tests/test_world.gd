@@ -105,6 +105,26 @@ func test_real_calendar_is_ordered_and_valid() -> void:
 		last = int(e["day"])
 		if not e.get("silent", false):
 			check(e.has("text") and e.has("title"), "%s has title and text" % e["id"])
+		# Conditions and effects are dialogue ones; validate them as a node.
+		var fake := {"entry": "n", "nodes": {"n": [{"cond": e.get("if", []), "fx": e.get("fx", [])}]}}
+		for err in Dialogue.validate(fake):
+			fail("calendar %s: %s" % [e["id"], err])
+
+
+func test_calendar_conditions_and_effects() -> void:
+	var gs := GameState.new()
+	gs.player = CharacterSheet.create("Test", {}, [])
+	gs.set_quest("bridge", "agreed")
+	var cal := DB.calendar()
+	var shown := 0
+	for e in cal:
+		if e["id"] == "cenabum_leaves":
+			check(Dialogue.all_true(gs, e.get("if", [])), "the town leaves when Senuacos agreed")
+			Dialogue.apply(gs, e.get("fx", []))
+			shown += 1
+	eq(shown, 1, "the evacuation event exists")
+	eq(gs.quest_stage("bridge"), "done_saved")
+	eq(gs.flag("cenabum_saved"), 1)
 
 
 func test_calendar_follows_caesar_not_a_240_day_year() -> void:

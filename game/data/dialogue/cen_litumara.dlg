@@ -1,0 +1,100 @@
+// Litumara, widow of Gaius Fufius Eros (a freedman of Cita, who kept his
+// books), held with her son in Atepomaros's pen. Freed by any route, she gives
+// up her husband's seal and ledger; the ledger names Noviodunum.
+=== start
+[flag ate_dead] -> free
+[flag lit_free] -> free
+[flag lit_caught] -> watched
+[!flag lit_met] -> first
+She looks up when you come to the hurdles, and puts her hand on the boy's head.
+-> hub
+
+=== first
+~ set lit_met
+[quest widow none] ~ quest widow start
+A woman in a good Roman gown gone filthy sits in the straw with a small boy against her side. There's a water jar and a crust, and a cousin of the household at the gate with a spear. She's been here long enough that she's stopped looking at the gate.
+
+"You're not one of his," she says in Gallic. Then, as if trying a key in a lock: "Quis es?"
+* [latin 40] "Amicus. Or near enough." -> latin
+* "I'm from the south. Cadurci." -> hub
+* "Who are you?" -> who
+
+=== latin
+~ set lit_trust; xp 15
+Her face changes, the way a face does when it hears home after a long time away, even a home it married into. She answers in Latin, fast and low, with an accent from the Liger and a vocabulary from the counting-house.
+
+"Then listen, because the cousin doesn't speak it. My husband kept Cita's books. They killed him with the others, in the street, in front of the house. I have his seal and his ledger. I sewed them in my hem the night it happened, and they don't know. If you get us out, they're yours. All of it. I don't want anything of his but the boy."
+-> hub
+
+=== hub
+* [!flag lit_who] "Who are you?" -> who
+* "Why does he want you?" -> why
+* [!night] "When it's dark, can you walk?" -> day
+* [night, flag kin_bribed] "Now. The cousin's looking the other way." -> out
+* [night, !flag kin_bribed, roll sneak 0] "Now. Out through the back hurdles, low, and don't stop." -> out | caught
+* [night, !flag kin_bribed, roll AGI -10] Pull the back hurdle loose and lift the boy over. -> out | caught
+* "I'll be back." -> END
+
+=== who
+~ set lit_who
+"Litumara. My father was a Carnute of this town, and my husband was Gaius Fufius Eros, Cita's freedman. Freed for being good with numbers." She smooths the boy's hair. "This is our son. Cingetos, here. Gaius, at home. He answers to both. He's six."
+-> hub
+
+=== why
+"Atepomaros's brother went to the Romans for a debt, three years ago. Cita's people bought the bill. My husband wrote it up." She says it without excusing it. "Now he thinks if he has a Roman's son, the Romans will trade the brother back for him."
+
+"They won't. My son isn't a citizen. A freedman can't marry a Gaul under their law; to them he's my son and nobody's. Atepomaros doesn't understand that, and I can't make him, because every time I say 'Roman law' he hears it as an insult." She looks at the boy. "Which it is, I suppose."
+-> hub
+
+=== day
+"With the boy on my back, I can walk to Rome." She glances at the cousin at the gate. "They change the watch at dark, and the one who comes on drinks. The back hurdles are only tied with withy. I've been picking at the knots."
+-> hub
+
+=== caught
+~ set lit_caught
+The hurdle comes away with a crack like a branch going, and the boy makes a sound, only a small one, and the cousin at the gate is shouting before you're halfway across the yard. Lamps. The house door. Atepomaros coming out with his sword already drawn.
+* Stand and fight. -> fight
+* Let her go and run. -> fled
+
+=== fight
+"Over the hurdle," you tell her. "Stay down."
+~ fight_all atepomaros
+
+=== fled
+You run. Behind you there's shouting, and then a woman's voice saying something in Latin very calmly, over and over, to a child. By morning they've tied the hurdles with rope.
+* Go. -> END
+
+=== watched
+They've tied the hurdles with rope now, and the cousin at the gate doesn't drink anymore. Litumara looks at you and says nothing. She doesn't need to.
+* [flag kin_bribed, night] "Now. The cousin's looking the other way." -> out
+* "I'll find another way." -> END
+
+=== out
+~ clear lit_caught
+[quest widow active] ~ quest widow done_saved done
+~ set lit_gone; xp 75
+She has the boy up and on her hip before you've finished talking. The two of you go out through the back of the pen, along the ditch behind the steading, through somebody's kale, to the river path, where the dark is thick enough to hide in.
+
+At the bank she stops, and kneels, and works at the hem of her gown with her teeth until the stitches go. Two things come out: a small bronze seal on a cord, and a book of wax tablets bound with thongs, one corner black.
+
+"His seal. His ledger." She puts them in your hands. "Use them for something, or throw them in the river. I don't care which." Then, in Latin, to the boy: "Come. We're going to walk a long way."
+~ give commissary_seal; give grain_ledger
+They go along the bank in the dark, toward the bridge and the Bituriges' country beyond it, and the path takes them, and they're gone.
+~ leave_all cen_widow
+* Go. -> END
+
+=== free
+[quest widow active] ~ quest widow done_saved done
+~ set lit_gone; xp 50
+[flag ate_dead] The pen gate stands open. Litumara is already on her feet, with the boy behind her, looking at what's left in the yard. She doesn't say anything about it.
+[!flag ate_dead] The pen gate stands open, and nobody's at it. Litumara is on her feet with the boy behind her, as if she doesn't trust the open gate yet. Then she does.
+
+She kneels, and works at the hem of her gown with her teeth until the stitches go. Two things come out: a small bronze seal on a cord, and a book of wax tablets bound with thongs, one corner black where it lay too near a fire.
+
+"My husband's seal. His ledger. Cita's grain went through those, every sack of it." She puts them in your hands. "You got us out. Use them for something."
+~ give commissary_seal; give grain_ledger
+"We'll go south, over the river, to my mother's people among the Bituriges. After that, wherever a widow with numbers can earn bread." She picks up the boy. "Tell him goodbye, Gai."
+
+The boy looks at you gravely and says, "Vale," and they go.
+~ leave_all cen_widow
+* Go. -> END

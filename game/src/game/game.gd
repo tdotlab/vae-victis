@@ -164,9 +164,14 @@ func check_calendar() -> Array:
 		# without news or effects.
 		if e.has("unless_flag") and state.flag(String(e["unless_flag"])) != 0:
 			continue
+		# Or it only happens if things stand a certain way ("if", dialogue
+		# conditions), and can move quests along ("fx", dialogue effects).
+		if not Dialogue.all_true(state, e.get("if", [])):
+			continue
 		var fl: Dictionary = e.get("flags", {})
 		for f in fl:
 			state.set_flag(f, int(fl[f]))
+		Dialogue.apply(state, e.get("fx", []))
 		if not e.get("silent", false):
 			shown.append(e)
 	return shown

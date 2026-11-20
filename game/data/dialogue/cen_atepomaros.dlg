@@ -1,0 +1,90 @@
+// Atepomaros, a Carnute farmer holding Litumara and her son against his
+// brother, sold to the Romans for debt. He can be paid, argued out of it,
+// fought, or helped.
+=== start
+[flag lit_gone] -> after
+[flag lit_free] -> after
+[!flag ate_met] -> first
+"You again." He doesn't move from where he's standing, which is between you and the pen.
+-> hub
+
+=== first
+~ set ate_met
+[quest widow none] ~ quest widow start
+A big man in his forties stands in the yard with a sword on his hip that still has the shop-shine on the scabbard. He watches you come the way farmers watch weather.
+
+"This is my yard," he says. "If you've come about the woman, say so. Everyone else has."
+-> hub
+
+=== hub
+* [!flag ate_brother] "Why are you holding her?" -> brother
+* [flag ate_brother, !flag ate_argued, latin 40] "That boy's no citizen. A freedman can't marry a Gaul under Roman law. To Rome he's nobody's son, and nobody trades for nobody." -> argue
+* [flag ate_brother, !flag ate_argued, lore 45] "The Romans don't trade slaves back for anyone, least of all a Gaul's child. I've seen what they do with a bill of sale." -> argue
+* [flag ate_brother, !flag ate_argued, roll PRE -10] "Look at that boy and tell me he's a Roman. Rome won't pay a copper for him." -> argue | stubborn ~ set ate_argued
+* [silver 120] "What's she worth to you? In silver." -> price
+* [barter 45, silver 80] "She's worth nothing to you dead and less once Caesar's here. Eighty silver, now, and you buy a horse and go after your brother yourself." -> bought ~ silver -80
+* [!flag ate_offered] "Keep her. I only want what her husband carried." -> betray
+* "Let her go, or I'll make you." -> threat
+* "Goodbye." -> END
+
+=== brother
+~ set ate_brother
+"Brogimaros. My brother." He says the name as if it were a debt figure. "He borrowed against his barley, three years back, and the barley failed, and the man he owed sold the bill to Cita's people, and Cita's people sold him. Downriver, to the coast. A Roman ship." He spits. "Her husband wrote the bill of sale. In that neat hand. I've seen it."
+
+"So I have a Roman's son. When Caesar comes, I'll trade him for Brogimaros. A son for a brother. That's fair. That's more than fair."
+-> hub
+
+=== argue
+~ set ate_argued; set lit_free; xp 75
+He stares at you. Then at the pen, at the boy in the straw, as if seeing him for the first time as a thing with a price and finding the price is nothing.
+
+"Then he's worth nothing." He says it slowly. "Then I've kept a widow in my yard all winter for nothing, and every man in this town has watched me do it." He takes his hand off the sword. "Open it," he tells his cousin. "Let them go. Let them go wherever they like." He goes into his house and doesn't come out.
+-> END
+
+=== stubborn
+"No." He shakes his head like a bull with a fly. "You'd say anything. Everyone says anything. The Romans paid for my brother; they'll pay to get theirs back."
+-> hub
+
+=== price
+"Silver." He looks at you a long time. "A hundred and twenty. That's what they paid for Brogimaros. That's the price."
+* [silver 120] Count it out. -> bought ~ silver -120
+* "Too much." -> hub
+
+=== bought
+~ quest widow done_bought done; set lit_free; xp 50
+He takes the silver and weighs it in his hands, and for a moment you think he's going to throw it at you. He doesn't. "I'll buy him back myself," he says. "I'll go to the coast. I'll find the ship." He tells his cousin to open the pen, and goes inside.
+-> END
+
+=== betray
+~ set ate_offered
+He narrows his eyes. "What did he carry?"
+* "A seal and a book of accounts. She has them on her. Give them to me, and the rest is your business." -> given
+* "Forget it." -> hub
+
+=== given
+~ quest widow done_given done; set lit_gone; honor -10; xp 25
+He goes to the pen himself. There's a short struggle in the straw and a woman's voice saying "no" in two languages, and then a sound of cloth tearing. He comes back and puts them in your hand: a small bronze seal on a cord, and a book of wax tablets with one corner burned.
+
+"Sewn in her hem," he says, and laughs, not much. "All winter."
+~ give commissary_seal; give grain_ledger
+By evening the pen is empty, and nobody in the yard will say where they took her.
+~ leave_all cen_widow
+* Go. -> END
+
+=== threat
+His hand closes on the sword. "Then make me," he says, and his cousins come round the side of the house with their spears.
+* Fight. -> fight
+* "Not today." -> hub
+
+=== fight
+He goes for you, and the cousins with him.
+~ fight_all atepomaros
+
+=== after
+[quest widow=done_given] -> after_given
+"She's gone. Good. I didn't want her." He looks at the empty pen. "I wanted my brother."
+* Go. -> END
+
+=== after_given
+"We're done, you and I." He doesn't look at you.
+* Go. -> END

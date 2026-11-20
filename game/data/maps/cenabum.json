@@ -1,0 +1,327 @@
+{
+ "id": "cenabum",
+ "name": "Cenabum",
+ "default": "grass",
+ "weather": "rain",
+ "legend": {
+  ".": "grass",
+  "T": "tree",
+  "b": "bush",
+  ";": "meadow",
+  "q": "shallows",
+  "~": "water",
+  "_": "road",
+  "o": "dirt",
+  "R": "rampart",
+  "w": "wall_wood",
+  "f": "floor_earth",
+  "d": "door",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "a": "amphorae",
+  "l": "loom",
+  "Q": "quern",
+  "y": "granary",
+  "s": "stall",
+  "F": "woodpile",
+  "/": "cart",
+  "r": "rubble",
+  "k": "floor_wood",
+  "z": "fence",
+  "p": "palisade",
+  "n": "bones",
+  "E": {
+   "terrain": "road",
+   "mark": "exit"
+  },
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "Z": {
+   "terrain": "road",
+   "mark": "town"
+  },
+  "V": {
+   "terrain": "meadow",
+   "mark": "river"
+  },
+  "X": {
+   "terrain": "floor_wood",
+   "mark": "bridge_exit"
+  },
+  "W": {
+   "terrain": "shallows",
+   "mark": "bank_exit"
+  },
+  "G": {
+   "terrain": "road",
+   "mark": "bridge"
+  },
+  "O": {
+   "terrain": "meadow",
+   "mark": "onnacos"
+  },
+  "M": {
+   "terrain": "shallows",
+   "mark": "boats"
+  },
+  "C": {
+   "terrain": "road",
+   "mark": "cunissos"
+  },
+  "S": {
+   "terrain": "floor_earth",
+   "mark": "senuacos"
+  },
+  "A": {
+   "terrain": "dirt",
+   "mark": "atepomaros"
+  },
+  "K": {
+   "terrain": "dirt",
+   "mark": "kin1"
+  },
+  "J": {
+   "terrain": "dirt",
+   "mark": "kin2"
+  },
+  "L": {
+   "terrain": "dirt",
+   "mark": "litumara"
+  },
+  "Y": {
+   "terrain": "dirt",
+   "mark": "boy"
+  },
+  "c": {
+   "terrain": "crate",
+   "mark": "cellar"
+  },
+  "x": {
+   "terrain": "crate",
+   "mark": "ate_chest"
+  },
+  "1": {
+   "terrain": "dirt",
+   "mark": "t1"
+  },
+  "2": {
+   "terrain": "dirt",
+   "mark": "t2"
+  },
+  "3": {
+   "terrain": "dirt",
+   "mark": "t3"
+  },
+  "4": {
+   "terrain": "dirt",
+   "mark": "t4"
+  },
+  "P": {
+   "terrain": "crate",
+   "mark": "stock"
+  }
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTT.EEE.TTTTTTTTTTTTTTTTTTTTT",
+  "...TT....T....b.......@.............T...TT....",
+  ".T...................._.......b.............T.",
+  "bTRRRRRRRRRRRRRRRRRRRo_oRRRRRRRRRRRRRRRRRRRRTT",
+  "TbR..................._....................RTT",
+  "TTR.wwrrwwww.wwrrwww.._..wwwwwwwwww........RTT",
+  "TTR.wcffrffd.rffffaw.._..wffBfffBfw.y.y....RTT",
+  "TTR.wfrffffw_____________dSfffhfffw........RTT",
+  "TTR.rffffrfw.waffffr.._..wffffffffw.....F..RTT",
+  "TTR.wwwwwwww.wwwwwww.._..wffffftfBw........RTT",
+  "TTR..................._..wwwwwwwwww........RTT",
+  "TTR.wwrrrww..sP.......Z........y...........RTT",
+  "TTR.wrrrrrd__C_________............wwwwwww.RTT",
+  "TTR.wrrorrr..../......_........oooowffffBw.RTT",
+  "TTR.rrrrrrw....oooosoo_ooo2ooo.oooowffhffw.RTT",
+  "TTR.wwwwwww....osooooo_________oooodfffffw.RTT",
+  "TTR............oo1oooo_oooooso.ooAowfffxfw.RTT",
+  "TTR.........y..ooooo3o_ooooooo.oooowwwwwww.RTT",
+  "TTR.wwwwwww____________........oooo..K.....RTT",
+  "TTR.wBffffw_.wwwdwww.._..wwwwwwF...ppopppp.RTT",
+  "TTR.wffhffd_.wQffffw.._..wfffBw.J..pooooop.RTT",
+  "TTR.wflfffw..wffhffw..___dffhfw....poooLop.RTT",
+  "TTR.wwwwwww..wffffBw.._..w4fffw....pooooYp.RTT",
+  "TTR..........wwwwwww.._..wwwwww....ppppppp.RTT",
+  "TTR.........y.......F._........../.........RTT",
+  "TTRb...b...b...b...b.._b...b...b...b...b...bTT",
+  "bb;;;;;;;;;;;;;;;;;;;;G;;;;;V;O;;;;;;;;;;;;;bb",
+  "WqqqqqqqqqqqqqqqqqqqqqkkqqqqqqqMMqqqqqqqqqqqqq",
+  "qqqqqqqqqqqqqqqqqqqqqqkkqqqqqqqqqqqqqqqqqqqqqq",
+  "~~~~~~~~~~~~~~~~~~~~~~kk~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~kk~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~kk~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~XX~~~~~~~~~~~~~~~~~~~~~~"
+ ],
+ "arrive_text": "Cenabum of the Carnutes: a river town of thatch and mud inside an earth rampart, with one long wooden bridge over the Liger and a quarter of Roman houses with their roofs fallen in. This is where it started. The men who did it still walk past the gutted houses every day, and nobody looks at them.",
+ "actors": [
+  {
+   "uid": "senuacos",
+   "template": "senuacos",
+   "mark": "senuacos",
+   "unless_flag": [
+    "cenabum_saved"
+   ]
+  },
+  {
+   "uid": "cunissos",
+   "template": "cunissos",
+   "mark": "cunissos"
+  },
+  {
+   "uid": "onnacos",
+   "template": "onnacos",
+   "mark": "onnacos",
+   "unless_flag": [
+    "cenabum_saved"
+   ]
+  },
+  {
+   "uid": "atepomaros",
+   "template": "atepomaros",
+   "mark": "atepomaros",
+   "kill_flag": "ate_dead"
+  },
+  {
+   "uid": "cen_kin1",
+   "template": "cen_kinsman",
+   "mark": "kin1"
+  },
+  {
+   "uid": "cen_kin2",
+   "template": "cen_kinsman",
+   "mark": "kin2"
+  },
+  {
+   "uid": "litumara",
+   "template": "litumara",
+   "mark": "litumara",
+   "unless_flag": [
+    "lit_gone"
+   ]
+  },
+  {
+   "uid": "cen_boy",
+   "template": "cen_boy",
+   "mark": "boy",
+   "unless_flag": [
+    "lit_gone"
+   ]
+  },
+  {
+   "uid": "cen_t1",
+   "template": "cen_townswoman",
+   "mark": "t1",
+   "unless_flag": [
+    "cenabum_saved"
+   ]
+  },
+  {
+   "uid": "cen_t2",
+   "template": "cen_townsman",
+   "mark": "t2",
+   "unless_flag": [
+    "cenabum_saved"
+   ]
+  },
+  {
+   "uid": "cen_t3",
+   "template": "cen_townsman",
+   "mark": "t3",
+   "unless_flag": [
+    "cenabum_saved"
+   ]
+  },
+  {
+   "uid": "cen_t4",
+   "template": "cen_townswoman",
+   "mark": "t4",
+   "unless_flag": [
+    "cenabum_saved"
+   ]
+  }
+ ],
+ "containers": [
+  {
+   "mark": "stock",
+   "name": "Cunissos's pickings",
+   "items": [
+    [
+     "roman_wine",
+     2
+    ],
+    [
+     "salt",
+     1
+    ]
+   ],
+   "owner": "cunissos"
+  },
+  {
+   "mark": "cellar",
+   "name": "A cellar under the ash",
+   "items": [
+    [
+     "roman_wine",
+     1
+    ],
+    [
+     "bandage",
+     2
+    ]
+   ],
+   "silver": 35,
+   "lock": 40
+  },
+  {
+   "mark": "ate_chest",
+   "name": "Atepomaros's chest",
+   "items": [
+    [
+     "bread",
+     3
+    ]
+   ],
+   "silver": 30,
+   "lock": 30,
+   "owner": "atepomaros"
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The road out of Cenabum"
+  },
+  {
+   "mark": "bridge_exit",
+   "to": "world",
+   "label": "Over the bridge, south"
+  },
+  {
+   "mark": "bank_exit",
+   "to": "world",
+   "label": "Along the bank"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "bridge",
+   "id": "bridge",
+   "once": false,
+   "unless_flag": "cen_bridge_seen",
+   "dialogue": "cen_bridge"
+  },
+  {
+   "mark": "town",
+   "id": "quarter_view",
+   "say": "West of the street the Roman houses stand open to the sky. The doors are gone, and the shutters, and most of the roof beams; what couldn't be carried off was burned where it stood. Someone has scratched a word into the plaster of the nearest wall, in Gallic, in Latin letters. It isn't a kind one."
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+// Atepomaros's cousins, keeping the pen. One of them can be paid to look the
+// other way after dark.
+=== start
+[flag lit_gone] -> empty
+[flag lit_free] -> empty
+"Atepomaros says nobody goes near the pen." He shifts the spear, not quite at you.
+* [!flag kin_bribed, silver 20] "Cold work. Here's twenty for something to drink, after dark, a long way from the gate." -> bribe ~ silver -20
+* [flag kin_bribed] "Remember: after dark, a long way from the gate." -> reminded
+* "What's she to you?" -> what
+* "Goodbye." -> END
+
+=== bribe
+~ set kin_bribed
+He looks at the silver, then at the house, and then he takes it and puts it away fast. "There's a jar at the miller's," he says, to nobody. "I'll be there tonight. Late."
+* Go. -> END
+
+=== reminded
+"I heard you." He doesn't look at you.
+* Go. -> END
+
+=== what
+"Nothing. A Roman's woman." He shrugs. "He's my cousin. If he says watch a pen, I watch a pen."
+* Go. -> END
+
+=== empty
+"Nothing to keep now." He leans the spear on the wall and looks at the straw.
+* Go. -> END

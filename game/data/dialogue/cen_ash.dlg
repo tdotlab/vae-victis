@@ -1,0 +1,9 @@
+// An old woman in the ashes of Cenabum, after Caesar.
+=== start
+[flag cenabum_saved] -> saved
+She doesn't look up. "They tried the bridge," she says. "All of them, in the dark. My sons, and their wives, and the little ones. The bridge was narrow. The legions were at the gate." She looks at her hands. "I couldn't walk fast enough. That's why I'm here. I couldn't walk fast enough to die with them."
+* Go. -> END
+
+=== saved
+"We went by day. The old man made us." She sounds almost cross about it. "And we came back, and it's all ash, and I'm sitting on my own doorstep, and my sons are cutting timber up in the wood." She looks round at the black ground. "Ash grows good barley. My mother always said."
+* Go. -> END
