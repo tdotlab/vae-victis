@@ -694,7 +694,7 @@
   {
    "id": "grotto_bandit",
    "name": "Outlaw",
-   "faction": "grotto",
+   "faction": "grotto", "nerve": -15,
    "ai": "guard",
    "dialogue": "grotto_bandit",
    "attrs": {
@@ -727,7 +727,7 @@
   {
    "id": "grotto_slinger",
    "name": "Outlaw slinger",
-   "faction": "grotto",
+   "faction": "grotto", "nerve": -20,
    "ai": "guard",
    "dialogue": "grotto_bandit",
    "attrs": {
@@ -958,7 +958,7 @@
   {
    "id": "rider",
    "name": "Germanic rider",
-   "faction": "riders",
+   "faction": "riders", "nerve": -10,
    "ai": "guard",
    "dialogue": "ford_rider",
    "attrs": {
@@ -989,7 +989,7 @@
   {
    "id": "rider_archer",
    "name": "Germanic rider",
-   "faction": "riders",
+   "faction": "riders", "nerve": -15,
    "ai": "guard",
    "dialogue": "ford_rider",
    "attrs": {
@@ -2261,7 +2261,7 @@
    ],
    "silver": 6,
    "xp": 50,
-   "nerve": 40,
+   "nerve": -10,
    "desc": "An Aeduan levy man hired to walk the depot at night and stand at doors by day. Paid in Roman silver and bored in two languages.",
    "look": {
     "tunic": "#4a6a5a",
@@ -2297,7 +2297,7 @@
    ],
    "silver": 15,
    "xp": 70,
-   "nerve": 50,
+   "nerve": 0,
    "desc": "The man in charge of the night watch, which means he walks the line twice and then sits by the forge.",
    "look": {
     "tunic": "#3a5a4a",
@@ -2703,7 +2703,7 @@
   {
    "id": "atepomaros",
    "name": "Atepomaros",
-   "faction": "atepomaros",
+   "faction": "atepomaros", "leader": true,
    "ai": "guard",
    "dialogue": "cen_atepomaros",
    "attrs": {
@@ -2725,7 +2725,7 @@
    ],
    "silver": 40,
    "xp": 90,
-   "nerve": 60,
+   "nerve": 0,
    "desc": "A big Carnute farmer in his forties with a sword he hasn't owned long. Three years ago his brother went to the Romans for a debt, and he keeps the account of it the way other men keep a grudge: exactly.",
    "look": {
     "tunic": "#6a4a3a",
@@ -2765,7 +2765,7 @@
    ],
    "silver": 5,
    "xp": 50,
-   "nerve": 40,
+   "nerve": -20,
    "desc": "One of Atepomaros's cousins, keeping the pen because he was told to.",
    "look": {
     "tunic": "#5a4a3a",

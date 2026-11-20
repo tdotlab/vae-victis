@@ -119,6 +119,16 @@ func can_end_combat() -> bool:
 	return true
 
 
+## On an exit hex the player can run for it, as long as nobody is close
+## enough to grab them.
+func can_escape() -> bool:
+	var r := int(DB.rules().get("escape_radius", 2))
+	for a in order:
+		if a.hostile and a.is_active() and not a.has_meta("broken") and Hex.distance(a.cell, map.player.cell) <= r:
+			return false
+	return true
+
+
 func request_end() -> void:
 	if not active or current != map.player or acting:
 		return
@@ -228,7 +238,7 @@ func on_click(c: Vector2i, button: int) -> void:
 		map.hud.refresh()
 	acting = false
 	_cached_hover = Vector2i(-9999, -9999)
-	if map.exit_at(map.player.cell).size() > 0 and can_end_combat():
+	if map.exit_at(map.player.cell).size() > 0 and can_escape():
 		Game.say("You slip away from the fight.")
 		_end_combat()
 		_player_done.emit()
@@ -400,7 +410,8 @@ func _kill(def: Actor, killer: Actor) -> void:
 		Game.give_xp(xp, "Killed " + def.display_name())
 	if def.has_meta("kill_flag") or DB.npc_template(def.template).has("kill_flag"):
 		Game.state.set_flag(DB.npc_template(def.template).get("kill_flag", def.get_meta("kill_flag", "")))
-	var shock := 10 + (25 if def.leader else 0)
+	var rules := DB.rules()
+	var shock := int(rules.get("kill_shock", 10)) + (int(rules.get("leader_shock", 50)) if def.leader else 0)
 	var head_taker := killer.is_player and killer.sheet.has_flag("head_taker")
 	for o in order:
 		if o == def or not o.is_active() or o.is_player or o.has_meta("broken"):

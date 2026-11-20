@@ -48,6 +48,11 @@
     "sight": "4 + PER"
   },
   "perk_every": 3,
+  "_kill_shock": "Morale shock to a dead man's faction-mates; more if he led them. Unhurt men only test once their morale is down to 40, so a leader's fall shakes hired men and outlaws but not soldiers.",
+  "kill_shock": 10,
+  "leader_shock": 50,
+  "_escape_radius": "In a fight, the player escapes off an exit hex if no enemy is this close.",
+  "escape_radius": 2,
   "max_traits": 2,
   "traits": [
     {"id": "once_sold", "name": "Once Sold", "desc": "You were a slave and bought your freedom. +15 Latin, +10 Barter. Romans and slavers know the brand; Gallic nobles look down on you.", "mods": {"skills": {"latin": 15, "barter": 10}}, "flags": ["branded"]},

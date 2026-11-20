@@ -6,6 +6,9 @@ extends SceneTree
 ##   tools/arena.sh --runs=2000          more runs per cell (default 500)
 ##   tools/arena.sh --only=wolves        encounters whose id contains this
 ##   tools/arena.sh --turns              also print mean turns and hp left
+##   tools/arena.sh --quest              the scripted quest fights instead,
+##                                       at the levels a player meets them
+##   tools/arena.sh --group=a,b,b --level=2   any group of templates
 ##
 ## All the math comes from CombatRules, so tuning data/rules.json, items or
 ## NPCs shows up here at once. The turn loop is a stripped copy of
@@ -37,7 +40,28 @@ const GEARS := {
 	"sword+shield": ["gallic_sword", "gallic_shield", "leather_jerkin"],
 }
 
+# The fights quests start (fight_all in dialogue), with every member of the
+# faction on the map, and the levels a player usually has by then (Act I
+# hands out roughly 3000-4000 xp: level 2 by mid-act, 3 near the end).
+const QUEST_FIGHTS := {
+	"ford riders": {"foes": ["haldo", "rider", "rider", "rider_archer", "rider"], "levels": [1, 2]},
+	"grotto": {"foes": ["dubnacos", "grotto_bandit", "grotto_bandit", "grotto_slinger"], "levels": [1, 2]},
+	"grotto wolves": {"foes": ["wolf", "wolf", "wolf"], "levels": [1, 2]},
+	"atepomaros": {"foes": ["atepomaros", "cen_kinsman", "cen_kinsman"], "levels": [2, 3]},
+	"depot watch": {"foes": ["nov_watch", "nov_watch", "nov_guard"], "levels": [2, 3]},
+	"ava sentry": {"foes": ["legionary"], "levels": [2, 3]},
+	"ava garrison": {"foes": ["legionary", "legionary", "legionary", "legionary", "legionary", "legionary", "legionary"], "levels": [2, 3]},
+	"epomeduos": {"foes": ["epomeduos"], "levels": [2]},
+}
+# Where each build puts its skill points as it levels, and the perk it takes.
+const GROWTH := {
+	"fighter": {"skills": ["blades", "shield"], "perk": "toughened"},
+	"balanced": {"skills": ["blades", "speech"], "perk": "quick_hands"},
+	"talker": {"skills": ["speech", "barter"], "perk": "silver_tongue"},
+}
+
 var _dice := Dice.new()
+var _level := 1
 
 
 func _initialize() -> void:
@@ -51,6 +75,17 @@ func _initialize() -> void:
 			only = a.substr(7)
 		elif a == "--turns":
 			verbose = true
+	var quest := OS.get_cmdline_user_args().has("--quest")
+	var group := ""
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--group="):
+			group = a.substr(8)
+		elif a.begins_with("--level="):
+			_level = int(a.substr(8))
+	if quest or group != "":
+		_quest_table(runs, only, verbose, group)
+		quit()
+		return
 	var world: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/world.json"))
 	var encounters: Array = world.get("encounters", [])
 	_dice.reseed(12345)
@@ -70,7 +105,7 @@ func _initialize() -> void:
 		var extra := ""
 		for g in gear_names:
 			for b in BUILDS:
-				var r := _run_cell(e["actors"], BUILDS[b], GEARS[g], runs)
+				var r := _run_cell(e["actors"], b, GEARS[g], runs)
 				line += " %-13s" % ("%3d%%" % roundi(100.0 * r["wins"] / runs))
 				if verbose:
 					extra += "    %s/%s: %.1f turns, %.0f%% hp left when won\n" % [g, b, r["turns"], 100.0 * r["hp_left"]]
@@ -79,6 +114,38 @@ func _initialize() -> void:
 			print(extra.trim_suffix("\n"))
 	print("(win rate over %d runs per cell; foes start %d hexes away on open ground)" % [runs, START_DIST])
 	quit()
+
+
+## Quest fights (or one --group), one row per fight and level.
+func _quest_table(runs: int, only: String, verbose: bool, group: String) -> void:
+	_dice.reseed(12345)
+	var fights := QUEST_FIGHTS
+	if group != "":
+		fights = {group: {"foes": Array(group.split(",")), "levels": [_level]}}
+	var head := "%-15s %-3s" % ["fight", "lvl"]
+	for g in GEARS:
+		for b in BUILDS:
+			head += " %-13s" % (g.substr(0, 6) + "/" + b.substr(0, 5))
+	print(head)
+	for id in fights:
+		if only != "" and not id.contains(only):
+			continue
+		for lvl in fights[id]["levels"]:
+			_level = lvl
+			var line := "%-15s %-3d" % [id, lvl]
+			var extra := ""
+			for g in GEARS:
+				for b in BUILDS:
+					var r := _run_cell(fights[id]["foes"], b, GEARS[g], runs, true)
+					line += " %-13s" % ("%3d%%" % roundi(100.0 * r["wins"] / runs))
+					if verbose:
+						extra += "    %s/%s: %.1f turns, %.0f%% hp left when won
+" % [g, b, r["turns"], 100.0 * r["hp_left"]]
+			print(line)
+			if verbose:
+				print(extra.trim_suffix("
+"))
+	print("(win rate over %d runs per cell; every foe hostile, %d hexes away on open ground)" % [runs, START_DIST])
 
 
 func _has_hostile(actors: Array) -> bool:
@@ -98,12 +165,12 @@ func _foes_label(actors: Array) -> String:
 	return " ".join(parts)
 
 
-func _run_cell(foe_templates: Array, build: Dictionary, gear: Array, runs: int) -> Dictionary:
+func _run_cell(foe_templates: Array, build: String, gear: Array, runs: int, all_hostile := false) -> Dictionary:
 	var wins := 0
 	var turns := 0
 	var hp_left := 0.0
 	for i in range(runs):
-		var r := _fight(foe_templates, build, gear)
+		var r := _fight(foe_templates, build, gear, all_hostile)
 		if r["won"]:
 			wins += 1
 			turns += r["rounds"]
@@ -117,10 +184,12 @@ func _run_cell(foe_templates: Array, build: Dictionary, gear: Array, runs: int) 
 
 # --- One fight -----------------------------------------------------------------
 
-func _fight(foe_templates: Array, build: Dictionary, gear: Array) -> Dictionary:
+func _fight(foe_templates: Array, build_id: String, gear: Array, all_hostile := false) -> Dictionary:
+	var build: Dictionary = BUILDS[build_id]
 	var player := Actor.new()
 	player.is_player = true
 	player.sheet = CharacterSheet.create("Hero", build["attrs"], build["tags"])
+	_grow(player.sheet, build_id)
 	for id in gear:
 		player.sheet.inventory.add(id, 1)
 		player.sheet.equip(id)
@@ -130,6 +199,8 @@ func _fight(foe_templates: Array, build: Dictionary, gear: Array) -> Dictionary:
 	var spot := 0
 	for t in foe_templates:
 		var f := Actor.from_template(t)
+		if all_hostile:
+			f.hostile = true
 		if not f.hostile:
 			continue  # peaceful travellers don't join the fight
 		f.cell = _spawn_cell(player.cell, spot)
@@ -161,6 +232,25 @@ func _fight(foe_templates: Array, build: Dictionary, gear: Array) -> Dictionary:
 				return {"won": true, "rounds": round_no,
 					"hp_frac": float(player.sheet.hp) / player.sheet.max_hp()}
 	return {"won": false, "rounds": round_no, "hp_frac": 0.0}
+
+
+## Levels the sheet up to _level the way that build would spend it.
+func _grow(sheet: CharacterSheet, build_id: String) -> void:
+	if _level <= 1:
+		return
+	sheet.add_xp(CharacterSheet.xp_for_level(_level))
+	var g: Dictionary = GROWTH[build_id]
+	var guard := 0
+	while sheet.unspent_skill_points > 0 and guard < 400:
+		guard += 1
+		var raised := false
+		for sk in g["skills"]:
+			if sheet.raise_skill(sk):
+				raised = true
+		if not raised:
+			break
+	if sheet.perks_owed > 0:
+		sheet.take_perk(g["perk"])
 
 
 func _over(order: Array) -> bool:
@@ -268,7 +358,8 @@ func _kill_shock(dead: Actor, order: Array) -> void:
 	for o in order:
 		if o == dead or not o.is_active() or o.is_player or o.has_meta("broken"):
 			continue
-		if o.faction == dead.faction and not CombatRules.morale_holds(o, 10 + (25 if dead.leader else 0), _dice):
+		var shock := int(DB.rules().get("kill_shock", 10)) + (int(DB.rules().get("leader_shock", 50)) if dead.leader else 0)
+		if o.faction == dead.faction and not CombatRules.morale_holds(o, shock, _dice):
 			o.set_meta("broken", true)
 
 
