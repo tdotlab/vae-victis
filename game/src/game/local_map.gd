@@ -116,9 +116,76 @@ func _ready() -> void:
 	else:
 		save_map_state()
 		Game.autosave()
-	if first_visit and map.def.has("arrive_dialogue"):
+	var scene := _arrival_scene(first_visit)
+	if not scene.is_empty():
 		await get_tree().process_frame
-		open_dialogue(map.def["arrive_dialogue"], null)
+		open_dialogue(scene[0], scene[1])
+	else:
+		check_quiet.call_deferred()
+
+
+## What happens as the player arrives, if anything: [dialogue, speaker].
+##   arrive_dialogue: once, on the first visit.
+##   arrive_dialogues: [{"id", "dialogue", "if": [conditions], "speaker": uid}],
+##     each once, the first visit on which its conditions hold (the house's
+##     man waiting at home, a runner with news).
+##   A random or scripted road encounter can carry its own "dialogue".
+func _arrival_scene(first_visit: bool) -> Array:
+	var gs := Game.state
+	if map.def.get("encounter", false):
+		if gs.encounter.has("dialogue") and not gs.encounter.get("talked", false):
+			gs.encounter["talked"] = true
+			return [String(gs.encounter["dialogue"]), _actor_by_uid("enc0")]
+		return []
+	if first_visit and map.def.has("arrive_dialogue"):
+		return [String(map.def["arrive_dialogue"]), null]
+	var fired: Dictionary = gs.map_states[map.id].get("arrivals", {})
+	for e in map.def.get("arrive_dialogues", []):
+		var id: String = e.get("id", e["dialogue"])
+		if fired.has(id) or not Dialogue.all_true(gs, e.get("if", [])):
+			continue
+		fired[id] = 1
+		gs.map_states[map.id]["arrivals"] = fired
+		return [String(e["dialogue"]), _actor_by_uid(String(e.get("speaker", "")))]
+	return []
+
+
+func _actor_by_uid(uid: String) -> Actor:
+	for a in actors:
+		if a.uid == uid and a.is_active():
+			return a
+	return null
+
+
+## A quiet moment (no fight, no window open): a companion who has had enough
+## of the player says so now.
+func check_quiet() -> void:
+	if combat.active or modal_open or _leaving:
+		return
+	var uid := Companions.next_to_part(Game.state)
+	if uid == "":
+		return
+	var a := _actor_by_uid(uid)
+	if a == null or not a.is_companion:
+		return
+	Companions.mark_parting(Game.state, uid)
+	var dlg: String = Companions.def(a.template).get("part_dialogue", "")
+	if dlg != "":
+		open_dialogue(dlg, a)
+	else:
+		Game.say(Companions.text("parts", "%s has had enough of you, and goes.") % a.display_name(), "bad")
+		part_companion(a)
+
+
+## A companion stops following and stays where they stand, to be found (and
+## perhaps talked round) later.
+func part_companion(a: Actor) -> void:
+	a.is_companion = false
+	a.ai = "idle"
+	a.faction = String(DB.npc_template(a.template).get("faction", "neutral"))
+	a.home = a.cell
+	a.set_meta("visitor", true)
+	save_map_state()
 
 
 ## A map can change with the calendar. Each phase text is said once, the
@@ -192,6 +259,8 @@ func _spawn_actors() -> void:
 			a.ai = e["ai"]
 		if e.has("kill_flag"):
 			a.set_meta("kill_flag", e["kill_flag"])
+		if e.has("ally"):
+			a.ally = e["ally"]
 		a.home = a.cell
 		if saved.has(uid):
 			a.apply_state(saved[uid])
@@ -208,12 +277,26 @@ func _spawn_actors() -> void:
 				a.apply_state(saved[uid])
 			a.home = a.cell
 			actors.append(a)
-	# Companions travel with the player.
+	# Anyone left here who isn't in the map's own list: a companion who parted
+	# from the player here, or fell here.
+	var spawned := {}
+	for a in actors:
+		spawned[a.uid] = true
+	for uid in saved:
+		var st: Dictionary = saved[uid]
+		if st.get("visitor", false) and not spawned.has(uid) and not with_player.has(uid):
+			var v := Actor.from_template(String(st["template"]), uid)
+			v.apply_state(st)
+			v.set_meta("visitor", true)
+			actors.append(v)
+	# Companions travel with the player. One who ran from the last fight has
+	# caught up again.
 	for cd in gs.companions:
 		var c := Actor.from_template(cd["template"], cd["uid"])
 		c.apply_state(cd)
 		c.is_companion = true
 		c.ai = "follow"
+		c.fled = false
 		actors.append(c)
 	var taken := {}
 	for a in actors:
@@ -249,13 +332,26 @@ func save_map_state() -> void:
 	var ms: Dictionary = gs.map_states[map.id]
 	var a_states := {}
 	var comps := []
+	var own := {}
+	for e in map.def.get("actors", []):
+		own[e.get("uid", e["template"])] = true
 	for a in actors:
 		if a.is_player:
 			continue
+		if a.is_companion and a.dead:
+			# A companion who falls stays where they fell.
+			a.is_companion = false
+			a.set_meta("visitor", true)
+			gs.set_flag("dead_" + a.uid)
 		if a.is_companion:
 			comps.append(a.state_dict())
 		else:
-			a_states[a.uid] = a.state_dict()
+			var st: Dictionary = a.state_dict()
+			# Someone not in the map's own list (or whose entry there no longer
+			# applies, like a companion who parted here) is kept as a visitor.
+			if (not own.has(a.uid) and not a.uid.begins_with("enc")) or a.has_meta("visitor"):
+				st["visitor"] = true
+			a_states[a.uid] = st
 	ms["actors"] = a_states
 	var c_states := {}
 	for m in containers:
@@ -1004,7 +1100,7 @@ func _draw_things(ci: CanvasItem) -> void:
 			if a.is_player:
 				ring = Color(0.9, 0.75, 0.3, 0.9)
 			elif combat.active and a.is_active() and a.in_combat:
-				ring = Color(0.9, 0.3, 0.2, 0.9) if a.hostile else Color(0.4, 0.8, 0.4, 0.8)
+				ring = Color(0.9, 0.3, 0.2, 0.9) if a.hostile else (Color(0.4, 0.65, 0.95, 0.85) if a.ally else Color(0.4, 0.8, 0.4, 0.8))
 				if a == combat.current:
 					ring = Color(1, 1, 1, 0.95)
 			if sprites and Art.draw_figure(ci, display_pos[a], a, walk_phase[a], ring):

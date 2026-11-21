@@ -15,6 +15,7 @@ var minutes := START_MINUTES
 var honor := 0
 var renown := 0
 var standing: Dictionary = {}  # faction -> int
+var opinion: Dictionary = {}   # companion uid -> what they think of the player (Companions)
 var map_id := ""
 var entry := "start"           # mark name to place the player on map entry
 var map_states: Dictionary = {}  # map id -> {"actors": {uid: state}, "containers": {...}, "taken": [...]}
@@ -89,7 +90,7 @@ func to_dict() -> Dictionary:
 		"companions": companions,
 		"flags": flags, "quests": quests, "quest_log": quest_log,
 		"minutes": minutes, "honor": honor, "renown": renown,
-		"standing": standing, "map_id": map_id, "entry": entry,
+		"standing": standing, "opinion": opinion, "map_id": map_id, "entry": entry,
 		"map_states": map_states,
 		"world_pos": [world_pos.x, world_pos.y],
 		"known_locations": known_locations, "titles": titles,
@@ -111,6 +112,9 @@ static func from_dict(d: Dictionary) -> GameState:
 	g.honor = int(d.get("honor", 0))
 	g.renown = int(d.get("renown", 0))
 	g.standing = d.get("standing", {})
+	g.opinion = d.get("opinion", {})
+	for k in g.opinion:
+		g.opinion[k] = int(g.opinion[k])
 	g.map_id = d.get("map_id", "")
 	g.entry = d.get("entry", "start")
 	g.map_states = d.get("map_states", {})

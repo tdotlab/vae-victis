@@ -1,0 +1,40 @@
+{
+ "_comment": "Prices that move with the story. See src/core/prices.gd. Named prices are what dialogue charges for one thing; markets scale traders' prices for some goods while their conditions hold.",
+ "named": {
+  "brig_line": {
+   "_comment": "Striking Brigodunon's line from the house of Vettius's book. Cheap while the house is only buying futures; ten times dearer once the Aedui take Noviodunum and the forward sale is real; gone at Alesia.",
+   "base": 60,
+   "barter": true,
+   "steps": [
+    {
+     "if": [
+      "flag aedui_defected"
+     ],
+     "x": 10
+    },
+    {
+     "if": [
+      "flag alesia_begun"
+     ],
+     "x": 0
+    }
+   ]
+  }
+ },
+ "markets": [
+  {
+   "_comment": "Gergovia under siege: food and medicine cost what wine used to.",
+   "if": [
+    "flag gergovia_besieged",
+    "!flag gergovia_lifted"
+   ],
+   "maps": [
+    "gergovia"
+   ],
+   "types": [
+    "consumable"
+   ],
+   "x": 3.0
+  }
+ ]
+}

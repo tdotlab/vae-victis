@@ -2,6 +2,17 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-21 (Act II systems, A2.1)
+
+- **Opinion is a number underneath and words on screen.** Fallout shows nothing; a bare number invites min-maxing. The character sheet says "Theron thinks well of you", and the five bands are in `story.json` for T to rewrite.
+- **Honor moves opinion through a per-companion scale, and named deeds move it through a per-companion table.** Most of what companions care about is already Honor, so one scale covers it without tagging every dialogue. The few things that matter differently to different people (sold captives, the guest-bond, joining the house) are deeds, so Gundo and Theron can disagree about the same act. Only companions who are present react.
+- **A companion asks to leave once per low, at a quiet moment, through a dialogue with routes.** Leaving mid-fight would be a punishment with no answer, and a parting that just happens breaks the quest standard. Asking again only after opinion recovers and falls stops a nag loop.
+- **A parted companion is a map visitor.** Theron's map entry is hidden once he joins (`unless_flag: theron_joined`), so a parted Theron vanished on the next visit. Actors left behind by the party are marked as visitors and saved with the map regardless of which list they came from.
+- **`violate` changes Honor directly, not through the opinion scale.** The guest-bond deed already carries each companion's reaction; going through the Honor scale too would count it twice.
+- **No map declares a roof yet.** The guest-bond rule is in, but where it applies is content: Brigodunon's hall, Vettius's house and the Bibracte guest-houses get their `hospitality` entries as they're built (A2.2 onward). Until then nothing in the game can trigger it by accident.
+- **The Decetia settlement (`aedui_wavering`) moved from day 150 to 144,** to match the clock in DESIGN.md and the research. Nothing in Act I read the day.
+- **Act II's clock events that are only state changes are silent** (`column_turned`, `gergovia_lifted`): the news text belongs to the events the player would hear about.
+
 ## 2026-11-20 (Act II design)
 
 - **Act II runs from day ~120 to ~230, on the corrected clock.** The old range was guessed. Caesar's narrative puts the Bibracte council at about day 215 and the cavalry battle and the retreat into Alesia at about 230 (research/chronology-52bc.md), so Act III is Alesia alone, ~231 to ~284.

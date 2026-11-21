@@ -26,6 +26,8 @@ He looks at you the way a man looks at a dog that has bitten someone. "I have no
 * [quest vettius active, !flag clerk_unmasked, !flag theron_confessed] "Your bookkeeper. Where's he from?" -> clerk
 * [quest theron none] "You look like a man who'd rather be somewhere else." -> want_out
 * [quest theron active] "About getting you out of Gergovia." -> deal
+* [flag theron_joined, !companion theron, opinion theron > -30] "Come with me again." -> rejoin
+* [flag theron_joined, !companion theron, opinion theron <= -30] "Come with me again." -> refuse
 * [item vettius_tablets, !flag tablets_read] "Can you read these?" -> tablets
 * [item hostage_tally, !flag tally_read] "Can you read this Roman mark?" -> tally
 * "Goodbye." -> END
@@ -115,9 +117,28 @@ He reads slowly, translating as he goes, and his voice gets flatter the further 
 * [item hostage_tally, !flag tally_read] "Read me this tally." -> tally_read
 * "Let's trade." -> trade
 * "How are you holding up?" -> holding
+* "Wait for me here." -> stay
 * "Nothing." -> END
 
 === holding
 [day < 30] "My feet hurt. In Massilia we have carts for this." He looks at the hills. "It's very beautiful. I'd like it better from a window."
 [day >= 30] "I'm alive and so is my purse. In this country that's a good year."
 -> comp
+
+=== rejoin
+[!room] -> rejoin_full
+"I was hoping you'd ask. I've been bored, and being bored here is how people get noticed." He's already rolling up the scale.
+* "Let's go." -> END ~ join
+
+=== rejoin_full
+"And walk at the back of that crowd?" He means the people you already have. "There's no room in it for a man of my size."
+-> hub
+
+=== refuse
+"No." He doesn't look up from the tablet. "I did the sums once. They haven't changed."
+-> hub
+
+=== stay
+"Here?" He looks around as if he'd been asked to wait in a pit. "Fine. I'll find someone to sell something to. Come back for me."
+~ part
+-> END

@@ -9,6 +9,7 @@ var _title: Label
 var _box: VBoxContainer
 var show_value := false
 var price_factor := 1.0
+var market: Dictionary = {}   # Prices.market, when prices follow the story
 
 
 func _init(title: String = "", min_size: Vector2 = Vector2(300, 320)) -> void:
@@ -43,7 +44,7 @@ func fill(entries: Array) -> void:
 		if e.size() > 2:
 			txt += e[2]
 		if show_value:
-			txt += "   %d" % maxi(1, int(round(float(d.get("value", 0)) * price_factor)))
+			txt += "   %d" % Trade.price(id, price_factor, market)
 		var b := UITheme.button(txt, func(): if on_pick.is_valid(): on_pick.call(id))
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.add_theme_font_size_override("font_size", 14)

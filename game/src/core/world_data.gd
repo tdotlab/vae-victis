@@ -197,12 +197,31 @@ func encounter_chance(c: Vector2i, night: bool) -> int:
 	return base
 
 
+## A scripted encounter that is due: one marked "forced" whose "if"
+## conditions hold and that hasn't happened yet (fired is recorded as the flag
+## enc_<id>). It finds the player on the next stretch of road, wherever they
+## are, as the runner from home does. {} if none is due.
+static func forced_encounter(encounters: Array, gs: GameState) -> Dictionary:
+	for e in encounters:
+		if not e.get("forced", false) or gs.flag("enc_" + String(e["id"])) != 0:
+			continue
+		var days: Array = e.get("days", [0, 9999])
+		if gs.day() < int(days[0]) or gs.day() > int(days[1]):
+			continue
+		if Dialogue.all_true(gs, e.get("if", [])):
+			return e
+	return {}
+
+
 ## Picks an encounter that fits the terrain and the day, or {} if none does.
+## Forced (scripted) encounters never come up at random.
 func pick_encounter(c: Vector2i, day: int, dice: Dice) -> Dictionary:
 	var t := terrain_id(c)
 	var pool: Array = []
 	var total := 0
 	for e in def.get("encounters", []):
+		if e.get("forced", false):
+			continue
 		var terr: Array = e.get("terrain", [])
 		if not terr.is_empty() and not t in terr:
 			continue

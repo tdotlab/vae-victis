@@ -13,6 +13,7 @@ var faction := "neutral"
 var hostile := false
 var is_player := false
 var is_companion := false
+var ally := false         # not a companion, but fights on the player's side
 var dialogue := ""
 var desc := ""
 var ai := "idle"          # idle, wander, guard, follow
@@ -31,6 +32,11 @@ var crippled: Dictionary = {}  # "arm_l", "arm_r", "leg_l", "leg_r", "eyes"
 var morale := 100
 var leader := false
 var in_combat := false
+
+
+## On the player's side in a fight: the player, companions and allies.
+func friendly() -> bool:
+	return is_player or is_companion or ally
 
 
 func is_active() -> bool:
@@ -117,6 +123,7 @@ static func from_template(tid: String, uid_: String = "") -> Actor:
 	a.ai = t.get("ai", "idle")
 	a.look = t.get("look", {})
 	a.leader = t.get("leader", false)
+	a.ally = t.get("ally", false)
 	return a
 
 
@@ -127,6 +134,7 @@ func state_dict() -> Dictionary:
 		"hostile": hostile, "dead": dead, "fled": fled, "unconscious": unconscious,
 		"sheet": sheet.to_dict(), "faction": faction, "dialogue": dialogue,
 		"ai": ai, "home": [home.x, home.y], "is_companion": is_companion,
+		"ally": ally,
 	}
 
 
@@ -143,3 +151,4 @@ func apply_state(d: Dictionary) -> void:
 	ai = d.get("ai", ai)
 	home = Vector2i(int(d["home"][0]), int(d["home"][1])) if d.has("home") else cell
 	is_companion = d.get("is_companion", false)
+	ally = d.get("ally", ally)

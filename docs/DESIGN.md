@@ -38,7 +38,7 @@ Gaul in 52 BC is a patchwork of rival peoples (Caesar's *civitates*) ruled by ar
 
 ### The historical clock
 
-These events happen on schedule. The player can witness them, take part in them, and change their local consequences, but not their outcome. Day numbers follow the research, which reconstructs them from Caesar's own day counts and seasons; Caesar gives no calendar dates, so each is approximate.
+These events happen on schedule. The player can witness them, take part in them, and change their local consequences, but not their outcome. Day numbers follow the research, which reconstructs them from Caesar's own day counts and seasons; Caesar gives no calendar dates, so each is approximate. Every event through Alesia is in `data/calendar.json`, as news on its day and as the flags content checks (`gergovia_besieged`, `litaviccus_column`, `column_turned`, `cabillonum_riot`, `gergovia_lifted`, `aedui_defected`, `volcae_raid`, `german_horse`, `council_of_gaul`, `alesia_begun`, `act2_over`).
 
 | Day | Event | Effect on the game |
 |---|---|---|
@@ -220,6 +220,8 @@ Experience from combat, quests, and skill use (picking a lock, winning an argume
 
 **Honor** replaces Fallout's Karma, measured against Gallic values rather than modern ones: keep your oaths, honor the guest-bond, show courage, be generous. Killing a host or a guest under your roof is the worst crime in the game. Lying is not dishonorable in itself, but oath-breaking is.
 
+The guest-bond is a rule, not just a dialogue option. A map declares its roofs (`"hospitality"`: a host faction and, optionally, the marked area it covers). Attacking anyone under a roof who wasn't already fighting you, or a dialogue `~ violate <host>`, costs 60 Honor and 40 standing with the host's people, logs it, and sets `guest_murder`, which every companion with a view on it reacts to. A map with no roof declared has no guest-bond, so content has to declare it where it applies.
+
 **Renown** is how widely your deeds are known, good or bad, and the bards decide what the story is. High renown opens doors and draws challenges. Named reputation titles appear in dialogue ("Guest-Slayer," "the one who came back from Avaricum").
 
 **Faction standing** is tracked per faction, separately.
@@ -235,6 +237,7 @@ Additions that fit the period:
 - **Aimed attacks** at head, eyes, arms, legs, torso, and groin, with Fallout-style effects: crippled limbs, knockdown, blindness.
 - **Morale.** Most enemies flee when their side breaks or a leader falls. Ancient battles were decided by panic. Fleeing enemies can be let go, which affects Honor and later encounters.
 - **Getting out.** Stepping onto a map exit mid-fight escapes if no enemy is within two hexes. A band of three or more equals beats a lone character on open ground almost every time, so a fight a failed roll would start always offers a way out first (run, talk, pay), and a deliberate one shows the odds before it starts.
+- **Allies.** Friendly bands fight on the player's side: a dialogue `~ ally` or `~ ally_all <faction>` turns people into allies, who join any fight that starts within ten hexes of the player or that they can see, and act on their own turn. They wear a blue ring, can't be attacked by a misclick, and don't count as enemies for escaping or ending the fight. This is what the Wall at Gergovia, the Tribune's Road and storming the Pens are built on.
 - **Formations, lightly.** Allies adjacent to each other with shields get a defense bonus. Legionaries fight as a unit and are dangerous in groups and much weaker alone.
 - **Ammunition is cheap and finite.** Sling stones, javelins, arrows. Javelins can be recovered after a fight.
 
@@ -508,6 +511,7 @@ What Act III reads: the line (struck or standing), Dannotalos (interdicted, disg
 - **Armor:** leather, padded linen, mail, Roman helmet types, Gallic helmets, shields of several sizes.
 - **Consumables:** healing herbs, poultices, bandages, wine (Roman wine is a luxury and a trade currency), mead, beer, preserved food.
 - **Currency:** silver. Gallic coins and Roman denarii both exist as flavor, but there is one money value. Prices depend on location, faction standing, and Barter. Wine trades high in Gaul and low in Roman camps.
+- **Prices move with the story** (`data/prices.json`). Named prices are what dialogue charges for one particular thing: striking Brigodunon's line from the house's book costs 60, ten times that once the Aedui take Noviodunum and the forward sale is real, and can't be bought at all after Alesia; Barter brings it down. Markets scale traders' prices for some goods on some maps while their conditions hold: food and medicine cost three times as much in besieged Gergovia.
 - **Quest items:** hostage tokens, the ledger, orders, sealed tablets, druidic objects.
 
 ## Companions
@@ -520,7 +524,11 @@ Fallout 1 has four or five companions. We aim for five, each with a personal que
 - **Gundo** (placeholder), a Germanic deserter who wants to go home across the Rhine, the hard way. Joins at the Germanic camp; The Way Home resolves in Act III.
 - **Cintillus** (placeholder), a Roman auxiliary of Gallic birth from the Province, with a Roman name, a conscience problem and a good sword arm. Joins if saved at the fall of Noviodunum.
 
-Act II has the player traveling with several of them at once, so it needs what Act I didn't: an opinion score per companion that the player's choices move, a companion who leaves (or turns) when it falls far enough, and a cap on how many will follow, set by Presence.
+Act II has the player traveling with several of them at once, so the companion rules (`src/core/companions.gd`, the `"companion"` block on an NPC template) are:
+
+- **Presence sets the cap.** Half the player's Presence, at least one, will follow. The war dog is a pet and doesn't count. A full party is turned away in dialogue (`[room]`).
+- **Opinion.** Each companion has a score, starting where their template says (Theron at 10). Changes in the player's Honor move it, scaled by how much that companion cares (Theron 0.3; someone who likes a scoundrel can have a negative scale). Named deeds that content reports with `~ deed <tag>` (`guest_murder`, `joined_house`, `sold_captives`, `freed_captives`, `cruelty`) move it by each companion's own table, and only for companions who are there. Dialogue reads it with `[opinion theron >= 10]` and moves it with `~ opinion theron n`. The character sheet shows it in words ("Theron thinks well of you"), never as a number.
+- **Parting.** At or below the companion's `leave_at` (Theron -30), they raise it at the next quiet moment, out of combat and not mid-dialogue, through their parting dialogue, which has its own routes to keep them (Theron: Speech, Barter, or Honor if you have some left; or let him go; or take his purse). Each companion asks once per low; they ask again only if opinion recovers and falls again. A parted companion stays on the map where they left, can be talked back if opinion allows, and stays there across saves. `~ part` in a companion's own dialogue ("Wait for me here") does the same thing deliberately.
 
 ## Presentation
 

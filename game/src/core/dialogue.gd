@@ -17,6 +17,8 @@ extends RefCounted
 ##   [item salt]  [item salt 3]  [silver 20]  [honor >= 25]  [standing aedui 10]
 ##   [quest hostages=find_tally]  [quest hostages active]  [trait once_sold]
 ##   [perk silver_tongue]  [sex f]  [day >= 30]  [season winter]  [companion theron]
+##   [opinion theron >= 10]  [room] (another companion would follow)
+##   [price brig_line] (can be had, and you can pay)  [priced brig_line] (can be had)
 ## Skill and attribute conditions show to the player as a tag like [Speech];
 ## others silently hide the line.
 ## Effects:
@@ -25,6 +27,11 @@ extends RefCounted
 ##   time minutes | heal n | say text | fight | barter | join | leave | travel map entry
 ##   title text | known location | leave_all faction | fight_all faction | ending textfile
 ##   wait_until hour (pass time until the next time the clock shows that hour)
+##   opinion uid n | deed tag (companions react, see Companions) | pay price_id
+##   violate host_faction (break the guest-bond, see Hospitality)
+##   ally (the speaker fights on your side) | ally_all faction | part (a
+##   companion stays here instead of following)
+## Text can show a price: {price brig_line}.
 ## A line "@speaker Name" before the first node names a speaker-less talk.
 ## [night] is true from 20:00 to 06:00.
 
@@ -262,6 +269,15 @@ static func _check(gs: GameState, c: String, ctx: Dictionary) -> bool:
 			return false
 		"has":  # ctx flags supplied by the screen, e.g. "has speaker_hurt"
 			return ctx.get(rest, false)
+		"opinion":
+			var o4 := _split_op(rest)
+			return _cmp(Companions.opinion(gs, o4[0]), o4[1] if o4[1] != "" else ">=", int(o4[2]) if o4[2] != "" else 0)
+		"room":
+			return Companions.has_room(gs, rest)
+		"price":
+			return Prices.can_pay(gs, rest)
+		"priced":
+			return Prices.named(gs, rest) >= 0
 	push_warning("Unknown dialogue condition: " + c)
 	return false
 
@@ -349,6 +365,18 @@ static func _apply_one(gs: GameState, e: String, out: Dictionary) -> void:
 		"honor":
 			gs.honor += int(args[0])
 			out["messages"].append(["Your honor grows." if int(args[0]) > 0 else "Your honor suffers.", "good" if int(args[0]) > 0 else "bad"])
+			out["messages"].append_array(Companions.react_honor(gs, int(args[0])))
+		"opinion":
+			Companions.change(gs, args[0], int(args[1]))
+		"deed":
+			out["messages"].append_array(Companions.react(gs, args[0]))
+		"violate":
+			out["messages"].append_array(Hospitality.violate(gs, args[0] if args.size() > 0 else ""))
+		"pay":
+			var cost := Prices.named(gs, args[0])
+			if cost > 0:
+				p.silver = maxi(0, p.silver - cost)
+				out["messages"].append(["You pay %d silver." % cost, "info"])
 		"renown":
 			var r := int(args[0])
 			if r > 0 and p.has_flag("bards_friend"):
@@ -376,17 +404,18 @@ static func _apply_one(gs: GameState, e: String, out: Dictionary) -> void:
 			if not gs.known_locations.has(rest):
 				gs.known_locations.append(rest)
 				out["messages"].append(["A new place is marked on your map.", "good"])
-		"fight", "barter", "join", "leave", "travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending":
+		"fight", "barter", "join", "leave", "travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending", "ally", "ally_all", "part":
 			out["actions"].append(e)
 		_:
 			push_warning("Unknown dialogue effect: " + e)
 
 
 const COND_HEADS := ["flag", "item", "silver", "honor", "renown", "day", "level", "standing", "quest",
-	"trait", "perk", "sex", "season", "night", "companion", "has"]
+	"trait", "perk", "sex", "season", "night", "companion", "has", "opinion", "room", "price", "priced"]
 const FX_HEADS := ["set", "clear", "add", "xp", "quest", "give", "take", "silver", "honor", "renown",
 	"standing", "time", "wait_until", "heal", "say", "title", "known", "fight", "barter", "join", "leave",
-	"travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending"]
+	"travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending",
+	"opinion", "deed", "violate", "pay", "ally", "ally_all", "part"]
 
 
 ## Problems in a parsed script: unknown conditions or effects, jumps to
@@ -405,6 +434,10 @@ static func validate(d: Dictionary) -> Array:
 					errs.append(where + "unknown condition " + c)
 				if head == "item" and DB.item(String(c).split(" ")[1]).is_empty():
 					errs.append(where + "unknown item in " + c)
+				if head in ["price", "priced"] and Prices.named_def(String(c).split(" ")[1]).is_empty():
+					errs.append(where + "unknown price in " + c)
+				if head == "opinion" and Companions.def(_split_op(String(c).trim_prefix("!").strip_edges().substr(8))[0]).is_empty():
+					errs.append(where + "opinion of someone who isn't a companion in " + c)
 			if op.has("roll"):
 				var rh: String = String(op["roll"]).split(" ")[0]
 				if not (rh in SKILL_IDS or rh in ATTR_IDS):
@@ -424,15 +457,38 @@ static func validate(d: Dictionary) -> Array:
 						errs.append(where + "unknown quest stage in " + e)
 				elif parts[0] == "ending" and not FileAccess.file_exists("res://data/" + parts[1]):
 					errs.append(where + "missing text file in " + e)
+				elif parts[0] == "pay" and Prices.named_def(parts[1]).is_empty():
+					errs.append(where + "unknown price in " + e)
+				elif parts[0] == "opinion" and Companions.def(parts[1]).is_empty():
+					errs.append(where + "opinion of someone who isn't a companion in " + e)
+			if op.get("t", "") == "text":
+				for id in _price_tokens(String(op["text"])):
+					if Prices.named_def(id).is_empty():
+						errs.append(where + "unknown price {price %s}" % id)
 	return errs
 
 
-## Replaces {name} and {sibling} tokens in text.
+## Replaces {name}, {sibling} and {price id} tokens in text.
 static func fill(gs: GameState, text: String) -> String:
 	var t := text.replace("{name}", gs.player.name)
 	if t.find("{sibling}") >= 0:
 		t = t.replace("{sibling}", DB.story().get("sibling", "your sibling"))
+	for id in _price_tokens(t):
+		var p := Prices.named(gs, id)
+		t = t.replace("{price %s}" % id, str(p) if p >= 0 else "?")
 	return t
+
+
+static func _price_tokens(t: String) -> Array:
+	var out: Array = []
+	var i := t.find("{price ")
+	while i >= 0:
+		var close := t.find("}", i)
+		if close < 0:
+			break
+		out.append(t.substr(i + 7, close - i - 7).strip_edges())
+		i = t.find("{price ", close)
+	return out
 
 
 # --- Walking a conversation ---------------------------------------------------------

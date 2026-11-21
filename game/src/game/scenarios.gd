@@ -47,7 +47,7 @@ static func start(name: String) -> void:
 
 ## Scripted actions for screenshot runs: walk:x:y, fight, talk:<uid>,
 ## open:<panel>, wait:<frames>, attack:<uid>, endturn, key:<choice number>,
-## encounter:<id> (world map), press:<button text prefix>, flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, known:<location>, save:<slot>, reload.
+## encounter:<id> (world map), press:<button text prefix>, flag:<name>[:v], quest:<id>:<stage>, give:<item>[:n], silver:<n>, opinion:<uid>:<n>, ally:<uid>, roof:<host faction>, known:<location>, save:<slot>, reload.
 static func act(main: Node, a: String) -> void:
 	var parts := a.split(":")
 	var tree := main.get_tree()
@@ -125,6 +125,21 @@ static func act(main: Node, a: String) -> void:
 			Game.state.player.inventory.add(parts[1], int(parts[2]) if parts.size() > 2 else 1)
 		"silver":
 			Game.state.player.silver += int(parts[1])
+		"roof":
+			# Declares the whole map a host's roof, as a map's "hospitality" would.
+			if map:
+				map.map.def = map.map.def.duplicate()
+				map.map.def["hospitality"] = [{"host": parts[1]}]
+		"ally":
+			if map:
+				var al := map.find_actor(parts[1])
+				al.ally = true
+				al.hostile = false
+		"opinion":
+			Companions.change(Game.state, parts[1], int(parts[2]))
+			if map:
+				map.check_quiet()
+				await tree.process_frame
 		"known":
 			Game.state.known_locations.append(parts[1])
 			if screen is WorldMap:

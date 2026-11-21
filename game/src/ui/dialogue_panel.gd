@@ -178,13 +178,30 @@ func _finish() -> void:
 					m.combat.provoke(speaker)
 					m.combat.start_combat(speaker)
 			"join":
-				if speaker:
+				if speaker and not Companions.has_room(Game.state, speaker.template):
+					Game.say(Companions.text("full", "You can't lead more than %d people.") % Companions.cap(Game.state), "bad")
+				elif speaker:
 					speaker.is_companion = true
+					speaker.ally = false
 					speaker.hostile = false
 					speaker.ai = "follow"
 					speaker.faction = "player"
 					Game.say("%s joins you." % speaker.display_name(), "good")
 					m.save_map_state()
+			"part":
+				if speaker and speaker.is_companion:
+					Game.say(Companions.text("stays", "%s stays here.") % speaker.display_name())
+					m.part_companion(speaker)
+			"ally":
+				if speaker:
+					speaker.ally = true
+					speaker.hostile = false
+			"ally_all":
+				for a2 in m.actors:
+					if a2.faction == parts[1] and not a2.dead and not a2.is_companion:
+						a2.ally = true
+						a2.hostile = false
+				m.save_map_state()
 			"leave":
 				if speaker:
 					speaker.fled = true
@@ -232,3 +249,4 @@ func _finish() -> void:
 				return
 	m.save_map_state()
 	hud.refresh()
+	m.check_quiet.call_deferred()

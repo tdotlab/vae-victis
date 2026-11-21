@@ -315,6 +315,11 @@ func _show_news() -> bool:
 
 func _roll_encounter(c: Vector2i) -> void:
 	var gs := Game.state
+	var due := WorldData.forced_encounter(world.def.get("encounters", []), gs)
+	if not due.is_empty():
+		gs.set_flag("enc_" + String(due["id"]))
+		_offer_encounter(due, c)
+		return
 	var night := gs.hour() < 6 or gs.hour() >= 20
 	if not gs.dice.chance(world.encounter_chance(c, night)):
 		return
@@ -339,7 +344,10 @@ func _offer_encounter(e: Dictionary, c: Vector2i) -> void:
 		_dest_loc = dest_loc
 	var buttons: Array = []
 	var talkable: bool = not e.get("parley", []).is_empty()
-	if gs.dice.chance(spot):
+	if e.get("forced", false):
+		# Someone came looking for you: there's no going around them.
+		buttons.append([e.get("button", "Go on"), func(): _start_encounter(e, c)])
+	elif gs.dice.chance(spot):
 		text += "\n\n" + world.def.get("spotted_text", "You see them before they see you.")
 		buttons.append(["Fight" if talkable else "Approach", func(): _start_encounter(e, c)])
 		buttons.append(["Go around", func():
@@ -392,6 +400,8 @@ func _start_encounter(e: Dictionary, c: Vector2i) -> void:
 	var gs := Game.state
 	var map_id: String = e.get("map", world.terrain(c).get("encounter_map", "enc_open"))
 	gs.encounter = {"id": e["id"], "actors": e.get("actors", []), "text": e.get("text", "")}
+	if e.has("dialogue"):
+		gs.encounter["dialogue"] = e["dialogue"]
 	gs.map_states.erase(map_id)
 	gs.map_id = map_id
 	gs.entry = "start"

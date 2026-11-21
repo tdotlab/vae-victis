@@ -9,6 +9,8 @@ extends SceneTree
 ##   tools/arena.sh --quest              the scripted quest fights instead,
 ##                                       at the levels a player meets them
 ##   tools/arena.sh --group=a,b,b --level=2   any group of templates
+##   tools/arena.sh --allies=theron,aed_spear  friendly fighters beside the player
+##                                       (also a quest fight's "allies")
 ##
 ## All the math comes from CombatRules, so tuning data/rules.json, items or
 ## NPCs shows up here at once. The turn loop is a stripped copy of
@@ -62,6 +64,8 @@ const GROWTH := {
 
 var _dice := Dice.new()
 var _level := 1
+## Templates that fight on the player's side (--allies, or a quest fight's "allies").
+var _allies: Array = []
 
 
 func _initialize() -> void:
@@ -82,6 +86,8 @@ func _initialize() -> void:
 			group = a.substr(8)
 		elif a.begins_with("--level="):
 			_level = int(a.substr(8))
+		elif a.begins_with("--allies="):
+			_allies = Array(a.substr(9).split(",", false))
 	if quest or group != "":
 		_quest_table(runs, only, verbose, group)
 		quit()
@@ -130,6 +136,9 @@ func _quest_table(runs: int, only: String, verbose: bool, group: String) -> void
 	for id in fights:
 		if only != "" and not id.contains(only):
 			continue
+		var allies_arg := _allies
+		if fights[id].has("allies") and _allies.is_empty():
+			_allies = fights[id]["allies"]
 		for lvl in fights[id]["levels"]:
 			_level = lvl
 			var line := "%-15s %-3d" % [id, lvl]
@@ -145,6 +154,7 @@ func _quest_table(runs: int, only: String, verbose: bool, group: String) -> void
 			if verbose:
 				print(extra.trim_suffix("
 "))
+		_allies = allies_arg
 	print("(win rate over %d runs per cell; every foe hostile, %d hexes away on open ground)" % [runs, START_DIST])
 
 
@@ -208,6 +218,15 @@ func _fight(foe_templates: Array, build_id: String, gear: Array, all_hostile := 
 		foes.append(f)
 	var order: Array = [player]
 	order.append_array(foes)
+	# Allies start beside the player and play by the same simple plan.
+	var side := 0
+	for t in _allies:
+		var al := Actor.from_template(t)
+		al.hostile = false
+		al.ally = true
+		al.cell = Hex.neighbor(player.cell, (side * 2) % 6)
+		side += 1
+		order.append(al)
 	order = CombatRules.turn_order(order)
 	order.erase(player)
 	order.push_front(player)  # the player starts the fight, as in the game

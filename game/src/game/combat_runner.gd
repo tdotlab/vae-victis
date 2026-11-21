@@ -38,6 +38,10 @@ func start_combat(initiator: Actor, target: Actor = null) -> void:
 			participants.append(a)
 	if target and not participants.has(target):
 		participants.append(target)
+	# Allies within reach of the fight join it on the player's side.
+	for a in map.actors:
+		if a.ally and a.is_active() and not participants.has(a) and _ally_aware(a, participants):
+			participants.append(a)
 	# Their friends hear the fight and come, even without seeing you.
 	for a in map.actors:
 		if a.is_active() and a.hostile and not participants.has(a) and _hears_friends(a, participants):
@@ -59,6 +63,17 @@ func _aware(a: Actor) -> bool:
 		if (o.is_player or o.is_companion) and o.is_active():
 			if map.can_see(a, o) or Hex.distance(a.cell, o.cell) <= 3:
 				return true
+	return false
+
+
+## True if an ally is close enough to the player, or sees an enemy in the
+## fight, to come in on the player's side.
+func _ally_aware(a: Actor, fighters: Array) -> bool:
+	if Hex.distance(a.cell, map.player.cell) <= int(DB.rules().get("ally_join_radius", 10)):
+		return true
+	for o in fighters:
+		if o.hostile and o.is_active() and map.can_see(a, o):
+			return true
 	return false
 
 
@@ -97,6 +112,7 @@ func _end_combat() -> void:
 	map.busy = false
 	map.hud.refresh()
 	map.save_map_state()
+	map.check_quiet.call_deferred()
 
 
 ## Sets wiped_<faction> when every member of a faction on this map is dead,
@@ -194,6 +210,9 @@ func _recruit_newly_aware() -> void:
 		if a.hostile and a.is_active() and not order.has(a) and (_aware(a) or _hears_friends(a, order)):
 			_join(a)
 			order.append(a)
+		elif a.ally and a.is_active() and not order.has(a) and _ally_aware(a, order):
+			_join(a)
+			order.append(a)
 
 
 func player_end_turn() -> void:
@@ -214,7 +233,9 @@ func on_click(c: Vector2i, button: int) -> void:
 	if current != map.player or acting:
 		return
 	var target := map.actor_at(c)
-	if target and target != map.player and not target.is_companion:
+	if target and target.ally and button == MOUSE_BUTTON_LEFT:
+		return  # your own side: no blow, no walking into them
+	if target and not target.friendly():
 		if button == MOUSE_BUTTON_RIGHT:
 			map.hud.open_aim(target)
 		else:
@@ -306,7 +327,12 @@ func attack(att: Actor, def: Actor, w: Dictionary, aim: String = "torso") -> voi
 		att.sheet.inventory.remove(w["ammo"], 1)
 	if thrown:
 		_consume_thrown(att, w)
-	if att.is_player and not def.hostile and not def.is_companion:
+	if att.is_player and not def.hostile and not def.friendly():
+		# Striking the first blow under a host's roof breaks the guest-bond.
+		var host := Hospitality.roof_at(Game.state, map.map, def.cell)
+		if host != "":
+			for m in Hospitality.violate(Game.state, host):
+				Game.say(m[0], m[1])
 		provoke(def)
 	if CombatRules.is_ranged(w):
 		await map.shoot(att.cell, def.cell)
@@ -402,7 +428,7 @@ func _kill(def: Actor, killer: Actor) -> void:
 	def.sheet.hp = 0
 	def.dead = true
 	def.in_combat = false
-	Game.say("%s is dead." % def.display_name(), "bad" if def.is_player or def.is_companion else "info")
+	Game.say("%s is dead." % def.display_name(), "bad" if def.friendly() else "info")
 	if def.is_player:
 		return
 	if killer.is_player or killer.is_companion:
@@ -432,7 +458,7 @@ func provoke(def: Actor) -> void:
 	Game.state.add_standing(def.faction, -10)
 	_add(def)
 	for o in map.actors:
-		if o != def and o.is_active() and not o.is_player and not o.is_companion and o.faction == def.faction:
+		if o != def and o.is_active() and not o.friendly() and o.faction == def.faction:
 			if map.can_see(o, map.player) or Hex.distance(o.cell, def.cell) <= 6:
 				o.hostile = true
 				_add(o)
@@ -553,7 +579,7 @@ func draw_overlay(ci: CanvasItem) -> void:
 	var h := map.hover
 	var target := map.actor_at(h)
 	var font := UITheme.BODY_FONT
-	if target and target != map.player and not target.is_companion:
+	if target and not target.friendly():
 		var w := map.player.sheet.weapon_def()
 		var txt := "%d%%" % chance_for(map.player, target, w, "torso")
 		if attack_blocker(map.player, target, w, "torso") != "":

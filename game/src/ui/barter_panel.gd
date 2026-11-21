@@ -13,6 +13,7 @@ var _summary: Label
 var _deal: Button
 var _tt := Inventory.new()   # trader's offer
 var _mt := Inventory.new()   # player's offer
+var _market: Dictionary = {}
 
 
 func _ready() -> void:
@@ -38,6 +39,9 @@ func _ready() -> void:
 	_my_table.price_factor = _my_goods.price_factor
 	_their_goods.price_factor = Trade.buy_factor(p, trader.sheet, standing)
 	_their_table.price_factor = _their_goods.price_factor
+	_market = Prices.market(Game.state, Game.state.map_id)
+	for l in [_my_goods, _my_table, _their_table, _their_goods]:
+		l.market = _market
 	_my_goods.on_pick = func(id):
 		if DB.item(id).get("type", "") == "quest":
 			return
@@ -83,7 +87,7 @@ func _refresh() -> void:
 	_their_table.fill(_entries(_tt))
 	_their_goods.fill(_entries(trader.sheet.inventory))
 	var standing := Game.state.get_standing(trader.faction)
-	var diff = Trade.settle(_mt, _tt, p, trader.sheet, standing)
+	var diff = Trade.settle(_mt, _tt, p, trader.sheet, standing, _market)
 	var txt := "Your silver: %d     Theirs: %d     " % [p.silver, trader.sheet.silver]
 	if _mt.is_empty() and _tt.is_empty():
 		txt += "Put something on the table."
@@ -105,7 +109,7 @@ func _refresh() -> void:
 
 func _strike() -> void:
 	var p := Game.state.player
-	var diff = Trade.settle(_mt, _tt, p, trader.sheet, Game.state.get_standing(trader.faction))
+	var diff = Trade.settle(_mt, _tt, p, trader.sheet, Game.state.get_standing(trader.faction), _market)
 	if diff == null:
 		return
 	p.silver -= diff

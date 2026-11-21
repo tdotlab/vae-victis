@@ -1,0 +1,50 @@
+// Theron has had enough of the player (opinion at or below his leave_at).
+// Opens at the next quiet moment. Routes: talk him round (Speech), make the
+// practical case (Barter, or Honor if the player still has some), or let him go.
+=== start
+[flag guest_murder] -> guest
+Theron has stopped walking. He has his pack on one shoulder, the way a man carries a pack he is about to carry somewhere else.
+
+"I've been doing sums," he says. "It's a habit. On one side, the roads, the spears, the cold. On the other side, you. For a while you came out ahead." He shrugs. "You don't any more."
+-> plead
+
+=== guest
+Theron has stopped walking, and he won't come closer than a spear's length.
+
+"In Massilia we have a word for a man who kills under a roof he was given. Several words, actually. The Gauls have more." He keeps his hands where you can see them. "I've slept under your roof, in a manner of speaking. I would like to stop."
+-> plead
+
+=== plead
+* [speech 55] "You did the same sums at Gergovia, and I was the only number that kept you alive. Nothing's changed but your temper." -> talked ~ opinion theron 20; xp 25
+* [barter 50] "Go, then. Alone, through a war, with a Greek accent and a purse. Tell me what that comes to." -> sums ~ opinion theron 12; xp 25
+* [honor >= 25] "I've kept every promise I made you. Name one I broke." -> promises ~ opinion theron 15; xp 25
+* "Then go. I won't stop you." -> goes
+* "Leave the purse." -> robbed
+
+=== talked
+He looks at you for a long time. "That's a terrible argument," he says. "It's also true, which is the worst kind." He settles the pack on both shoulders again. "I'll stay. I reserve the right to complain."
+-> END
+
+=== sums
+Theron opens his mouth, closes it, and does the sum. You can watch him do it.
+
+"It comes to a very small Greek in a ditch." He sighs. "Fine. You're the less bad investment. Don't make me regret the arithmetic."
+-> END
+
+=== promises
+He thinks about it, honestly, which is more than most men would. "No," he says at last. "You haven't. It's the other things." He hitches the pack up. "All right. I'll stay until you give me a better reason not to."
+-> END
+
+=== goes
+"Thank you." He means it. "If I live, I'll tell people you were reasonable at the end. It's the best thing anyone will be able to say about this year."
+
+He goes, quickly, the way he does everything that matters.
+~ part
+-> END
+
+=== robbed
+He looks at you, and then at the purse, and for a moment he is going to argue. Then he unties it and throws it at your feet.
+
+"There," he says. "Now you know exactly what you're worth." He doesn't look back.
+~ silver 40; honor -10; part
+-> END

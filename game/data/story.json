@@ -61,5 +61,22 @@
   "saved": "saved %s",
   "confirm": "Click again to save over this.",
   "road": "On the road"
- }
+ },
+ "companion_text": {
+  "heading": "With you (%d of %d)",
+  "hint": "Presence decides how many will follow you. What you do decides whether they stay.",
+  "approves": "%s approves.",
+  "disapproves": "%s doesn't like that.",
+  "full": "Nobody else will follow you. You can't lead more than %d people.",
+  "stays": "%s stays behind.",
+  "parts": "%s has had enough of you, and goes.",
+  "guest_bond": "You have broken the guest-bond. Nobody who hears of it will forget, and everybody will hear of it."
+ },
+ "opinion_words": [
+  [25, "would follow you anywhere"],
+  [10, "thinks well of you"],
+  [-9, "is still deciding about you"],
+  [-20, "is wary of you"],
+  [-999, "has had about enough of you"]
+ ]
 }

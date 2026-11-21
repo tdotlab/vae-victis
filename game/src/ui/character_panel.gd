@@ -123,3 +123,10 @@ func _refresh() -> void:
 		c3.add_child(UITheme.label("Known as", 16, UITheme.BRONZE))
 		for t in gs.titles:
 			c3.add_child(UITheme.label(t, 14))
+	if not gs.companions.is_empty():
+		c3.add_child(UITheme.label(Companions.text("heading", "With you (%d of %d)") % [Companions.count(gs), Companions.cap(gs)], 16, UITheme.BRONZE))
+		for cd in gs.companions:
+			var who: String = cd.get("sheet", {}).get("name", cd.get("uid", ""))
+			var l := UITheme.label("%s %s" % [who, Companions.opinion_word(gs, cd.get("uid", ""))], 14)
+			_hint(l, Companions.text("hint", "Presence decides how many will follow you. What you do decides whether they stay."))
+			c3.add_child(l)

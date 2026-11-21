@@ -53,6 +53,12 @@
   "leader_shock": 50,
   "_escape_radius": "In a fight, the player escapes off an exit hex if no enemy is this close.",
   "escape_radius": 2,
+  "_companion_presence_div": "How many followers Presence allows: PRE divided by this, at least one. Pets don't count.",
+  "companion_presence_div": 2,
+  "_ally_join_radius": "Allies (friendly bands, not companions) join a fight that starts this close to the player, or that they can see.",
+  "ally_join_radius": 10,
+  "_guest_bond": "Breaking the guest-bond: attacking host or guest under a roof the map declares, or a dialogue `violate`. Honor, and standing with the host's people.",
+  "guest_bond": {"honor": -60, "standing": -40},
   "max_traits": 2,
   "traits": [
     {"id": "once_sold", "name": "Once Sold", "desc": "You were a slave and bought your freedom. +15 Latin, +10 Barter. Romans and slavers know the brand; Gallic nobles look down on you.", "mods": {"skills": {"latin": 15, "barter": 10}}, "flags": ["branded"]},

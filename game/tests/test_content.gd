@@ -89,6 +89,13 @@ func test_maps_reference_real_things() -> void:
 			check(_dlg_exists(def["arrive_dialogue"]), "%s: arrive dialogue missing" % id)
 		if def.has("deadline"):
 			check(_dlg_exists(def["deadline"]["dialogue"]), "%s: deadline dialogue missing" % id)
+		for ad in def.get("arrive_dialogues", []):
+			check(_dlg_exists(ad.get("dialogue", "")), "%s: arrival scene %s has no dialogue" % [id, ad.get("id", "")])
+			check(ad.has("id"), "%s: arrival scene without an id" % id)
+		for h in def.get("hospitality", []):
+			check(h.get("host", "") != "", "%s: a roof with no host" % id)
+			if h.has("mark"):
+				check(m.has_mark(h["mark"]), "%s: hospitality mark %s missing" % [id, h["mark"]])
 		if not def.get("encounter", false):
 			check(m.has_mark("start"), "%s has a start mark" % id)
 
@@ -110,6 +117,10 @@ func test_road_encounters_are_well_formed() -> void:
 				humans = true
 		if hostile and humans:
 			check(not e.get("parley", []).is_empty(), "%s is a human fight with no way out" % id)
+		if e.has("dialogue"):
+			check(_dlg_exists(e["dialogue"]), "%s: encounter dialogue %s missing" % [id, e["dialogue"]])
+		if e.get("forced", false):
+			check(e.has("days") or e.has("if"), "%s: a forced encounter with no window" % id)
 		for p in e.get("parley", []):
 			check(p.get("label", "") != "", "%s: parley option without a label" % id)
 			if p.get("kind", "") == "pay":

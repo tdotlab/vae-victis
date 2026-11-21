@@ -93,6 +93,8 @@ func change_honor(amount: int) -> void:
 		say("Your honor grows.", "good")
 	elif amount < 0:
 		say("Your honor suffers.", "bad")
+	for m in Companions.react_honor(state, amount):
+		say(m[0], m[1])
 	stats_changed.emit()
 
 
