@@ -47,10 +47,15 @@ These events happen on schedule. The player can witness them, take part in them,
 | ~56 | Caesar crosses the Cevennes through deep snow and appears where no one expected him. | Roman patrols appear on the world map. |
 | ~105 | Scorched earth: the Bituriges burn more than twenty of their own towns in one day to starve Caesar. They beg to spare Avaricum, and are allowed to. | Several world-map locations burn. Refugees appear. |
 | ~108–137 | Siege and sack of Avaricum. Caesar says barely 800 of about 40,000 escaped. | Avaricum is a timed location: after it falls, it's ruins. |
+| ~144 | Caesar settles the disputed Aeduan magistracy at Decetia in favor of Convictolitavis (VII.33). | The Aedui start to waver. |
+| ~161 | Caesar reaches Gergovia and camps under it; Vercingetorix holds the slopes behind a six-foot stone wall (VII.36). | Gergovia's besieged face. |
+| ~172–180 | Convictolitavis, paid by the Arverni, sends Litaviccus with the Aeduan levy toward Caesar; Litaviccus tells it Caesar has killed its nobles, and the Roman citizens with it are tortured and killed (VII.37-38). At home the Aedui plunder the Romans, and the tribune Aristius and the traders are led out of Cabillonum under a promise and attacked on the road (VII.42). | The column on the roads; Cabillonum's riot. |
 | ~190 | Caesar is beaten at Gergovia. | Revolt morale peaks; Roman standing drops everywhere. |
-| ~196 | The Aedui, Rome's oldest allies, defect. They seize the Roman depot at Noviodunum, kill its garrison, and take the hostages to Bibracte. | The Act I goal changes location. |
-| ~215 | Vercingetorix is confirmed supreme commander at an assembly at Bibracte. | Political endgame begins. |
-| ~230–284 | Siege of Alesia. The Mandubii expel their women and children, and Caesar refuses to take them in (that they starved between the lines is Cassius Dio's detail, not Caesar's). A relief army fails. Vercingetorix surrenders. Caesar gives one captive to each of his soldiers, except the Aedui and Arverni, whose men he sends home. | Act III. The game ends here. |
+| ~196 | The Aedui, Rome's oldest allies, defect. They seize the Roman depot at Noviodunum, kill its garrison and the Roman traders, split the army's money and horses, and take the hostages to Bibracte (VII.55). | Hostages move to Bibracte. Without its pay chest, Caesar's army sells the war forward to the house of Vettius (invented; Act II). |
+| ~205 | Caesar sends across the Rhine for German horse and light infantry and mounts them on his officers' horses (VII.65). Vercingetorix sends the Cadurci and Ruteni to raid the Volcae Arecomici (VII.64). | Brigodunon's young men go south; the Germanic camp's choice gets urgent. |
+| ~215 | Vercingetorix is confirmed supreme commander at a council of all Gaul at Bibracte. The Aedui, who wanted the command, submit unwillingly (VII.63). | Act II's set piece. |
+| ~230 | Vercingetorix's cavalry attacks Caesar's column and is routed when the Germans take the ridge (VII.67). He falls back into Alesia. | Act II ends. |
+| ~231–284 | Siege of Alesia. The Mandubii expel their women and children, and Caesar refuses to take them in (that they starved between the lines is Cassius Dio's detail, not Caesar's). A relief army fails. Vercingetorix surrenders. Caesar gives one captive to each of his soldiers, except the Aedui and Arverni, whose men he sends home. | Act III. The game ends here. |
 | Epilogue | Next year, at Uxellodunum in Cadurci country, Caesar cuts off the town's water by tunneling into its spring, then cuts off the hands of every defender who bore arms, and spares their lives. | The final ending slide for the player's home region. |
 
 ### Tone
@@ -83,13 +88,28 @@ The player leaves home, learns the world, and follows the hostages' trail: Gergo
 
 Along the way the player discovers that the hostages' fate is a business matter. A Roman trading house, run by **Aulus Vettius Calvus** (placeholder) with a Gallic partner, the Aeduan noble **Dannotalos** (placeholder), is buying the future: contracts on the captives from towns that haven't been besieged yet. Vettius's ledger lists Avaricum before it falls. Brigodunon's hostages are in it too, already sold.
 
-### Act II: The ledger (days ~120 to ~180)
+### Act II: The ledger (days ~120 to ~230)
 
 Fallout's second act is the discovery that the water chip was never the real problem. Ours is the same move. The real enemy isn't Rome, which no one can beat. It's the people who turned the conquest into a market and are positioned to profit from every outcome, including the revolt. Dannotalos helps arm the rebels, because a bigger war means more captives.
 
-The Aedui defection at around day 196 scrambles everything. The player can be inside Noviodunum when it falls, help seize it, or arrive after. The hostages move to Bibracte. The player can go after Vettius's network through its funding, its Gallic partners, its depot (**The Pens**, a holding compound at a river crossing), or its paper. The druids, the Germanic mercenaries, and the Aeduan factions each offer a different way in, at a different price.
+**The turn.** A few days after the assembly, the house of Vettius sends a man to Brigodunon, and Vellaunos seats him at his own hearth, because a guest is a guest. He is polite. Rome will win, he explains, and when it does, the Cadurci will be sold like everyone else. For a price the house will write Brigodunon down as not for sale. It is protection from a list that doesn't exist yet, sold by the people who are going to write it. Whatever happened at Noviodunum, this works: if the hostages came home, the house wants its half-paid property or its price; if they didn't, it offers to sell them back. Either way the hill itself is now on the table. That is Act II's water chip: **get Brigodunon off the house's book before the harvest.**
 
-### Act III: Alesia (days ~180 to ~240)
+**The escalation.** On about day 196 the Aedui seize Noviodunum and Caesar loses the hostages, his grain and the army's pay chest (VII.55). An army that can't pay its soldiers sells what it hasn't taken yet. The house of Vettius has the coin, lent to it by Massiliot bankers, and buys the war forward: the future captives of whole peoples, at a discount, from the quartermasters who will sell them (the forward sale is invented; the lost pay chest is Caesar's). The revolt's best summer is what makes the market. After day 196 the list is real, Brigodunon is a line on it, and the price of striking it off goes up tenfold.
+
+**The house.** Vettius's network has five parts, and each can be broken in Act II:
+- **The partner:** Dannotalos at Bibracte, who supplies Gallic captives and protects the house in Aeduan country.
+- **The paper:** the master book at Cabillonum, which proves every purchase.
+- **The stock:** the Pens, where what the house has already bought waits for the boats south.
+- **The muscle:** the Germanic horsemen who guard the Pens and catch runaways.
+- **The credit:** the Massiliot money behind it all.
+
+The player can't stop the harvest at Alesia. What they break decides what Vettius brings to it in Act III, and what he can collect.
+
+**The council.** Act I ends at a village assembly; Act II's set piece is the assembly of all Gaul at Bibracte on about day 215, where Vercingetorix is confirmed and the Aedui swallow it (VII.63). The hostages of Gaul are in Bibracte by then, and the Aedui are using them to frighten peoples who hesitate (VII.63: "horum supplicio dubitantes territant"). The player can be in the crowd or on their feet: for the hostages, against Dannotalos, for Brigodunon's name.
+
+**The end.** On about day 230 Vercingetorix's cavalry breaks against Caesar's new Germans, and he falls back into Alesia (VII.67-68). Act II closes with slides, and everyone converges on Alesia. The details are under Quests, in "Act II: the house of Vettius".
+
+### Act III: Alesia (days ~230 to ~284)
 
 Everyone converges on Alesia. The player chooses where to stand: inside the town with Vercingetorix, with the relief army, inside Caesar's siege lines as a spy or a collaborator, or in the slavers' camp waiting for the harvest. The historical outcome is fixed. The player's goal is what can be saved from it: the hostages, a town's people, the ledger's buyers, or only themselves.
 
@@ -122,11 +142,12 @@ A world map of central Gaul on a grid, like Fallout's, traveled in days. Travel 
 | **Avaricum** | The richest city in Gaul. Timed: sacked around day 137. | Necropolis (a place that changes or ends on a timer) |
 | **The Carnute forest** | Annual assembly of the druids, the closest thing Gaul has to a center. Knowledge, judgment, initiation. | Brotherhood of Steel |
 | **Cenabum** | Burned trade town where the revolt began. Scavengers and grudges. | Junktown |
-| **Bibracte** | Aeduan capital. Rich, Romanized, collaborating until it isn't. Endless intrigue. | The Boneyard / Adytum politics |
+| **Bibracte** | Aeduan capital. Rich, Romanized, collaborating until it isn't. Endless intrigue. Dannotalos's house, the hostages of Gaul after day 196, the council of all Gaul. | The Boneyard / Adytum politics |
+| **Cabillonum** | Aeduan river port on the Arar, full of Roman traders until the riot of about day 178. The house of Vettius and its master book. | The Hub's water merchants: the people who sell what everyone needs |
 | **Noviodunum** | Caesar's depot on the Loire. Hostages, baggage, horses. Seized by the Aedui around day 196. | Military Base, act one version |
 | **The Germanic camp** | Mounted mercenaries in Caesar's pay, and deserters from them. Raiders, horse thieves. | The Khans |
-| **The Bone Field** | An old battlefield shrine where the victors displayed the dead. Superstition, plague, and grave robbers. | The Glow |
-| **The Pens** | Vettius's captive depot at a river crossing. | The Cathedral / Mariposa |
+| **The Bone Field** | An old battlefield shrine where the victors displayed the dead. Robbers selling the gods' iron to arm the revolt, and a sickness they call a curse. | The Glow |
+| **The Pens** | Vettius's captive depot at a river crossing below Cabillonum. Hidden until found. | Mariposa: the place where people are turned into product |
 | **Alesia** | The siege. Several areas: the town, the Roman lines, the relief camp. | The Master's lair |
 
 Plus random encounters: refugees, patrols, foragers, deserters, wolves, bandits, a traveling bard, a Greek merchant from Massilia, and occasional strange ones, as in Fallout.
@@ -138,7 +159,7 @@ Plus random encounters: refugees, patrols, foragers, deserters, wolves, bandits,
 | **Brigodunon** | To survive the year with its children back | The player's standing at home is its own reputation track |
 | **Vercingetorix's revolt** | A united Gaul under one command, at any cost | Burns its own towns, executes waverers. Admirable and frightening. |
 | **Rome (Caesar's army)** | Pacification, plunder, glory for Caesar | Not a monolith: legionaries, officers, auxiliaries, quartermasters |
-| **The Aedui** | To come out on top whoever wins | Split between pro-Roman and pro-revolt nobles; defects at day ~130 |
+| **The Aedui** | To come out on top whoever wins | Split between pro-Roman and pro-revolt nobles; defects at day ~196 |
 | **The druids** | Their authority over Gaul, which Rome will end | Keepers of law, medicine, and secrets. Initiation is a long quest line. |
 | **The house of Vettius** | Captives, contracts, profit | The main antagonist. Gallic partners make it everyone's problem. |
 | **Germanic horsemen** | Pay, plunder, a way home | Caesar's cavalry; their deserters raid the roads |
@@ -288,6 +309,199 @@ Freed hostages walk home and are in Brigodunon when the player gets there.
 
 **The assembly.** Back home, Vellaunos calls the assembly, with Lucterius's man in the hall. The player speaks: rise with Lucterius, hold back while Rome has hostages, or send the young men and keep the village's name out of it. Evidence and the druid's verdict make arguments easier. The Cadurci rise either way, as they did; the choice is how Brigodunon goes into it. If the player is not home by day 120, the assembly meets without them and rises. The act closes with Fallout-style slides (one per thing the player changed) and play continues.
 
+### Act II: the house of Vettius (designed)
+
+Act II is open from the start and gets tighter as history arrives. Days ~120 to ~160 are free: the house is intact, the Aedui are still Rome's friends, and every place in this section can be visited in any order. Days ~160 to ~200 are history-heavy: the siege of Gergovia, Litaviccus's column, the Cabillonum riot, the fall of Noviodunum. Days ~200 to ~230 are the reckoning: the forward sale, the council, the retreat into Alesia.
+
+Two rules bind it. **Act I's slides are canon**: they narrate day 196 in advance, so Orbius dies at Noviodunum in every game, Iccios and Ateula go to Bibracte if they stayed, and Act II can't undo it. **History doesn't wait**: a quest whose moment passes fails, the way the bridge at Cenabum does.
+
+#### The main line
+
+- **The House Collects** (opening). The house's man comes to Brigodunon as Vellaunos's guest. He is Epomeduos if he's alive and wasn't exposed (if he was turned in Act I, he comes half to warn you, as your "partner"); otherwise he's Hermeros the freedman. What he asks for depends on Act I. If the hostages came out by fraud or by night, he wants the house's property or its price. If Orbius wrote them off as dead of fever, or sold them to you, he has no claim on them, so he only sells protection. If they're still held, he offers to sell them back, delivered on Dannotalos's word. Routes:
+  - Pay the first price (cheap now, and it funds the machine).
+  - Read his paper (Latin): the protection runs "on Dannotalos's account", which points to Bibracte, and the seal is the house's at Cabillonum.
+  - Show him the door. The house raises the price, and later its Germans drive off Brigodunon's cattle as a reminder.
+  - Follow him when he leaves (Sneak): he goes to the Pens, which reveals them early.
+  - Kill him. Under Vellaunos's roof that is guest-murder, the worst crime in the game: Honor collapses and the vates curses the hall. On the road afterward it is only murder, and the house knows who did it.
+
+  If the player doesn't come home by about day 150, a runner from Vellaunos finds them on the road with the news.
+- **The Line for Brigodunon** (main). Get the hill off the book before the harvest. The price is low before day 196, ten times higher after it, and gone at Alesia. Routes:
+  - Buy it off (silver; Barter lowers the price).
+  - Burn or steal the master book (The Countinghouse).
+  - Forge the line struck (Latin and the house's seal, through Paconius or the seal ring).
+  - Have Dannotalos strike it, since it's on his account: as his partner, under threat (the Bone Field, Ateula's roll), or as the price of his life.
+  - The law: a people that kept faith isn't booty. With `brig_faith`, or `pledge_bound` plus Latin or Speech, a Roman officer (the auxiliary companion's centurion, or the officer whose seal is on Orbius's copy) writes Brigodunon down as friends of the Roman people, and the line is void.
+  - Starve the house of coin before day 196 (Theron's Debt). It can't buy the forward sale, and the line is never written.
+
+  Whether the line stands decides Brigodunon's epilogue slide (Uxellodunum, 51 BC).
+- **The House of Vettius** (umbrella). The journal tracks the five parts (partner, paper, stock, muscle, credit) and what the player has done to each. Nothing forces any of them. All five broken means Vettius comes to Alesia a ruined man with a few freedmen. All five intact means he comes with a camp of buyers and paper on half of Gaul.
+
+Joining is a full path, as joining the Master is in Fallout: become Dannotalos's or Vettius's partner. The price of a partnership is your own line struck. The reward is silver and a share of the trade. The consequence is everything else on the book, and the bards. Act III's "slavers' camp" stand starts here.
+
+#### Brigodunon (Act II)
+
+The village as the assembly left it. If it rose or split, the young men go south to Lucterius, and on about day 205 they're sent with the Ruteni to raid the Volcae Arecomici (VII.64). That is news here, and a reunion in Act III, where the Cadurci are counted inside the Arverni's thirty-five thousand at the relief of Alesia (VII.75). Dubnacos, if he was pardoned, rides with them. The house's man and its reminders arrive here, and so does the epilogue.
+
+#### Cabillonum (designed)
+
+The house's seat: an Aeduan river port on the Arar (Saône), east of Bibracte, where Italian wine comes upriver and people go down it. The riverbed at Chalon-sur-Saône is famous for the mass of Republican wine amphorae dredged from it (verify the numbers before using them in text). There is a Roman traders' quarter, warehouses of amphorae, and Vettius's house with its strongroom. Three faces: open until the riot; the riot on about day 178 (VII.42); and after it, when Vettius is the last Roman in Cabillonum, alive because Dannotalos's spearmen stand at his door. That one image is the whole act. Vettius himself is here: met once, polite, tired, precise ("we pay on time and we write everything down"), and killable. Killing him doesn't kill the house: Hermeros inherits the book and runs the harvest. Only the paper stops the machine.
+
+- **The Countinghouse** (the paper). The master book is in the strongroom, kept by the house's own slaves. Routes:
+  - Steal it at night (Locks, Sneak).
+  - Get in under cover of the riot, or lead the mob to the door. Then the book burns: destroyed, not held.
+  - Use an inside hand: Paconius if he was saved in Act I, or a slave clerk offered his freedom.
+  - Sign on as the house's factor for the Cadurci hills and read it from inside.
+  - Copy the pages that matter in place (Latin and Wits). The house never knows, and the player holds the evidence.
+
+  Destroyed, held and copied are three different states for Act III. A held book names the officers who sold the war forward.
+- **Theron's Debt** (the credit; Theron's personal quest). Theron's elder brother, a Massiliot banker at Cabillonum, lends the house the coin it lends to soldiers. Theron owes the family for a ship of wine he lost and won't talk about. Routes:
+  - Persuade the brother to call the loan. Before the riot this needs the player's warning about the Aedui and Theron's word; after the riot the brother believes it.
+  - Buy the debt, so that the player and Theron become the house's creditors.
+  - Settle Theron's own debt (reconciliation; no effect on the house).
+  - If Theron thinks little of the player, or the player has joined the house, Theron sells them out and goes home to his family.
+
+  The loan called before day 196 means no forward sale. Called later, it squeezes the house in Act III.
+- **The Tribune's Road** (about day 178). The Aedui plunder the Romans. The tribune Aristius and the traders are led out of town under a promise and attacked on the road, and they hold out for a day and a night (VII.42). Routes:
+  - Hold the road with them (a fight with Roman allies).
+  - Get a trader's Aeduan wife and children out by the river (Sneak); it echoes Litumara.
+  - Join the plunder (silver, Aeduan standing).
+  - Stand aside.
+
+  The next day the Aedui claim it was the mob (VII.43).
+
+#### The Pens (designed)
+
+A fenced compound on the river flat at a crossing below Cabillonum, where what the house has bought waits for the boats down the Arar and the Rhodanus to the Province. Iron gang-chains, which are known from Late Iron Age Gaul and Britain. Hidden until found: the master book, the house's man followed, the Germans, Hermeros, or the boatmen at Cabillonum show the way.
+
+The overseer is a Gaul, one of Dannotalos's ambacti, doing a job. The captives are debtors sold by Gallic nobles (some of them Dannotalos's own clients), runaways caught on the roads, Avaricum's few, and a Roman deserter: the machine eats its own. Among them are a Cadurcan from a fort near Brigodunon, a Biturigan boy, and a Senone woman who keeps count of the days.
+
+- **The Pens** (the stock). Routes:
+  - Turn the guards with their wages (see the camp): they walk off or open the gate.
+  - Break them out by night (Sneak, Locks, the boats). The hard part is where sixty people go: the druids' grove, Bibracte as free Gauls after day 196, Brigodunon if the village agrees, or scattered on the roads, where many are caught again.
+  - Storm it, with allies: Haldo's riders if hired, the war band if Brigodunon rose, the Germans if turned, or the Aeduan mob after the riot.
+  - Move them out "legally" on a forged order of the house (Latin and the seal).
+  - Buy people: one, a few, or all of them, at a price that ruins anyone.
+  - Burn it. Freed in the chaos, some die.
+  - Sell runaways to it, or take the overseer's job (joining).
+
+  Freeing the Pens' captives has its own slides. A stock the house can't replace is a camp it can't fill at Alesia.
+
+#### The Germanic camp (designed)
+
+Horse lines and hide shelters in a forest clearing toward the Dubis: a band of Germanic horsemen who rode for Caesar, are between masters now, and earn their bread catching and guarding for the house. Their leader (placeholder) is an older man who is careful with his men and doesn't care about anyone else's. They aren't savages and they aren't noble. They're professionals a long way from home, paid late.
+
+- **Wages** (the muscle). The house pays late, and later still if Theron's brother squeezes it. Routes:
+  - Outbid it: a month's pay and they ride for the player once.
+  - Rob the house's paymaster on the road. Unpaid, they turn on the house, and plunder the Pens for themselves unless the player is there first: freed from the house is not the same as freed.
+  - Tell them what's coming (Latin from the Roman lines, Lore, or Speech): Caesar has sent across the Rhine for fresh horsemen, who are being given Roman officers' horses (VII.65) and will be set to hunt deserters. They go home now, the Pens lose their guards, and Gundo's way home begins.
+  - Fight their champion one on one (fair, and the arena should show it): they stand aside at the Pens.
+  - Hire them to the house yourself (joining).
+- **Haldo's debt.** With `ford_lied`, Haldo's band is here and knows there was no Arvernian army: pay, fight Haldo alone, or own it to his face (Honor or Presence). With `riders_recalled`, one rider who stayed behind knows what happened to the men who went to their "pardon" (Roman deserters' deaths), and knows whose order it was: talk, pay or fight. With `riders_hired`, the camp knows them, and you, and that buys respect.
+- **The Way Home.** Gundo (placeholder), a young rider who wants to go back across the Rhine "the hard way", joins once the wages are settled or the band breaks up. His quest resolves in Act III.
+
+#### The Bone Field (designed)
+
+A bare ridge between Bibracte and the Carnute country with a square ditched enclosure, where, long ago, the victors of a battle nobody remembers displayed the beaten army's dead and their arms. The bones were later stacked into square ossuaries, and the weapons left on racks and in the ditch. The model is the sanctuary at Ribemont-sur-Ancre (verify details before writing text). Caesar says Gauls heap their spoils in consecrated places, that hardly anyone dares touch them, and that the penalty is death with torture (VI.17).
+
+Robbers are pulling the old iron out and selling it to Dannotalos's agent, who sells it to the revolt's smiths to fill the king's arms quotas (VII.4). The gods' iron is arming Gaul against Rome, which makes it a good question. The robbers are sick: men cut on the old iron clench up and die. It's lockjaw, and they call it the god. The old keeper is dead, and his dog won't leave him.
+
+- **The God's Iron.** Routes:
+  - Drive them off (a fight against a few men, some too sick to stand).
+  - Scare them off (Lore: name the god whose iron it is; Fortune).
+  - Tend the sick (Surgery or Healing). Lockjaw can't be cured, but the wounds of the others can be cleaned, and the dying man, grateful, names the buyer and gives up the robbers' tally.
+  - Take the tally and a sworn robber to the druids. It is evidence of sacrilege, and it can finish Dannotalos (The Partner).
+  - Buy the iron yourself for Brigodunon's spears. If the druids learn of it, the interdiction falls on you.
+  - Leave it be: the iron goes to war (a slide).
+- **The keeper's dog.** Bury the keeper (Lore, or just a spade and an hour) or feed the dog, and it follows you: the war dog companion.
+
+#### Gergovia besieged (designed; days ~161-190)
+
+Gergovia's third face, made with `map_by_flag` like Avaricum's. Caesar's camps are in the plain, and his men take the small hill opposite by night and link it to the camp with a double ditch (VII.36). The Gallic camps fill the slope up to the wall behind a six-foot stone wall (VII.46). A new map covers the slope, the stone wall and the valley; the lower town and the plateau change.
+
+- **The Sutler** (about days 161-185). Someone is selling grain across the valley to the Roman camp, which is short and waiting for the Aeduan column. It's the house's new man in the lower town, buying from the old uncle's party. With `verc_surety`, the accused is Eppillos, and the king calls in the player's surety. Routes:
+  - Find the real sutler (Perception, Latin overheard at the Roman lines, the potter).
+  - Turn him, and feed the Roman camp false word.
+  - Smuggle the accused out to the Romans (Honor with the king, lost).
+  - Take the king's sentence in his place: as surety, the cost is real.
+  - Hand over whoever is convenient.
+- **The Wall** (day 190). The assault. The legions come over the stone wall and take three camps; Teutomatus, king of the Nitiobriges, the Cadurci's neighbors, is caught napping at noon and gets away half-dressed on a wounded horse (VII.46). The women on the wall, who a moment ago were holding out their hands to the Romans, turn to their own men and hold up their children (VII.47-48). Allied Aedui come up on the Roman flank with their right shoulders bared as the agreed sign, and the Romans take them for the enemy anyway (VII.50). The centurion Petronius dies at a gate to buy his men time (VII.50). Routes:
+  - Hold the wall in the line (an allied battle).
+  - Carry the wounded (Healing, Surgery).
+  - Bring the old men and boys up to the gate (Presence).
+  - Watch it from the Roman lines as an interpreter (Latin), and hear what they say afterward.
+
+  The outcome is fixed: the Romans fall back, with 46 centurions and nearly 700 men lost (VII.51), and in his account Caesar scolds his soldiers for being too brave (VII.52). The reward is a title: "who stood at Gergovia".
+- **The King's Errand.** With renown, or as his pledge (`levy_self`), Vercingetorix sends the player to Bibracte to watch the Aedui before the council, with a token that gets them into it.
+- Brigodunon's two children, if pledged (`levy_pledged`), are in the hostage yard: well fed, and going wherever the king goes. In Act III that is Alesia.
+
+#### The Aeduan column (designed; road event, days ~172-180)
+
+On the Aeduan roads toward Gergovia: Litaviccus and the Aeduan levy, after he has told them Caesar killed their nobles. The Roman citizens traveling under their protection are tortured and killed, and the grain is plundered (VII.38). Routes:
+- Get the Romans out before it starts (Sneak, Speech).
+- Expose the lie. The player may have seen Eporedorix alive (at Bibracte or Noviodunum), or have the bard's news; Speech carries it.
+- Ride with the column.
+- Take the dead traders' papers in the confusion: the house's grain contracts with the Roman camp, which tie back to the sutler.
+
+Whatever the player does, Caesar intercepts the column and Litaviccus escapes to Gergovia (VII.40).
+
+#### The fall of Noviodunum (designed; day ~196)
+
+The depot from Act I, on its last day. Eporedorix and Viridomarus come in, Dagolitos opens the gate for Dannotalos's men, the garrison and the Roman traders are killed, the money and the horses are shared out, the hostages are sent to the magistrate at Bibracte, and the town is burned (VII.55). Before day 196 every Act I route still works. A player inside on the day can:
+- Go with the hostages: a way into Bibracte's hostage house from inside.
+- Save the Gallic-born auxiliary, whom the Aedui would kill with the garrison, by claiming him as kin (Speech, Presence) or hiding him. He becomes the auxiliary companion.
+- Be with Orbius in his last hour. He gives the player his own copy of the forward sales, the army's half of the house's paper, naming the officers.
+- Take a share of the pay chest in the confusion. It's enough silver to buy the line, and Eporedorix's men will look for it.
+- Help the Aedui open the river gate (Aeduan standing).
+
+After day 196 it's a burned map: ash, the ditch, looters.
+
+#### Bibracte (designed)
+
+The Aeduan capital on its mountain. The murus gallicus runs for miles, and the Porte du Rebout is a gate corridor nineteen meters wide. There is the craftsmen's quarter of smiths and enamelers, the noble houses on the upper ground, and wine jars everywhere. Two maps: the lower town and the gate, and the upper town with Dannotalos's house, the magistrate's hall and the council ground. Before day 196 it's a city of Rome's friends with a lot of young men talking about the Arverni. After it, it holds the hostages of Gaul. Real people, sparingly: Convictolitavis the vergobret, and Eporedorix seen once. The druid's token from the forest opens the gate. The vergobret was chosen "through the priests" (VII.33), so a druid of Bibracte matters here.
+
+- **The Partner** (Dannotalos). Met at his house, at any time. He is an old house gone poor and made rich again, and a man who was a hostage himself: as a boy he was given to the Sequani, by a city that swore never to ask for its hostages back (I.31), and nobody did. He knows what a hostage is worth from the inside, he buys people forward so they're on his book rather than someone worse's, and sometimes that's even true: the girl Epomeduos "lost in transit" at Avaricum is alive. He arms the revolt because a long war raises prices, and because he wants the Aedui, meaning himself, to lead Gaul. He treats the player as a partner (`factor_turned`), a thief (`dannotalos_cheated`), or a curiosity. Routes to break him:
+  - Interdiction: take the Bone Field's evidence to the druids, who bar him from the sacrifices (VI.13). Nobody speaks to him, no court hears him, and he's finished without a drop of blood.
+  - The council: show Ateula's roll to all Gaul. An Aeduan noble bought Gaul's hostages forward from Rome, and the Aedui, who want the command, give him up.
+  - Set the partners on each other: show Vettius that Dannotalos skims (the girl at Avaricum, Epomeduos's double books, or a forged letter with Latin and Wits). The house cuts him off, and paper on his account is void.
+  - Challenge him at a feast. He names a champion, and it's one on one. Win, and he strikes the line as his forfeit.
+  - Kill him at night. His account passes to the house: murder makes Vettius bigger. That consequence is the honest one.
+  - Join him. He wants to cut Vettius out and own the trade himself, a Gallic house in place of a Roman one. Bring him the book or the Pens.
+- **The Children of Gaul** (after day 196). The hostages of a dozen peoples are kept by the vergobret, and the ones on Dannotalos's account are in his own house as property. With `ateula_stays`, Ateula keeps the vergobret's rolls. With `brig_faith`, Brigodunon is a people that hesitates, and the Aedui threaten its hostages to make the village send men (VII.63). Routes:
+  - Argue at the council for the hostages of peoples in the revolt (Speech, the roll, the druid's verdict).
+  - Druid law: with `pledge_void`, hostages under a pledge Rome broke must go home.
+  - Out by night through the Rebout gate or over the rampart (Sneak), with Ateula inside.
+  - Ransom from Dannotalos.
+  - Trade the vergobret something he wants more: the master book's page of Aeduan nobles' debts, or the Pens' stock (joining).
+  - For Brigodunon, send word home to rise. It changes the village, not just the quest.
+
+  For a player whose three came home, this is Ateula's hundred names.
+- **The Council of All Gaul** (day ~215). Fixed: Vercingetorix is confirmed by a vote of the multitude; the Aedui resent it; the Remi, Lingones and Treveri stay away (VII.63). The player gets in with a patron: Lucterius's man, the king's errand, the druid's token, Ateula, or Dannotalos himself. Inside, they can raise up to three matters: the hostages, Dannotalos, and Brigodunon's name, the way the assembly at home works (evidence and arguments add up). A player who isn't there gets the defaults: the hostages are kept as threats, and Dannotalos rises among the Aedui.
+- **The Bard's Disgrace.** Bitugenos has come to sing at the council and sings a satire on the wrong Aeduan: Dannotalos, if the player told him the story at the forest, and otherwise a kinsman of the vergobret. He's beaten and thrown out at the gate. Routes: speak for him before the vergobret (Speech), pay his debts, or give him a better story (renown). He follows, writing it. He's the bard companion; once an act he can sing a satire that ruins someone's standing.
+
+#### How Act II ends
+
+On day ~230 the news of the cavalry battle and the retreat into Alesia closes the act, whatever the player is doing. The slides wait for the next safe moment, as the assembly's do. The slides (`data/endings/act2.json`): the line, Dannotalos, each part of the house, the Pens, the gods' iron, Gergovia, Cabillonum, Noviodunum, the children of Gaul, the council, and each companion. Quests whose moment has passed fail; the rest stay open into Act III where history allows (the Pens can be raided later; the council can't be attended later).
+
+What Act III reads: the line (struck or standing), Dannotalos (interdicted, disgraced, dead, a partner, or standing), the book (destroyed, held, copied, or standing), the credit (called early, called late, or intact), the Pens (freed, burned, taken by the Germans, or standing), the camp (gone home, the player's, or the house's), Vettius (alive, or dead with Hermeros running the harvest), the hostages of Gaul, the war band, the levy's children, and the companions.
+
+#### Act I threads and where they pay
+
+| Act I flag | Pays off in Act II |
+|---|---|
+| `epo_out`, `iccios_out`, `ateula_out`, `ateula_stays`, `hostages_left` | Who is in Bibracte after day 196; how personal The Children of Gaul is |
+| `hostage_roll`, `roll_read` | Evidence at the council and against Dannotalos |
+| `brig_rising`, `brig_split`, `brig_faith`, `quest hostages=done_late` | The war band; the law route for the line (faith); the Aedui threatening Brigodunon's hostages (faith) |
+| `pledge_void`, `pledge_bound` | Druid law for the hostages; the Roman-law route for the line |
+| `druid_shown` and the druid's token | The Bibracte gate; a patron at the council |
+| `factor_turned`, `factor_gone`, `factor_unmasked` | Who comes to Brigodunon; how Dannotalos receives you |
+| `dannotalos_cheated`, `orbius_mercy`, `hostages_bought` | What the house claims at the opening |
+| `clerk_saved`, `clerk_betrayed` | The inside hand at the Countinghouse, or a house that knows your name |
+| `theron_joined` | Theron's Debt |
+| `ford_lied`, `riders_recalled`, `riders_hired` | Haldo's debt at the camp; allies for the Pens |
+| `levy_pledged`, `levy_self` | The children in the king's hostage yard; the King's Errand as an order |
+| `verc_surety` | The accused in The Sutler |
+| `dubnacos_pardoned` | Rides with the war band |
+
 ## Items and economy
 
 - **Weapons:** daggers, swords (Gallic long swords and Roman short swords), axes, spears, javelins and pila, slings, bows, clubs. Quality tiers: crude, common, fine, masterwork.
@@ -300,11 +514,13 @@ Freed hostages walk home and are in Brigodunon when the player gets there.
 
 Fallout 1 has four or five companions. We aim for five, each with a personal quest, an opinion of the player, and an ending slide.
 
-- **A war dog**, because some things are universal.
-- **Theron**, a Greek trader from Massilia: interpreter, coward, bookkeeper, the funniest person in the game.
-- **A disgraced bard** who will make you famous for a price, and who is writing your story whether you like it or not.
-- **A Germanic deserter** who wants to go home across the Rhine, the hard way.
-- **A Roman auxiliary** of Gallic birth, with a conscience problem and a good sword arm.
+- **A war dog**, because some things are universal. The dead keeper's dog at the Bone Field (Act II).
+- **Theron**, a Greek trader from Massilia: interpreter, coward, bookkeeper, the funniest person in the game. Joins at Gergovia (Act I); his personal quest is Theron's Debt at Cabillonum.
+- **Bitugenos** (placeholder), a disgraced bard who will make you famous for a price, and who is writing your story whether you like it or not. Joins at Bibracte after The Bard's Disgrace; once an act he can sing a satire that ruins someone's standing.
+- **Gundo** (placeholder), a Germanic deserter who wants to go home across the Rhine, the hard way. Joins at the Germanic camp; The Way Home resolves in Act III.
+- **Cintillus** (placeholder), a Roman auxiliary of Gallic birth from the Province, with a Roman name, a conscience problem and a good sword arm. Joins if saved at the fall of Noviodunum.
+
+Act II has the player traveling with several of them at once, so it needs what Act I didn't: an opinion score per companion that the player's choices move, a companion who leaves (or turns) when it falls far enough, and a cap on how many will follow, set by Presence.
 
 ## Presentation
 
@@ -341,7 +557,9 @@ Length, by Fallout 1's HowLongToBeat figures (T's reference): about 16 hours for
 
 ## Open questions for T
 
-- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina. Gergovia adds: Theron (the Greek), Paconius (the Vettius clerk), Ollognatos (hostage-master), Ategnatos and his son Eppillos, Senognatos (levy captain), Excingos (smith), Nammia (food seller) and Uxellos (potter). Avaricum adds: Senodonnos (Biturigan magistrate), Epomeduos (the Aeduan factor), Nertomara (weaver), Andecamulos (master of the mines), Vindos (boatman), Sumelis (market woman) and Hermeros (Vettius's freedman).
+- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina. Gergovia adds: Theron (the Greek), Paconius (the Vettius clerk), Ollognatos (hostage-master), Ategnatos and his son Eppillos, Senognatos (levy captain), Excingos (smith), Nammia (food seller) and Uxellos (potter). Avaricum adds: Senodonnos (Biturigan magistrate), Epomeduos (the Aeduan factor), Nertomara (weaver), Andecamulos (master of the mines), Vindos (boatman), Sumelis (market woman) and Hermeros (Vettius's freedman). Act II's design adds: Bitugenos (the bard), Gundo (the German rider), Cintillus (the auxiliary), and still-unnamed roles: the Germanic band's leader, Theron's elder brother, the overseer of the Pens, the Pens' named captives, and the sutler at Gergovia.
+- Act II's scope: about eight new or changed maps (Cabillonum in three faces, the Pens, the Germanic camp, the Bone Field, Gergovia's slope, Noviodunum burned, Bibracte's two maps) and about seventeen quests. If it has to shrink, Gergovia besieged and the Aeduan column are the first to cut, since the act's spine (the line, the house, the council) doesn't depend on them.
+- Facts to verify before they go into game text: the Chalon-sur-Saône amphora numbers, the details of Ribemont-sur-Ancre, and the width of the Porte du Rebout.
 - The secret ahistorical path: yes or no. Default no.
 - Is the player character fixed (a named person) or player-made? Default: player-made name and sex, fixed origin in Brigodunon, like Fallout.
 - How dark the Avaricum and Alesia sequences may get. Default: shown plainly, never lingered on.

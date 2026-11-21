@@ -2,6 +2,20 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-20 (Act II design)
+
+- **Act II runs from day ~120 to ~230, on the corrected clock.** The old range was guessed. Caesar's narrative puts the Bibracte council at about day 215 and the cavalry battle and the retreat into Alesia at about 230 (research/chronology-52bc.md), so Act III is Alesia alone, ~231 to ~284.
+- **Brigodunon's own line in the house's book is the personal hook.** Act I can end three ways (rose, kept faith, split) and with the hostages home or not, and Act II has to matter for all of them. Whatever happened, the house is now selling the war forward, and the player's own hill is a line on its paper. "Get Brigodunon off the book before the harvest" is the Fallout water chip: concrete, personal, and on a clock.
+- **The forward sale comes from the lost pay chest, and it's invented on attested facts.** At Noviodunum the Aedui seized Caesar's money, hostages and remounts (VII.55). An army without its pay chest selling captives forward to a trading house is not in any source; it's a plausible mechanism, and it ties the revolt's victories to the market's growth, which is the act's irony: every Gallic win raises the price of Gauls.
+- **Act I's slides are canon.** They narrate day 196 in advance (Orbius dies, Iccios and Ateula go to Bibracte if they stayed), so Act II builds on them instead of contradicting them.
+- **History doesn't wait in Act II either.** Quests tied to a dated event fail when it passes, as Cenabum's bridge does. The free stretch (120 to 160) is where the player explores; the history-heavy stretch (160 to 200) is where they choose which events to be present for.
+- **Cabillonum is added, and the Pens stay separate and hidden.** Caesar names Cabillonum for the Aeduan riot against the Roman traders (VII.42), and Hermeros's day book already says "Gergovia and Cabillonum", so the house's seat had a place waiting for it. The Pens are a compound below it, found only by following a lead, like Fallout's Mariposa.
+- **The Bone Field is reworked around VI.17 and lockjaw.** Gauls heaped spoils in consecrated places and death with torture was the penalty for touching them. Robbers selling the gods' iron to arm the revolt makes a real dilemma, and lockjaw from old iron is a natural "curse" that a healer can understand and not cure.
+- **The council of all Gaul at Bibracte is the act's set piece,** built like the assembly at home: up to three matters, evidence and arguments add up, defaults if the player isn't there. The vote itself is fixed (VII.63).
+- **Joining the house is a full path.** Fallout lets you join the Master; this game lets you become Dannotalos's or Vettius's partner. It costs everything else on the book and pays in silver, and it starts Act III's slavers' camp stand.
+- **Killing the men doesn't stop the machine; only the paper does.** Killing Vettius hands the book to Hermeros; killing Dannotalos hands his account to the house. The routes that break the house are the book, the credit, the stock, the muscle and the partner's standing. That's both truer and a better design: murder is always available and never the clever answer.
+- **Five companions, named and placed.** The war dog (the Bone Field), Theron (Act I, personal quest at Cabillonum), Bitugenos the bard (Bibracte), Gundo the German (the camp), Cintillus the auxiliary (Noviodunum's fall). All names but Theron's are placeholders.
+
 ## 2026-11-20 (balance)
 
 - **Combat arena instead of guesswork.** A playtester said wolves were too hard. `tools/arena.sh` runs fresh builds against every random encounter headless and prints win rates, so balance changes can be checked in numbers. It copies the turn loop and reuses `CombatRules` for the math, so it drifts if `CombatRunner` changes.

@@ -2,7 +2,7 @@
 
 A turn-based, isometric, open-world role-playing game in the mold of Fallout 1, set in Gaul during the Great Revolt of 52 BC. You can't change who wins. You can change who's left.
 
-Status: Act I is playable start to finish, from the village that sends you out to Caesar's depot at Noviodunum and back to the assembly at home, with every quest solvable several ways. See [docs/STATUS.md](docs/STATUS.md).
+Status: Act I is playable start to finish, from the village that sends you out to Caesar's depot at Noviodunum and back to the assembly at home, with every quest solvable several ways. Act II is designed and not yet built. See [docs/STATUS.md](docs/STATUS.md).
 
 ## Docs
 

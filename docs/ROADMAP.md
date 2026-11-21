@@ -22,7 +22,19 @@ The target is the full game described in [DESIGN.md](DESIGN.md), roughly Fallout
 
 ## Phase 3: The rest of Gaul
 
-One milestone per location or pair of locations, in roughly the order a player meets them: Gergovia (built 2026-11-18); Avaricum (timed; built 2026-11-18); Cenabum and the Carnute forest (built 2026-11-20); Noviodunum and the assembly at home, closing Act I (built 2026-11-20); Bibracte; the Germanic camp and the Bone Field; the Pens; Alesia. Companions are added as their home locations arrive.
+One milestone per location or pair of locations, in roughly the order a player meets them: Gergovia (built 2026-11-18); Avaricum (timed; built 2026-11-18); Cenabum and the Carnute forest (built 2026-11-20); Noviodunum and the assembly at home, closing Act I (built 2026-11-20). Then Act II (designed 2026-11-20), then Alesia. Companions are added as their home locations arrive.
+
+Act II, in build order:
+
+| Milestone | Done when |
+|---|---|
+| **A2.1 Systems** | Allied bands fight on the player's side; several companions follow at once, with opinion, parting and a Presence cap; the guest-bond Honor rule; calendar-dependent prices; scripted day changes to maps; the Act II clock events in `calendar.json`. Covered by tests and the arena. |
+| **A2.2 The house arrives** | The opening at Brigodunon (The House Collects, the runner), the Line for Brigodunon in the journal, and Cabillonum before the riot: Vettius, the Countinghouse, Theron's Debt. |
+| **A2.3 The partner** | Bibracte's two maps before day 196, Dannotalos and The Partner's routes (those that don't need later content stubbed as unavailable). |
+| **A2.4 The road east** | The Bone Field (the God's Iron, the dog) and the Germanic camp (Wages, Haldo's debt, Gundo). |
+| **A2.5 The Pens** | The compound, its captives, every route, and where freed people go. |
+| **A2.6 The war arrives** | Gergovia besieged (the Sutler, the Wall, the King's Errand), the Aeduan column, and Cabillonum's riot and after (the Tribune's Road). The first to cut if Act II has to shrink. |
+| **A2.7 The reckoning** | Noviodunum's fall on day 196 and its burned map, Bibracte after 196 (the Children of Gaul, the Bard's Disgrace), the council, and the Act II slides. Act II playable start to finish. |
 
 ## Phase 4: Finish
 
