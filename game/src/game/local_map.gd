@@ -216,6 +216,14 @@ func _any_flag(v) -> bool:
 	return false
 
 
+## True if every flag in v (one name or a list) is set.
+func _all_flags(v) -> bool:
+	for f in (v if v is Array else [v]):
+		if Game.state.flag(String(f)) == 0:
+			return false
+	return true
+
+
 func _remember_visit() -> void:
 	var gs := Game.state
 	if not gs.map_states.has(map.id):
@@ -246,7 +254,7 @@ func _spawn_actors() -> void:
 		var uid: String = e.get("uid", e["template"])
 		if with_player.has(uid):
 			continue
-		if e.has("if_flag") and gs.flag(e["if_flag"]) == 0:
+		if e.has("if_flag") and not _all_flags(e["if_flag"]):
 			continue
 		if _any_flag(e.get("unless_flag", [])):
 			continue
@@ -931,6 +939,11 @@ func leave_to(to: String, entry: String = "start") -> void:
 		Game.goto("world", {})
 	elif to.begins_with("map:"):
 		Game.state.map_id = to.substr(4)
+		# A dialogue that takes you somewhere far (following a man to
+		# Cabillonum) moves you on the world map too.
+		var wc := WorldData.load_world().cell_for_map(Game.state.map_id)
+		if wc.x >= 0:
+			Game.state.world_pos = wc
 		Game.state.entry = entry
 		Game.goto("map", {})
 

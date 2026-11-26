@@ -1,0 +1,6 @@
+// Read from the inventory: pages copied out of the master book.
+@speaker Copied pages
+=== start
+~ set pens_known
+Your copy: Brigodunon's line, the lines for Avaricum and the three at Noviodunum, and the leaf of Roman officers who signed for what they sold, with the sums. Every line is the house's own words. The house doesn't know you have them.
+* Put them away. -> END

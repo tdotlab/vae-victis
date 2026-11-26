@@ -2,10 +2,28 @@
  "_comment": "Prices that move with the story. See src/core/prices.gd. Named prices are what dialogue charges for one thing; markets scale traders' prices for some goods while their conditions hold.",
  "named": {
   "brig_line": {
-   "_comment": "Striking Brigodunon's line from the house of Vettius's book. Cheap while the house is only buying futures; ten times dearer once the Aedui take Noviodunum and the forward sale is real; gone at Alesia.",
-   "base": 60,
+   "_comment": "Striking Brigodunon's line from the house of Vettius's book. Cheap while the house is only buying futures; dearer if the house thinks Brigodunon cheated it, refused it or killed its man; ten times dearer once the Aedui take Noviodunum and the forward sale is real; gone at Alesia.",
+   "base": 80,
    "barter": true,
    "steps": [
+    {
+     "if": [
+      "flag house_owed"
+     ],
+     "x": 1.5
+    },
+    {
+     "if": [
+      "flag house_refused"
+     ],
+     "x": 2
+    },
+    {
+     "if": [
+      "flag house_grudge"
+     ],
+     "x": 2
+    },
     {
      "if": [
       "flag aedui_defected"
@@ -19,6 +37,39 @@
      "x": 0
     }
    ]
+  },
+  "hostages_back": {
+   "_comment": "Buying back hostages still held at Noviodunum from the house, for delivery after the harvest on Dannotalos's word. Gone once the Aedui take the depot.",
+   "base": 150,
+   "barter": true,
+   "steps": [
+    {
+     "if": [
+      "flag aedui_defected"
+     ],
+     "x": 0
+    }
+   ]
+  },
+  "house_debt": {
+   "_comment": "Buying the house of Vettius's debt from Demarchos. Ruinous; Theron puts his own purse in if he thinks well enough of the player.",
+   "base": 800,
+   "barter": true,
+   "steps": [
+    {
+     "if": [
+      "companion theron",
+      "opinion theron >= 20"
+     ],
+     "x": 0.6
+    }
+   ]
+  },
+  "theron_owes": {
+   "_comment": "What Theron owes his family for the ship of wine he lost.",
+   "base": 300,
+   "barter": true,
+   "steps": []
   }
  },
  "markets": [

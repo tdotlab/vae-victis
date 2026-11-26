@@ -1,0 +1,17 @@
+// The strongroom keeper in Vettius's house: a slave who sits against the
+// door. The way past him is the door itself (cab_strongroom).
+=== start
+[flag house_factor] -> factor
+The big man on the stool against the strongroom door looks at you with no interest at all.
+
+"Master's room," he says. "Not yours."
+* [speech 30] "Where are you from?" -> where
+* "Fine." -> END
+
+=== where
+He thinks about not answering. "Matisco. Downriver." He looks at his hands, which are a smith's hands with nothing to do. "Long time ago."
+* "Fine." -> END
+
+=== factor
+He gets up off the stool for you, now. It doesn't look as if he likes it.
+* "Sit down." -> END

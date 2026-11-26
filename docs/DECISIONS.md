@@ -2,6 +2,16 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-26 (Act II opening, A2.2)
+
+- **The house's man is Diodotos, not Hermeros, when Epomeduos can't come.** Hermeros is at Avaricum with his pen, his day book and his own scenes, and the ruins still need him; a second freedman keeps both. Diodotos is a placeholder.
+- **Paconius is at Cabillonum.** He meant to run for Narbo; the river south runs past Vettius's door, his money ran out, and the only man hiring someone who reads Latin was his old master. That puts the design's "inside hand" where the strongroom is, with a cost: if the book walks out after he let you in, he runs.
+- **Robbing or killing the house's man on the road needs Vellaunos's hint first** (`house_waylay`). An unprompted road encounter that offers murder would be a cartoon; the elder saying "not at my hearth" makes it a choice the player was handed.
+- **The reminder raiders are unnamed riders who don't speak Gallic,** not "its Germans". The Germanic band is A2.4's content and shouldn't be introduced by a raid it can't yet explain.
+- **Following the man takes twelve days and only hears of the Pens.** The compound itself is A2.5; until then the follow reveals Cabillonum and sets `pens_heard`, which A2.5 reads.
+- **`quest x failed` is a trap, and a test now catches it.** Several quests have stages named `done` or `failed`; on its own the effect sets that stage and leaves the quest active. A content test rejects an effect whose stage is a status word without the status spelled out.
+- **Engine, small:** a `hospitality` roof can cover a list of marks and wait on a flag; a dialogue `travel` moves the world-map position too; an actor's `if_flag` can be a list; a killed actor sets both its template's and its map entry's `kill_flag`.
+
 ## 2026-11-21 (Act II systems, A2.1)
 
 - **Opinion is a number underneath and words on screen.** Fallout shows nothing; a bare number invites min-maxing. The character sheet says "Theron thinks well of you", and the five bands are in `story.json` for T to rewrite.
@@ -9,7 +19,7 @@ Newest first. Each entry: the decision, and why.
 - **A companion asks to leave once per low, at a quiet moment, through a dialogue with routes.** Leaving mid-fight would be a punishment with no answer, and a parting that just happens breaks the quest standard. Asking again only after opinion recovers and falls stops a nag loop.
 - **A parted companion is a map visitor.** Theron's map entry is hidden once he joins (`unless_flag: theron_joined`), so a parted Theron vanished on the next visit. Actors left behind by the party are marked as visitors and saved with the map regardless of which list they came from.
 - **`violate` changes Honor directly, not through the opinion scale.** The guest-bond deed already carries each companion's reaction; going through the Honor scale too would count it twice.
-- **No map declares a roof yet.** The guest-bond rule is in, but where it applies is content: Brigodunon's hall, Vettius's house and the Bibracte guest-houses get their `hospitality` entries as they're built (A2.2 onward). Until then nothing in the game can trigger it by accident.
+- **Roofs are declared as maps are built.** Brigodunon's hall and Vettius's house got theirs in A2.2; the Bibracte guest-houses get theirs in A2.3.
 - **The Decetia settlement (`aedui_wavering`) moved from day 150 to 144,** to match the clock in DESIGN.md and the research. Nothing in Act I read the day.
 - **Act II's clock events that are only state changes are silent** (`column_turned`, `gergovia_lifted`): the news text belongs to the events the player would hear about.
 

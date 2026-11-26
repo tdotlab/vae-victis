@@ -1,0 +1,40 @@
+// Road encounter: the house's man on his way back east with two of
+// Dannotalos's spearmen, after the player let him go and got onto the road
+// first (house_waylay). Away from Vellaunos's roof this is only murder, and
+// the house will know who did it.
+=== start
+[flag house_road_done] -> done
+[flag house_epo] -> epo
+The freedman's little party comes down through the trees below the ford at dusk: Diodotos on a mule with his cloak pulled round him, a spearman ahead and a spearman behind. The front one sees you first and stops, and his spear comes down level without anyone telling it to.
+
+Diodotos looks at you, and at the empty road behind you, and understands. "Ah," he says. "Not under the roof. That's something." His hands stay where you can see them. "I'd ask you to think about the house, but I don't suppose you came here to think."
+-> hub
+
+=== epo
+Epomeduos's little party comes down through the trees below the ford at dusk: Epomeduos on a mule, a spearman ahead and a spearman behind. The front one sees you first and stops, and his spear comes down level.
+
+Epomeduos looks at you, and at the empty road behind you, and sighs. "Not under the roof. Vellaunos will be grateful." He doesn't reach for anything. "Whatever you decide, I'd rather you decided quickly. It's getting cold."
+-> hub
+
+=== hub
+* [PRE 7] "The paper and the purse. Then you can go home and tell the house what happened." -> rob
+* [speech 50] "Two spearmen aren't paid enough to die for a Roman's paper. Give it to me, and everybody walks home." -> rob
+* Kill him. -> kill
+* "Go on. I've changed my mind." -> spare
+
+=== rob
+~ set house_road_done; give house_paper; silver 50; set house_grudge; set house_paper_held; known cabillonum; quest brig_line seat; quest house_collects done_road done; honor -5; xp 50; leave; leave_all aedui
+The spearmen look at each other, and then at the man on the mule, and do the arithmetic that hired men always do. The rear one shrugs.
+
+The tablet and a heavy purse change hands. "The house will put this in the price," he says, quite calmly, and rides on into the dark with his spearmen walking a little faster than before.
+
+=== kill
+~ set house_road_done; set house_grudge; quest house_collects done_road done; honor -15; fight_all aedui; fight
+"So," he says. The spearmen move apart to give themselves room.
+
+=== spare
+~ set house_road_done; set house_refused; quest house_collects done_refused done; leave; leave_all aedui
+He nods, as if you had concluded a small piece of business satisfactorily, and rides on. The rear spearman walks backward for the first twenty paces.
+
+=== done
+The spearman has nothing to say to you.

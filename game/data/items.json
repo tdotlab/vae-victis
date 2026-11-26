@@ -652,6 +652,10 @@
       "weight": 0,
       "value": 0,
       "desc": "A wax tablet in good Latin, sealed: the hostages of Brigodunon, three, to be released to the bearer and given road and bread. Whether it is true depends on who's asking."
-    }
-  ]
+    },
+  {"id": "house_paper", "name": "The house's paper", "type": "quest", "weight": 0.2, "value": 0, "read": "item_house_paper", "desc": "A sealed wax tablet carried by the house's man: a running boar on the seal and the letters A VET C."},
+  {"id": "master_book", "name": "The master book", "type": "quest", "weight": 3.0, "value": 0, "read": "item_master_book", "desc": "Twenty leaves of beech, waxed and bound with thongs, written on both sides in a small Roman hand. Everything the house of Vettius has bought, and everything it means to."},
+  {"id": "book_pages", "name": "Copied pages", "type": "quest", "weight": 0.5, "value": 0, "read": "item_book_pages", "desc": "Leaves of wax copied out of the house's master book: the lines that matter, and the names of the men who signed for them."},
+  {"id": "vettius_seal", "name": "Vettius's seal ring", "type": "quest", "weight": 0, "value": 0, "desc": "A gold ring with a red stone cut with a running boar and A VET C. Everything the house writes is closed with it."}
+ ]
 }

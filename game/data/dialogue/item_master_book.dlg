@@ -1,0 +1,19 @@
+// Read from the inventory: the house of Vettius's master book, taken from the
+// strongroom at Cabillonum. It can be burned.
+@speaker The master book
+=== start
+Twenty leaves of beech, waxed on both sides and bound with thongs, heavy as a child. Everything the house of Vettius has bought, and everything it means to.
+* [latin 40] Read it. -> read
+* [!latin 40, companion theron] "Theron. Read me the worst of it." -> read
+* Burn it. -> burn
+* Put it away. -> END
+
+=== read
+~ set book_read; set pens_known
+Brigodunon is on the ninth leaf, between a Biturigan village that no longer exists and a family of Senones. There are pages for Avaricum, written before it fell, "by the head, from the Bituriges, after the town is taken". There are the three at Noviodunum, and a list of Roman officers with sums beside their names, and on every other page the same note in the margin: "to the pens at the crossing", where the house keeps what it has collected until the boats come.
+* Put it away. -> END
+
+=== burn
+It takes a long time. The wax runs and spits and the beech blackens slowly, leaf by leaf, and you sit and feed it until the thongs are ash and there is nothing in the fire you could read.
+~ take master_book; set book_burned; quest countinghouse done_burned done; quest house_vettius paper_burned; xp 50
+* Done. -> END

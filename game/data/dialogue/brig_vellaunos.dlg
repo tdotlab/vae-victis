@@ -1,6 +1,7 @@
 // Vellaunos, chief of the elders. Gives the main quest, hears what became of
 // the hostages, and calls the assembly that ends Act I.
 === start
+[flag guest_murder_brigodunon, !flag hall_cursed] -> cursed
 [flag act1_done] -> post
 [flag assembly_met] -> late
 [quest hostages=summoned] -> commission
@@ -247,7 +248,23 @@ It isn't peace. It isn't war. It's Brigodunon.
 * Go. -> END
 
 === post
+[flag hall_cursed] He doesn't look at you. He talks to the fire, because he has to talk to someone.
 [flag brig_rising] "The young men are drilling in the lower field. Every one of them thinks he'll be home for the harvest." He rubs his face. "There's war everywhere now, and Brigodunon can't spare anyone who knows the roads."
 [flag brig_faith] "We kept faith." He says it as if testing a floorboard. "Lucterius hasn't sent anyone. That worries me more than if he had."
 [flag brig_split] "Forty of ours are with Lucterius. The rest are here, pretending not to count the days." He looks at the fire. "Half a village at war is still a village at war."
+* [flag house_met, !flag house_left, !flag hall_cursed] "About our guest." -> guest
 * "Goodbye." -> END
+
+=== guest
+He keeps his voice down. "I know what he is. I knew before he'd finished his bow." He feeds the fire. "But he asked at my door and I let him in, and that's the end of it. Under this roof he's as safe as my own grandchildren. Whatever you want to do about the house of Vettius, you do it on the road, or in Cabillonum, or in your dreams. Not at my hearth."
+* "I understand." -> END
+
+=== cursed
+~ set hall_cursed; set house_grudge; set house_left
+[!quest house_collects done] ~ quest house_collects done_guest done
+Vellaunos is sitting where the guest sat. Somebody has scrubbed the floor, and it hasn't helped.
+
+Cintugnatos the vates came up from the shrine at dawn and stood in the doorway and spoke the words over the hall, all of them, slowly, so that nobody could say afterward they hadn't heard. Then he went back down the hill without looking at anyone. Nobody in Brigodunon has said your name since, not even to curse it.
+
+"He ate my bread," Vellaunos says, without looking up. "Whatever the house of Vettius does to us now, it will be fair. Go away."
+* Go. -> END

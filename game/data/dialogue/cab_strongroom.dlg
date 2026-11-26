@@ -1,0 +1,70 @@
+// Trigger on the strongroom door in Vettius's house. By day the house's
+// factor, or someone with the master's seal, is let in. By night: Sneak,
+// Locks, Felix, a bribe, a promise of freedom, or a fist. Turned away, the
+// player is put back in the hall.
+@speaker The strongroom door
+=== start
+[night] -> night
+[flag house_factor] -> factor
+The strongroom door is oak bound with iron, and the keeper sits on a stool against it like a dog across a threshold. He looks at you, and at your hands, and doesn't get up.
+
+"Master's room," he says in Aeduan Gallic. "Nobody goes in but the master and his freedmen."
+* [item vettius_seal] Show him the master's ring. -> seal
+* Step back. -> back
+
+=== factor
+~ set strongroom_open; xp 25
+The keeper gets up off his stool when he sees you. Somebody has told him who you are now. He lifts the bar without a word.
+* Go in. -> END
+
+=== seal
+~ set strongroom_open; xp 50
+He looks at the ring a long time, then at you. He can't read. He knows the boar. He lifts the bar and stands aside, and doesn't ask where the master is.
+* Go in. -> END
+
+=== night
+The house is asleep. A lamp burns in the hall. The keeper is still on his stool against the strongroom door, chin on his chest, breathing like a bellows.
+[flag house_warned] He has a dog with him tonight, which he didn't have before. Somebody told the house to expect you.
+* [sneak 50, !flag house_warned] Wait until he goes out to piss, and slip in behind him. -> in_sneak
+* [sneak 70, flag house_warned] Wait until he goes out to piss, dog and all, and slip in behind him. -> in_sneak
+* [locks 45, sneak 40] Pick the lock with him snoring an arm's length away. -> in_lock
+* [flag felix_turned] Tap twice on the shutter, the way Felix said. -> in_felix
+* [silver 30, !flag house_warned] Wake him gently and show him silver. -> bribe
+* [speech 50] Wake him gently and talk to him about being free. -> free
+* [brawling 45] Hit him before he's properly awake. -> knock
+* Step back. -> back
+
+=== in_sneak
+~ set strongroom_open; xp 75
+It takes most of the night. Then the keeper wakes, grumbles, and goes out to the yard, and you're through the door before the bar swings back.
+* Go in. -> END
+
+=== in_lock
+~ set strongroom_open; xp 75
+It's a Roman lock, a good one, and your hands are cold. The keeper snores. The bolt slides back with a sound like a word.
+* Go in. -> END
+
+=== in_felix
+~ set strongroom_open; xp 50
+The shutter opens a crack, and closes, and a moment later the bar lifts from inside the passage. Felix is in his shirt, white as milk. "Quickly," he whispers. "Please."
+* Go in. -> END
+
+=== bribe
+~ silver -30; set strongroom_open; xp 25
+He looks at the silver, and up at you, and round at the dark house. Then he takes it, and goes out to the yard, and takes a long time about it.
+* Go in. -> END
+
+=== free
+~ set strongroom_open; set keeper_freed; leave_all vettius_keeper; xp 75
+He listens with his eyes closed. You talk about the Arar and the roads north, and men who walk off and are never asked for again; about the war, which has room in it for a big man who isn't anybody's.
+
+"He paid four hundred for me," he says at last. "I was a smith's son at Matisco." He gets up, and lifts the bar, and goes out into the yard without looking back. You don't think he's coming back.
+* Go in. -> END
+
+=== knock
+~ set strongroom_open; set keeper_hit; leave_all vettius_keeper; xp 50
+He wakes up just in time to see it coming, which is worse for him. He folds off the stool without a sound. You drag him into the corner, and he'll wake with a headache and no idea who it was.
+* Go in. -> END
+
+=== back
+~ travel cabillonum vhall

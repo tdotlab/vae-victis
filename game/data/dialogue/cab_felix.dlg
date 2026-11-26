@@ -1,0 +1,62 @@
+// Felix, the slave clerk in Vettius's house. Promise him his freedom and he
+// opens the strongroom at night, or copies the pages for you. Once the book
+// is gone, he'll be the one they beat for it.
+=== start
+[flag book_gone] -> after
+[flag felix_turned] -> turned
+[flag felix_met] -> again
+~ set felix_met
+A young clerk at a side table is copying figures with the speed of somebody who is beaten for blots. He looks up, sees you aren't the master, and looks down again.
+
+"The master is at his table," he says in good Gallic with a Roman accent. "I only add things up."
+-> hub
+
+=== again
+Felix glances at the master's table before he answers. "Yes?"
+-> hub
+
+=== hub
+* "What do you add up?" -> book
+* [!flag felix_turned, speech 40] "How long until you've added up enough to buy yourself?" -> promise
+* [!flag felix_turned, honor >= 10] "I can get you out of here. You have my word." -> promise
+* "Never mind." -> END
+
+=== book
+[quest countinghouse none] ~ quest countinghouse start
+"Everything." He doesn't stop writing. "Day books, letters, the accounts with the boatmen. Then once a month the master copies it all into the master book himself, in the strongroom, and nobody else touches that." He lowers his voice. "Not even me. The keeper sleeps against the door."
+-> hub
+
+=== promise
+~ set felix_turned; xp 25
+His stylus stops. For a long moment he doesn't look up.
+
+"They named me Felix," he says to the tablet. "Lucky. The master thought it was funny." Then he looks up. "I sleep in the passage behind the strongroom. At night, if someone tapped twice on the shutter, I could lift the bar from inside. Or I could copy what you need, a few leaves a night, when the master's asleep." He swallows. "When it's done, I'm going with you. That's the price."
+-> turned_hub
+
+=== turned
+Felix doesn't look up. "Not here," he breathes. "He listens."
+-> turned_hub
+
+=== turned_hub
+* [!flag book_copied] "Copy the pages that matter. Brigodunon, the officers, the pens." -> copies
+* "Twice on the shutter, at night. I remember." -> END
+* "Later." -> END
+
+=== copies
+~ time 720; give book_pages; set book_copied; quest countinghouse found; quest countinghouse done_copied done; quest house_vettius paper_copied; xp 50
+"Two nights," he says.
+
+It takes three. When he gives you the tablets, tied in a cloth, his hands are shaking and there is fresh wax under his nails. "Brigodunon, the officers with their sums, Avaricum, the pens at the crossing." He tries to smile. "In my best hand."
+* "Thank you, Felix." -> END
+
+=== after
+[flag felix_freed] -> END
+Felix is at his side table with a bruise along his jaw that wasn't there before. He doesn't look up.
+
+"The book's gone," he says, very quietly. "They think it was someone in the house. The keeper says he slept. I'm the only one in this house who can read." He dips the stylus, and his hand shakes. "They'll ask me again tomorrow."
+* "Come with me. Now." -> freed
+* "I'm sorry." -> END
+
+=== freed
+~ set felix_freed; honor 5; xp 25; leave
+He puts the stylus down very carefully, as if it might break, and gets up, and walks out of the house behind you without taking anything at all.

@@ -1,0 +1,13 @@
+// Italian wine traders at Cabillonum before the riot.
+=== start
+[flag cabillonum_riot] -> after
+-> roman
+
+=== roman
+[flag aedui_wavering] The trader keeps his voice down. "My wife's Aeduan, you know. Her brothers have stopped coming to supper. Twenty years on this river and they've stopped coming to supper." He looks at the quay. "If it comes to it, I'll be in a boat before they've finished deciding."
+[!flag aedui_wavering] "Best wine on the Arar, straight up from Massilia, and the Aedui drink it like water." The trader grins. "Mind you, they pay in slaves half the time. Ask Vettius what he does with them. Actually, don't."
+* "Goodbye." -> END
+
+=== after
+They don't want to talk to you. Nobody in Cabillonum wants to talk to anybody this week.
+* "Goodbye." -> END

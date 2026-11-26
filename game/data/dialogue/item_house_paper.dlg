@@ -1,0 +1,22 @@
+// Read from the inventory: the sealed tablet the house's man carried.
+@speaker The house's paper
+=== start
+[flag house_paper_read] -> known
+A wax tablet in a beech case, the seal on the binding a running boar with letters round it. Inside, close Roman cursive.
+* [latin 30] Read it. -> read
+* [!latin 30] Look at the seal. -> seal
+* Put it away. -> END
+
+=== read
+~ set house_paper_read; known cabillonum; quest brig_line seat; quest house_vettius start; xp 25
+The house of Aulus Vettius Calvus offers Brigodunon of the Cadurci its protection, "on the account of Dannotalos the Aeduan", the line to be struck from the book on payment. The seal reads A VET C, and under it, smaller, CABILLONO: the house's own seal, at Cabillonum on the Arar.
+* Put it away. -> END
+
+=== seal
+~ set house_paper_read; known cabillonum; quest brig_line seat; quest house_vettius start; xp 10
+You can't read the writing. The seal you can: a boar, running, and five letters you saw on Theron's tablets and in the depot at Noviodunum. Anyone on the Arar could tell you where that boar lives. Cabillonum.
+* Put it away. -> END
+
+=== known
+Protection for Brigodunon, on Dannotalos's account, under the house's seal from Cabillonum.
+* Put it away. -> END

@@ -1,0 +1,23 @@
+// Arrival scene at Cabillonum with Theron in the party: his brother lives
+// here. If he thinks little of the player, or the player has joined the
+// house, he sells them out to his family and goes home.
+=== start
+[opinion theron < 0] -> sells
+[flag house_factor] -> sells
+~ quest theron_debt start
+Theron stops at the gate and looks down the long street to the river, at the warehouses and the boats and a stone house with a blue door near the quay.
+
+"My brother lives there," he says. "Demarchos. He lends money to Vettius, the money Vettius lends to soldiers." He doesn't look at you. "And I owe the family for a ship of wine. I'd rather not talk about the ship." He straightens his cloak. "But if you want to hurt the house without lifting a sword, he's the one to talk to. I'll come with you. I'll even be polite."
+* "Thank you, Theron." -> END
+
+=== sells
+~ quest theron_debt failed failed; set theron_sold; set house_warned
+Theron stops at the gate and looks down the long street to the river, at the warehouses and the boats and a stone house with a blue door near the quay.
+
+"My brother lives there," he says. "I'm going to see him. Alone." He turns to you, and he isn't smiling. "I'll tell you what I'm going to tell him, because I'm a Greek, not a thief. I'm going to tell him what you're here to do to the house of Vettius, because my brother lends Vettius money, and because I owe my family more than I owe you." He hitches his pack on his shoulder. "Then I'm going home to Massilia. Goodbye."
+* "Theron." -> gone
+* Let him go. -> gone
+
+=== gone
+~ part; leave
+He goes down the street toward the blue door, and doesn't look back.

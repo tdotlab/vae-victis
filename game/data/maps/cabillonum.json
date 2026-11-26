@@ -1,0 +1,288 @@
+{
+ "id": "cabillonum",
+ "name": "Cabillonum",
+ "default": "grass",
+ "legend": {
+  ".": "grass",
+  "o": "dirt",
+  "_": "road",
+  "p": "palisade",
+  "w": "wall_wood",
+  "#": "wall_stone",
+  "f": "floor_earth",
+  "d": "door",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "a": "amphorae",
+  "S": "stall",
+  "y": "granary",
+  "F": "woodpile",
+  "/": "cart",
+  "T": "tree",
+  "=": "shallows",
+  "~": "water",
+  "m": "floor_wood",
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "e": {
+   "terrain": "grass",
+   "mark": "exit"
+  },
+  "H": {
+   "terrain": "floor_wood",
+   "mark": "vhouse"
+  },
+  "R": {
+   "terrain": "floor_wood",
+   "mark": "vhall"
+  },
+  "V": {
+   "terrain": "floor_wood",
+   "mark": "vettius"
+  },
+  "J": {
+   "terrain": "floor_wood",
+   "mark": "felix"
+  },
+  "P": {
+   "terrain": "floor_wood",
+   "mark": "paconius"
+  },
+  "K": {
+   "terrain": "floor_wood",
+   "mark": "keeper"
+  },
+  "G": {
+   "terrain": "floor_wood",
+   "mark": "strongroom"
+  },
+  "L": {
+   "terrain": "floor_wood",
+   "mark": "lectern"
+  },
+  "D": {
+   "terrain": "door",
+   "mark": "strong_door"
+  },
+  "X": {
+   "terrain": "crate",
+   "mark": "strongbox"
+  },
+  "k": {
+   "terrain": "crate",
+   "mark": "ware_stock"
+  },
+  "M": {
+   "terrain": "floor_wood",
+   "mark": "demarchos"
+  },
+  "Z": {
+   "terrain": "road",
+   "mark": "quay"
+  },
+  "1": {
+   "terrain": "dirt",
+   "mark": "t1"
+  },
+  "2": {
+   "terrain": "dirt",
+   "mark": "t2"
+  },
+  "3": {
+   "terrain": "dirt",
+   "mark": "t3"
+  },
+  "4": {
+   "terrain": "dirt",
+   "mark": "t4"
+  },
+  "5": {
+   "terrain": "grass",
+   "mark": "t5"
+  },
+  "6": {
+   "terrain": "dirt",
+   "mark": "boatman"
+  }
+ },
+ "rows": [
+  "..p.....................................oo==~~",
+  "..p..T.............T....................oo==~~",
+  "..p..........T......................T...oo==~~",
+  "..p...................#############.....oo==~~",
+  "..p.wwwwww..wwwwww....#XGL#HHHHHHH#wwwwwoo==~~",
+  "..p.wfhfBw..wfhfBw....#GGt#HhHHHHH#waaawoo==~~",
+  "..p.wffffw..wffffw....#aGG#HHHHHHH#wfffdoo==~~",
+  "..p.wffftw..wffftw....##D##HHHtttH#waaawoo==~~",
+  "..p.wwdwww..wwdwww....#KRHHHHHHVHH#wwwwwoo==~~",
+  "..p...o.......o.......#HHHHHHHHHHH#.....oo==~~",
+  "..p...o..y....o.......#HHtJHHHHHHH#.....oo==~~",
+  "..pT..o.......o../....#HHHHHHHtPHH#.....oo==~~",
+  "..p...o.......o.....5.#HHHHHHHHHHH#.....o6==~~",
+  "e.p...o..S.S..o..S.S..######d######.....oo==~~",
+  "e._ooooo1ooooooooooooooooooo_oooooooo3oooo==~~",
+  "e@_______________________________________Z==~~",
+  "e._ooooooooooooo2ooooooooooooooooooooo/o4o==~~",
+  "e.p...o..S.S...o....S......o.......wwwwwoo==~~",
+  "..p...o........o.......####d####...waaawoo==~~",
+  "..p.wwdwww...wwdwww....#mmmmmmm#...wfffdoo==~~",
+  "..p.wffftw...wffftw....#mtMmmmm#...wakawoo==~~",
+  "..p.wffffw...wffffw.T..#mmmmmBm#...waaawoo==~~",
+  "..p.wfhfBw...wfhfBw....#mammmmm#...wwwwwoo==~~",
+  "..p.wwwwww...wwwwww....#########........oo==~~",
+  "..p..................................T..oo==~~",
+  "..p.....F.........T.....................oo==~~",
+  "..p.T...................T...............oo==~~",
+  "..p........T..................T.........oo==~~",
+  "..p.....................................oo==~~",
+  "..p.....................................oo==~~"
+ ],
+ "arrive_text": "Cabillonum: an Aeduan river town on the Arar, where Roman wine comes upriver by the boatload and goes into Gaul by the cartload. Timber houses, a market, warehouses stacked to the eaves with amphorae, and by the quay a Roman's stone house with a strongroom at the back. The river is wide and brown and slow, and everything on it is going somewhere for money.",
+ "arrive_dialogues": [
+  {
+   "id": "theron_cab",
+   "dialogue": "cab_theron_arrive",
+   "if": [
+    "companion theron"
+   ],
+   "speaker": "theron"
+  }
+ ],
+ "hospitality": [
+  {
+   "host": "vettius",
+   "mark": [
+    "vhouse",
+    "vhall",
+    "vettius",
+    "felix",
+    "keeper",
+    "paconius",
+    "strongroom",
+    "lectern",
+    "strong_door"
+   ],
+   "if_flag": "vettius_guest"
+  }
+ ],
+ "actors": [
+  {
+   "uid": "vettius",
+   "template": "vettius",
+   "mark": "vettius"
+  },
+  {
+   "uid": "cab_keeper",
+   "template": "cab_keeper",
+   "mark": "keeper"
+  },
+  {
+   "uid": "felix",
+   "template": "felix",
+   "mark": "felix"
+  },
+  {
+   "uid": "paconius_cab",
+   "template": "paconius",
+   "mark": "paconius",
+   "dialogue": "cab_paconius",
+   "if_flag": "clerk_saved",
+   "unless_flag": [
+    "paconius_blamed"
+   ]
+  },
+  {
+   "uid": "demarchos",
+   "template": "demarchos",
+   "mark": "demarchos"
+  },
+  {
+   "uid": "cab_t1",
+   "template": "cab_aeduan",
+   "mark": "t1"
+  },
+  {
+   "uid": "cab_t2",
+   "template": "cab_aeduan_f",
+   "mark": "t2"
+  },
+  {
+   "uid": "cab_t3",
+   "template": "cab_trader",
+   "mark": "t3"
+  },
+  {
+   "uid": "cab_t4",
+   "template": "cab_aeduan",
+   "mark": "t4"
+  },
+  {
+   "uid": "cab_t5",
+   "template": "cab_trader",
+   "mark": "t5"
+  },
+  {
+   "uid": "cab_boatman",
+   "template": "cab_boatman",
+   "mark": "boatman"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "strongbox",
+   "name": "The house's strongbox",
+   "items": [
+    [
+     "bronze_torque",
+     1
+    ]
+   ],
+   "silver": 250,
+   "lock": 60,
+   "owner": "vettius",
+   "if_seen": "fight"
+  },
+  {
+   "mark": "ware_stock",
+   "name": "Wine for the hills",
+   "items": [
+    [
+     "roman_wine",
+     4
+    ]
+   ],
+   "owner": "vettius"
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The west gate"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "strong_door",
+   "id": "strong_door",
+   "once": false,
+   "unless_flag": "strongroom_open",
+   "dialogue": "cab_strongroom"
+  },
+  {
+   "mark": "lectern",
+   "id": "lectern",
+   "once": false,
+   "unless_flag": "book_gone",
+   "dialogue": "cab_book"
+  },
+  {
+   "mark": "quay",
+   "id": "quay_view",
+   "say": "The quay is timber piles and packed gravel, and the mud under the water is full of broken amphorae: generations of them, dropped, cracked, emptied and thrown in. A barge from downriver is unloading wine. Another, empty, waits with its lines slack, and the boatmen keep looking south."
+  }
+ ]
+}

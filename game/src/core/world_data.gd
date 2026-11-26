@@ -168,6 +168,18 @@ static func map_entry(l: Dictionary, flags: Dictionary) -> Dictionary:
 	return out
 
 
+## The world cell of the location a local map belongs to (any of its faces),
+## or (-1, -1) for maps that belong to none (road encounters, the sandbox).
+func cell_for_map(map_id: String) -> Vector2i:
+	for l in locations:
+		if l.get("map", "") == map_id:
+			return location_cell(l)
+		for v in l.get("map_by_flag", []):
+			if v.get("map", "") == map_id:
+				return location_cell(l)
+	return Vector2i(-1, -1)
+
+
 func location_at(c: Vector2i) -> Dictionary:
 	for l in locations:
 		if location_cell(l) == c:

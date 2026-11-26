@@ -1,0 +1,14 @@
+// Aeduans in the streets and on the quay at Cabillonum before the riot: the
+// tension that breaks on about day 178.
+=== start
+[flag cabillonum_riot] -> after
+-> aeduan
+
+=== aeduan
+[flag aedui_wavering] "They say at Bibracte the magistrate's brother has been talking to the Arverni. They say a lot of things at Bibracte." A look at the Roman wine stacked on the quay. "If it's true, some people on this street are going to find out who their friends are."
+[!flag aedui_wavering] "The Romans pay for the unloading. Every jar." A shrug that isn't a shrug. "They pay for everything. That's what you notice, after a while. Everything in this town is something they've paid for."
+* "Goodbye." -> END
+
+=== after
+They don't want to talk to you. Nobody in Cabillonum wants to talk to anybody this week.
+* "Goodbye." -> END

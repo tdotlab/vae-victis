@@ -1,0 +1,63 @@
+// Trigger on the lectern in Vettius's strongroom: the master book (The
+// Countinghouse). Read it, copy it in place, strike Brigodunon's line under
+// the house's seal, take it, or burn it in the clerks' brazier.
+@speaker The master book
+=== start
+[flag book_seen] -> look
+~ set book_seen; set pens_known
+[quest countinghouse none] ~ quest countinghouse start
+~ quest countinghouse found
+The strongroom is small and cold and smells of wax. Strongboxes along one wall, an iron lamp, a brazier for the clerks' hands, and on a lectern by the slit window a book of twenty beech leaves, waxed on both sides and bound with thongs. It lies open, as if someone had only stepped out.
+-> look
+
+=== look
+* [latin 40] Read it. -> read
+* [!latin 40, companion theron] "Theron. Read it." -> read_theron
+* [!flag book_copied, latin 50, WIT 7] Copy the pages that matter onto the clerks' blank tablets. -> copy
+* [!flag book_copied, companion theron] "Theron, copy the pages that matter. Quickly." -> copy
+* [!quest brig_line done, latin 60, item vettius_seal] Strike Brigodunon's line the way the clerks strike a line, and seal it. -> forge
+* [!quest brig_line done, flag paconius_inside] "Paconius. Strike our line." -> forge_pac
+* Take the book. -> take
+* Burn it in the brazier. -> burn
+* Leave it. -> END
+
+=== read
+~ set book_read; xp 25
+It's written in a small, tidy hand, every line the same: a place, a family, a number of heads, a price, "on the account of" a man's name, and when. Brigodunon is on the ninth leaf: "the hill fort, all hearths, after the harvest, on the account of Dannotalos". There are pages for Avaricum, written before it fell. There are the three at Noviodunum, and a leaf of Roman officers with sums beside their names: a tribune, two centurions, a quartermaster called Orbius. And on every other page the same note in the margin: "to the pens at the crossing".
+-> look
+
+=== read_theron
+~ set book_read; xp 25
+Theron reads it standing, turning the leaves with one finger, and his face goes still the way it did at Gergovia.
+
+"Brigodunon, ninth leaf: every hearth, after the harvest, on Dannotalos's account." He turns more. "Avaricum, written before it fell. Your three at Noviodunum. Here, Roman officers, with sums." He shows you a name you know: Orbius. "And this, everywhere: 'to the pens at the crossing'. That's where they keep them until the boats come." He closes it carefully. "My brother lends this man money."
+-> look
+
+=== copy
+~ time 180; give book_pages; set book_copied; quest countinghouse done_copied done; quest house_vettius paper_copied; xp 75
+It takes most of three hours by the strongroom lamp: Brigodunon's line, Avaricum's, the three at Noviodunum, the leaf of officers with their sums, all in the house's own words. You put the stack of blank tablets back four short, and nothing else is out of place. The book lies open at the page it was open at before.
+-> look
+
+=== forge
+~ set line_forged; quest brig_line done_forged done; xp 75
+You find the ninth leaf and do what the clerks do to a line that's settled: one ruled stroke through it, "solv." in the margin with the day, and a dab of fresh wax with the seal pressed into it. It looks like every other struck line on the page. Nobody reads struck lines.
+-> look
+
+=== forge_pac
+~ set line_forged; quest brig_line done_forged done; xp 75
+Paconius does it in the time it takes to say it: a ruled stroke, "solv." and the day, and the house's seal on fresh wax, from the box where he knows the master keeps a spare stamp. He doesn't look at you while he does it. "Twenty years," he says to the book. "Nobody reads a struck line."
+-> look
+
+=== take
+~ give master_book; set book_taken; set book_gone; set house_robbed; quest countinghouse done_taken done; quest house_vettius paper_held; xp 50
+[!quest brig_line done] ~ quest brig_line done_taken done
+[flag paconius_inside] ~ set paconius_blamed
+You close it, and tie the thongs, and it's heavy as a child under your cloak. On the lectern there's a clean rectangle in the dust.
+* Go. -> END
+
+=== burn
+~ set book_burned; set book_gone; set house_robbed; quest countinghouse done_burned done; quest house_vettius paper_burned; xp 50
+[!quest brig_line done] ~ quest brig_line done_burned done
+[flag paconius_inside] ~ set paconius_blamed
+You feed it to the brazier a leaf at a time. The wax runs and spits and the beech blackens slowly, and the strongroom fills with the smell of a shrine full of lamps. When it's ash you stir it, and it's still ash.
+* Go. -> END

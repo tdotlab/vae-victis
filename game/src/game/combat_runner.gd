@@ -434,8 +434,13 @@ func _kill(def: Actor, killer: Actor) -> void:
 	if killer.is_player or killer.is_companion:
 		var xp := int(DB.npc_template(def.template).get("xp", 25 + 15 * def.sheet.level))
 		Game.give_xp(xp, "Killed " + def.display_name())
-	if def.has_meta("kill_flag") or DB.npc_template(def.template).has("kill_flag"):
-		Game.state.set_flag(DB.npc_template(def.template).get("kill_flag", def.get_meta("kill_flag", "")))
+	# Both count: the template's flag says who died (Epomeduos), the map
+	# entry's says in what part (the house's man at Brigodunon).
+	var tkf: String = DB.npc_template(def.template).get("kill_flag", "")
+	if tkf != "":
+		Game.state.set_flag(tkf)
+	if def.has_meta("kill_flag") and String(def.get_meta("kill_flag")) != "":
+		Game.state.set_flag(String(def.get_meta("kill_flag")))
 	var rules := DB.rules()
 	var shock := int(rules.get("kill_shock", 10)) + (int(rules.get("leader_shock", 50)) if def.leader else 0)
 	var head_taker := killer.is_player and killer.sheet.has_flag("head_taker")

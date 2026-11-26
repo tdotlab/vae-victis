@@ -198,6 +198,79 @@
         "done_void": "The druids have judged: Rome broke faith, and Brigodunon's oath is void. Whatever the assembly decides, it decides free.",
         "done_bound": "The druids have judged that the oath still binds. Brigodunon gave its word; Rome has not yet broken its own."
       }
+    },
+    {
+      "id": "house_collects",
+      "name": "The House Collects",
+      "main": true,
+      "xp": 150,
+      "stages": {
+        "runner": "A runner from Vellaunos found me on the road. A man from the house of Vettius has been sitting in the hall at Brigodunon as Vellaunos's guest, and he won't go until he has spoken to whoever brought the hostages home.",
+        "start": "The house of Vettius has sent a man to Brigodunon to collect. He sits at Vellaunos's fire as a guest, which means nobody may lift a hand to him under that roof, and he knows it.",
+        "redeemed": "I paid the house's man for the three still held at Noviodunum. He says they will be delivered after the harvest, on Dannotalos's word. I have his word that I have Dannotalos's word.",
+        "done_paid": "I paid the house. Brigodunon's line is struck, and the house has my silver to buy the next line with.",
+        "done_refused": "I showed the house's man the door. He went politely, and said the price would be higher next time, and that someone else would come to collect it.",
+        "done_followed": "I let the house's man go, and followed him east to Cabillonum on the Arar, where the house of Vettius keeps its book.",
+        "done_guest": "I killed the house's man at Vellaunos's fire, a guest under our roof. Nothing I do now will make Brigodunon forget it.",
+        "done_road": "I waited for the house's man on the road and settled it there. It was only murder. The house will know who did it."
+      }
+    },
+    {
+      "id": "brig_line",
+      "name": "The Line for Brigodunon",
+      "main": true,
+      "xp": 300,
+      "stages": {
+        "start": "Brigodunon is a line in the book of the house of Vettius: not the three hostages, the hill itself, every hearth and every head, to be collected after the harvest on Dannotalos's account. I have to get it struck off. It is cheap now. Once the Aedui go over to the revolt it will cost ten times as much, and at the end it won't be for sale at all.",
+        "seat": "The house of Vettius keeps its book at Cabillonum, an Aeduan river port on the Arar, east of Bibracte. Vettius himself lives there.",
+        "done_bought": "I bought Brigodunon off the book. The line is struck.",
+        "done_factor": "I signed on as the house's factor for the Cadurci hills, and Vettius struck Brigodunon from the book as my wage. Factors' villages are kept off the book. It is bad for business to sell a man's mother.",
+        "done_forged": "Brigodunon's line is struck in the master book in a clerk's hand and closed with the house's seal. Nobody reads struck lines. The house will never know it didn't strike it.",
+        "done_taken": "I have the house's master book. Nobody can collect a line from a book they don't have.",
+        "done_burned": "The house's master book is ash and melted wax. Brigodunon's line, and every other line in it, went with it.",
+        "done_never": "Demarchos has called in what the house of Vettius owed him. When the Aedui go over and the war comes up for sale, the house won't have the coin to buy it forward, and Brigodunon's line will never be written down for real."
+      }
+    },
+    {
+      "id": "house_vettius",
+      "name": "The House of Vettius",
+      "main": true,
+      "xp": 0,
+      "stages": {
+        "start": "The house of Vettius sells the war forward: people bought before they are taken, paid for on account. It stands on five things: a partner (Dannotalos of the Aedui), the paper (the master book at Cabillonum), the stock (whatever the house is holding for the boats), the muscle (whoever does its catching), and the credit (whoever lends it the coin). Nothing makes me break any of them.",
+        "paper_copied": "The paper: I copied the pages of the master book that matter, the lines and the names of the officers who signed for them. The house doesn't know.",
+        "paper_held": "The paper: I took the master book. The house will have to remember everything it was owed.",
+        "paper_burned": "The paper: the master book is burned.",
+        "factor": "I signed on as the house's factor for the Cadurci hills. I am part of the house now, whatever else I am.",
+        "credit_called": "The credit: Demarchos of Massilia has called in the house's loan.",
+        "credit_bought": "The credit: I own the house's debt to Demarchos. The house of Vettius owes me.",
+        "vettius_dead": "Vettius is dead. The house isn't: Hermeros the freedman inherits the book and the business, and the harvest goes on."
+      }
+    },
+    {
+      "id": "countinghouse",
+      "name": "The Countinghouse",
+      "xp": 200,
+      "stages": {
+        "start": "The house's master book is in the strongroom of Vettius's house at Cabillonum, behind a door its own slaves keep. Brigodunon is in it, and much else.",
+        "found": "I've seen the master book. Brigodunon is in it, and Avaricum, and the hostages at Noviodunum, and a list of Roman officers with sums beside their names. Deliveries go to pens at a crossing below the town.",
+        "done_copied": "I copied the pages that matter out of the master book. The house doesn't know, and I hold the evidence.",
+        "done_taken": "I took the master book out of the strongroom.",
+        "done_burned": "I burned the master book."
+      }
+    },
+    {
+      "id": "theron_debt",
+      "name": "Theron's Debt",
+      "xp": 150,
+      "stages": {
+        "start": "Theron's elder brother Demarchos is a Massiliot banker at Cabillonum. He lends the house of Vettius the coin it lends to soldiers. Theron owes the family for a ship of wine he lost, and won't talk about it.",
+        "met": "I've met Demarchos. Polite, heavy, careful, and the house of Vettius owes him a great deal of money.",
+        "done_called": "Demarchos has called in the house's loan on my word and Theron's.",
+        "done_bought": "Theron and I bought the house's debt from Demarchos. The house of Vettius owes us now.",
+        "done_settled": "I paid what Theron owed his family for the lost ship. Demarchos embraced his brother in the doorway. It changes nothing for the house, and everything for Theron.",
+        "failed": "Theron went to his brother without me and told him, and the house, what I mean to do. Then he went home to his family."
+      }
     }
   ]
 }

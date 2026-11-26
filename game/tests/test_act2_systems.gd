@@ -127,9 +127,9 @@ func test_roofs_cover_their_marks() -> void:
 func test_named_price_moves_with_the_story() -> void:
 	var gs := _gs()
 	var disc := Prices.barter_discount(gs.player.skill("barter"))
-	eq(Prices.named(gs, "brig_line"), int(round(60 * disc)), "before Noviodunum")
+	eq(Prices.named(gs, "brig_line"), int(round(80 * disc)), "before Noviodunum")
 	gs.set_flag("aedui_defected")
-	eq(Prices.named(gs, "brig_line"), int(round(600 * disc)), "ten times after it")
+	eq(Prices.named(gs, "brig_line"), int(round(800 * disc)), "ten times after it")
 	gs.set_flag("alesia_begun")
 	eq(Prices.named(gs, "brig_line"), -1, "gone at Alesia")
 	check(not Dialogue.check(gs, "priced brig_line"))

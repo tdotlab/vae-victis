@@ -1,0 +1,33 @@
+// Arrival scene at Brigodunon, once, from day 121 (calendar flag house_due):
+// Vellaunos meets the player with the news that the house of Vettius has sent
+// a man, settles who he is and what the house can claim from Act I, and walks
+// the player into the hall, where the man waits (brig_house).
+//   house_epo + epo_at_brig: Epomeduos, alive and unexposed after Avaricum.
+//   house_dio: otherwise Diodotos, a freedman of the house (placeholder name).
+//   house_owed: the hostages came out by fraud or by night; the house wants its price.
+//   house_claim_none: Orbius wrote them off, or sold them; no claim, only "protection".
+//   house_claim_held: they're still at Noviodunum; the house offers them back.
+=== start
+~ set house_met
+[!flag factor_gone] ~ set house_epo; set epo_at_brig
+[flag factor_gone] ~ set house_dio
+[!flag epo_out] ~ set house_claim_held
+[flag epo_out, flag orbius_mercy] ~ set house_claim_none
+[flag epo_out, flag hostages_bought] ~ set house_claim_none
+[flag epo_out, !flag house_claim_none] ~ set house_owed
+[quest house_collects=runner] -> runner
+Vellaunos is waiting at the gate, which he never does. He takes your arm and walks you up the hill without saying anything until the gate warden can't hear.
+
+"We have a guest." He says the word carefully. "A man from the house of Vettius, the Roman who trades out of Cabillonum. He came the day after the assembly with two Aeduan spearmen, left them at the foot of the hill like a gentleman, and asked for hospitality. I gave it. What else could I do?" He stops at the hall door. "He's eaten my bread and he sleeps by my fire. Whatever he wants, and he wants something, he's under my roof. Remember that."
+-> go
+
+=== runner
+Vellaunos is waiting at the gate. "The boy found you, then. Good." He looks older than he did. "He's still here. He's very patient. He's eaten my bread for a month and thanked me for it every evening." He stops at the hall door. "He's under my roof. Remember that, whatever he says."
+-> go
+
+=== go
+~ quest house_collects start
+* Go in. -> in
+
+=== in
+~ travel brigodunon hall

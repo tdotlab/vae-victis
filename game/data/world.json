@@ -90,16 +90,16 @@
   "~~ff.......f..~=.f........f.....",
   "~.....f..f.sss.~~......ff....f.f",
   "..........sssss.~~fff.....f....f",
-  "...........s.s...~~.f.f.h..f..f.",
-  "......f...........~....h.fh...ff",
-  ".......f...f....f.~ff..hfhf..f..",
-  "..f.f.....f.......~~ff.fhff..f..",
-  ".....ff..ff....f...~=.f.h.h.f...",
-  "....f.f......f.....~~~ffhff.....",
-  ".f..............f..~.~~.h.....f.",
-  "....ff..f.......f..~..~~.f.f....",
-  "..........f...f....~...~~.......",
-  "....f.........f..ff~....~~.ff...",
+  "...........s.s...~~.f.f.h..f~.f.",
+  "......f...........~....h.fh.~.ff",
+  ".......f...f....f.~ff..hfhf.=f..",
+  "..f.f.....f.......~~ff.fhff.~f..",
+  ".....ff..ff....f...~=.f.h.h.~...",
+  "....f.f......f.....~~~ffhff.~...",
+  ".f..............f..~.~~.h...~.f.",
+  "....ff..f.......f..~..~~.f.f~...",
+  "..........f...f....~...~~...~...",
+  "....f.........f..ff~....~~~~f...",
   "f.....f...........f=.....~f..f..",
   "....ff.....ff.hhhhh~hhh.f~~.f...",
   ".f.ff...f...f.hhhhh~hhh...=f....",
@@ -280,6 +280,19 @@
    "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
    "size": 2,
    "hidden": true
+  },
+  {
+   "id": "cabillonum",
+   "name": "Cabillonum",
+   "cell": [
+    27,
+    15
+   ],
+   "desc": "An Aeduan river port on the Arar, where Roman wine comes upriver. The house of Vettius keeps its book here.",
+   "map": "cabillonum",
+   "entry": "start",
+   "size": 2,
+   "hidden": true
   }
  ],
  "encounters": [
@@ -457,7 +470,10 @@
    ],
    "text": "Roman foragers, a long way from their camp, stripping a farm. They see you.",
    "parley": [{"kind": "pay", "cost": 30, "label": "Pay them off", "text": "It takes everything that can be spared, but they take it. None of them looks at you again."}, {"kind": "skill", "skill": "latin", "bonus": 5, "label": "Speak Latin", "win": "You speak slowly and politely, like a man with nothing to hide, and they lose interest.", "lose": "They don't believe a word. The sergeant calls an order.", "xp": 40}, {"kind": "skill", "skill": "sneak", "bonus": 10, "label": "Slip away", "win": "You stay low behind the wall until they've finished and gone. You don't breathe much.", "lose": "One of them sees the movement and shouts. They come over the wall.", "xp": 35}]
-  }
+  },
+  {"id": "house_runner", "forced": true, "days": [150, 229], "if": ["flag house_due", "!flag house_met"], "map": "enc_open", "actors": ["brig_runner"], "dialogue": "enc_runner", "button": "Wait for him", "text": "Someone is running up the road behind you, calling your name."},
+  {"id": "house_road_epo", "forced": true, "days": [121, 9999], "if": ["flag house_waylay", "flag house_epo", "!flag house_road_done"], "map": "enc_wood", "actors": ["house_epomeduos", "house_spearman", "house_spearman"], "dialogue": "enc_house_road", "button": "Step into the road", "text": "You're in the trees below the ford when you hear them: a mule, two men on foot, and Epomeduos's voice complaining about the cold."},
+  {"id": "house_road_dio", "forced": true, "days": [121, 9999], "if": ["flag house_waylay", "flag house_dio", "!flag house_road_done"], "map": "enc_wood", "actors": ["diodotos", "house_spearman", "house_spearman"], "dialogue": "enc_house_road", "button": "Step into the road", "text": "You're in the trees below the ford when you hear them: a mule, two men on foot, and the freedman's careful voice asking how far it is to the next village."}
  ],
  "reveal_radius": 1
 }

@@ -22,6 +22,45 @@ func test_every_dialogue_is_clean() -> void:
 			fail("%s.dlg: %s" % [id, e])
 
 
+## Dialogue.validate checks effect stages. This adds what it doesn't: quest
+## conditions name real stages and statuses, effects name a real status, and a
+## stage named like a status ("quest x failed") spells its status out, since
+## on its own it sets that stage and leaves the quest active.
+func test_dialogue_quest_stages_and_statuses() -> void:
+	var quests := {}
+	for q in DB.load_json("quests.json")["quests"]:
+		quests[q["id"]] = q["stages"]
+	var statuses := ["active", "done", "failed"]
+	var fx := RegEx.create_from_string(r"~\s*(.*)$")
+	var conds := RegEx.create_from_string(r"\[([^\]]*)\]")
+	for id in _files("dialogue", ".dlg"):
+		for line in FileAccess.get_file_as_string("res://data/dialogue/%s.dlg" % id).split("\n"):
+			if line.strip_edges().begins_with("//"):
+				continue
+			var m := fx.search(line)
+			if m:
+				for e in m.get_string(1).split(";"):
+					var a := e.strip_edges().split(" ", false)
+					if a.size() >= 3 and a[0] == "quest":
+						if a.size() == 3:
+							check(not a[2] in statuses, "%s: '%s' leaves the quest active; write the status too" % [id, e])
+						else:
+							check(a[3] in statuses, "%s: bad status in '%s'" % [id, e])
+			for cm in conds.search_all(line.split("~")[0]):
+				for c in cm.get_string(1).split(","):
+					var a2 := c.strip_edges().trim_prefix("!").split(" ", false)
+					if a2.size() < 2 or a2[0] != "quest":
+						continue
+					var qs := a2[1].split("=")
+					check(quests.has(qs[0]), "%s: unknown quest in [%s]" % [id, c])
+					if not quests.has(qs[0]):
+						continue
+					if qs.size() > 1:
+						check(quests[qs[0]].has(qs[1]), "%s: unknown stage in [%s]" % [id, c])
+					elif a2.size() > 2:
+						check(a2[2] in statuses + ["none"], "%s: bad status in [%s]" % [id, c])
+
+
 func test_every_ending_is_clean() -> void:
 	var quests := {}
 	for q in DB.load_json("quests.json")["quests"]:
@@ -95,7 +134,8 @@ func test_maps_reference_real_things() -> void:
 		for h in def.get("hospitality", []):
 			check(h.get("host", "") != "", "%s: a roof with no host" % id)
 			if h.has("mark"):
-				check(m.has_mark(h["mark"]), "%s: hospitality mark %s missing" % [id, h["mark"]])
+				for mk in (h["mark"] if h["mark"] is Array else [h["mark"]]):
+					check(m.has_mark(String(mk)), "%s: hospitality mark %s missing" % [id, mk])
 		if not def.get("encounter", false):
 			check(m.has_mark("start"), "%s has a start mark" % id)
 

@@ -4,7 +4,7 @@ extends RefCounted
 ## other: raising a hand against either is the worst thing a Gaul can do, far
 ## worse than murder on the road. A map declares its roofs:
 ##   "hospitality": [{"host": "brigodunon", "mark": "hall", "if_flag": "..."}]
-## (no mark: the whole map). Attacking someone there who wasn't already
+## (no mark: the whole map; a list of marks: all of them). Attacking someone there who wasn't already
 ## fighting you breaks it; so does a dialogue `~ violate <host faction>`.
 ## The price is in rules.json "guest_bond".
 
@@ -14,8 +14,15 @@ static func roof_at(gs: GameState, map: MapData, c: Vector2i) -> String:
 	for h in map.def.get("hospitality", []):
 		if h.has("if_flag") and gs.flag(String(h["if_flag"])) == 0:
 			continue
-		if h.has("mark") and not map.mark_cells(String(h["mark"])).has(c):
-			continue
+		if h.has("mark"):
+			var marks: Array = h["mark"] if h["mark"] is Array else [h["mark"]]
+			var inside := false
+			for mk in marks:
+				if map.mark_cells(String(mk)).has(c):
+					inside = true
+					break
+			if not inside:
+				continue
 		return String(h.get("host", ""))
 	return ""
 

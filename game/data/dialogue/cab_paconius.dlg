@@ -1,0 +1,47 @@
+// Paconius, if the player got him out of Gergovia in Act I. He meant to go to
+// Narbo; the river south runs past Vettius's door, and his money ran out
+// here. He's the house's clerk again. He can walk the player into the
+// strongroom by day, or strike Brigodunon's line himself. If the book goes
+// missing while he's the one who let someone in, he runs.
+=== start
+[flag paconius_blamed] -> run
+[flag paconius_met] -> again
+~ set paconius_met
+The clerk at the far table looks up, and his stylus stops, and the color goes out of his face. It's Paconius, who swore at Gergovia he would never write anything down again.
+
+"Don't," he says quietly. "Don't say my name like that. He doesn't know where I was this winter, and I'd like him not to." He glances at Vettius's table. "I got as far as here. The river goes south, but the boats cost money, and the only man on the Arar hiring someone who can read Latin is him." A thin unhappy smile. "So here I am, writing everything down."
+-> hub
+
+=== again
+Paconius doesn't look up. "Quietly," he says.
+-> hub
+
+=== hub
+* [!flag strongroom_open] "I need to see the master book." -> walk_in
+* [!quest brig_line done] "Could you strike a line, if you had to?" -> strike
+* "Why did you come back to him?" -> why
+* "Never mind." -> END
+
+=== why
+"I didn't come back. I ran out." He turns the stylus over. "He paid me well and he never once hit me. I used to think that made it all right."
+-> hub
+
+=== walk_in
+He looks at you for a long time.
+
+"He's at the quay every morning until noon, haggling with the boatmen. I fetch the day books from the strongroom then; the keeper's used to me." He breathes out. "I'll take you in. You look, and we come out. Don't take it. If that book walks out of the room while I've been in it, I'm the one they'll come for. You know what happens to freedmen who steal from their patrons? Nothing pleasant, and then nothing at all."
+* "Just a look. I promise." -> walk_in_yes
+* "Not yet." -> hub
+
+=== walk_in_yes
+~ set paconius_inside; set strongroom_open; xp 25
+The next morning he walks you past the keeper as if you were carrying the day books for him, and the keeper lifts the bar for him without looking at either of you.
+* Go in. -> END
+
+=== strike
+"Strike it." He says it the way you'd test ice. "A ruled stroke, 'solv.' and the day, and the seal. The master keeps a spare stamp in the strongroom for the copies." He doesn't look at you. "Nobody reads a struck line. If you get me in front of that book, I'll do it."
+-> hub
+
+=== run
+The far table is empty. Paconius's stylus is still lying on it, and his cloak is gone from the peg. One of the boatmen will tell you, later, that a thin Roman paid everything he had for a place on the first barge going south, and didn't wait for the cargo.
+* Leave it. -> END

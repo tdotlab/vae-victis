@@ -259,7 +259,8 @@
    "mark": "epomeduos",
    "unless_flag": [
     "avaricum_siege",
-    "factor_gone"
+    "factor_gone",
+    "epo_at_brig"
    ]
   },
   {

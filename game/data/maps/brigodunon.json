@@ -113,6 +113,14 @@
     "u": {
       "terrain": "floor_earth",
       "mark": "ateula"
+    },
+    "H": {
+      "terrain": "floor_earth",
+      "mark": "hall"
+    },
+    "J": {
+      "terrain": "floor_earth",
+      "mark": "house_man"
     }
   },
   "rows": [
@@ -128,11 +136,11 @@
     "........R...wwwdwww.._.............R........",
     "........R......_______________1....R........",
     "........R..........._wwwwwwwwwwwww.R........",
-    "........R..2........_wfffffffffffw.R........",
-    "........R...........dfffttfffffffw.R........",
-    "........R...........wffhfffVfufffw.R........",
-    "........R...........wfffttfffffffw.R........",
-    "........R...........wfafffffffflfw.R........",
+    "........R..2........_wHHHHHHHHHHHw.R........",
+    "........R...........dHHHttHHHHHHHw.R........",
+    "........R...........wHHhHHHVHuHHHw.R........",
+    "........R...........wHJHttHHHHHHHw.R........",
+    "........R...........wHaHHHHHHHHlHw.R........",
     "........R...........wwwwwwwwwwwwww.R........",
     "........R..wwwww.....3.............R........",
     "........R..wfSfd____________.......R........",
@@ -218,6 +226,30 @@
       "template": "ateula_home",
       "mark": "ateula",
       "if_flag": "ateula_out"
+    },
+    {
+      "uid": "house_epo",
+      "template": "house_epomeduos",
+      "mark": "house_man",
+      "if_flag": "epo_at_brig",
+      "unless_flag": [
+        "house_left",
+        "factor_gone"
+      ],
+      "kill_flag": "house_man_dead"
+    },
+    {
+      "uid": "house_dio",
+      "template": "diodotos",
+      "mark": "house_man",
+      "if_flag": [
+        "house_due",
+        "house_dio"
+      ],
+      "unless_flag": [
+        "house_left",
+        "house_man_dead"
+      ]
     }
   ],
   "containers": [
@@ -274,6 +306,57 @@
       "mark": "altar",
       "id": "shrine_seen",
       "say": "The shrine's offering box lies open on the altar stone, its lid split. Whatever was in it is gone."
+    }
+  ],
+  "arrive_dialogues": [
+    {
+      "id": "house_arrives",
+      "dialogue": "brig_house_arrive",
+      "if": [
+        "flag house_due",
+        "!flag house_met"
+      ],
+      "speaker": "vellaunos"
+    },
+    {
+      "id": "house_talk_epo",
+      "dialogue": "brig_house",
+      "if": [
+        "flag epo_at_brig",
+        "!flag house_talked"
+      ],
+      "speaker": "house_epo"
+    },
+    {
+      "id": "house_talk_dio",
+      "dialogue": "brig_house",
+      "if": [
+        "flag house_dio",
+        "!flag house_talked",
+        "!flag house_left"
+      ],
+      "speaker": "house_dio"
+    },
+    {
+      "id": "house_reminder",
+      "dialogue": "brig_house_reminder",
+      "if": [
+        "flag house_refused",
+        "day >= 150"
+      ],
+      "speaker": "vellaunos"
+    }
+  ],
+  "hospitality": [
+    {
+      "host": "brigodunon",
+      "mark": [
+        "hall",
+        "vellaunos",
+        "ateula",
+        "house_man"
+      ],
+      "if_flag": "house_met"
     }
   ]
 }

@@ -181,7 +181,10 @@
    "uid": "epomeduos",
    "template": "epomeduos",
    "mark": "epomeduos",
-   "unless_flag": "factor_gone"
+   "unless_flag": [
+    "factor_gone",
+    "epo_at_brig"
+   ]
   },
   {
    "uid": "pen_guard",

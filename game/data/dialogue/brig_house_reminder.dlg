@@ -1,0 +1,11 @@
+// Arrival scene at Brigodunon after the player showed the house's man the
+// door (house_refused), from day 150: the house's reminder.
+=== start
+~ set house_reminded
+Vellaunos meets you in the lower field, among the empty pens. Most of the cattle are gone.
+
+"Horsemen, four nights ago. Twenty, maybe more. Big men on big horses, and they spoke no Gallic at all, not to each other and not to us. They didn't touch a soul. They opened the pens and drove off every beast they could see and rode away east, and the last one called something back over his shoulder." He spits. "Moccos thought it sounded like a word he'd heard from the Romans' cavalry. Interest."
+
+"Your guest said the price would go up," he says. "He was a man of his word."
+* "It's going to cost them more than cattle." -> END
+* "I'm sorry." -> END

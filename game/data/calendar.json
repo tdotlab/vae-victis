@@ -43,6 +43,7 @@
     {"id": "assembly", "day": 120, "unless_flag": "act1_done", "title": "The assembly",
      "text": "The roads have dried, and the Cadurci of Brigodunon have met in assembly without you. Lucterius's man spoke, and nobody who had been to Noviodunum was there to answer him. Vellaunos will tell you how it went.",
      "flags": {"assembly_met": 1}},
+    {"id": "house_due", "day": 121, "silent": true, "flags": {"house_due": 1}},
     {"id": "terrace_fire", "day": 133, "silent": true, "flags": {"terrace_fire": 1}},
     {"id": "breakout_stopped", "day": 136, "silent": true, "flags": {"breakout_stopped": 1}},
     {"id": "avaricum_fallen", "day": 137, "title": "Avaricum",

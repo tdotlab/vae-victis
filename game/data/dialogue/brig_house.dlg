@@ -1,0 +1,161 @@
+// The house of Vettius at Brigodunon: its man, Vellaunos's guest (Epomeduos,
+// or the freedman Diodotos; see brig_house_arrive). What he asks depends on
+// Act I. Routes: pay the line (or buy back the held hostages); read his paper;
+// show him the door; follow him to Cabillonum (Sneak, or clumsily); kill him
+// under the roof (guest-murder); let him go and wait on the road
+// (enc_house_road).
+=== start
+[flag house_talked] -> again
+~ set house_talked
+[flag house_epo, flag factor_turned] -> partner
+[flag house_epo] -> epo
+-> dio
+
+=== epo
+Epomeduos has the guest's place by the fire, a cup of Vellaunos's beer untouched beside him and a stylus behind his ear. He gets up when you come in, which a guest doesn't have to do.
+
+"We've met," he says. "Avaricum. You were asking about grain." The patient smile of a man paid by the line. "Today I'm here for the house of Vettius, not for Dannotalos. It's the same account. It's always the same account."
+-> claim
+
+=== partner
+Epomeduos has the guest's place by the fire. When he sees you he doesn't get up, and he doesn't smile. He waits until Vellaunos has gone to see about the meat.
+
+"Partner." He keeps his voice low. "I asked for this errand so it would be me and not somebody else. Listen to me before you listen to the house."
+
+"Brigodunon is in the book. Not the three children: the hill. Every hearth, every head, on Dannotalos's account, to be collected after the harvest. The book is kept at Cabillonum, on the Arar, in Vettius's strongroom. I've seen the page." He turns his cup round once. "I'm supposed to sell you protection. Protection means your line is struck, for a price, for now. Pay it if you like. It won't save anyone else on the page."
+~ set house_paper_read; known cabillonum; quest brig_line start; quest brig_line seat; quest house_vettius start
+-> claim
+
+=== dio
+A man in a Roman tunic and a good Gallic cloak has the guest's place by the fire. He stands, bows the small exact bow of a freedman who knows what a bow is worth, and lays a sealed tablet on the bench beside him.
+
+"Diodotos, freedman of Aulus Vettius Calvus, of Cabillonum." His Gallic is careful and correct. "Your chief has been very hospitable. I've come about the house's business with Brigodunon. It won't take long. We pay on time and we write everything down, and we expect the same of others."
+-> claim
+
+=== claim
+[!quest brig_line active, !quest brig_line done] ~ quest brig_line start
+[flag house_owed] -> owed
+[flag house_claim_held] -> held
+-> protect
+
+=== owed
+"Three persons were bought by the house from the depot at Noviodunum, paid for, and entered. They are now in Brigodunon." He doesn't look round, but he doesn't need to: through the wall you can hear Eponina laughing at something. "The house isn't unreasonable. It doesn't want them back. They'd only run again. It wants its money, and some assurance against further losses, because Brigodunon is in the book for later, the whole hill. The assurance costs {price brig_line} silver. Then the line is struck, and nobody from the house comes up this hill again."
+-> hub
+
+=== held
+"Three persons from Brigodunon are at Noviodunum, bought and entered for delivery after the season's fighting." He says it gently, as if it were good news. "The house could sell them back to you, delivered after the harvest on Dannotalos's word. And Brigodunon itself is in the book for later, the whole hill. For {price brig_line} silver the house strikes the line, and nobody from the house comes up this hill again."
+-> hub
+
+=== protect
+"The house has no claim on any persons from Brigodunon. The quartermaster at Noviodunum wrote yours off, and the house respects other people's books." A small dry pause. "But Brigodunon is in our book all the same, for later. The whole hill. These are uncertain times. For {price brig_line} silver the house strikes the line, and nobody from the house comes up this hill again."
+-> hub
+
+=== again
+[flag house_epo] Epomeduos looks up from the fire. "Well, partner?"
+[flag house_dio] Diodotos puts his cup down. "Have you decided?"
+-> hub
+
+=== hub
+* [price brig_line] "Strike it. Here's your silver." -> paid ~ pay brig_line
+* [priced brig_line, !price brig_line] "I don't have that much." -> poor
+* [flag house_claim_held, price hostages_back, !flag hostages_redeemed] "The three at Noviodunum. What do they cost?" -> redeem
+* [!flag house_paper_read] "Let me see your paper." -> paper
+* "What exactly is this book?" -> book
+* [sneak 45] "I'll think about it. You'll have your answer before you go." (Follow him when he leaves.) -> follow
+* "I'll think about it." (Watch him leave, and follow.) -> follow_clumsy
+* "Go back to your master. Tonight." (Let him go, and be on the road before him.) -> waylay
+* "Get out of this hall." -> door
+* [!flag house_draw] Draw your knife. -> draw
+* "Not now." -> END
+
+=== poor
+"Then you have until the harvest." He isn't unkind about it. "After that the price is somebody else's to set."
+-> hub
+
+=== paid
+~ set line_bought; set house_funded; set house_left; clear epo_at_brig; quest brig_line done_bought done; quest house_collects done_paid done; xp 50
+He counts it twice, the second time for the form of it, and writes in a small book of his own with a bone stylus. "Brigodunon: struck." He shows you the line, a neat stroke through a name. "The house thanks Brigodunon. You won't see me again."
+
+He leaves before dark, with Vellaunos's thanks for his company and your silver in a bag under his cloak, and somewhere east of here the house buys something else with it.
+* "Good." -> END
+
+=== redeem
+"For the three: {price hostages_back}. Delivered after the harvest, at Bibracte or wherever Dannotalos happens to be, on his word." He writes it as he says it. "I know what you're thinking. Dannotalos's word is very good. It's the only thing he never sells."
+* [price hostages_back] Pay him. -> redeemed ~ pay hostages_back
+* "Not yet." -> hub
+
+=== redeemed
+~ set hostages_redeemed; quest house_collects redeemed; xp 25
+He writes, and seals, and gives you half a tablet broken along a line, the other half kept back. "When they're delivered, the halves will match." He smiles. "That's how you know it's honest."
+-> hub
+
+=== paper
+[latin 30] -> paper_read
+[companion theron] -> paper_theron
+He hands it over without hesitation. The wax inside is close Roman cursive, every letter of it a fence. "It says the house offers Brigodunon its protection," he says helpfully. "In Latin it sounds better."
+-> hub
+
+=== paper_theron
+Theron takes it before you can, reads it with his lips pressed together, and hands it back with a little bow, one man of business to another.
+
+"'On the account of Dannotalos the Aeduan,'" he says to you in Greek-flavored Gallic, quickly, as if commenting on the weather. "Protection on Dannotalos's account. And the seal is the house's at Cabillonum, on the Arar. That's where the book is."
+-> paper_known
+
+=== paper_read
+The protection is offered, in a clerk's tidy cursive, "on the account of Dannotalos the Aeduan", and the seal on the binding is a running boar with A VET C: the house's own seal, at Cabillonum on the Arar. The book is wherever the seal is.
+-> paper_known
+
+=== paper_known
+~ set house_paper_read; known cabillonum; quest brig_line seat; quest house_vettius start; xp 25
+[flag house_dio] Diodotos takes it back and closes it. "Everything above board," he says. "We write everything down."
+[flag house_epo] Epomeduos takes it back. "Now you know where it's kept," he says, as if he had told you nothing.
+-> hub
+
+=== book
+"The house's book?" He seems pleased to be asked. "Everything the house has bought, and everything it means to. Gaul is at war. Wars end. When they end, somebody owns what's left, and the house would like that to be orderly." He opens his hands. "We buy forward. A village, a family, a town, entered now, collected later, on the account of a man who will be there to collect it. Brigodunon is a line like any other."
+-> hub
+
+=== follow
+~ set house_followed; set house_left; clear epo_at_brig; set pens_heard; known cabillonum; quest brig_line seat; quest house_vettius start; quest house_collects done_followed done; time 17280; xp 75
+He leaves at first light with his spearmen. You leave an hour later and keep a ridge between you.
+
+It takes twelve days. They go northeast over the mountains of the Arverni and down to the Liger, across it at a ford, and on past Bibracte without going up to it, to a river port on the Arar where Roman wine comes upriver in boats. The night before they get there they turn off south along the bank, to a crossing below the town where there's a fence on the river flat and smoke behind it, and the freedman goes in alone and comes out an hour later writing in his little book. Then into the town, to a stone house by the quay with a strongroom at the back.
+
+Nobody looks round once. You come into Cabillonum behind them like the next boatload of wine.
+* Go into the town. -> follow_in
+
+=== follow_in
+~ travel cabillonum start
+
+=== follow_clumsy
+~ set house_followed; set house_warned; set house_left; clear epo_at_brig; known cabillonum; quest brig_line seat; quest house_vettius start; quest house_collects done_followed done; time 17280; xp 25
+He leaves at first light with his spearmen. You leave an hour later.
+
+On the second day one of the spearmen is sitting on a rock beside the road, eating, when you come round a bend. He doesn't get up. He watches you all the way past, chewing, and the next morning the house's man lifts a hand to you across a valley, politely, the way you'd greet a neighbor.
+
+So they know. They let you follow them anyway, twelve days northeast, past Bibracte, to a river port on the Arar where Roman wine comes upriver in boats, and a stone house by the quay where the house of Vettius keeps its book. Whoever's in it now knows your face.
+* Go into the town. -> follow_in
+
+=== waylay
+~ set house_waylay; set house_left; clear epo_at_brig
+[flag house_dio] Diodotos inclines his head. "Tonight, then. The house will be sorry. The price will be higher next time." He starts to gather his things, carefully, the way he does everything.
+[flag house_epo] Epomeduos looks at you for a long moment. Then he starts to gather his things. "Tonight," he says. "Of course."
+You thank Vellaunos for his patience with your guest, and leave by the lower gate before the house's spearmen have finished their supper. The road east goes through the woods below the ford. You know it better than they do.
+* Go. -> END
+
+=== door
+~ set house_refused; set house_left; clear epo_at_brig; quest house_collects done_refused done
+[flag house_dio] Diodotos doesn't argue. He puts the tablet away, thanks Vellaunos for his hospitality in a little speech that makes the old man look at his feet, and goes down the hill to his spearmen with his back very straight.
+[flag house_epo] Epomeduos doesn't argue. "You'll regret that more than I will," he says, quite kindly, and goes.
+At the gate he turns. "The house will be sorry. The price will be higher next time, and somebody else will come to collect it. The house doesn't forget a line. It only waits."
+* "Let it wait." -> END
+
+=== draw
+~ set house_draw
+Vellaunos's hearth is between you. Somebody outside laughs at something; the hall is warm and smells of meat. Under this roof he has eaten your chief's bread and slept by his fire. If you draw here, it isn't killing a man. Everyone in this hall will know what it is, and so will everyone they ever tell.
+* Do it. -> guest_kill
+* Put the knife away. -> hub
+
+=== guest_kill
+~ violate brigodunon; set house_grudge; quest house_collects done_guest done; fight
+He sees it in your face before the knife is out, and for the first time he looks surprised.

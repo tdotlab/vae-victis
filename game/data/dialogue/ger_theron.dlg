@@ -2,6 +2,7 @@
 // Latin and Greek; hides Paconius; joins the player on the right terms.
 === start
 [companion theron] -> comp
+[flag theron_sold] -> sold
 [flag clerk_betrayed] -> cold
 [flag theron_met] -> again
 ~ set theron_met
@@ -14,6 +15,10 @@ The Greek's stall is the only one in the lower town with a roof that doesn't lea
 === again
 "Back again. Good." He means it, or he's very good. "What do you need?"
 -> hub
+
+=== sold
+He looks at you for a long moment, and then past you, at the door. "I told my brother what you were going to do. I'm sorry. No, I'm not. Goodbye."
+* "Goodbye, Theron." -> END
 
 === cold
 He looks at you the way a man looks at a dog that has bitten someone. "I have nothing you want. Buy something or go."

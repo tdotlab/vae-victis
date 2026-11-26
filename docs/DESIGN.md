@@ -220,7 +220,7 @@ Experience from combat, quests, and skill use (picking a lock, winning an argume
 
 **Honor** replaces Fallout's Karma, measured against Gallic values rather than modern ones: keep your oaths, honor the guest-bond, show courage, be generous. Killing a host or a guest under your roof is the worst crime in the game. Lying is not dishonorable in itself, but oath-breaking is.
 
-The guest-bond is a rule, not just a dialogue option. A map declares its roofs (`"hospitality"`: a host faction and, optionally, the marked area it covers). Attacking anyone under a roof who wasn't already fighting you, or a dialogue `~ violate <host>`, costs 60 Honor and 40 standing with the host's people, logs it, and sets `guest_murder`, which every companion with a view on it reacts to. A map with no roof declared has no guest-bond, so content has to declare it where it applies.
+The guest-bond is a rule, not just a dialogue option. A map declares its roofs (`"hospitality"`: a host faction, optionally the marked area or list of marks it covers, and optionally an `if_flag` that has to be set). Attacking anyone under a roof who wasn't already fighting you, or a dialogue `~ violate <host>`, costs 60 Honor and 40 standing with the host's people, logs it, and sets `guest_murder`, which every companion with a view on it reacts to. A map with no roof declared has no guest-bond, so content has to declare it where it applies.
 
 **Renown** is how widely your deeds are known, good or bad, and the bards decide what the story is. High renown opens doors and draws challenges. Named reputation titles appear in dialogue ("Guest-Slayer," "the one who came back from Avaricum").
 
@@ -320,14 +320,16 @@ Two rules bind it. **Act I's slides are canon**: they narrate day 196 in advance
 
 #### The main line
 
-- **The House Collects** (opening). The house's man comes to Brigodunon as Vellaunos's guest. He is Epomeduos if he's alive and wasn't exposed (if he was turned in Act I, he comes half to warn you, as your "partner"); otherwise he's Hermeros the freedman. What he asks for depends on Act I. If the hostages came out by fraud or by night, he wants the house's property or its price. If Orbius wrote them off as dead of fever, or sold them to you, he has no claim on them, so he only sells protection. If they're still held, he offers to sell them back, delivered on Dannotalos's word. Routes:
+- **The House Collects** (opening). The house's man comes to Brigodunon as Vellaunos's guest. He is Epomeduos if he's alive and wasn't exposed (if he was turned in Act I, he comes half to warn you, as your "partner"); otherwise he's Diodotos, another of the house's freedmen (Hermeros stays at Avaricum). What he asks for depends on Act I. If the hostages came out by fraud or by night, he wants the house's property or its price. If Orbius wrote them off as dead of fever, or sold them to you, he has no claim on them, so he only sells protection. If they're still held, he offers to sell them back, delivered on Dannotalos's word. Routes:
   - Pay the first price (cheap now, and it funds the machine).
   - Read his paper (Latin): the protection runs "on Dannotalos's account", which points to Bibracte, and the seal is the house's at Cabillonum.
-  - Show him the door. The house raises the price, and later its Germans drive off Brigodunon's cattle as a reminder.
-  - Follow him when he leaves (Sneak): he goes to the Pens, which reveals them early.
-  - Kill him. Under Vellaunos's roof that is guest-murder, the worst crime in the game: Honor collapses and the vates curses the hall. On the road afterward it is only murder, and the house knows who did it.
+  - Show him the door. The house doubles the price, and from about day 150 riders who don't speak Gallic drive off Brigodunon's cattle as a reminder.
+  - Follow him when he leaves (Sneak): twelve days on his trail to Cabillonum, and he stops at the Pens on the way, so the player hears of them early. Followed clumsily, he gets there anyway and the house knows the player's face (`house_warned`).
+  - Kill him. Under Vellaunos's roof that is guest-murder, the worst crime in the game: Honor collapses and the vates curses the hall. On the road afterward it is only murder, and the house knows who did it. Vellaunos says so ("do it on the road... Not at my hearth"): wait for him there, then rob him of his paper, kill him, or let him pass.
 
   If the player doesn't come home by about day 150, a runner from Vellaunos finds them on the road with the news.
+
+  As built (A2.2): the house's man arrives on day 121 (`house_due`) and waits at Brigodunon until the player comes. Paying, the door, the paper and the kill each close The House Collects; the hall is a roof (`hospitality` over the hall, the elders and the guest's place by the fire) only while he's there.
 - **The Line for Brigodunon** (main). Get the hill off the book before the harvest. The price is low before day 196, ten times higher after it, and gone at Alesia. Routes:
   - Buy it off (silver; Barter lowers the price).
   - Burn or steal the master book (The Countinghouse).
@@ -357,6 +359,8 @@ The house's seat: an Aeduan river port on the Arar (Saône), east of Bibracte, w
   - Copy the pages that matter in place (Latin and Wits). The house never knows, and the player holds the evidence.
 
   Destroyed, held and copied are three different states for Act III. A held book names the officers who sold the war forward.
+
+  As built (A2.2, the open face): Paconius is here as the house's clerk if he was saved in Act I (he ran south for Narbo and his money ran out at Vettius's door), and Felix is the slave clerk. The strongroom opens by night (Sneak, Locks and Sneak, Felix, a bribe, or talking or knocking the keeper out of the way; a warned house keeps a dog and takes no bribes), by day for the house's factor or with the seal ring, or on Paconius's arm. At the lectern: read (Latin or Theron), copy (Latin and Wits, Theron, or Felix over three nights), strike the line (Latin and the seal, or Paconius), take, or burn. Taking the book after Paconius let you in makes him run. The riot routes come with the riot (A2.6).
 - **Theron's Debt** (the credit; Theron's personal quest). Theron's elder brother, a Massiliot banker at Cabillonum, lends the house the coin it lends to soldiers. Theron owes the family for a ship of wine he lost and won't talk about. Routes:
   - Persuade the brother to call the loan. Before the riot this needs the player's warning about the Aedui and Theron's word; after the riot the brother believes it.
   - Buy the debt, so that the player and Theron become the house's creditors.
@@ -364,6 +368,8 @@ The house's seat: an Aeduan river port on the Arar (Saône), east of Bibracte, w
   - If Theron thinks little of the player, or the player has joined the house, Theron sells them out and goes home to his family.
 
   The loan called before day 196 means no forward sale. Called later, it squeezes the house in Act III.
+
+  As built (A2.2): the brother is Demarchos. Theron decides at the gate on arrival (opinion below zero, or the player is the house's factor, and he sells them out); otherwise the quest starts there. Before the riot, calling the loan takes Theron's word plus either the news that the Aedui are wavering (`aedui_wavering`, day 144) or Speech.
 - **The Tribune's Road** (about day 178). The Aedui plunder the Romans. The tribune Aristius and the traders are led out of town under a promise and attacked on the road, and they hold out for a day and a night (VII.42). Routes:
   - Hold the road with them (a fight with Roman allies).
   - Get a trader's Aeduan wife and children out by the river (Sneak); it echoes Litumara.
@@ -565,7 +571,7 @@ Length, by Fallout 1's HowLongToBeat figures (T's reference): about 16 hours for
 
 ## Open questions for T
 
-- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina. Gergovia adds: Theron (the Greek), Paconius (the Vettius clerk), Ollognatos (hostage-master), Ategnatos and his son Eppillos, Senognatos (levy captain), Excingos (smith), Nammia (food seller) and Uxellos (potter). Avaricum adds: Senodonnos (Biturigan magistrate), Epomeduos (the Aeduan factor), Nertomara (weaver), Andecamulos (master of the mines), Vindos (boatman), Sumelis (market woman) and Hermeros (Vettius's freedman). Act II's design adds: Bitugenos (the bard), Gundo (the German rider), Cintillus (the auxiliary), and still-unnamed roles: the Germanic band's leader, Theron's elder brother, the overseer of the Pens, the Pens' named captives, and the sutler at Gergovia.
+- Real names for Brigodunon, Vindomagos, Vettius, Dannotalos, and the companions. Placeholders are in use until then. The demo adds more placeholders: Vellaunos (chief elder), Matugenta (the player's mother), Cintugnatos (vates), Cobnertos (smith), Moccos (gate guard), Dubnacos (the exile), Sulicena (headwoman of Vindomagos), Lugurix (salt merchant), Banna (healer), Haldo (the deserters' leader), and the hostages Ateula and Iccios. The player's sister is Eponina. Gergovia adds: Theron (the Greek), Paconius (the Vettius clerk), Ollognatos (hostage-master), Ategnatos and his son Eppillos, Senognatos (levy captain), Excingos (smith), Nammia (food seller) and Uxellos (potter). Avaricum adds: Senodonnos (Biturigan magistrate), Epomeduos (the Aeduan factor), Nertomara (weaver), Andecamulos (master of the mines), Vindos (boatman), Sumelis (market woman) and Hermeros (Vettius's freedman). Act II's design adds: Bitugenos (the bard), Gundo (the German rider), Cintillus (the auxiliary), Diodotos (the house's freedman), Demarchos (Theron's elder brother), Felix (Vettius's slave clerk), and still-unnamed roles: the Germanic band's leader, the overseer of the Pens, the Pens' named captives, and the sutler at Gergovia.
 - Act II's scope: about eight new or changed maps (Cabillonum in three faces, the Pens, the Germanic camp, the Bone Field, Gergovia's slope, Noviodunum burned, Bibracte's two maps) and about seventeen quests. If it has to shrink, Gergovia besieged and the Aeduan column are the first to cut, since the act's spine (the line, the house, the council) doesn't depend on them.
 - Facts to verify before they go into game text: the Chalon-sur-Saône amphora numbers, the details of Ribemont-sur-Ancre, and the width of the Porte du Rebout.
 - The secret ahistorical path: yes or no. Default no.

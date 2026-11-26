@@ -1,0 +1,122 @@
+// Aulus Vettius Calvus, in the hall of his house at Cabillonum. Polite, tired,
+// precise, and killable. Routes for the Line: buy it struck; sign on as the
+// house's factor (the line struck as the wage). A threat gets nowhere.
+// Accepting his wine makes the player his guest (vettius_guest), and the
+// guest-bond runs both ways.
+=== start
+[flag vettius_met] -> again
+~ set vettius_met
+[quest house_vettius none] ~ quest house_vettius start
+[flag house_warned] -> expected
+A Roman of fifty sits at a table covered in tablets, with a lamp lit although it's day. Plain good tunic, ink on his second finger, a gold ring with a red stone. He finishes the line he is writing before he looks up, and then he looks at you properly, all of you, the way a man weighs a sack.
+
+"Aulus Vettius Calvus." His Gallic is slow and correct. "You've come a long way, by the mud on you. Sit. Will you take a cup of wine? It's Italian. Everything in this house is Italian except the slaves and the weather."
+-> offer
+
+=== expected
+A Roman of fifty sits at a table covered in tablets. He doesn't look surprised to see you. He finishes the line he's writing, and puts the stylus down, and folds his hands.
+
+[flag house_followed, flag house_dio] "Brigodunon," he says. "Diodotos said you'd be along. He said you walk like a man who's never had to be quiet in his life." A small dry smile.
+[flag house_followed, !flag house_dio] "Brigodunon," he says. "Epomeduos said you'd be along. He said you followed him the whole way like a dog that hasn't decided whether to bite." A small dry smile.
+[!flag house_followed] "Brigodunon," he says. "Demarchos sent a boy round this morning. Bankers are such careful people." A small dry smile.
+"Aulus Vettius Calvus. Sit. Will you take a cup of wine, or have you come to do something we'll both regret?"
+-> offer
+
+=== offer
+* Take the cup. -> wine
+* "I'll stand." -> hub
+
+=== wine
+~ set vettius_guest
+He pours it himself, and watered, the Roman way, and watches you drink it the way Vellaunos watched the house's man eat his bread. You both know what it means. Neither of you says so.
+-> hub
+
+=== again
+He looks up from his tablets. "Brigodunon. What can the house do for you?"
+-> hub
+
+=== hub
+* "What does the house do, exactly?" -> who
+* "Buying forward. Explain it to me." -> forward
+* [!quest brig_line done, price brig_line] "Strike Brigodunon off your book. I'll pay." -> strike
+* [!quest brig_line done, priced brig_line, !price brig_line] "What would it cost to strike Brigodunon off?" -> strike_poor
+* [!quest brig_line done] "What if I made you strike it?" -> threat
+* [!flag house_factor] "Is there another way to get a line struck?" -> factor_offer
+* [!flag vettius_draw] Draw your knife. -> draw
+* "Goodbye." -> END
+
+=== who
+"We trade." He spreads his ink-stained hands. "Wine up the river, and whatever Gaul has to sell down it. Hides, tin, grain, people. We pay on time and we write everything down. You'd be surprised how rare that is, on both sides of the Alps." He turns a tablet round so you can see the columns. "Everything in this house is in a book. That's the whole secret."
+-> hub
+
+=== forward
+"A war is a harvest that ruins the field." He says it as if he's said it before, and liked it. "When it's over, somebody owns what's left: the land, the cattle, the people. Usually it goes to whoever is standing nearest with a sword, and half of it rots on the way to market. That's waste."
+
+"So the house buys it before it's taken. Brigodunon, on Dannotalos's account: when the war is over, Dannotalos will be in a position to collect, and the house will have paid him for it in advance, at a fair price, written down. The soldiers get coin now. Dannotalos gets coin now. Nobody gets anything for free." He shrugs. "And Brigodunon can buy itself back at any time, at the price of the day. I don't know what could be fairer."
+-> hub
+
+=== strike_poor
+"{price brig_line}," he says, without looking it up. "The price of the day. It won't be lower tomorrow."
+-> hub
+
+=== strike
+~ pay brig_line; set line_bought; set house_funded; set house_left; clear epo_at_brig; quest brig_line done_bought done; xp 50
+[quest house_collects active] ~ quest house_collects done_paid done
+He takes a key from round his neck, and goes into the back, and comes back with a book of beech leaves under his arm. He finds the leaf and draws one neat stroke through a line, writes in the margin, and turns the book round so you can watch the wax take the seal from his ring.
+
+"Brigodunon: struck." He counts the silver into a box without looking at it. "The house thanks Brigodunon. Is there anything else?"
+-> hub
+
+=== threat
+He doesn't move, but something in him settles, the way a man settles on a horse.
+
+"You could kill me. I'm fifty and I write for a living." He taps the table. "Then Hermeros, at Avaricum, who has kept my day book for eleven years and remembers every line of it better than I do, would write Brigodunon back in by supper, at a higher price, on the account of a man who doesn't like you. The book isn't me. That's the point of a book."
+-> hub
+
+=== factor_offer
+He considers you for a while, as if he were adding up a column.
+
+"The house needs factors. A man in every hill country who knows the roads and the families, who tells us who can pay and who can't, and carries our paper. Our Cadurcan factor is..." He makes a small gesture. "No longer available. Factors' villages are kept off the book. It's bad for business to sell a man's mother." He pours himself more wine. "Sign on for the Cadurci hills and I'll strike Brigodunon tonight, as your wage. You'd have an advance, and a share, and the house's protection. And you'd be the house, of course. People would know."
+* "Show me where to sign." -> factor_yes
+* [barter 40] "For an advance that's worth my name, I'll sign." -> factor_rich
+* "No." -> factor_no
+
+=== factor_no
+"No." He doesn't seem offended. "Most people say no the first time. Then the harvest comes."
+-> hub
+
+=== factor_rich
+~ silver 50
+He laughs, once, like a man surprised into it. "You'd have made a good Roman." He writes the sum in.
+-> factor_yes
+
+=== factor_yes
+~ set house_factor; deed joined_house; honor -10; silver 30; quest house_vettius factor; xp 50
+[!quest brig_line done] ~ quest brig_line done_factor done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_paid done
+He writes a contract in two copies, slowly, so you can watch every word go in, and you put your name or your mark at the bottom of both. He seals them. One copy goes into a box, and the other into your hand.
+
+"Factor of the house for the Cadurci hills." He holds out his hand, and you take it, and his grip is dry and firm. "Brigodunon is struck tonight. The keeper will let you into the strongroom by day: a factor should know the book. Welcome to the house."
+-> hub
+
+=== draw
+~ set vettius_draw
+[flag vettius_guest] -> draw_guest
+He sees it, and puts the stylus down, and waits. He doesn't call out. "I wondered," he says.
+* Do it. -> kill
+* Put the knife away. -> hub
+
+=== draw_guest
+You drank his wine. He watched you drink it. In this house, and in any house in Gaul, that makes the next thing worse than murder, and he knows it, and so do you.
+
+"Ah," he says. "Under my roof. I'd have thought better of you."
+* Do it anyway. -> kill_guest
+* Put the knife away. -> hub
+
+=== kill
+~ quest house_vettius vettius_dead; fight
+He stands up, finally, and steps back from the table, and he's quicker than a man of fifty has any right to be.
+
+=== kill_guest
+~ violate vettius; quest house_vettius vettius_dead; fight
+He stands up, finally, and steps back from the table, and he's quicker than a man of fifty has any right to be.

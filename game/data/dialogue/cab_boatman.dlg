@@ -1,0 +1,33 @@
+// A boatman on the quay at Cabillonum. He knows what goes downriver, and
+// where the house loads it: the Pens, at a crossing below the town.
+=== start
+[flag paconius_blamed, !flag boat_paconius] -> paconius
+[flag boatman_met] -> again
+~ set boatman_met
+The boatman leans on his pole and watches the river go by, brown and slow and wide as a field.
+
+"Going down? I don't take passengers past Matisco this summer. Too many people on the bank with spears and opinions." He spits into the Arar. "Up's easy. Wine comes up all year. Down's where the money is."
+-> hub
+
+=== again
+The boatman nods. "Still on dry land?"
+-> hub
+
+=== hub
+* "What goes down?" -> down
+* [!flag pens_heard, !flag pens_known] "Where does the house load its cargo?" -> pens
+* "Goodbye." -> END
+
+=== down
+"Hides. Tin, from the north. Grain, when there is any." He looks at you sidelong. "And the cargo that walks. The house of Vettius ships a lot of that. They don't load it here. Too many eyes."
+-> hub
+
+=== pens
+~ set pens_heard; xp 15
+He looks at you a long time before he answers. "Below the town there's a crossing, where the river flat's wide. There's a fence on the flat, and a few huts, and smoke. The barges tie up there at night and they're gone before it's light." He pushes off the bank. "I don't carry for them. I'm just telling you where not to fish."
+-> hub
+
+=== paconius
+~ set boat_paconius
+"Your friend the thin Roman?" The boatman grins. "Paid everything he had for a place on the first barge south, and didn't wait for the cargo. Didn't even wait for the dawn."
+-> hub

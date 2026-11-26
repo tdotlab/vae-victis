@@ -1,0 +1,84 @@
+// Demarchos of Massilia, Theron's elder brother, a banker at Cabillonum who
+// lends the house of Vettius the coin it lends to soldiers (Theron's Debt).
+// Routes: persuade him to call the loan (before the riot it takes Theron's
+// word and a warning about the Aedui; after it he believes it), buy the
+// house's debt, or settle Theron's own debt to the family.
+=== start
+[flag theron_sold] -> sold
+[flag demarchos_met] -> again
+~ set demarchos_met
+[quest theron_debt active] ~ quest theron_debt met
+[companion theron] -> brothers
+A heavy man in a white cloak with a blue border sits in a stone house full of shade, with a scale on the table and a slave fanning the flies off it. He has Theron's quick eyes in an older, more careful face.
+
+"Demarchos, of Massilia." He doesn't get up. "I lend money to people who lend money. If you want to borrow some, you've come to the wrong man; I'm much too expensive for anyone who has to ask."
+-> hub
+
+=== brothers
+A heavy man in a white cloak with a blue border sits in a stone house full of shade, with a scale on the table. When he sees who is behind you he puts down his cup.
+
+"Theron." Just the name. Then something in Greek, low and fast, that makes Theron look at the floor. Then, in Gallic, to you: "Demarchos, of Massilia. My brother keeps interesting company now. Sit down, both of you. Theron, sit. I'm not going to shout at you in front of a guest."
+-> hub
+
+=== again
+Demarchos looks up from his scale. "Well?"
+-> hub
+
+=== hub
+* "Who do you lend to?" -> who
+* [companion theron, opinion theron >= 0, flag aedui_wavering, !flag credit_called, !flag credit_bought, !flag cabillonum_riot] "The Aedui are going over to the revolt. Call in what Vettius owes you while there's still a Roman left here to pay it." -> call_warn
+* [companion theron, opinion theron >= 0, speech 55, !flag aedui_wavering, !flag credit_called, !flag credit_bought, !flag cabillonum_riot] "Before the summer's out the Aedui will be killing Romans in this street. Call in Vettius's loan now." -> call_warn
+* [flag cabillonum_riot, !flag credit_called, !flag credit_bought] "You saw what the Aedui did to the Romans here. Call in Vettius's loan while he's still alive to pay it." -> call
+* [!flag credit_called, !flag credit_bought] "What would it cost to buy Vettius's debt from you?" -> buy
+* [companion theron, quest theron_debt active, !flag theron_settled] "What does Theron owe the family?" -> owes
+* "Goodbye." -> END
+
+=== who
+"Today? Vettius." He weighs a coin on the scale out of habit. "He lends to soldiers against their share of the plunder, and to Aeduan nobles against their clients, and he buys forward on credit. My credit. When the war's over he'll pay me out of the harvest, with interest, and everyone will be very happy." He sets the coin down. "I don't ask what he buys. A banker who asks what the money is for ends up a moneylender."
+-> hub
+
+=== call_warn
+He listens without interrupting. Then he looks at Theron.
+
+Theron says something in Greek, quietly. You catch the name of your hill fort, and Vettius's, and a word that sounds like "book".
+
+Demarchos is silent a long time. "My brother has never in his life told me a thing I wanted to hear," he says. "So I'll believe him."
+-> call
+
+=== call
+~ set credit_called; quest house_vettius credit_called; xp 75
+[!flag aedui_defected] ~ set forward_sale_stopped
+[!flag aedui_defected, !quest brig_line done] ~ quest brig_line done_never done
+[quest theron_debt active] ~ quest theron_debt done_called done
+[companion theron] ~ opinion theron 10
+He calls the slave and dictates a letter in Greek to Vettius, three lines, and seals it himself. "Repayment in full at the end of the month. He'll pay it, because he pays on time and writes everything down." Something like a smile. "He'll have to sell the stock to do it, and he won't have a sestertius left to buy forward with this summer. Whatever he meant to buy, he's going to have to want it."
+* "Good." -> END
+
+=== buy
+"Buy it." He looks at you with real interest for the first time. "Well. It's a good debt, from a man who pays. {price house_debt} silver and it's yours, and Vettius owes you instead of me." He shrugs. "I won't pretend I'm sorry to be out of Gaul this summer."
+[companion theron] Theron clears his throat. Demarchos looks at him, and sighs, and says something in Greek about their mother.
+* [price house_debt] Pay him. -> bought ~ pay house_debt
+* "Too much." -> hub
+
+=== bought
+~ set credit_bought; set house_creditor; quest house_vettius credit_bought; xp 75
+[quest theron_debt active] ~ quest theron_debt done_bought done
+[companion theron] ~ opinion theron 10
+He writes the transfer in Greek and in Latin, both copies, and has the slave witness them. "The house of Vettius owes you a great deal of money," he says. "Be careful. People have been killed for less than they're owed."
+* "I'll remember." -> END
+
+=== owes
+Theron looks at the wall. Demarchos looks at Theron.
+
+"A ship of wine. Two thousand jars of Campanian, at Massilia, two summers ago. He was to bring it up the river, and he sold it at Arelate for half its price to pay a debt of his own, and told our father it sank." He says it without heat, like a figure. "The family wants {price theron_owes}. Not for the money. For the lie."
+* [price theron_owes] "Here. It's paid." -> settle ~ pay theron_owes
+* "Not now." -> hub
+
+=== settle
+~ set theron_settled; quest theron_debt done_settled done; opinion theron 20; xp 50
+Demarchos counts it, and stops counting halfway, and gets up, and puts his arms round his brother in the doorway. Neither of them says anything you can follow. When Theron comes back his eyes are wet and he's very angry with you about it.
+* "Let's go." -> END
+
+=== sold
+Demarchos doesn't get up. "My brother told me what you meant to do," he says. "And I've told Vettius, because I lend him money, and that's what one does. Go away. There's nothing for you in this house."
+* Go. -> END

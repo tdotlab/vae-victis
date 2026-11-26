@@ -1,0 +1,9 @@
+// Forced road encounter, days 150-229, if the player hasn't come home since
+// the house's man arrived: a runner from Vellaunos with the news.
+=== start
+~ quest house_collects runner
+A boy comes up the road at a jog that has stopped being a run some miles back. He has mud to the knees and Vellaunos's iron ring on a thong round his neck, and when he sees you he sits down in the road with relief.
+
+"Vellaunos sent me. I've been asking for you at every fire between here and the Oltis." He gets his breath. "There's a man in the hall. From the Roman house at Cabillonum, the one that bought the hostages. He came with two Aeduan spearmen and asked for hospitality, and Vellaunos gave it, and now he won't go. He's very polite. He says he'll wait for whoever brought the children home, and he writes everything down." The boy makes a face. "He's been there a month. He thanks Vellaunos for the bread every evening. Vellaunos says come home."
+* "Go home. Tell him I'm coming." -> END ~ leave
+* "Rest first. Then go home and tell him." -> END ~ give bread; leave
