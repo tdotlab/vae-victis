@@ -30,7 +30,8 @@ extends RefCounted
 ##   opinion uid n | deed tag (companions react, see Companions) | pay price_id
 ##   violate host_faction (break the guest-bond, see Hospitality)
 ##   ally (the speaker fights on your side) | ally_all faction | part (a
-##   companion stays here instead of following)
+##   companion stays here instead of following) | duel uid [flag] (the
+##   player fights that actor alone, by agreement; flag is set on a win)
 ## Text can show a price: {price brig_line}.
 ## A line "@speaker Name" before the first node names a speaker-less talk.
 ## [night] is true from 20:00 to 06:00.
@@ -404,7 +405,7 @@ static func _apply_one(gs: GameState, e: String, out: Dictionary) -> void:
 			if not gs.known_locations.has(rest):
 				gs.known_locations.append(rest)
 				out["messages"].append(["A new place is marked on your map.", "good"])
-		"fight", "barter", "join", "leave", "travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending", "ally", "ally_all", "part":
+		"fight", "barter", "join", "leave", "travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending", "ally", "ally_all", "part", "duel":
 			out["actions"].append(e)
 		_:
 			push_warning("Unknown dialogue effect: " + e)
@@ -415,7 +416,7 @@ const COND_HEADS := ["flag", "item", "silver", "honor", "renown", "day", "level"
 const FX_HEADS := ["set", "clear", "add", "xp", "quest", "give", "take", "silver", "honor", "renown",
 	"standing", "time", "wait_until", "heal", "say", "title", "known", "fight", "barter", "join", "leave",
 	"travel", "end", "heal_all", "rest", "leave_all", "fight_all", "ending",
-	"opinion", "deed", "violate", "pay", "ally", "ally_all", "part"]
+	"opinion", "deed", "violate", "pay", "ally", "ally_all", "part", "duel"]
 
 
 ## Problems in a parsed script: unknown conditions or effects, jumps to

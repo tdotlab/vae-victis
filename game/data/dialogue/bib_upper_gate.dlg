@@ -1,0 +1,101 @@
+// The gate through the inner bank at Bibracte, between the craftsmen's
+// quarter and the great houses. Opened by the warden, or stepped onto from
+// the road. By day: the druid's token, Dannotalos's letter, the house's
+// factor, asking for Dannotalos (his steward comes down and walks you up),
+// Speech, or silver. By night it's shut: the token, the bank in the dark
+// (Sneak), or wait for morning. Every way in sets bib_upper.
+@speaker The gate warden
+=== start
+[flag bib_upper] -> again
+[night] -> night
+The road climbs to a second bank, lower than the outer one but newer, with a timber gate in it standing open and a man with a long spear standing in the opening. He has a helmet he keeps polished, and he looks at you as if you were a cart with a bad wheel.
+
+"The houses up there are the houses of the Aedui," he says. "Whose are you?"
+-> ways
+
+=== ways
+* [item druid_token] Show him the druid's token. -> token
+* [item aeduan_letter] Show him Dannotalos's letter. -> letter
+* [flag house_factor] "I'm the house of Vettius's factor. Your Dannotalos is its partner." -> factor
+* "I've come to see Dannotalos." -> steward
+* [speech 45] "My business is with the vergobret. Do you want to be the man who kept it waiting?" -> talked
+* [silver 15] Put fifteen in silver where he can see it. -> bribe
+* "Nobody's. I'll go back down." -> back
+
+=== token
+~ set bib_upper; xp 25
+He looks at the wheel of bronze in your hand for a long moment, and then at you, differently. He moves the spear.
+
+"The priests' friends go where they like," he says. "Up you go."
+* Go up. -> END
+
+=== letter
+~ set bib_upper; xp 25
+He can't read it, but he knows the horse pressed into the wax. Everyone on this hill knows that horse.
+
+"Dannotalos's," he says, and gives it back as if it were hot. "Then you're his. Go on up. It's the big hall with the horses outside."
+* Go up. -> END
+
+=== factor
+~ set bib_upper; xp 25
+"The Roman's man." He says it without any particular feeling. "Dannotalos's friends' friends. Fine." He moves the spear. "The big hall, with the horses."
+* Go up. -> END
+
+=== steward
+~ set bib_upper; set bib_escorted; time 30
+He shouts up the hill, and a boy runs, and after a while a man comes down to the gate in a good blue cloak: Dannotalos's steward, Moricos, smiling, with a ring of keys at his belt and eyes that count your weapons.
+
+"Everyone who asks for my lord is welcome," he says. "My lord sees everyone. Come up; I'll walk with you." He does, all the way to the hall door, talking pleasantly about the weather and looking at everything you look at.
+* Go up. -> END
+
+=== talked
+~ set bib_upper; xp 50
+He looks at you a long while, weighing how much trouble you might be against how much trouble he might be in. "The vergobret's hall is the one with the guards," he says at last. "Don't make me sorry."
+* Go up. -> END
+
+=== bribe
+~ silver -15; set bib_upper
+It goes away somewhere inside his cloak without his hand appearing to move. "You're expected," he says, to nobody. "Go up."
+* Go up. -> END
+
+=== back
+~ travel bibracte_lower from_upper
+
+=== night
+The gate in the inner bank is shut and barred for the night, and there's a fire in a brazier beside it, and the warden by the fire with his spear across his knees.
+
+"Shut," he says. "The houses are asleep. Come back in the morning, like a decent man."
+* [item druid_token] Show him the druid's token. -> token_night
+* [roll sneak -10] Leave him to his fire and go over the bank in the dark further along. -> over | caught
+* Wait for the morning. -> wait
+* Go back down. -> back
+
+=== token_night
+~ set bib_upper; xp 25
+He gets up, grumbling, and holds the wheel of bronze to the fire to see it, and puts it back in your hand quickly. He lifts the bar.
+
+"The priests' friends go where they like," he says, "even at night. Don't wake the dogs."
+* Go up. -> END
+
+=== over
+~ set bib_upper; xp 75
+The bank is steep and the timber face of it is slick with dew, and halfway up a dog starts barking somewhere above and stops. You lie flat in the wet grass on the top for a long count of breaths. Nobody comes. On the far side the great houses are dark shapes with a little firelight under the doors.
+* Go on. -> END
+
+=== caught
+~ standing bib_town -5
+A loose stone goes clattering down the face of the bank, and the warden is there with a torch before you're halfway up.
+
+"Come down," he says, almost kindly, "before I put this through you." He walks you back down the hill himself.
+~ travel bibracte_lower from_upper
+
+=== wait
+~ wait_until 7
+You sit by the warden's fire, and he lets you, and talks about the Arverni until he falls asleep. In the morning he wakes, and stretches, and opens the gate, and looks at you as if he's never seen you before.
+-> start
+
+=== again
+[night] He gets up from his fire, grumbling, and lifts the bar for you. "You've been up before. Don't wake the dogs."
+[!night] "You again." He moves the spear without being asked. "Up you go."
+* Go up. -> END
+* Go back down. -> back

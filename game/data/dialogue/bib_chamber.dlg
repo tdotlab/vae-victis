@@ -1,0 +1,93 @@
+// Trigger on the hide curtain at the end of Dannotalos's hall: his chamber.
+// By day a weaver keeps it. By night the player steps over the sleepers
+// (Sneak; harder if his steward walked them up and knows their face). Inside:
+// a knife at his throat (he writes the release as the price of his life), the
+// chest (the key, or the lock; his own tally of the skim), or murder in his
+// sleep (his account passes to the house). Every way out of the chamber goes
+// down the hill.
+@speaker Dannotalos's chamber
+=== start
+[night] -> night
+A curtain of stitched hides closes off the end of the hall, and a woman sits at a loom right beside it, weaving, and looks up every time anyone comes near.
+
+"My lord's chamber," she says. "Nobody goes in but him."
+* [sneak 40] Mark the way in, and come back when the hall is asleep. -> wait_dark
+* Step back. -> back_hall
+
+=== back_hall
+~ travel bibracte_upper hall
+
+=== wait_dark
+~ wait_until 23
+You go out with the last of the guests at dusk and wait in the dark of the yard, among the horses, until the noise in the hall goes down to snoring. Then you come back in over the fence.
+-> night
+
+=== night
+The hall is dark except for the hearth, banked for the night, and full of sleeping men on their hides along the walls, breathing. The dogs are asleep too, mostly. Behind the hide curtain is Dannotalos's chamber.
+[flag bib_escorted] His steward Moricos is asleep on a pallet across the foot of the curtain tonight. You remember his eyes on the way up the hill, counting your weapons.
+* [roll sneak -10, !flag bib_escorted] Step over the sleepers to the curtain. -> inside | caught
+* [roll sneak -30, flag bib_escorted] Step over the sleepers, and over the steward. -> inside | caught
+* Leave the way you came. -> leave
+
+=== caught
+A dog finds your ankle in the dark and won't let go, and in a moment the whole hall is up, men grabbing spears off the walls and shouting for a light.
+* Fight. -> caught_fight
+* [roll AGI 0] Run for the door and the hill. -> fled | caught_fight
+
+=== caught_fight
+~ set dan_enemy; fight_all dannotalos
+Somebody gets the fire up, and in its light they see who it is.
+
+=== fled
+~ set dan_enemy; standing aedui -5
+You go through the door with a spear in the doorpost behind you, and over the yard fence, and down the hill in the dark, and you don't stop until you're among the craftsmen's houses with the dogs of the whole town barking.
+~ travel bibracte_lower from_upper
+
+=== inside
+~ xp 75
+Inside it smells of beeswax and wool. A lamp is burning low in a niche. Dannotalos is asleep on a bed of skins, on his back, with one arm over his face like a boy, and a key on a thong round his neck. At the foot of the bed there's a chest bound with iron.
+-> menu
+
+=== menu
+* [!quest brig_line done] Put your knife to his throat, and wake him. -> throat
+* [!flag dan_tally_taken, !flag dan_chest_tried] Try the chest. -> chest
+* Kill him in his sleep. -> murder
+* Leave him sleeping. -> leave
+
+=== throat
+~ set dan_enemy; xp 100
+[!quest partner done] ~ quest partner struck
+[!quest brig_line done] ~ quest brig_line done_released done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_struck done
+He wakes all at once, with your hand over his mouth and the edge against his neck, and doesn't struggle. His eyes go to the curtain, and back to you.
+
+You tell him what you want, in a whisper. He nods. You give him the lamp and a tablet off the chest, and he writes it lying down: Brigodunon of the Cadurci released from his account, under his horse seal. His hand is perfectly steady.
+
+"You should kill me now," he whispers, when you take the tablet. "You'll wish you had." You leave him there, sitting up in his bed in the dark, not calling for anyone.
+* Go. -> leave
+
+=== chest
+~ set dan_chest_tried
+The chest is oak bound with iron, with a Roman lock in it, a good one. The key is on the thong round his neck.
+* [roll steal -10] Lift the key from round his neck. -> chest_open | chest_wake
+* [locks 40] Pick the lock. -> chest_open
+* Leave it. -> menu
+
+=== chest_wake
+He stirs when the thong moves, and turns over, and mutters something with a woman's name in it. You freeze with your hand an inch from his throat for a long time. When you can breathe again, the key is under him.
+-> menu
+
+=== chest_open
+~ set dan_tally_taken; give dannotalos_tally; silver 120; xp 50
+The lid is heavy and silent on greased hinges. Silver, in bags. A gold torc wrapped in wool. And underneath, a set of tablets tied with red cord that aren't like the ones he carries in the hall: smaller, older, in his own hand, the kind of thing a man keeps under his bed and doesn't show his partner. You take the silver and the tablets.
+-> menu
+
+=== murder
+~ set dannotalos_dead; honor -15; deed cruelty; xp 50
+~ quest partner done_dead done; quest house_vettius partner_dead
+[flag dan_guest] ~ violate dannotalos
+It's quick, and very quiet. He doesn't wake up enough to know who it was. You stand there afterwards with the lamp going out, and nothing in the chamber is any different, except that the account of Dannotalos of the Aedui has just passed, every line of it, to the house of Vettius at Cabillonum, which will be bigger for it in the morning.
+* Go. -> leave
+
+=== leave
+~ travel bibracte_lower from_upper

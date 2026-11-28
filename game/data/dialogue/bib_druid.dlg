@@ -1,0 +1,60 @@
+// Esugenos (placeholder), the druid who keeps the spring at Bibracte. The
+// druids judge almost every dispute, and a man who won't abide by their
+// judgment is barred from the sacrifices (BG VI.13); Convictolitavis was made
+// vergobret through the priests, by the custom of the city, when the
+// magistracies lapsed (VII.33). Interdiction is the bloodless route against
+// Dannotalos: it needs the Bone Field's evidence (iron_tally, set in A2.4).
+// The hostage roll is a matter for all Gaul at the council (A2.7).
+=== start
+[flag druid_met] -> again
+~ set druid_met
+An old man in undyed wool sits on a stool inside the fence of the spring, with a bronze wheel at his throat, doing nothing whatever, in the way of a man who has done it for a long time and is good at it.
+[item druid_token] He looks at your hand before he looks at your face. "You've been to the forest," he says. "Sit. I'm Esugenos. I keep the spring."
+[!item druid_token] "Cadurci," he says, without looking round. "By the shoes. Sit, if you like. I'm Esugenos. I keep the spring."
+-> hub
+
+=== again
+Esugenos opens one eye. "Brigodunon."
+-> hub
+
+=== hub
+* "What do the druids do here?" -> druids
+* "How was the vergobret chosen?" -> vergobret
+* [flag dan_met, !flag dannotalos_dead, !flag dannotalos_interdicted] "What would it take for the druids to judge Dannotalos?" -> judge
+* [flag iron_tally, flag dan_met, !flag dannotalos_dead, !flag dannotalos_interdicted] "I've brought you the iron out of the Bone Field, and the man who dug it." -> iron
+* [item hostage_roll, flag roll_read, !flag druid_roll] Show him the hostage roll. -> roll
+* "Goodbye." -> END
+
+=== druids
+"We judge," he says. "Killings, inheritances, boundaries, who owes whom. Almost everything, in the end, comes to the priests." He watches the water come up in the basin. "And if a man won't abide by what we decide, we bar him from the sacrifices. That's the worst thing that can be done to anyone in Gaul. Nobody will eat with him or speak to him, for fear of catching it. No court will hear him. No honor is his. He's still alive, of course." A small movement of the shoulders. "For a while."
+-> hub
+
+=== vergobret
+[!flag aedui_wavering] "Two men claim the magistracy this year, which the law doesn't allow, and the city is split down the middle over it. They've sent to Caesar to settle it." He says Caesar's name as he might say the name of a weather. "He'll find that one of them was named by his own brother, in the wrong place, at the wrong time, and the other was chosen through the priests, as the custom is when there's no magistrate. And he'll want the priests on his side." He closes his eyes. "So it will be Convictolitavis."
+[!flag aedui_wavering] -> hub
+"Two men claimed the magistracy this spring, which the law doesn't allow, and the city split down the middle over it. Caesar came to Decetia to settle it." He says Caesar's name as he might say the name of a weather. "He found that one of them had been named by his own brother, in the wrong place, at the wrong time, and the other had been chosen through the priests, as the custom is when there's no magistrate. So Convictolitavis is vergobret." He closes his eyes. "Through the priests. He remembers that, I think."
+-> hub
+
+=== judge
+"For selling people?" He almost smiles. "Half the great houses on the hill buy and sell people, and the other half wish they could. That's not a matter for the gods."
+
+"Bring me something that is. A wrong done to the gods, not to men: proof of it, in his hand or his agent's, and a man who'll swear to it before the priests and take the consequences of swearing. Then we'll judge him, and he'll abide by it, or he won't."
+-> hub
+
+=== iron
+~ set dannotalos_interdicted; xp 200
+[!quest partner done] ~ quest partner done_interdicted done
+~ quest house_vettius partner_interdicted
+[!quest brig_line done] ~ quest brig_line done_barred done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_struck done
+He hears the robber out, all of it, with his eyes closed, and turns the tally over and over in his hands without looking at it. When it's done he sits a long time.
+
+"The gods' iron," he says at last. "Pulled out of the ground where it was given, and sold, through an agent, to the smiths." He gets up, slowly, an old man getting up. "We'll judge him at the next new moon. He won't come. They never come." He looks up the hill at the great houses. "And after that, nobody in Gaul will take delivery of anything from Dannotalos, ever again."
+-> hub
+
+=== roll
+~ set druid_roll
+He reads it a long time. His lips move with the names.
+
+"This isn't for one priest at a spring," he says, and gives it back. "This is for all Gaul. If the council of all the peoples ever meets on this hill, and it may, the way things are going, show it to them. And make sure you're standing near the door when you do."
+-> hub

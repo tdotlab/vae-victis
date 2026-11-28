@@ -1,0 +1,12 @@
+// An enameler of the craftsmen's quarter at Bibracte, setting red glass into
+// bronze harness bosses.
+=== start
+She has a bronze boss in a clamp and a little crucible on the coals, and she's setting red glass into the hollows of a pattern with a needle, one drop at a time.
+
+"For somebody's horse," she says, without looking up. "A great man's horse. They all want red. It's always red." She blows on it. "Mind the crucible."
+* "Whose horse?" -> whose
+* "Goodbye." -> END
+
+=== whose
+"Somebody up the hill." She tips her head at the inner bank. "They all ride now. Every boy with a father on the council wants a harness that shines." She sets another drop. "Good for business. War's good for business. Everybody says so."
+* "Goodbye." -> END

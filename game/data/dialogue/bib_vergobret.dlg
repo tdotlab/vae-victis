@@ -1,0 +1,56 @@
+// Convictolitavis, vergobret of the Aedui, in the magistrate's hall at
+// Bibracte. Real person, used sparingly: chosen through the priests and
+// confirmed by Caesar at Decetia (BG VII.33); by the time Litaviccus marches
+// he has taken Arvernian money (VII.37). Flavor and pointers only; the council
+// of all Gaul is A2.7.
+=== start
+[flag verg_met] -> again
+~ set verg_met
+A young man for the office sits in a carved chair at the end of the hall, very well dressed, in white wool with a blue cloak and a great deal of gold, listening to two old men argue about a boundary stone. He listens with his whole face. When they've gone he turns it on you.
+
+"Cadurci," he says. "You're a long way from your hills. I'm Convictolitavis."
+[!flag aedui_wavering] "Vergobret of the Aedui, chosen through the priests. Cotus says his brother made him vergobret instead, and Caesar will have to decide between us." The smile. "He'll decide for the priests. What do the Cadurci want of the Aedui?"
+[flag aedui_wavering] "What do the Cadurci want of the Aedui?"
+-> hub
+
+=== again
+Convictolitavis looks up from the men around his chair. "The Cadurcan. Again."
+-> hub
+
+=== hub
+* "How do things stand between the Aedui and Rome?" -> rome
+* [flag aedui_wavering] "They say the Aedui are quarreling." -> wavering
+* [flag dan_met] "What do you make of Dannotalos?" -> dannotalos
+* [item hostage_roll, flag roll_read, !flag verg_roll] Show him the hostage roll. -> roll
+* "Goodbye." -> END
+
+=== rome
+[!flag aedui_wavering] "The Aedui are brothers and kinsmen of the Roman people," he says. "The senate has called us so for longer than either of us has been alive. Caesar is our friend. Our nobles ride with him." It comes out smooth as a pebble from a river. "Is there anything else?"
+[flag aedui_wavering, !flag aedui_defected] "We're Rome's friends," he says, and then, more quietly, "and Gaul's sons. A man can be both, for a while. The question every house on this hill is asking is how long a while."
+-> hub
+
+=== wavering
+"Two men claimed my chair this spring, and Caesar came to Decetia and gave it to me, because the priests had chosen me." He smiles. "So I owe Caesar, and I owe the priests. And the Arverni are very generous." The smile doesn't change. "A man in my chair owes everyone. Tell me about your king. Vercingetorix. What is he like, close to?"
+* "He burns the men who tell him to wait." -> wavering_hard
+* "He's the only man in Gaul who might beat Caesar." -> wavering_win
+* "I'm not here to talk about him." -> hub
+
+=== wavering_hard
+He nods slowly, as though you've confirmed a price. "Yes. That's what they say." He looks at the men round his chair. "Thank you, Cadurcan."
+-> hub
+
+=== wavering_win
+~ standing aedui 2
+"Might," he says. "That's a great word, might." He turns his ring round on his finger. "Thank you, Cadurcan. I'll remember you said it."
+-> hub
+
+=== dannotalos
+"Dannotalos has more clients than any man on this hill except me, and more silver than I do." He says it lightly. "He feeds half of Bibracte. He'd like the Aedui to lead Gaul, and he'd like to be the Aeduan who leads them." He shrugs, gold catching the light. "If he lost his clients, I'd have one less friend to worry about. I'd never say so."
+-> hub
+
+=== roll
+~ set verg_roll
+He reads it, and goes on reading it after he's finished, the way a man looks at a road he doesn't want to take.
+
+"Put that away," he says quietly, "before anybody in this hall sees me read it. If that's what I think it is, it belongs to all Gaul, not to the Aedui, and certainly not to me. If the peoples ever meet on this hill in council, show it to them there." He gives it back. "Not before."
+-> hub

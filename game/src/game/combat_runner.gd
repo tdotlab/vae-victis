@@ -14,6 +14,8 @@ var round_no := 0
 var acting := false                # an attack or move is animating
 var _cached_hover := Vector2i(-9999, -9999)
 var _cached_path: Array[Vector2i] = []
+var duel_with: Actor = null        # a one-on-one: nobody else joins
+var duel_flag := ""                # set if the player wins it
 
 
 func dice() -> Dice:
@@ -58,6 +60,28 @@ func start_combat(initiator: Actor, target: Actor = null) -> void:
 	_run.call_deferred()
 
 
+## A fight between the player and one other, by agreement: companions and
+## allies stand back, nobody else joins, and no guest-bond is broken. The
+## flag is set if the player is standing at the end and the other is dead,
+## down, or has run. Nobody dies of it: whoever drops to nothing yields.
+func start_duel(champ: Actor, flag: String = "") -> void:
+	if active or champ == null:
+		return
+	active = true
+	round_no = 0
+	map.path_preview.clear()
+	duel_with = champ
+	duel_flag = flag
+	champ.hostile = true
+	var participants: Array = [map.player, champ]
+	for a in participants:
+		_join(a)
+	order = CombatRules.turn_order(participants)
+	Game.say("Combat!", "bad")
+	map.hud.refresh()
+	_run.call_deferred()
+
+
 func _aware(a: Actor) -> bool:
 	for o in map.actors:
 		if (o.is_player or o.is_companion) and o.is_active():
@@ -97,6 +121,14 @@ func _join(a: Actor) -> void:
 func _end_combat() -> void:
 	active = false
 	current = null
+	if duel_with:
+		var beaten := duel_with.dead or duel_with.unconscious or duel_with.has_meta("broken")
+		if beaten and map.player.is_active() and duel_flag != "":
+			Game.state.set_flag(duel_flag)
+		if not duel_with.dead:
+			duel_with.hostile = false
+		duel_with = null
+		duel_flag = ""
 	for a in map.actors:
 		a.in_combat = false
 		a.bonus_defense = 0
@@ -197,7 +229,10 @@ func _run() -> void:
 			# Unused action points make you harder to hit until your next turn.
 			a.bonus_defense = a.ap * 2
 			if not map.player.is_active():
-				_player_died()
+				if duel_with:
+					_end_combat()
+				else:
+					_player_died()
 				return
 			if _fight_over():
 				_end_combat()
@@ -206,6 +241,8 @@ func _run() -> void:
 
 
 func _recruit_newly_aware() -> void:
+	if duel_with:
+		return
 	for a in map.actors:
 		if a.hostile and a.is_active() and not order.has(a) and (_aware(a) or _hears_friends(a, order)):
 			_join(a)
@@ -371,6 +408,13 @@ func attack(att: Actor, def: Actor, w: Dictionary, aim: String = "torso") -> voi
 	if crit:
 		line = "A critical hit! " + line
 	Game.say(line, "bad" if def.is_player else ("good" if att.is_player else "info"))
+	if def.sheet.hp <= 0 and duel_with and (def == duel_with or def.is_player):
+		# A duel is by agreement: it ends when one of the two can't stand.
+		def.sheet.hp = 1
+		def.unconscious = true
+		def.set_meta("wake_round", round_no + 1000)
+		Game.say("%s goes down, and yields." % whom)
+		return
 	if def.sheet.hp <= 0 and DB.npc_template(def.template).get("essential", false):
 		# History needs some people alive. They go down hard and stay down.
 		def.sheet.hp = 1
@@ -441,6 +485,14 @@ func _kill(def: Actor, killer: Actor) -> void:
 		Game.state.set_flag(tkf)
 	if def.has_meta("kill_flag") and String(def.get_meta("kill_flag")) != "":
 		Game.state.set_flag(String(def.get_meta("kill_flag")))
+	# Quest consequences of a death, applied only when it actually happens.
+	var kfx: Array = DB.npc_template(def.template).get("kill_fx", [])
+	if not kfx.is_empty():
+		var r := Dialogue.apply(Game.state, kfx)
+		for m in r["messages"]:
+			Game.say(m[0], m[1])
+		if int(r["xp"]) > 0:
+			Game.give_xp(int(r["xp"]))
 	var rules := DB.rules()
 	var shock := int(rules.get("kill_shock", 10)) + (int(rules.get("leader_shock", 50)) if def.leader else 0)
 	var head_taker := killer.is_player and killer.sheet.has_flag("head_taker")

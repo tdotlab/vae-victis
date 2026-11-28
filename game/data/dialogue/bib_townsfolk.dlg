@@ -1,0 +1,25 @@
+// Townsfolk of Bibracte, lower and upper town. Rumors by the calendar and by
+// what the player has done.
+=== start
+[sex f] "You're not from here." She shifts the jar on her hip. "Cadurci? You look it. What is it?"
+[!sex f] "Cadurci, are you?" He looks you up and down, friendly enough, with wine on his breath. "What is it?"
+* "What's the news?" -> news
+* "Where does Dannotalos live?" -> dan
+* "Goodbye." -> END
+
+=== news
+[flag dannotalos_dead] "Somebody killed Dannotalos in his own bed. Under his own roof, and nobody saw a thing. His men have taken him home to burn him, and his clients are going round the other halls with their hats in their hands."
+[!flag dannotalos_dead, flag dan_forfeit] "A Cadurcan took the champion's portion off Cingetos, in Dannotalos's own hall, and beat him on the floor for it. They say Dannotalos paid the forfeit without blinking." A grin. "They say he hasn't blinked since."
+[!flag dannotalos_dead, flag dannotalos_interdicted] "The priests have barred Dannotalos from the sacrifices. Nobody will go near his hall. His horses are standing out there with nobody to feed them."
+[!flag aedui_wavering] "Two men both say they're vergobret this year, Cotus and Convictolitavis, and the whole city's split down the middle over it. They've sent to Caesar to settle it." A snort. "Asking a Roman to choose our magistrate."
+[flag aedui_wavering, !flag gergovia_besieged] "Caesar came to Decetia and gave the magistracy to Convictolitavis, because the priests chose him. Cotus's family won't forget it. And now Caesar wants all our horse and ten thousand foot for his war, and the young men say the Arverni pay better."
+[flag gergovia_besieged, !flag litaviccus_column] "Caesar's in front of Gergovia with all his legions, and Eporedorix has gone to him with the horse. They're sending ten thousand foot after them under Litaviccus." A look. "Litaviccus. Of all people."
+[flag litaviccus_column, !flag cabillonum_riot] "They're saying Caesar killed our nobles at Gergovia, Eporedorix and Viridomarus and all the rest. Others say it's a lie. Nobody knows which."
+[flag cabillonum_riot] "They plundered the Roman traders at Cabillonum, and promised them safe conduct, and then killed them on the road. Now everyone's saying it was a misunderstanding." He laughs, not much. "Everyone's very sorry. Everyone's keeping what they took."
+* "Where does Dannotalos live?" -> dan
+* "Goodbye." -> END
+
+=== dan
+[!flag dannotalos_dead] "Up the hill, through the inner gate. The biggest hall, with the horses outside. He feeds anyone who comes. If you've come to ask him for something, eat first. He likes that."
+[flag dannotalos_dead] "Lived. Up the hill." A look. "Why?"
+* "Goodbye." -> END

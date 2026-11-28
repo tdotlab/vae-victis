@@ -390,6 +390,8 @@ func test_killing_vettius_under_his_roof() -> void:
 	var page := _pick(gs, st, "Do it anyway")
 	check(page["actions"].has("fight"))
 	check(gs.flag("guest_murder_vettius"))
+	check(not _q(gs, "quest house_vettius=vettius_dead"), "not dead until the fight kills him")
+	Dialogue.apply(gs, DB.npc_template("vettius")["kill_fx"])
 	check(_q(gs, "quest house_vettius=vettius_dead"))
 	check(not _q(gs, "quest brig_line done"), "killing him doesn't strike the line")
 

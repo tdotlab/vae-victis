@@ -1,0 +1,281 @@
+{
+ "id": "bibracte_upper",
+ "name": "Bibracte, the great houses",
+ "default": "grass",
+ "legend": {
+  ".": "grass",
+  "_": "road",
+  "o": "dirt",
+  "R": "rampart",
+  "w": "wall_wood",
+  "f": "floor_earth",
+  "d": "door",
+  "h": "hearth",
+  "B": "bed",
+  "t": "table",
+  "a": "amphorae",
+  "l": "loom",
+  "T": "tree",
+  "n": "fence",
+  "G": "rock",
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "e": {
+   "terrain": "road",
+   "mark": "exit"
+  },
+  "H": {
+   "terrain": "floor_wood",
+   "mark": "hall"
+  },
+  "c": {
+   "terrain": "floor_wood",
+   "mark": "chamber"
+  },
+  "k": {
+   "terrain": "crate",
+   "mark": "dan_chest"
+  },
+  "N": {
+   "terrain": "floor_wood",
+   "mark": "dannotalos"
+  },
+  "C": {
+   "terrain": "floor_wood",
+   "mark": "champion"
+  },
+  "A": {
+   "terrain": "floor_wood",
+   "mark": "a1"
+  },
+  "Z": {
+   "terrain": "floor_wood",
+   "mark": "a2"
+  },
+  "J": {
+   "terrain": "floor_wood",
+   "mark": "a3"
+  },
+  "D": {
+   "terrain": "door",
+   "mark": "chamber_door"
+  },
+  "+": {
+   "terrain": "door",
+   "mark": "hall_door"
+  },
+  "V": {
+   "terrain": "floor_earth",
+   "mark": "vergobret"
+  },
+  "M": {
+   "terrain": "floor_earth",
+   "mark": "g1"
+  },
+  "Y": {
+   "terrain": "floor_earth",
+   "mark": "g2"
+  },
+  "L": {
+   "terrain": "altar",
+   "mark": "council_altar"
+  },
+  "E": {
+   "terrain": "road",
+   "mark": "epo"
+  },
+  "1": {
+   "terrain": "road",
+   "mark": "u1"
+  },
+  "2": {
+   "terrain": "dirt",
+   "mark": "u2"
+  },
+  "3": {
+   "terrain": "dirt",
+   "mark": "u3"
+  }
+ },
+ "rows": [
+  "..RR........................................",
+  "..RR...................wwwwwwwwwwwwwwwwwww..",
+  "..RR..wwwwwwww.wwwwwww.waHHHHHHHHHHHawcccw..",
+  "..RR..whffffBw.wafffBw.wHHttHHHHHttHHwcBcwT.",
+  "..RR..wffffffw.wfffffw.wHHHHHHHNCHHHHwcccw..",
+  "..RR..wffffffw.wfffffw.wHAHHHHhHHHHHHDcccw..",
+  "..RR..wffffflw.whffffw.wHHHHHHHHHHHHHwcccw..",
+  "..RR..wwwdwwww.wwwdwww.wHHttHHHHHttHHwcccw..",
+  "..RR.....o........o....waHHHHHHHHHHZHwclkw..",
+  "..RR.T...o........o....wHHHHHHJHHHHHHwcccw..",
+  "..RR.....o........o....wwwwwww+wwwwwwwwwww..",
+  "..RR.....o........o...........o.............",
+  "e___ooooooooooooooooooToooooooooooo.T.......",
+  "e___@___________1___E______________.........",
+  "e__________________________________.......T.",
+  "e___ooooooo3oooooooooooo2oooooooooo.........",
+  "..RR..........o.................oo..........",
+  "..RR...wwwwwwwdwwwwww....nnnnnnnoonnnnnnn...",
+  "..RR...wffffffffffffw....n..............n...",
+  "..RR...wfttMfffffttfw....n......GG......n...",
+  "..RR...wfffffVffffffw....n..............n...",
+  "..RR...wffffffffYfffw....n..............n...",
+  "..RR...wftffffhffftfw....n......L.......n...",
+  "..RR...waffffffffffaw....n..............n...",
+  "..RR...wwwwwwwwwwwwww....n..............n...",
+  "..RR..................T..n..............n...",
+  "..RR.T...................nnnnnnnnnnnnnnnn...",
+  "..RR........................................"
+ ],
+ "arrive_text": "Above the inner bank the noise of the craftsmen's quarter drops away. The houses up here stand in their own yards, long timber halls with carved posts at the doors, and there's a square of ditched ground with an altar in it where the council of the Aedui meets in the open air. The biggest hall on the hill, with a line of horses tethered outside it and somebody always going in or out, belongs to Dannotalos.",
+ "hospitality": [
+  {
+   "host": "dannotalos",
+   "mark": [
+    "hall",
+    "dannotalos",
+    "champion",
+    "a1",
+    "a2",
+    "a3",
+    "chamber",
+    "chamber_door",
+    "dan_chest"
+   ],
+   "if_flag": "dan_guest"
+  }
+ ],
+ "actors": [
+  {
+   "uid": "dannotalos",
+   "template": "dannotalos",
+   "mark": "dannotalos",
+   "unless_flag": [
+    "dannotalos_dead"
+   ]
+  },
+  {
+   "uid": "dan_champion",
+   "template": "bib_champion",
+   "mark": "champion",
+   "unless_flag": [
+    "champion_dead",
+    "dannotalos_dead"
+   ]
+  },
+  {
+   "uid": "dan_a1",
+   "template": "bib_ambactus",
+   "mark": "a1",
+   "unless_flag": [
+    "dannotalos_dead"
+   ]
+  },
+  {
+   "uid": "dan_a2",
+   "template": "bib_ambactus",
+   "mark": "a2",
+   "unless_flag": [
+    "dannotalos_dead"
+   ]
+  },
+  {
+   "uid": "dan_a3",
+   "template": "bib_ambactus",
+   "mark": "a3",
+   "unless_flag": [
+    "dannotalos_dead"
+   ]
+  },
+  {
+   "uid": "convictolitavis",
+   "template": "convictolitavis",
+   "mark": "vergobret"
+  },
+  {
+   "uid": "bib_g1",
+   "template": "bib_warden",
+   "mark": "g1",
+   "dialogue": "bib_hall_guard"
+  },
+  {
+   "uid": "bib_g2",
+   "template": "bib_warden",
+   "mark": "g2",
+   "dialogue": "bib_hall_guard"
+  },
+  {
+   "uid": "bib_u1",
+   "template": "bib_aeduan",
+   "mark": "u1"
+  },
+  {
+   "uid": "bib_u2",
+   "template": "bib_aeduan_f",
+   "mark": "u2"
+  },
+  {
+   "uid": "bib_u3",
+   "template": "bib_youth",
+   "mark": "u3"
+  }
+ ],
+ "containers": [
+  {
+   "mark": "dan_chest",
+   "name": "Dannotalos's chest",
+   "items": [
+    [
+     "dannotalos_tally",
+     1
+    ],
+    [
+     "gold_torque",
+     1
+    ]
+   ],
+   "silver": 120,
+   "lock": 55,
+   "unless_flag": [
+    "dan_tally_taken"
+   ],
+   "gone_text": "The chest stands open and empty."
+  }
+ ],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "map:bibracte_lower",
+   "entry": "from_upper",
+   "label": "Down to the lower town"
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "chamber_door",
+   "id": "chamber_door",
+   "once": false,
+   "unless_flag": "dannotalos_dead",
+   "dialogue": "bib_chamber"
+  },
+  {
+   "mark": "hall_door",
+   "id": "hall_dead",
+   "if_flag": "dannotalos_dead",
+   "say": "Dannotalos's hall is shut up and the hearth is cold. His men have carried him home to his own people for the burning, and taken his horses with them. Nobody has swept the floor."
+  },
+  {
+   "mark": "epo",
+   "id": "epo_seen",
+   "unless_flag": "gergovia_besieged",
+   "say": "A knot of riders goes by at a walk, young men with gold at their throats and Roman saddles, and the street makes room for them. The one in front is Eporedorix, someone says: a noble's son, the best horseman of the Aedui, and Caesar's friend. He doesn't look at anybody."
+  },
+  {
+   "mark": "council_altar",
+   "id": "council_view",
+   "say": "The council ground is a square of beaten earth inside a ditch and a fence, with an altar in the middle of it, black from old fires. This is where the Aedui choose their vergobret, through the priests, and where they'll decide, sooner or later, whose war this is."
+  }
+ ]
+}

@@ -177,6 +177,13 @@ func _finish() -> void:
 					speaker.hostile = true
 					m.combat.provoke(speaker)
 					m.combat.start_combat(speaker)
+			"duel":
+				var champ: Actor = m.find_actor(parts[1]) if parts.size() > 1 else speaker
+				if champ and champ.is_active():
+					m.save_map_state()
+					hud.refresh()
+					m.combat.start_duel(champ, parts[2] if parts.size() > 2 else "")
+					return
 			"join":
 				if speaker and not Companions.has_room(Game.state, speaker.template):
 					Game.say(Companions.text("full", "You can't lead more than %d people.") % Companions.cap(Game.state), "bad")

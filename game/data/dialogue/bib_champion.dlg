@@ -1,0 +1,6 @@
+// Cingetos (placeholder), Dannotalos's champion.
+=== start
+[flag champion_beaten] Cingetos looks at you over his cup, and touches his nose, which has been broken again. "Next year," he says. "I'll have it back next year."
+[flag dan_duel, !flag champion_beaten] Cingetos doesn't look up from the joint. "Sit down," he says. "You had your turn."
+[!flag dan_duel] Cingetos looks at you the way a dog looks at another dog. He doesn't say anything at all.
+* Leave him. -> END

@@ -266,7 +266,8 @@
     13
    ],
    "desc": "The Aeduan capital. Rome's oldest friends in Gaul.",
-   "closed_text": "The road goes on, but this part of Gaul isn't built yet. The way home is open.",
+   "map": "bibracte_lower",
+   "entry": "start",
    "size": 3
   },
   {

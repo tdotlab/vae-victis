@@ -1,0 +1,233 @@
+// Dannotalos, in his hall in the upper town at Bibracte: the house of
+// Vettius's partner, who holds Brigodunon on his account. He receives the
+// player as a thief (dannotalos_cheated), a partner (factor_turned), the
+// house's man (house_factor) or a curiosity. He feeds strangers before he
+// asks their business (Diodorus V.28), and eating makes the player his guest
+// (dan_guest). Routes against him here: claim the champion's portion at the
+// feast and beat Cingetos (a duel; the forfeit strikes the line); threaten
+// him with Ateula's roll, or sell it to him; the Bone Field's iron (A2.4
+// sets iron_tally); join him with the house's master book (the Pens are
+// A2.5); or the knife. The night routes are at his chamber door
+// (bib_chamber), the split at Cabillonum (cab_vettius), and interdiction
+// with the druid (bib_druid).
+=== start
+[flag champion_beaten, !flag dan_forfeit] -> forfeit
+[flag dan_duel, !flag champion_beaten, !flag dan_duel_done] -> duel_lost
+[flag dan_met] -> again
+~ set dan_met
+[!quest partner done] ~ quest partner met
+[quest brig_line none] ~ quest brig_line start
+[quest house_vettius none] ~ quest house_vettius start
+The hall is long and full of smoke and people: dogs under the tables, men on hides along the walls with their shields hung above them, a boy turning a whole pig on a spit over the hearth. In the middle of it all, on a bench by the fire with a tablet in his lap, sits an Aeduan not yet thirty, with a gold torc as thick as a child's wrist. He closes the tablet when he sees you.
+[flag partners_split] -> met_split
+[flag dannotalos_cheated] -> met_thief
+[flag factor_turned] -> met_partner
+[flag house_factor] -> met_factor
+-> met_curious
+
+=== met_curious
+"A Cadurcan," he says. "There aren't so many in Bibracte this year that I can't guess which. Brigodunon." He smiles with half his mouth. "You're on my book. I'm Dannotalos."
+-> custom
+
+=== met_thief
+"Brigodunon," he says, before you're halfway down the hall. "The Cadurcan who collected my property at Noviodunum, on my account, with my letter, and left me the other half to pay." He doesn't get up. "Orbius wrote to me. Romans always write. I'm Dannotalos." The half smile. "I've been looking forward to this."
+-> custom
+
+=== met_partner
+"Partner," he says, and the men nearest the fire look round. "Epomeduos wrote you into my letter at Avaricum. He had no business to. He's a clever boy, and he likes making promises in my name." He considers you. "I'm Dannotalos. I keep my clever boys' promises when it suits me. Let's find out whether it does."
+-> custom
+
+=== met_factor
+"The house's new factor for the Cadurci hills." He doesn't get up. "Vettius writes to me about everything. He's very pleased with you. He says you have a good hand." He turns the tablet over in his lap. "I'm Dannotalos. Vettius's partner, and so, I suppose, yours."
+-> custom
+
+=== met_split
+He knows. You can see it from the door: he knows whose doing it was that the Roman closed his account. "Brigodunon," he says quietly. "You've cost me the Roman, and every line I ever sold him. I'm Dannotalos, since you've done me the honor of ruining me without being introduced."
+-> custom
+
+=== custom
+"Eat first," he says. "Then tell me who you are and what you want, though I know both. That's the custom of this house, and of every house in Gaul worth the name. We don't ask a stranger his business on an empty belly."
+* Sit down and eat. -> feast
+* "I'll stand." -> hub
+
+=== feast
+~ set dan_guest; time 120; heal 5
+They sit you on a wolfskin on the floor at a low table, among his men. He sits in the middle of the ring like the leader of a chorus, his guests by rank on either side of him; behind each warrior his shield-bearer stands with the shield, and across the floor his spearmen sit in a ring of their own. The meat comes off the spits in joints, and they eat it with both hands and cut what they can't tear with a little knife from the belt. A boy carries the cup round. There is one cup, and everyone drinks from it, a mouthful at a time, often.
+
+The thigh joint, the best of the pig, goes by right to the big man with the broken nose at Dannotalos's right hand. Nobody watches it go, and everybody knows where it's going.
+
+"Cingetos," Dannotalos says, seeing you see. "My champion. The champion's portion is his until somebody takes it off him. In my grandfather's day men died over that joint at the table." He drinks. "We're more civilized now. Now, then. Who are you, and what do you want?"
+-> hub
+
+=== again
+[flag dan_partner] Dannotalos looks up from his tablet. "Partner. Sit down."
+[!flag dan_partner, flag dan_enemy] Dannotalos looks up from his tablet and doesn't smile at all. "Brigodunon. You're still alive. What is it?"
+[!flag dan_partner, !flag dan_enemy] Dannotalos looks up from his tablet. "Brigodunon. What is it?"
+-> hub
+
+=== hub
+* [!flag dan_guest] "I'll eat with you after all." -> feast
+* "Who are you, Dannotalos?" -> who
+* "Brigodunon is on your account." -> brig
+* "Why do you buy people forward?" -> forward
+* [flag dan_guest, !flag dan_duel, !flag dan_forfeit] Stand up. "The champion's portion. I claim it." -> claim
+* [item hostage_roll, flag roll_read, !quest brig_line done, !flag dan_roll_tried] "I've seen the hostage roll from Noviodunum, with the buyers in the margin. Your name is beside half of it." -> roll
+* [flag iron_tally, !quest brig_line done, !flag dan_iron_tried] "The iron out of the Bone Field. I know whose agent buys it." -> iron
+* [!flag dan_partner, !flag dan_enemy, !flag partners_split] "Is there a way to be your partner?" -> partner_offer
+* [item master_book, !flag dan_partner, !flag dan_enemy, !flag partners_split] "I have the house's master book." -> join
+* [!flag dan_draw] Draw your knife. -> draw
+* "Goodbye." -> END
+
+=== who
+"Who am I." He likes the question. "My house is old. When I was fourteen it was also poor, and the Sequani had beaten us with the Germans' help, and the Aedui had to give them hostages: the sons of the best houses, and an oath that the city would never ask for them back." He turns the cup in his hands. "Nobody did. It took a Roman to remember us, after he'd beaten the Germans and wanted something to give the Aedui."
+
+"So I know what a hostage is worth, and to whom, from the inside. There are a great many in Gaul this year. Somebody is going to own them when it's over. I'd rather it was somebody who knows what they are."
+-> hub
+
+=== brig
+"Brigodunon is on my account," he agrees. "Every hearth, every head. The house paid me for it at a fair price, and I'll collect after the harvest, if there's anything left to collect." He holds up a hand. "Don't look at me like that. If it weren't on my book it would be on somebody's, and somebody's book is worse."
+
+"Bring me a reason to strike it, and I'll listen. Reasons are the only thing I buy that I can't sell again."
+-> hub
+
+=== forward
+"Because a war is a harvest, and the harvest is coming whether I buy it or not." He says it patiently, as a man explains rain. "On my book, people are property, and property is fed, and kept dry, and delivered in one piece. Off it, they're loot, and loot is whatever the man who caught it feels like. Ask any Roman's slave which he'd rather be."
+
+"And the revolt," he adds, "since you're too polite to ask. Yes. I sell iron to the king's smiths. A long war is good for prices, and when it's over somebody will have to lead Gaul, and it had better be the Aedui." He smiles. "Meaning me."
+
+"Losses in transit run about a tenth on my account. It's a long road from the Liger to the Arar."
+[flag survivor_out] ~ set dan_transit
+[flag survivor_out] You think of the girl at Avaricum, written down as Dannotalos's property, lost in transit, going into the reeds like a hare. A tenth is a great many girls.
+-> hub
+
+=== partner_offer
+~ set dan_offer
+He sets the cup down. For the first time he looks at you the way he looks at the tablet.
+
+"Vettius has the book and the boats and the Roman coin. I have the people. Every year he takes more of the price and I take more of the risk." He spreads his hands. "Bring me his master book, and the trade is mine: a Gallic house, not a Roman one, and the partners on it are partners of mine. Or bring me the Pens, where he keeps his stock for the boats." He shrugs. "Either one, and Brigodunon is off every book there is. You'd be the one keeping it."
+-> hub
+
+=== join
+He holds out his hand for it, and you don't give it to him yet, and he laughs.
+"Good. You're learning. Well?"
+* Give it to him. "Make me your partner." -> joined
+* "Not yet." -> hub
+
+=== joined
+~ take master_book; set dan_partner; deed joined_house; honor -10; silver 100; xp 100
+[!quest partner done] ~ quest partner done_partner done
+~ quest house_vettius partner_joined
+[!quest brig_line done] ~ quest brig_line done_partner done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_struck done
+He takes the book onto his knees and opens it, and goes through it leaf by leaf for a long time with his lips moving, while the hall gets on with its dinner around him. When he finds Brigodunon he draws his thumbnail through the wax, deliberately, and shows you.
+
+"Struck. Partners' villages are kept off the book." He closes it. "Vettius will hear by the end of the month. By then it won't matter what he hears." He hands you a purse. "Your share of the first quarter, in advance. Welcome to the house of Dannotalos."
+-> hub
+
+=== claim
+The hall goes quiet in pieces, from the middle outward, like ice breaking. Cingetos stops chewing. Dannotalos looks at you, and then at his men, who are all looking at him.
+
+"The champion's portion," he says, "in my hall." He doesn't sound angry. He sounds like a man doing sums. "It's an old custom. Very well. One on one, on the floor of my hall, and nobody helps either of you. It ends when one of you can't stand. Win, and the joint is yours, and I'll pay a forfeit worthy of my house."
+[!quest brig_line done] "Brigodunon," you say. "Struck off your account." "Done," he says, quite pleasantly. "And if Cingetos wins, you've eaten my meat and lost my floor, and everyone in Bibracte will know it."
+[quest brig_line done] "And the forfeit?" "Silver," he says. "As much as you weigh." The hall laughs. "And if Cingetos wins, you've eaten my meat and lost my floor, and everyone in Bibracte will know it."
+* "Agreed." -> duel
+* "On second thought, the joint is his." -> claim_back
+
+=== claim_back
+~ honor -2
+There's laughter, and Cingetos goes back to his meat, and Dannotalos raises the cup to you as if you'd done something sensible. Perhaps you have.
+-> hub
+
+=== duel
+~ set dan_duel; duel dan_champion champion_beaten
+They drag the tables back to the walls. Cingetos wipes his hands on his trousers and takes his shield from the boy behind him, and stands in the firelight in the middle of the floor, and waits.
+
+=== forfeit
+~ set dan_forfeit; renown 3; xp 150; title Who took the champion's portion in Dannotalos's hall
+[quest brig_line done] ~ set dan_forfeit_silver; silver 150
+[!quest partner done] ~ quest partner done_shamed done
+~ quest house_vettius partner_shamed
+[!quest brig_line done] ~ quest brig_line done_released done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_struck done
+The hall is very quiet. Two of his men are helping Cingetos up off the floor, and he lets them, which is the worst part. Everyone is watching Dannotalos, and he knows exactly what they're seeing.
+
+[!flag dan_forfeit_silver] He calls for wax and writes without hurrying, and seals it with his horse, and holds it out. "To the house of Vettius at Cabillonum: Brigodunon of the Cadurci is released from my account, and I will not take delivery. The forfeit." His voice is perfectly even. "And the joint is yours."
+[flag dan_forfeit_silver] He sends a boy for a bag, and weighs it in his hand, and tosses it to you. "Not as much as you weigh," he says. "As much as you're worth." His voice is perfectly even. "And the joint is yours."
+
+You eat it, because you have to. By the time you've finished, three of the men who were sitting nearest him have found reasons to go home early.
+-> hub
+
+=== duel_lost
+~ set dan_duel_done; honor -3
+Cingetos is back at his place with the joint in his hands, and somebody has thrown water on you, and the hall has gone back to its dinner as if you'd never stood up.
+
+"An old custom," Dannotalos says, "and a good one. It settles things." He doesn't look at you. "You've eaten my meat and lost my floor. Bibracte will be talking about it by morning. Was there anything else?"
+-> hub
+
+=== roll
+~ set dan_roll_tried
+He goes still. Not for long, but you see it.
+
+"Someone at Noviodunum has a good hand and a long memory." He turns his cup round once. "The council of all Gaul meets on this hill after the harvest. If they learned that an Aeduan bought the hostages of Gaul forward from Rome, they'd want a great deal explained." He looks at you. "What do you want for it?"
+* [speech 45] "Strike Brigodunon off your account, in your hand, under your seal. Then this stays a roll." -> roll_struck
+* [PRE 7] Say nothing at all. Just keep looking at him. -> roll_struck
+* "Strike Brigodunon off, and the roll is yours." -> roll_sold
+* "I'll think about it." -> hub
+
+=== roll_struck
+~ set dan_enemy; xp 100
+[!quest partner done] ~ quest partner struck
+[!quest brig_line done] ~ quest brig_line done_released done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_struck done
+He calls for wax and writes it while you watch: "Dannotalos of the Aedui, to the house of Vettius at Cabillonum: Brigodunon of the Cadurci is released from my account. I will not take delivery." He presses his horse into the seal, and gives it to his steward to send to the Arar tonight.
+
+"Keep your roll," he says. "Bring it to the council, if you like. You'll find a council is a great many men with debts." He doesn't smile. "I won't forget you, Brigodunon."
+-> hub
+
+=== roll_sold
+~ take hostage_roll; set roll_sold; xp 50
+[!quest partner done] ~ quest partner struck
+[!quest brig_line done] ~ quest brig_line done_released done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_struck done
+He writes the release, and seals it, and sends it to the Arar tonight. Then he reads the roll, all of it, by the fire, slowly, the way he read the faces round the table, and puts it inside his tunic.
+
+"A list of who has sold whom," he says. "That's worth more than gold, in the right winter. Thank you."
+-> hub
+
+=== iron
+~ set dan_iron_tried; set dan_enemy; xp 100
+[!quest partner done] ~ quest partner struck
+[!quest brig_line done] ~ quest brig_line done_released done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_struck done
+"The gods' iron." He says it softly, so the men at the next table don't hear. "Out of the Bone Field, through my agent, to the king's smiths. Sacrilege, the priests would call it. If they heard it from you, with a sworn man beside you, nobody in Gaul would speak to me again."
+
+He calls for wax and writes the release, and seals it, and sends it to the Arar tonight. "Go to the priests anyway, if you like," he says. "But you'd be wasting a good threat on a bad man."
+-> hub
+
+=== draw
+~ set dan_draw
+[flag dan_guest] -> draw_guest
+He sees it. So does everyone in the hall: his spearmen are on their feet before you've cleared the sheath.
+
+"In my own hall," he says. "Well."
+* Do it. -> kill
+* Put the knife away. -> sheathe
+
+=== draw_guest
+You ate his meat. You drank from his cup. In this hall, and in any hall in Gaul, that makes the next thing worse than murder, and every man here knows it.
+
+"Under my roof," Dannotalos says, "with my bread in you." He doesn't move. "Go on, then. They'll sing about it."
+* Do it anyway. -> kill_guest
+* Put the knife away. -> sheathe
+
+=== sheathe
+The spearmen sit down slowly. Nobody laughs. Dannotalos picks up his cup again, and the boy comes round with the meat, and everyone in the hall will remember this, including you.
+-> hub
+
+=== kill
+~ fight
+He's off the bench and behind the hearth before you're on him, quicker than you'd think, and his men come over the tables.
+
+=== kill_guest
+~ violate dannotalos; fight
+He's off the bench and behind the hearth before you're on him, quicker than you'd think, and his men come over the tables.

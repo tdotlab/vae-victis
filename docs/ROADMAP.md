@@ -30,7 +30,7 @@ Act II, in build order:
 |---|---|
 | **A2.1 Systems** (done 2026-11-21) | Allied bands fight on the player's side; several companions follow at once, with opinion, parting and a Presence cap; the guest-bond Honor rule; calendar-dependent prices; scripted day changes to maps; the Act II clock events in `calendar.json`. Covered by tests and the arena. |
 | **A2.2 The house arrives** (done 2026-11-26) | The opening at Brigodunon (The House Collects, the runner), the Line for Brigodunon in the journal, and Cabillonum before the riot: Vettius, the Countinghouse, Theron's Debt. |
-| **A2.3 The partner** | Bibracte's two maps before day 196, Dannotalos and The Partner's routes (those that don't need later content stubbed as unavailable). |
+| **A2.3 The partner** (done 2026-11-28) | Bibracte's two maps before day 196, Dannotalos and The Partner's routes (those that don't need later content stubbed as unavailable). |
 | **A2.4 The road east** | The Bone Field (the God's Iron, the dog) and the Germanic camp (Wages, Haldo's debt, Gundo). |
 | **A2.5 The Pens** | The compound, its captives, every route, and where freed people go. |
 | **A2.6 The war arrives** | Gergovia besieged (the Sutler, the Wall, the King's Errand), the Aeduan column, and Cabillonum's riot and after (the Tribune's Road). The first to cut if Act II has to shrink. |

@@ -1,6 +1,8 @@
 // Aulus Vettius Calvus, in the hall of his house at Cabillonum. Polite, tired,
 // precise, and killable. Routes for the Line: buy it struck; sign on as the
-// house's factor (the line struck as the wage). A threat gets nowhere.
+// house's factor (the line struck as the wage); show him that his partner
+// Dannotalos skims (his own tally, the girl lost in transit at Avaricum, or a
+// forged letter), and he voids the partner's account. A threat gets nowhere.
 // Accepting his wine makes the player his guest (vettius_guest), and the
 // guest-bond runs both ways.
 === start
@@ -42,6 +44,7 @@ He looks up from his tablets. "Brigodunon. What can the house do for you?"
 * [!quest brig_line done, priced brig_line, !price brig_line] "What would it cost to strike Brigodunon off?" -> strike_poor
 * [!quest brig_line done] "What if I made you strike it?" -> threat
 * [!flag house_factor] "Is there another way to get a line struck?" -> factor_offer
+* [!flag partners_split, !flag dannotalos_dead, !flag dannotalos_interdicted] "About your partner, Dannotalos." -> skim
 * [!flag vettius_draw] Draw your knife. -> draw
 * "Goodbye." -> END
 
@@ -114,9 +117,51 @@ You drank his wine. He watched you drink it. In this house, and in any house in 
 * Put the knife away. -> hub
 
 === kill
-~ quest house_vettius vettius_dead; fight
+~ fight
 He stands up, finally, and steps back from the table, and he's quicker than a man of fifty has any right to be.
 
 === kill_guest
-~ violate vettius; quest house_vettius vettius_dead; fight
+~ violate vettius; fight
 He stands up, finally, and steps back from the table, and he's quicker than a man of fifty has any right to be.
+
+=== skim
+He puts the stylus down. "Dannotalos," he says. "What about him?"
+* [item dannotalos_tally] Put Dannotalos's own tally on the table. -> skim_tally
+* [flag survivor_out, !flag skim_tried] "Your partner's losses in transit. I can tell you about one of them." -> skim_girl
+* [item aeduan_letter, latin 55, WIT 7, !flag skim_forged] "I have a letter of his you should read." -> skim_forge
+* "Nothing." -> hub
+
+=== skim_girl
+~ set skim_tried
+You tell him about Avaricum: a girl in the pens, Aeduan by Epomeduos's tablet, written down as Dannotalos's property lost in transit, and running into the reeds alive.
+
+"One girl," he says. "Losses in transit happen. It's a long road from the Liger to the Arar." But he has pulled a tablet towards him, and he's looking at a column of it.
+* [roll speech 10, flag dan_transit] "He told me himself they run a tenth on his account. What do they run on yours?" -> skim_win | skim_doubt
+* [roll speech -10, !flag dan_transit] "Look at what his losses run to, and ask yourself how many of them are alive somewhere, sold twice." -> skim_win | skim_doubt
+
+=== skim_doubt
+He looks at the column a long time, and then he closes the tablet. "I'll write to him about it," he says. "Partners have disagreements. Partners write to each other." He picks up the stylus. "Thank you for telling me."
+-> hub
+
+=== skim_tally
+~ take dannotalos_tally
+He unties the cord and reads, and his face doesn't change at all, which is how you know. Once he takes a day book from the shelf behind him and lays the two side by side and runs his finger down both, line against line, for a long time.
+-> skim_win
+
+=== skim_forge
+~ set skim_forged; take aeduan_letter; time 240; xp 50
+It takes you most of an afternoon at a borrowed table in the market, with his letter in front of you: his hand, his Latin, which is good but not as good as he thinks, his little flourish at the bottom, and his horse, lifted whole from the old wax with a hot knife. "Dannotalos to Philon at Massilia: the tenth from Avaricum goes down by the Rhodanus as before, not by the Arar. The house is to have them as losses in transit."
+
+Vettius reads it twice. He holds the seal up to the lamp.
+-> skim_win
+
+=== skim_win
+~ set partners_split; xp 100
+[!quest partner done] ~ quest partner done_split done
+~ quest house_vettius partner_cut
+[!quest brig_line done] ~ quest brig_line done_void done; set house_left; clear epo_at_brig
+[quest house_collects active] ~ quest house_collects done_struck done
+"We pay on time," Vettius says at last, "and we write everything down." He puts the tablet down very gently, as if it might break. "He was writing everything down twice."
+
+He writes, slowly, the same few lines four times over: to Hermeros at Avaricum, to the boats on the Arar, to the factors, to Dannotalos. "The account of Dannotalos the Aeduan is closed. Every line on it is void." He doesn't look up. "Brigodunon was on it, since you'll want to know." Then he does look up. "Thank you. I mean it. You've saved the house a great deal of money. I'll have to find another partner among the Aedui now, and the Aedui are about to become very difficult."
+-> hub

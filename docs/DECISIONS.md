@@ -2,6 +2,16 @@
 
 Newest first. Each entry: the decision, and why.
 
+## 2026-11-28 (The partner, A2.3)
+
+- **Duels are non-lethal.** A challenge at a feast is an agreement: whoever drops yields at 1 HP, and losing a duel is never game over. The duel engine (`duel <uid> <flag>`) fights one named actor, sets the flag if the player wins, and leaves everyone else out of it. Posidonius says men once fought to the death over the thigh joint; Dannotalos's "we're more civilized now" is the hall's own excuse.
+- **Dannotalos is not yet thirty.** He was given to the Sequani as a boy (I.31, about 61 BC), so he can't have been the fifty-year-old the first draft described.
+- **The champion is the fighter's route, and stays hard.** The arena gives a sword-and-shield fighter 29% at level 3 and 63% at level 4, a talker almost nothing. Losing costs Honor, not the game, and every other route is open to a talker.
+- **Routes that need later content are stubbed, not cut.** The Bone Field's `iron_tally` (A2.4) opens the iron routes with Dannotalos and the druid; joining with the Pens waits for A2.5; the council route waits for A2.7. Each is a condition on a choice that exists, so nothing has to be rewritten later.
+- **Interdiction gets its own Line ending,** `done_barred`: nobody delivers to a man the gods have refused, which is not the same as a release in his hand.
+- **The steward's escort has a cost.** Walking up with Moricos is the free way past the inner gate, and it makes the night chamber harder: he knows your face and sleeps across the curtain.
+- **Dannotalos stands in his hall at night.** The chamber's routes take the player off the map, so the overlap never shows; a night schedule for one actor isn't worth an engine feature yet.
+
 ## 2026-11-26 (Act II opening, A2.2)
 
 - **The house's man is Diodotos, not Hermeros, when Epomeduos can't come.** Hermeros is at Avaricum with his pen, his day book and his own scenes, and the ruins still need him; a second freedman keeps both. Diodotos is a placeholder.

@@ -1,0 +1,207 @@
+{
+ "id": "bibracte_lower",
+ "name": "Bibracte, the lower town",
+ "default": "grass",
+ "legend": {
+  ".": "grass",
+  "_": "road",
+  "o": "dirt",
+  "R": "rampart",
+  "w": "wall_wood",
+  "f": "floor_earth",
+  "d": "door",
+  "x": "smithy",
+  "F": "woodpile",
+  "k": "crate",
+  "t": "table",
+  "h": "hearth",
+  "a": "amphorae",
+  "y": "granary",
+  "S": "stall",
+  "/": "cart",
+  "T": "tree",
+  "B": "bed",
+  "l": "loom",
+  "q": "quern",
+  "n": "fence",
+  "~": "water",
+  "P": "altar",
+  "@": {
+   "terrain": "road",
+   "mark": "start"
+  },
+  "e": {
+   "terrain": "grass",
+   "mark": "exit"
+  },
+  "K": {
+   "terrain": "floor_earth",
+   "mark": "smith"
+  },
+  "E": {
+   "terrain": "floor_earth",
+   "mark": "enameler"
+  },
+  "D": {
+   "terrain": "grass",
+   "mark": "druid"
+  },
+  "W": {
+   "terrain": "grass",
+   "mark": "warden"
+  },
+  "b": {
+   "terrain": "road",
+   "mark": "from_upper"
+  },
+  "g": {
+   "terrain": "road",
+   "mark": "ugate"
+  },
+  "u": {
+   "terrain": "road",
+   "mark": "up"
+  },
+  "z": {
+   "terrain": "dirt",
+   "mark": "spring_in"
+  },
+  "1": {
+   "terrain": "dirt",
+   "mark": "t1"
+  },
+  "2": {
+   "terrain": "dirt",
+   "mark": "t2"
+  },
+  "3": {
+   "terrain": "dirt",
+   "mark": "t3"
+  },
+  "4": {
+   "terrain": "dirt",
+   "mark": "t4"
+  },
+  "6": {
+   "terrain": "dirt",
+   "mark": "youth"
+  },
+  "7": {
+   "terrain": "dirt",
+   "mark": "t7"
+  }
+ },
+ "rows": [
+  "..RRR...T.........T..................T..RR..",
+  "..RRRT.....................T............RR..",
+  "..RRR..wwwwwww...wwwwwwww....wwwwwwww...RR..",
+  "..RRR..wxfffxw...wttfffkw....waaaaaaw...RR..",
+  "..RRR..wffKffw...wfffEffw....wffffffw...RR..",
+  "..RRR..wFfffkw...wfffffhw....wftfftfw...RR..",
+  "..RRR..wwwdwww...wwwwdwww....wfffffhw...RR..",
+  "..RRR.....o..........o.......wwwdwwww...RR..",
+  "..RRR.....o..........o..........o.......RR..",
+  "..RRR.y...o...S......o...S......o.......RR..",
+  "..RRR.....o...../....o.....S....o.....W.RR..",
+  "e.RRRRRRRRR.........6o..........o......RRR..",
+  "e._________oooo1oooooooooooooooooo3ooogg___u",
+  "e@__________________________________b_gg___u",
+  "e.____________________________________gg___u",
+  "e._________ooooooooooooooo2o7ooooooooogg___u",
+  "e.RRRRRRRRR...o....o...........oo......RRR..",
+  "..RRR.....o...o....o......nnnnnzznnnnn..RR..",
+  "..RRR..wwwdwwwo.wwwdwww...n..........n..RR..",
+  "..RRR..whffflwo.wqfffBw...n.T..D...T.n..RR..",
+  "..RRR..wfffffw4.wfffffw...n..........nT.RR..",
+  "..RRR..wffffBwo.whffffw.T.n..P~~~....n..RR..",
+  "..RRR..wwwwwwwo.wwwwwww...n...~~~P...n..RR..",
+  "..RRR....ooooooooooo......n..........n..RR..",
+  "..RRR..wwdwww.o.wwwdwww...n.T......T.n..RR..",
+  "..RRR.Twffffw.o.wfffffw...n..........n..RR..",
+  "..RRR..wfffhw...whffaaw..Tnnnnnnnnnnnn..RR..",
+  "..RRR..wwwwww...wwwwwww.................RR.."
+ ],
+ "arrive_text": "Bibracte: the Aeduan capital on its mountain, with the forest pressing up to the walls. The gate is a corridor. The rampart turns inward on both sides, timber and stone faced, and you walk the length of it between walls twice your height, with men on the gatehouse looking down. Then the town opens out: smoke from the craftsmen's quarter, the smell of hot iron and wine, Roman amphorae stacked outside the houses like firewood, and higher up the slope a second bank where the great families live.",
+ "actors": [
+  {
+   "uid": "bib_smith",
+   "template": "bib_smith",
+   "mark": "smith"
+  },
+  {
+   "uid": "bib_enameler",
+   "template": "bib_enameler",
+   "mark": "enameler"
+  },
+  {
+   "uid": "bib_druid",
+   "template": "bib_druid",
+   "mark": "druid"
+  },
+  {
+   "uid": "bib_warden",
+   "template": "bib_warden",
+   "mark": "warden"
+  },
+  {
+   "uid": "bib_t1",
+   "template": "bib_aeduan",
+   "mark": "t1"
+  },
+  {
+   "uid": "bib_t2",
+   "template": "bib_aeduan_f",
+   "mark": "t2"
+  },
+  {
+   "uid": "bib_t3",
+   "template": "bib_aeduan",
+   "mark": "t3"
+  },
+  {
+   "uid": "bib_t4",
+   "template": "bib_aeduan_f",
+   "mark": "t4"
+  },
+  {
+   "uid": "bib_t7",
+   "template": "bib_aeduan",
+   "mark": "t7"
+  },
+  {
+   "uid": "bib_youth",
+   "template": "bib_youth",
+   "mark": "youth"
+  }
+ ],
+ "containers": [],
+ "exits": [
+  {
+   "mark": "exit",
+   "to": "world",
+   "label": "The Rebout gate"
+  },
+  {
+   "mark": "up",
+   "to": "map:bibracte_upper",
+   "entry": "start",
+   "label": "Up to the great houses",
+   "require_flag": "bib_upper",
+   "blocked_text": "The warden's spear is across the gate."
+  }
+ ],
+ "triggers": [
+  {
+   "mark": "ugate",
+   "id": "ugate",
+   "once": false,
+   "unless_flag": "bib_upper",
+   "dialogue": "bib_upper_gate"
+  },
+  {
+   "mark": "spring_in",
+   "id": "spring_view",
+   "say": "The spring comes up in a stone-lined basin in the middle of the town, cold enough to hurt the teeth. The fence round it is hung with things: little wooden legs and hands and eyes, a tin brooch, a twist of somebody's hair. The town walks round the fence, not through it, and lowers its voice going past."
+  }
+ ]
+}

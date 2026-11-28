@@ -212,7 +212,8 @@
         "done_refused": "I showed the house's man the door. He went politely, and said the price would be higher next time, and that someone else would come to collect it.",
         "done_followed": "I let the house's man go, and followed him east to Cabillonum on the Arar, where the house of Vettius keeps its book.",
         "done_guest": "I killed the house's man at Vellaunos's fire, a guest under our roof. Nothing I do now will make Brigodunon forget it.",
-        "done_road": "I waited for the house's man on the road and settled it there. It was only murder. The house will know who did it."
+        "done_road": "I waited for the house's man on the road and settled it there. It was only murder. The house will know who did it.",
+        "done_struck": "Brigodunon's line was struck before the house's man had his answer. He packed his tablets and went back the way he came."
       }
     },
     {
@@ -228,7 +229,11 @@
         "done_forged": "Brigodunon's line is struck in the master book in a clerk's hand and closed with the house's seal. Nobody reads struck lines. The house will never know it didn't strike it.",
         "done_taken": "I have the house's master book. Nobody can collect a line from a book they don't have.",
         "done_burned": "The house's master book is ash and melted wax. Brigodunon's line, and every other line in it, went with it.",
-        "done_never": "Demarchos has called in what the house of Vettius owed him. When the Aedui go over and the war comes up for sale, the house won't have the coin to buy it forward, and Brigodunon's line will never be written down for real."
+        "done_never": "Demarchos has called in what the house of Vettius owed him. When the Aedui go over and the war comes up for sale, the house won't have the coin to buy it forward, and Brigodunon's line will never be written down for real.",
+        "done_released": "Dannotalos has released Brigodunon from his account, in his own hand, under his horse seal. The house can't collect a line for a partner who won't take delivery.",
+        "done_void": "Vettius has closed Dannotalos's account. Every line on it is void, and Brigodunon's was on it.",
+        "done_partner": "I am Dannotalos's partner now, and partners' villages are kept off the book. Brigodunon is struck. So is my name, from anything decent the bards will sing.",
+        "done_barred": "The druids have barred Dannotalos from the sacrifices. Nobody in Gaul will deliver to a man the gods have refused, and Brigodunon's line was on his account."
       }
     },
     {
@@ -244,7 +249,27 @@
         "factor": "I signed on as the house's factor for the Cadurci hills. I am part of the house now, whatever else I am.",
         "credit_called": "The credit: Demarchos of Massilia has called in the house's loan.",
         "credit_bought": "The credit: I own the house's debt to Demarchos. The house of Vettius owes me.",
-        "vettius_dead": "Vettius is dead. The house isn't: Hermeros the freedman inherits the book and the business, and the harvest goes on."
+        "vettius_dead": "Vettius is dead. The house isn't: Hermeros the freedman inherits the book and the business, and the harvest goes on.",
+        "partner_cut": "The partner: Vettius has closed Dannotalos's account. The house and its partner are finished with each other, and every line on his account is void.",
+        "partner_dead": "The partner: Dannotalos is dead. His account passes to the house, which is bigger for it, not smaller.",
+        "partner_shamed": "The partner: I took the champion's portion at Dannotalos's own feast and beat his man for it. A lord who can't hold his own hall loses his clients, and a partner without clients is no use to the house.",
+        "partner_interdicted": "The partner: the druids have barred Dannotalos from the sacrifices. Nobody will speak to him, no court will hear him, and no one in Gaul will deliver to him.",
+        "partner_joined": "The partner: I gave Dannotalos the house's master book and became his partner. He means to cut Vettius out and own the trade himself, a Gallic house in place of a Roman one."
+      }
+    },
+    {
+      "id": "partner",
+      "name": "The Partner",
+      "xp": 300,
+      "stages": {
+        "start": "Dannotalos of the Aedui is the house of Vettius's partner: the lines in its book are on his account, and he collects them. He lives at Bibracte, in the upper town.",
+        "met": "I've met Dannotalos at Bibracte. He was a hostage himself once, as a boy, and he buys people forward so that they're on his book rather than someone worse's. Sometimes that's even true.",
+        "struck": "Dannotalos has struck Brigodunon from his account to save himself something worse. He hasn't forgiven it, and he hasn't stopped being the house's partner.",
+        "done_split": "I set the partners on each other. Vettius has closed Dannotalos's account, and the house of Vettius has no partner among the Aedui.",
+        "done_shamed": "I took the champion's portion at Dannotalos's own feast and beat his man for it in front of his clients. He paid the forfeit. The clients are already drifting to other halls.",
+        "done_dead": "Dannotalos is dead. His account passes to the house of Vettius, which is bigger for it.",
+        "done_partner": "I have become Dannotalos's partner.",
+        "done_interdicted": "The druids have barred Dannotalos from the sacrifices, on the evidence of the gods' iron. He is finished, and nobody had to bleed for it."
       }
     },
     {

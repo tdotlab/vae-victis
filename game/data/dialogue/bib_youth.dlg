@@ -1,0 +1,22 @@
+// A young Aeduan noble's son with a new sword: the young men of Bibracte
+// talking about the Arverni.
+=== start
+"Cadurci!" He says it loud enough for the whole street. "You've been with the Arverni. Tell me, is it true about the king? That he never sleeps, that he burns cowards, that he'll be in Narbo by the autumn?"
+* "Some of it." -> some
+* "He burns men who tell him to wait. That much is true." -> burns
+* "Why do you care? You're Rome's friends." -> friends
+
+=== some
+"Some of it!" He's delighted. "I knew it. My father says the Aedui have always been Rome's friends. My father is old." He touches his sword. "When the Aedui go over, and we will, I'll be at the front of it."
+* "Goodbye." -> END
+
+=== burns
+He's quiet for a moment. "Well," he says. "Cowards." But he looks round the street before he says it.
+* "Goodbye." -> END
+
+=== friends
+"Our fathers are Rome's friends." He spits.
+[flag aedui_wavering] "Caesar wants all our horse and ten thousand of our foot to fight his war for him. We're not friends. We're stock."
+[!flag aedui_wavering] "Rome's friends feed Rome's legions, and send Rome their sons, and say thank you. We're not friends. We're stock."
+He touches his sword. "My cousin says the Arverni pay in gold."
+* "Goodbye." -> END

@@ -1,0 +1,5 @@
+// One of Dannotalos's ambacti: a spearman of his household.
+=== start
+[flag dan_enemy] The spearman watches your hands and doesn't answer.
+[!flag dan_enemy] "My lord's hall," the spearman says. "If you want something, ask him. He's by the fire. He's always by the fire."
+* Leave him. -> END

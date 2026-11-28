@@ -1,0 +1,18 @@
+// Gobannos (placeholder), a smith of the craftsmen's quarter at Bibracte.
+// Sells arms. Half his iron is spoken for.
+=== start
+The smithy is a roofed yard full of heat and noise, and a man with forearms like hams is drawing out a spearhead on the anvil. He finishes the heat before he looks up.
+
+"Gobannos," he says, in a voice ruined by smoke. "Buying or looking?"
+* "Show me what you have." -> trade
+* "Who's all this iron for?" -> iron
+* "Goodbye." -> END
+
+=== trade
+~ barter
+
+=== iron
+He looks at the racks of spearheads, a hundred of them at least, black and new. "Somebody who pays on time," he says. "Half of it's spoken for, and I don't say by whom."
+[flag dan_met] He glances up the hill, though, when he says it.
+* "Show me what you have." -> trade
+* "Goodbye." -> END

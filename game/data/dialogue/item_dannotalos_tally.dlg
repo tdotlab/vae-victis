@@ -1,0 +1,11 @@
+// Read from the inventory: Dannotalos's private tally, out of the chest in his
+// chamber. Evidence that he skims the house (the split, at Cabillonum).
+@speaker Dannotalos's own tally
+=== start
+~ set dan_transit; set dan_tally_read
+Small old tablets tied with red cord, in Dannotalos's own hand, in Gallic written with Greek letters, the way the Aedui keep their accounts.
+
+It's the house's account, line by line, the same lines as the house's book: people bought forward on Dannotalos's account and delivered to Vettius's boats on the Arar. Except that beside about one line in ten, where the house's book would say "lost in transit," Dannotalos has written a second name, and a second price: a buyer at Massilia, who pays better, and never asks the house's permission.
+
+[flag survivor_out] Near the end, among the lines from Avaricum, one has no second name. It says only: "girl, Aeduan, lost in transit (Epomeduos)." Somebody has drawn a little line under it.
+* Put it away. -> END

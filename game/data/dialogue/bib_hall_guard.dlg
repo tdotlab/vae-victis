@@ -1,0 +1,4 @@
+// The vergobret's guards in the magistrate's hall at Bibracte.
+=== start
+"The vergobret's hall," the guard says. "He hears anyone, in daylight. Keep your hands where I can see them."
+* Leave him. -> END
